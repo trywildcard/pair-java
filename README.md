@@ -1,2 +1,2 @@
-merchant-sdk
+pair
 ============
