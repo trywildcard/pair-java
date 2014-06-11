@@ -129,7 +129,5 @@ public class ProductCardBuilderTest {
         testExtensiveCardAttributes(card);
     }
     
-    // TODO: test extensive product card
-    
     // TODO: test missing fields are invalid
 }

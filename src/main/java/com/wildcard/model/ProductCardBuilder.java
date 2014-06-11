@@ -150,7 +150,10 @@ public class ProductCardBuilder {
     }
 
     public ProductCardBuilder price(float price) {
-        this.offers.add(new Offer(price));
+        OfferBuilder offerBuilder = new OfferBuilder();
+        offerBuilder.price(price);
+        
+        this.offers.add(offerBuilder.build());
         return this;
     }
 
