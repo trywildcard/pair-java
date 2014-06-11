@@ -4,44 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCardBuilder {
-
+    
     // required fields
-    protected String name;
-    protected List<Offer> offers;
+    String name;
+    List<Offer> offers;
 
     // optional filds
-    protected String url;
-    protected float price;
-    protected String merchant;
-    protected String brand;
-    protected String description;
-    protected Gender gender;
-    protected List<Color> colors;
-    protected List<String> images;
-    protected List<String> videos;
-    protected float rating;
-    protected float ratingScale;
-    protected int ratingCount;
-    protected List<String> relatedItems;
-    protected List<String> options;
-    protected float weight;
-    protected String pattern;
-    protected String condition;
-    protected String model;
-    protected String material;
-    protected float shippingCost;
-    protected String appLinkIos;
-    protected String appLinkAndroid;
+    String url;
+    String merchant;
+    String brand;
+    String description;
+    Gender gender;
+    List<ProductColor> colors = new ArrayList<ProductColor>();
+    List<String> images = new ArrayList<String>();
+    Float rating;
+    Float ratingScale;
+    Integer ratingCount;
+    List<String> relatedItems = new ArrayList<String>();
+    List<String> options = new ArrayList<String>();
+    Float weight;
+    String pattern;
+    String condition;
+    String model;
+    String material;
+    Float shippingCost;
+    String appLinkIos;
+    String appLinkAndroid;
 
-    public ProductCardBuilder() {
-        this.offers = new ArrayList<Offer>();
+    public ProductCardBuilder(String name, List<Offer> offers) {
+        this.name = name;
+        this.offers = offers;
+        
+        // very minimal validation
+        
+        if (offers.size() == 0) {
+            throw new IllegalStateException("Must specify at least one offer");
+        }
+        
     }
     
-    public ProductCardBuilder name(String name){
-        this.name = name;
-        return this;
-    }
-
     public ProductCardBuilder appLinkAndroid(String appLinkAndroid) {
         this.appLinkAndroid = appLinkAndroid;
         return this;
@@ -52,7 +53,7 @@ public class ProductCardBuilder {
         return this;
     }
 
-    public ProductCardBuilder shippingCost(float shippingCost) {
+    public ProductCardBuilder shippingCost(Float shippingCost) {
         this.shippingCost = shippingCost;
         return this;
     }
@@ -77,75 +78,70 @@ public class ProductCardBuilder {
         return this;
     }
 
-    public ProductCardBuilder weight(float weight) {
+    public ProductCardBuilder weight(Float weight) {
         this.weight = weight;
+        return this;
+    }
+    
+    public ProductCardBuilder option(String option){
+        this.options.add(option);
         return this;
     }
 
     public ProductCardBuilder options(List<String> options) {
-        this.options = options;
+        for (String option : options){
+            this.options.add(option);
+        }
         return this;
     }
 
+    public ProductCardBuilder relatedItem(String relatedItem){
+        this.relatedItems.add(relatedItem);
+        return this;
+    }
+    
     public ProductCardBuilder relatedItems(List<String> relatedItems) {
-        this.relatedItems = relatedItems;
+        for (String relatedItem : relatedItems){
+            this.relatedItems.add(relatedItem);
+        }
         return this;
     }
 
-    public ProductCardBuilder ratingCount(int ratingCount) {
+    public ProductCardBuilder ratingCount(Integer ratingCount) {
         this.ratingCount = ratingCount;
         return this;
     }
 
-    public ProductCardBuilder ratingScale(float ratingScale) {
+    public ProductCardBuilder ratingScale(Float ratingScale) {
         this.ratingScale = ratingScale;
         return this;
     }
 
-    public ProductCardBuilder rating(float rating) {
+    public ProductCardBuilder rating(Float rating) {
         this.rating = rating;
-        return this;
-    }
-
-    public ProductCardBuilder videos(List<String> videos) {
-        this.videos = videos;
         return this;
     }
     
     public ProductCardBuilder image(String imgUrl){
-        if (images == null){
-            this.images = new ArrayList<String>();
-        }
         images.add(imgUrl);
         return this;
     }
 
     public ProductCardBuilder images(List<String> images) {
-        if (this.images == null){
-            this.images = images;
-        } else {
-            for (String img : images){
-                this.images.add(img);
-            }
+        for (String img : images){
+            this.images.add(img);
         }
         return this;
     }
     
-    public ProductCardBuilder color(Color color){
-        if (colors == null){
-            this.colors = new ArrayList<Color>();
-        }
+    public ProductCardBuilder color(ProductColor color){
         colors.add(color);
         return this;
     }
 
-    public ProductCardBuilder colors(List<Color> colors){
-        if (this.colors == null){
-            this.colors = colors;
-        } else {
-            for (Color c : colors){
-                this.colors.add(c);
-            }
+    public ProductCardBuilder colors(List<ProductColor> colors){
+        for (ProductColor c : colors){
+            this.colors.add(c);
         }
         return this;
     }
@@ -175,20 +171,8 @@ public class ProductCardBuilder {
         return this;
     }
 
-    public ProductCardBuilder price(float price) {
-        OfferBuilder offerBuilder = new OfferBuilder();
-        offerBuilder.price(price);
-        
-        this.offers.add(offerBuilder.build());
-        return this;
-    }
-
     public ProductCard build() {
         ProductCard card = new ProductCard(this);
-        
-        if (card.getOffers().size() == 0) {
-            throw new IllegalStateException("Must specify at least one offer");
-        }
 
         return card;
     }

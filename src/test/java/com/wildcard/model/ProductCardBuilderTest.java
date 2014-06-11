@@ -18,49 +18,43 @@ public class ProductCardBuilderTest {
     final String description = "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time";
     final String url = "http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=";
     final String imgUrl = "http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg";
-    final float price = 7.99f;
+    final Float price = 7.99f;
     final String brand = "ItemsByLisa";
     
     // extensive attributes
     // TODO: list of offers
     final String merchant = "Etsy";
     final String gender = "female";
-    List<Color> colors; // initialized in @Before
+    final List<ProductColor> colors = new ArrayList<ProductColor>();
     final List<String> images = Arrays
             .asList("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg",
                     "https://img0.etsystatic.com/020/0/7024554/il_570xN.473259414_3us0.jpg",
                     "https://img0.etsystatic.com/018/0/7024554/il_570xN.473259490_87gc.jpg");
-    final List<String> videos = Arrays
-            .asList("https://www.youtube.com/watch?v=UBSN7WOPkQ0",
-                    "https://www.youtube.com/watch?v=PX1vwDe9Z94",
-                    "https://www.youtube.com/watch?v=oPc-WR2sLi4");
-    final float rating = 8;
-    final float ratingScale = 10;
-    final int ratingCount = 12;
+    final Float rating = 8f;
+    final Float ratingScale = 10f;
+    final Integer ratingCount = 12;
     final List<String> relatedItems = Arrays
             .asList("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0",
                     "https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2",
                     "https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4");
     // TODO: product.sizes
     // TODO: product.options
-    final float weight = 1.77f;
+    final Float weight = 1.77f;
     final String pattern = "alternating beads with stars";
     final String condition = "new, handmade";
     final String model = "Bead Ankle Bracelet - 10 inch anklet";
     final String material = "Glass Beads, Metal Clasp";
-    final float shippingCost = 2.99f;
+    final Float shippingCost = 2.99f;
     final String appLinkIos = "jump://VerticalA/x123";
     final String appLinkAndroid = "market://search?q=pub:etsy";
     
     @Before
     public void prepare(){
-        this.colors = new ArrayList<Color>();
-        ColorBuilder colorBuilder = new ColorBuilder();
-        colorBuilder.displayName("Magenta");
-        colorBuilder.mappingColor(MappingColor.Red);
-        colorBuilder.swatchLink("http://https://www.etsy.com/swatches/magenta.jpg");
-        colorBuilder.value("Magenta color value");
-        colors.add(colorBuilder.build());
+        ProductColor color = new ProductColor("Magenta", "Magenta color value",
+                "http://https://www.etsy.com/swatches/magenta.jpg",
+                MappingColor.Red);
+        
+        colors.add(color);
     }
     
     private void testMinimalCardAttributes(ProductCard card){
@@ -76,16 +70,19 @@ public class ProductCardBuilderTest {
     @Test
     public void testMinimalProductCard(){
         
-        ProductCardBuilder builder = new ProductCardBuilder();
+        List<Offer> offers = new ArrayList<Offer>();
+        OfferBuilder offerBuilder = new OfferBuilder();
+        offerBuilder.price(price);
+        offers.add(offerBuilder.build());
         
-        builder.name(name);
-        builder.description(description);
-        builder.url(url);
-        builder.image(imgUrl);
-        builder.price(price);
-        builder.brand(brand);
+        ProductCardBuilder cardBuilder = new ProductCardBuilder(name, offers); 
         
-        ProductCard card = builder.build();
+        cardBuilder.description(description);
+        cardBuilder.url(url);
+        cardBuilder.image(imgUrl);
+        cardBuilder.brand(brand);
+        
+        ProductCard card = cardBuilder.build();
         
         testMinimalCardAttributes(card);
     }
@@ -104,7 +101,6 @@ public class ProductCardBuilderTest {
         }
         assertEquals("Images should match", combinedImages, card.getImages());
         
-        assertEquals("Videos should match", videos, card.getVideos());
         assertEquals("Rating should match", rating, card.getRating(), FLOAT_COMPARISON_EPSILON);
         assertEquals("Rating scale should match", ratingScale, card.getRatingScale(), FLOAT_COMPARISON_EPSILON);
         assertEquals("Rating count should match", ratingCount, card.getRatingCount());
@@ -120,19 +116,21 @@ public class ProductCardBuilderTest {
     
     @Test
     public void testExtensiveProductCard(){
-        ProductCardBuilder builder = new ProductCardBuilder();
+        List<Offer> offers = new ArrayList<Offer>();
+        OfferBuilder offerBuilder = new OfferBuilder();
+        offerBuilder.price(price);
+        offers.add(offerBuilder.build());
+        
+        ProductCardBuilder builder = new ProductCardBuilder(name, offers);
 
-        builder.name(name);
         builder.description(description);
         builder.url(url);
         builder.image(imgUrl);
-        builder.price(price);
         builder.brand(brand);
         builder.merchant(merchant);
         builder.gender(Gender.valueOf(gender.toUpperCase()));
         builder.colors(colors);
         builder.images(images);
-        builder.videos(videos);
         builder.rating(rating);
         builder.ratingScale(ratingScale);
         builder.ratingCount(ratingCount);
