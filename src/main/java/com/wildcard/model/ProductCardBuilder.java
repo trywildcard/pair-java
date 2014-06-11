@@ -11,7 +11,6 @@ public class ProductCardBuilder {
 
     // optional filds
     protected String url;
-    protected String brandName;
     protected float price;
     protected String merchant;
     protected String brand;
@@ -152,11 +151,6 @@ public class ProductCardBuilder {
 
     public ProductCardBuilder price(float price) {
         this.offers.add(new Offer(price));
-        return this;
-    }
-
-    public ProductCardBuilder brandName(String brandName) {
-        this.brandName = brandName;
         return this;
     }
 
