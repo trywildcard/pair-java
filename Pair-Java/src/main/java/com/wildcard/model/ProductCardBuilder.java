@@ -6,8 +6,8 @@ import java.util.List;
 public class ProductCardBuilder {
 
     // required fields
-    protected final String name;
-    protected final List<Offer> offers;
+    protected String name;
+    protected List<Offer> offers;
 
     // optional filds
     protected String url;
@@ -33,9 +33,13 @@ public class ProductCardBuilder {
     protected String appLinkIos;
     protected String appLinkAndroid;
 
-    public ProductCardBuilder(String name) {
-        this.name = name;
+    public ProductCardBuilder() {
         this.offers = new ArrayList<Offer>();
+    }
+    
+    public ProductCardBuilder name(String name){
+        this.name = name;
+        return this;
     }
 
     public ProductCardBuilder appLinkAndroid(String appLinkAndroid) {
@@ -105,6 +109,14 @@ public class ProductCardBuilder {
 
     public ProductCardBuilder videos(List<String> videos) {
         this.videos = videos;
+        return this;
+    }
+    
+    public ProductCardBuilder image(String imgUrl){
+        if (images == null){
+            this.images = new ArrayList<String>();
+        }
+        images.add(imgUrl);
         return this;
     }
 
