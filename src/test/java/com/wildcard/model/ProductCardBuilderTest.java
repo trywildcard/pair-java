@@ -2,6 +2,7 @@ package com.wildcard.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,7 +83,14 @@ public class ProductCardBuilderTest {
         
         assertEquals("Merchant should match", merchant, card.getMerchant());
         assertEquals("Gender should match", gender, card.getGender().toString().toLowerCase());
-        assertEquals("Images should match", images, card.getImages());
+        
+        List<String> combinedImages = new ArrayList<String>();
+        combinedImages.add(imgUrl);
+        for (String img : images){
+            combinedImages.add(img);
+        }
+        assertEquals("Images should match", combinedImages, card.getImages());
+        
         assertEquals("Videos should match", videos, card.getVideos());
         assertEquals("Rating should match", rating, card.getRating(), FLOAT_COMPARISON_EPSILON);
         assertEquals("Rating scale should match", ratingScale, card.getRatingScale(), FLOAT_COMPARISON_EPSILON);

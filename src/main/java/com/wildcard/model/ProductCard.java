@@ -11,7 +11,7 @@ public class ProductCard implements Card {
     private final String brand;
     private final String description;
     private final Gender gender;
-    // TODO: product.colors
+    private final List<Color> colors;
     private final List<String> images;
     private final List<String> videos;
     private final float rating;
@@ -37,6 +37,7 @@ public class ProductCard implements Card {
         this.merchant = builder.merchant;
         this.brand = builder.brand;
         this.description = builder.description;
+        this.colors = builder.colors;
         this.gender = builder.gender;
         this.images = builder.images;
         this.videos = builder.videos;

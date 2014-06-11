@@ -16,6 +16,7 @@ public class ProductCardBuilder {
     protected String brand;
     protected String description;
     protected Gender gender;
+    protected List<Color> colors;
     protected List<String> images;
     protected List<String> videos;
     protected float rating;
@@ -120,10 +121,35 @@ public class ProductCardBuilder {
     }
 
     public ProductCardBuilder images(List<String> images) {
-        this.images = images;
+        if (images == null){
+            this.images = images;
+        } else {
+            for (String img : images){
+                this.images.add(img);
+            }
+        }
+        return this;
+    }
+    
+    public ProductCardBuilder color(Color color){
+        if (colors == null){
+            this.colors = new ArrayList<Color>();
+        }
+        colors.add(color);
         return this;
     }
 
+    public ProductCardBuilder colors(List<Color> colors){
+        if (colors == null){
+            this.colors = colors;
+        } else {
+            for (Color c : colors){
+                this.colors.add(c);
+            }
+        }
+        return this;
+    }
+    
     public ProductCardBuilder gender(Gender gender) {
         this.gender = gender;
         return this;
@@ -158,11 +184,12 @@ public class ProductCardBuilder {
     }
 
     public ProductCard build() {
-
-        if (offers.size() == 0) {
-            // complain
+        ProductCard card = new ProductCard(this);
+        
+        if (card.getOffers().size() == 0) {
+            throw new IllegalStateException("Must specify at least one offer");
         }
 
-        return new ProductCard(this);
+        return card;
     }
 }
