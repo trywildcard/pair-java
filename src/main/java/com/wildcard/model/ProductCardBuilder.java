@@ -121,7 +121,7 @@ public class ProductCardBuilder {
     }
 
     public ProductCardBuilder images(List<String> images) {
-        if (images == null){
+        if (this.images == null){
             this.images = images;
         } else {
             for (String img : images){
@@ -140,7 +140,7 @@ public class ProductCardBuilder {
     }
 
     public ProductCardBuilder colors(List<Color> colors){
-        if (colors == null){
+        if (this.colors == null){
             this.colors = colors;
         } else {
             for (Color c : colors){
