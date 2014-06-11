@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class ProductCardBuilderTest {
@@ -24,7 +25,7 @@ public class ProductCardBuilderTest {
     // TODO: list of offers
     final String merchant = "Etsy";
     final String gender = "female";
-    // TODO: product.colors
+    List<Color> colors; // initialized in @Before
     final List<String> images = Arrays
             .asList("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg",
                     "https://img0.etsystatic.com/020/0/7024554/il_570xN.473259414_3us0.jpg",
@@ -50,6 +51,17 @@ public class ProductCardBuilderTest {
     final float shippingCost = 2.99f;
     final String appLinkIos = "jump://VerticalA/x123";
     final String appLinkAndroid = "market://search?q=pub:etsy";
+    
+    @Before
+    public void prepare(){
+        this.colors = new ArrayList<Color>();
+        ColorBuilder colorBuilder = new ColorBuilder();
+        colorBuilder.displayName("Magenta");
+        colorBuilder.mappingColor(MappingColor.Red);
+        colorBuilder.swatchLink("http://https://www.etsy.com/swatches/magenta.jpg");
+        colorBuilder.value("Magenta color value");
+        colors.add(colorBuilder.build());
+    }
     
     private void testMinimalCardAttributes(ProductCard card){
         assertEquals("Name should match", name, card.getName());
@@ -83,6 +95,7 @@ public class ProductCardBuilderTest {
         
         assertEquals("Merchant should match", merchant, card.getMerchant());
         assertEquals("Gender should match", gender, card.getGender().toString().toLowerCase());
+        assertEquals("Colors should match", colors, card.getColors());
         
         List<String> combinedImages = new ArrayList<String>();
         combinedImages.add(imgUrl);
@@ -117,6 +130,7 @@ public class ProductCardBuilderTest {
         builder.brand(brand);
         builder.merchant(merchant);
         builder.gender(Gender.valueOf(gender.toUpperCase()));
+        builder.colors(colors);
         builder.images(images);
         builder.videos(videos);
         builder.rating(rating);

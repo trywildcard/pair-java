@@ -152,4 +152,8 @@ public class ProductCard implements Card {
         return null;
     }
 
+    public List<Color> getColors() {
+        return colors;
+    }
+
 }

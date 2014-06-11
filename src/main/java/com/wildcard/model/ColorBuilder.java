@@ -29,4 +29,8 @@ public class ColorBuilder {
         this.mappingColor = mappingColor;
         return this;
     }
+    
+    public Color build(){
+        return new Color(this);
+    }
 }
