@@ -3,14 +3,14 @@ package com.wildcard.model;
 import java.util.List;
 
 public class OfferBuilder {
-    protected float price;
-    protected float originalPrice;
-    protected String currency;
-    protected String description;
-    protected String productUniqueId;
-    protected Availability availability;
-    protected int quantity;
-    protected List<CountryCode> geographicAvailability;
+    Float price;
+    Float originalPrice;
+    String currency;
+    String description;
+    String productUniqueId;
+    Availability availability;
+    Integer quantity;
+    List<CountryCode> geographicAvailability;
     
     public OfferBuilder(){
         
@@ -21,7 +21,7 @@ public class OfferBuilder {
         return this;
     }
     
-    public OfferBuilder quantity(int quantity){
+    public OfferBuilder quantity(Integer quantity){
         this.quantity = quantity;
         return this;
     }
@@ -46,12 +46,12 @@ public class OfferBuilder {
         return this;
     }
     
-    public OfferBuilder originalPrice(float originalPrice){
+    public OfferBuilder originalPrice(Float originalPrice){
         this.originalPrice = originalPrice;
         return this;
     }
     
-    public OfferBuilder price(float price){
+    public OfferBuilder price(Float price){
         this.price = price;
         return this;
     }

@@ -11,21 +11,20 @@ public class ProductCard implements Card {
     private final String brand;
     private final String description;
     private final Gender gender;
-    private final List<Color> colors;
+    private final List<ProductColor> colors;
     private final List<String> images;
-    private final List<String> videos;
-    private final float rating;
-    private final float ratingScale;
-    private final int ratingCount;
+    private final Float rating;
+    private final Float ratingScale;
+    private final Integer ratingCount;
     private final List<String> relatedItems;
     // TODO: product.sizes
     private final List<String> options;
-    private final float weight;
+    private final Float weight;
     private final String pattern;
     private final String condition;
     private final String model;
     private final String material;
-    private final float shippingCost;
+    private final Float shippingCost;
     private final String appLinkIos;
     private final String appLinkAndroid;
 
@@ -40,7 +39,6 @@ public class ProductCard implements Card {
         this.colors = builder.colors;
         this.gender = builder.gender;
         this.images = builder.images;
-        this.videos = builder.videos;
         this.rating = builder.rating;
         this.ratingScale = builder.ratingScale;
         this.ratingCount = builder.ratingCount;
@@ -64,7 +62,7 @@ public class ProductCard implements Card {
         return appLinkIos;
     }
 
-    public float getShippingCost() {
+    public Float getShippingCost() {
         return shippingCost;
     }
 
@@ -84,7 +82,7 @@ public class ProductCard implements Card {
         return pattern;
     }
 
-    public float getWeight() {
+    public Float getWeight() {
         return weight;
     }
 
@@ -96,20 +94,16 @@ public class ProductCard implements Card {
         return relatedItems;
     }
 
-    public int getRatingCount() {
+    public Integer getRatingCount() {
         return ratingCount;
     }
 
-    public float getRatingScale() {
+    public Float getRatingScale() {
         return ratingScale;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
-    }
-
-    public List<String> getVideos() {
-        return videos;
     }
 
     public List<String> getImages() {
@@ -148,12 +142,11 @@ public class ProductCard implements Card {
         return cardType;
     }
 
-    public String writeAsJson() {
-        return null;
-    }
-
-    public List<Color> getColors() {
+    public List<ProductColor> getColors() {
         return colors;
     }
 
+    public String writeAsJson() {
+        return null;
+    }
 }

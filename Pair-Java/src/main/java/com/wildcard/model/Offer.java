@@ -4,18 +4,20 @@ import java.util.List;
 
 public class Offer {
     // required fields
-    private final float price;
+    private final Float price;
 
     // optional fields
-    private final float originalPrice;
+    private final Float originalPrice;
+    // TODO: use java Currency
     private final String currency;
     private final String description;
     private final String productUniqueId;
     private final Availability availability;
-    private final int quantity;
+    private final Integer quantity;
     // TODO: saleStartDate
     // TODO: saleEndDate
     // TODO: expirationDate
+    // TODO: use Java Locale instead of CountryCode
     private final List<CountryCode> geographicAvailability;
     
     public Offer(OfferBuilder builder){
@@ -33,7 +35,7 @@ public class Offer {
         return geographicAvailability;
     }
     
-    public int getQuantity(){
+    public Integer getQuantity(){
         return quantity;
     }
     
@@ -53,11 +55,11 @@ public class Offer {
         return currency;
     }
     
-    public float getOriginalPrice(){
+    public Float getOriginalPrice(){
         return originalPrice;
     }
     
-    public float getPrice(){
+    public Float getPrice(){
         return price;
     }
 }
