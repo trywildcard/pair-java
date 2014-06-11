@@ -6,7 +6,6 @@ public class ProductCard implements Card {
     private final CardType cardType;
     private final String name;
     private final String url;
-    private final String brandName;
     private final List<Offer> offers;
     private final String merchant;
     private final String brand;
@@ -34,7 +33,6 @@ public class ProductCard implements Card {
         this.cardType = CardType.PRODUCT;
         this.name = builder.name;
         this.url = builder.url;
-        this.brandName = builder.brandName;
         this.offers = builder.offers;
         this.merchant = builder.merchant;
         this.brand = builder.brand;
@@ -125,10 +123,6 @@ public class ProductCard implements Card {
         return description;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
     public String getMerchant() {
         return merchant;
     }
@@ -141,8 +135,8 @@ public class ProductCard implements Card {
         return name;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getBrand() {
+        return brand;
     }
 
     public String getUrl() {
