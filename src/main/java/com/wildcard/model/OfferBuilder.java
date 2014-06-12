@@ -1,12 +1,14 @@
 package com.wildcard.model;
 
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class OfferBuilder {
     Float price;
     Float originalPrice;
-    String currency;
+    Currency currency;
     String description;
     String productUniqueId;
     Availability availability;
@@ -14,10 +16,10 @@ public class OfferBuilder {
     Date saleStartDate;
     Date saleEndDate;
     Date expirationDate;
-    List<CountryCode> geographicAvailability;
+    List<Locale> geographicAvailability;
     
-    public OfferBuilder(){
-        
+    public OfferBuilder(Float price){
+        this.price = price;
     }
     
     public OfferBuilder saleStartDate(Date saleStartDate){
@@ -35,7 +37,7 @@ public class OfferBuilder {
         return this;
     }
     
-    public OfferBuilder geographicAvailability(List<CountryCode> geographicAvailability){
+    public OfferBuilder geographicAvailability(List<Locale> geographicAvailability){
         this.geographicAvailability = geographicAvailability;
         return this;
     }
@@ -60,18 +62,13 @@ public class OfferBuilder {
         return this;
     }
     
-    public OfferBuilder currency(String currency){
+    public OfferBuilder currency(Currency currency){
         this.currency = currency;
         return this;
     }
     
     public OfferBuilder originalPrice(Float originalPrice){
         this.originalPrice = originalPrice;
-        return this;
-    }
-    
-    public OfferBuilder price(Float price){
-        this.price = price;
         return this;
     }
     

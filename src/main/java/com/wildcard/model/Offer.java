@@ -1,7 +1,9 @@
 package com.wildcard.model;
 
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Offer {
     // required fields
@@ -9,8 +11,7 @@ public class Offer {
 
     // optional fields
     private final Float originalPrice;
-    // TODO: use java Currency
-    private final String currency;
+    private final Currency currency;
     private final String description;
     private final String productUniqueId;
     private final Availability availability;
@@ -18,8 +19,7 @@ public class Offer {
     private final Date saleStartDate;
     private final Date saleEndDate;
     private final Date expirationDate;
-    // TODO: use Java Locale instead of CountryCode
-    private final List<CountryCode> geographicAvailability;
+    private final List<Locale> geographicAvailability;
     
     public Offer(OfferBuilder builder){
         this.price = builder.price;
@@ -35,7 +35,7 @@ public class Offer {
         this.geographicAvailability = builder.geographicAvailability;
     }
     
-    public List<CountryCode> getGeographicAvailability(){
+    public List<Locale> getGeographicAvailability(){
         return geographicAvailability;
     }
     
@@ -55,7 +55,7 @@ public class Offer {
         return description;
     }
     
-    public String getCurrency(){
+    public Currency getCurrency(){
         return currency;
     }
     
