@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.wildcard.model.util.ValidationTool;
+
 public class OfferBuilder {
     // required fields
     Float price;
@@ -22,6 +24,8 @@ public class OfferBuilder {
     Float weight;
     
     public OfferBuilder(Float price){
+        ValidationTool.notNull(price, "Price must not be null.");
+        ValidationTool.notNegative(price, "Price must be a positive Float.");
         this.price = price;
     }
     
@@ -31,6 +35,7 @@ public class OfferBuilder {
     }
     
     public OfferBuilder weight(Float weight) {
+        ValidationTool.notNegative(weight, "Weight must be a positive Float.");
         this.weight = weight;
         return this;
     }
@@ -62,6 +67,7 @@ public class OfferBuilder {
     }
     
     public OfferBuilder quantity(Integer quantity){
+        ValidationTool.notNegative(quantity,  "quantity must be a positive Integer.");
         this.quantity = quantity;
         return this;
     }
@@ -72,6 +78,7 @@ public class OfferBuilder {
     }
     
     public OfferBuilder description(String description){
+        ValidationTool.notEmpty(description, "Tried to set description to an empty string.");
         this.description = description;
         return this;
     }
