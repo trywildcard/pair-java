@@ -1,6 +1,5 @@
 package com.wildcard.model;
 
-import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -10,29 +9,44 @@ public class Offer {
     private final Float price;
 
     // optional fields
-    private final Float originalPrice;
-    private final Currency currency;
+    private final Price originalPrice;
+    private final Price shippingCost;
     private final String description;
-    private final String productUniqueId;
     private final Availability availability;
     private final Integer quantity;
     private final Date saleStartDate;
     private final Date saleEndDate;
     private final Date expirationDate;
     private final List<Locale> geographicAvailability;
+    private final Gender gender;
+    private final Float weight;
     
     public Offer(OfferBuilder builder){
         this.price = builder.price;
         this.originalPrice = builder.originalPrice;
-        this.currency = builder.currency;
+        this.shippingCost = builder.shippingCost;
         this.description = builder.description;
-        this.productUniqueId = builder.productUniqueId;
         this.availability = builder.availability;
         this.quantity = builder.quantity;
         this.saleStartDate = builder.saleStartDate;
         this.saleEndDate = builder.saleEndDate;
         this.expirationDate = builder.expirationDate;
         this.geographicAvailability = builder.geographicAvailability;
+        this.gender = builder.gender;
+        this.weight = builder.weight;
+    }
+    
+
+    public Float getWeight() {
+        return weight;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Price getShippingCost() {
+        return shippingCost;
     }
     
     public List<Locale> getGeographicAvailability(){
@@ -47,19 +61,11 @@ public class Offer {
         return availability;
     }
     
-    public String getProductUniqueId(){
-        return productUniqueId;
-    }
-    
     public String getDescription(){
         return description;
     }
     
-    public Currency getCurrency(){
-        return currency;
-    }
-    
-    public Float getOriginalPrice(){
+    public Price getOriginalPrice(){
         return originalPrice;
     }
     

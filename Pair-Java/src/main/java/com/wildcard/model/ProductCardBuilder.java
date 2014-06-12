@@ -1,47 +1,44 @@
 package com.wildcard.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductCardBuilder {
     
     // required fields
     String name;
     List<Offer> offers;
+    String url;
 
     // optional filds
-    String url;
     String merchant;
     String brand;
     String description;
-    String gender;
     List<ProductColor> colors = new ArrayList<ProductColor>();
     List<String> images = new ArrayList<String>();
     Float rating;
     Float ratingScale;
     Integer ratingCount;
     List<String> relatedItems = new ArrayList<String>();
-    List<Size> sizes = new ArrayList<Size>();
+    Map<String, String> sizes = new HashMap<String,String>();
     List<String> options = new ArrayList<String>();
-    Float weight;
-    String pattern;
-    String condition;
     String model;
-    String material;
-    Float shippingCost;
     String appLinkIos;
     String appLinkAndroid;
 
-    public ProductCardBuilder(String name, List<Offer> offers) {
-        this.name = name;
-        this.offers = offers;
-        
+    public ProductCardBuilder(String productName, List<Offer> offers, String url) {
+
         // very minimal validation
-        
-        if (offers.size() == 0) {
+        // TODO: null check, do it first
+        if (offers == null || offers.isEmpty()) {
             throw new IllegalStateException("Must specify at least one offer");
         }
         
+        this.name = productName;
+        this.offers = offers;
+        this.url = url;
     }
     
     public ProductCardBuilder appLinkAndroid(String appLinkAndroid) {
@@ -54,44 +51,14 @@ public class ProductCardBuilder {
         return this;
     }
 
-    public ProductCardBuilder shippingCost(Float shippingCost) {
-        this.shippingCost = shippingCost;
-        return this;
-    }
-
-    public ProductCardBuilder material(String material) {
-        this.material = material;
-        return this;
-    }
-
     public ProductCardBuilder model(String model) {
         this.model = model;
         return this;
     }
-
-    public ProductCardBuilder condition(String condition) {
-        this.condition = condition;
-        return this;
-    }
-
-    public ProductCardBuilder pattern(String pattern) {
-        this.pattern = pattern;
-        return this;
-    }
-
-    public ProductCardBuilder weight(Float weight) {
-        this.weight = weight;
-        return this;
-    }
     
-    public ProductCardBuilder size(Size size){
-        this.sizes.add(size);
-        return this;
-    }
-    
-    public ProductCardBuilder sizes(List<Size> sizes){
-        for (Size size : sizes){
-            this.sizes.add(size);
+    public ProductCardBuilder sizes(Map<String, String> sizes){
+        for (String key : sizes.keySet()){
+            this.sizes.put(key, sizes.get(key));
         }
         return this;
     }
@@ -158,11 +125,6 @@ public class ProductCardBuilder {
         }
         return this;
     }
-    
-    public ProductCardBuilder gender(String gender) {
-        this.gender = gender;
-        return this;
-    }
 
     public ProductCardBuilder description(String description) {
         this.description = description;
@@ -171,11 +133,6 @@ public class ProductCardBuilder {
 
     public ProductCardBuilder brand(String brand) {
         this.brand = brand;
-        return this;
-    }
-
-    public ProductCardBuilder url(String url) {
-        this.url = url;
         return this;
     }
 
