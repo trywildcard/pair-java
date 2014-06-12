@@ -3,9 +3,11 @@ package com.wildcard.model;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -14,7 +16,7 @@ public class OfferBuilderTest {
     
     final Float price = 12.99f;
     final Float originalPrice = 18f;
-    final String currency = "USD";
+    final Currency currency = Currency.getInstance(Locale.US);
     final String description = "6 pack for $12.99";
     final String productUniqueId = "AK-91578379523829734";
     final Availability availability = Availability.InStock;
@@ -22,14 +24,12 @@ public class OfferBuilderTest {
     final Date saleStartDate = new GregorianCalendar(2014, 06, 23).getTime();
     final Date saleEndDate = new GregorianCalendar(2014, 06, 29).getTime();
     final Date expirationDate = new GregorianCalendar(2014, 06, 29).getTime();
-    final List<CountryCode> geographicAvailability = Arrays
-            .asList(CountryCode.US,
-                    CountryCode.EU);
+    final List<Locale> geographicAvailability = Arrays
+            .asList(Locale.US, Locale.UK);
     
     @Test
     public void testMinimalOffer(){
-        OfferBuilder builder = new OfferBuilder();
-        builder.price(price);
+        OfferBuilder builder = new OfferBuilder(price);
         Offer offer = builder.build();
         
         assertEquals("Price should match", price, offer.getPrice(), FLOAT_COMPARISON_EPSILON);
@@ -37,9 +37,8 @@ public class OfferBuilderTest {
     
     @Test
     public void testExtensiveOffer(){
-        OfferBuilder builder = new OfferBuilder();
+        OfferBuilder builder = new OfferBuilder(price);
         
-        builder.price(price);
         builder.originalPrice(originalPrice);
         builder.currency(currency);
         builder.description(description);

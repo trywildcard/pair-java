@@ -76,9 +76,8 @@ public class ProductCardBuilderTest {
     public void testMinimalProductCard(){
         
         List<Offer> offers = new ArrayList<Offer>();
-        OfferBuilder offerBuilder = new OfferBuilder();
-        offerBuilder.price(price);
-        offers.add(offerBuilder.build());
+        Offer offer = new OfferBuilder(price).build();
+        offers.add(offer);
         
         ProductCardBuilder cardBuilder = new ProductCardBuilder(name, offers); 
         
@@ -125,9 +124,8 @@ public class ProductCardBuilderTest {
     @Test
     public void testExtensiveProductCard(){
         List<Offer> offers = new ArrayList<Offer>();
-        OfferBuilder offerBuilder = new OfferBuilder();
-        offerBuilder.price(price);
-        offers.add(offerBuilder.build());
+        Offer offer = new OfferBuilder(price).build();
+        offers.add(offer);
         
         ProductCardBuilder builder = new ProductCardBuilder(name, offers);
 
