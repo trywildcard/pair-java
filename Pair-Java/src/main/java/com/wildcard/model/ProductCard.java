@@ -1,22 +1,23 @@
 package com.wildcard.model;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
 public class ProductCard implements Card {
     private final CardType cardType;
     private final String name;
-    private final String url;
+    private final URL url;
     private final List<Offer> offers;
     private final String merchant;
     private final String brand;
     private final String description;
     private final List<ProductColor> colors;
-    private final List<String> images;
+    private final List<URL> images;
     private final Float rating;
     private final Float ratingScale;
     private final Integer ratingCount;
-    private final List<String> relatedItems;
+    private final List<URL> relatedItems;
     private final Map<String, String> sizes;
     private final List<String> options;
     private final String model;
@@ -60,7 +61,7 @@ public class ProductCard implements Card {
         return options;
     }
 
-    public List<String> getRelatedItems() {
+    public List<URL> getRelatedItems() {
         return relatedItems;
     }
 
@@ -76,7 +77,7 @@ public class ProductCard implements Card {
         return rating;
     }
 
-    public List<String> getImages() {
+    public List<URL> getImages() {
         return images;
     }
 
@@ -100,7 +101,7 @@ public class ProductCard implements Card {
         return brand;
     }
 
-    public String getUrl() {
+    public URL getUrl() {
         return url;
     }
 
