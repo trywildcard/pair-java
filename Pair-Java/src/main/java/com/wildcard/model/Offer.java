@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(builder = OfferBuilder.class)
 public class Offer {
     // required fields
-    private final Float price;
+    private final Price price;
 
     // optional fields
     private final Price originalPrice;
@@ -69,7 +72,7 @@ public class Offer {
         return originalPrice;
     }
     
-    public Float getPrice(){
+    public Price getPrice(){
         return price;
     }
 

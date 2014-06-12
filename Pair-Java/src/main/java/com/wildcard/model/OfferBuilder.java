@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.wildcard.model.util.ValidationTool;
 
+@JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class OfferBuilder {
     // required fields
-    Float price;
+    Price price;
     
     // optional fields
     Price originalPrice;
@@ -23,9 +25,9 @@ public class OfferBuilder {
     Gender gender;
     Float weight;
     
-    public OfferBuilder(Float price){
+    public OfferBuilder(Price price){
         ValidationTool.notNull(price, "Price must not be null.");
-        ValidationTool.notNegative(price, "Price must be a positive Float.");
+        ValidationTool.notNegative(price.getPrice(), "Price must be a positive Float.");
         this.price = price;
     }
     
@@ -90,5 +92,17 @@ public class OfferBuilder {
     
     public Offer build(){
         return new Offer(this);
+    }
+    
+
+    /*
+     * The following private constructor and private methods are required by Jackson. 
+     */
+    
+    private OfferBuilder(){}
+    
+    private OfferBuilder price(Price price){
+        this.price = price;
+        return this;
     }
 }
