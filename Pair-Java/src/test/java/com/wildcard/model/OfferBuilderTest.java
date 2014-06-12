@@ -3,6 +3,8 @@ package com.wildcard.model;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -17,9 +19,9 @@ public class OfferBuilderTest {
     final String productUniqueId = "AK-91578379523829734";
     final Availability availability = Availability.InStock;
     final Integer quantity = 58;
-    // TODO: Sale Start Date
-    // TODO: Sale End Date
-    // TODO: Expiration Date
+    final Date saleStartDate = new GregorianCalendar(2014, 06, 23).getTime();
+    final Date saleEndDate = new GregorianCalendar(2014, 06, 29).getTime();
+    final Date expirationDate = new GregorianCalendar(2014, 06, 29).getTime();
     final List<CountryCode> geographicAvailability = Arrays
             .asList(CountryCode.US,
                     CountryCode.EU);
@@ -44,6 +46,9 @@ public class OfferBuilderTest {
         builder.productUniqueId(productUniqueId);
         builder.availability(availability);
         builder.quantity(quantity);
+        builder.saleStartDate(saleStartDate);
+        builder.saleEndDate(saleEndDate);
+        builder.expirationDate(expirationDate);
         builder.geographicAvailability(geographicAvailability);
         
         Offer offer = builder.build();
@@ -55,6 +60,9 @@ public class OfferBuilderTest {
         assertEquals("ProductUniqueId should match", productUniqueId, offer.getProductUniqueId());
         assertEquals("Availability should match", availability, offer.getAvailability());
         assertEquals("Quantity should match", quantity, offer.getQuantity());
+        assertEquals("Sale start date should match", saleStartDate, offer.getSaleStartDate());
+        assertEquals("Sale end date should match", saleEndDate, offer.getSaleEndDate());
+        assertEquals("Expiration date should match", expirationDate, offer.getExpirationDate());
         assertEquals("Geographic Availability should match", geographicAvailability, offer.getGeographicAvailability());
     }
 }
