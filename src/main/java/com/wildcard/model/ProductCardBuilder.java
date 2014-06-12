@@ -6,11 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.wildcard.model.util.ValidationTool;
 
+@JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductCardBuilder {
     
     // required fields
+    CardType cardType;
     String name;
     List<Offer> offers;
     URL url;
@@ -35,6 +38,8 @@ public class ProductCardBuilder {
         ValidationTool.notNullOrEmpty(offers, "Must specify at least one offer.");
         ValidationTool.notNullOrEmpty(name, "Product name cannot be blank.");
         ValidationTool.notNull(url, "Must specify a product url.");
+        
+        this.cardType = CardType.PRODUCT;
         
         this.name = name;
         this.offers = offers;
@@ -162,4 +167,31 @@ public class ProductCardBuilder {
         ProductCard card = new ProductCard(this);
         return card;
     }
+    
+    /*
+     * The following private constructor and private methods are required by Jackson. 
+     */
+
+    private ProductCardBuilder(){}
+    
+    private ProductCardBuilder cardType(CardType cardType){
+        this.cardType = cardType;
+        return this;
+    }
+    
+    private ProductCardBuilder name(String name) {
+        this.name = name;
+        return this;
+    }
+    
+    private ProductCardBuilder url(URL url){
+        this.url = url;
+        return this;
+    }
+    
+    private ProductCardBuilder offers(List<Offer> offers){
+        this.offers = offers;
+        return this;
+    }
+
 }

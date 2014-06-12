@@ -12,10 +12,10 @@ import java.util.Locale;
 import org.junit.Test;
 
 public class OfferBuilderTest {
-    private final int FLOAT_COMPARISON_EPSILON = 0; // prices should be exact, no error since never computed. 
+    private final int FLOAT_COMPARISON_EPSILON = 0; // should be exact, no error since never computed. 
     
-    final Float price = 12.99f;
     final Currency currency = Currency.getInstance(Locale.US);
+    final Price price = new Price(12.99f, currency);
     final Price originalPrice = new Price(18f, currency);
     final Price shippingCost = new Price(2.99f, currency);
     final String description = "6 pack for $12.99";
@@ -34,7 +34,7 @@ public class OfferBuilderTest {
         OfferBuilder builder = new OfferBuilder(price);
         Offer offer = builder.build();
         
-        assertEquals("Price should match", price, offer.getPrice(), FLOAT_COMPARISON_EPSILON);
+        assertEquals("Price should match", price, offer.getPrice());
     }
     
     @Test
@@ -55,7 +55,7 @@ public class OfferBuilderTest {
         
         Offer offer = builder.build();
 
-        assertEquals("Price should match", price, offer.getPrice(), FLOAT_COMPARISON_EPSILON);
+        assertEquals("Price should match", price, offer.getPrice());
         assertEquals("OriginalPrice should match", originalPrice, offer.getOriginalPrice());
         assertEquals("Shipping cost should match", shippingCost, offer.getShippingCost());
         assertEquals("Description should match", description, offer.getDescription());

@@ -2,27 +2,35 @@ package com.wildcard.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ProductCardBuilderTest {
 
     private final int FLOAT_COMPARISON_EPSILON = 0; // prices should be exact, no error since never computed. 
+    ObjectMapper mapper = new ObjectMapper();
     
     // minimal attributes
     final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
     final String description = "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time";
     URL url;
     URL imgUrl;
-    final Float price = 7.99f;
+    final Price price = new Price(7.99f, Currency.getInstance(Locale.US));
     final String brand = "ItemsByLisa";
     
     // extensive attributes
@@ -44,6 +52,7 @@ public class ProductCardBuilderTest {
     
     @Before
     public void prepare() throws MalformedURLException{
+        
         url = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
         imgUrl = new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg");
         
@@ -71,12 +80,12 @@ public class ProductCardBuilderTest {
         assertEquals("Url should match", url, card.getUrl());
         assertEquals("Image url should match", imgUrl, card.getImages().get(0));
         
-        assertEquals("Price should match", price, card.getOffers().get(0).getPrice(), FLOAT_COMPARISON_EPSILON);
+        assertEquals("Price should match", price, card.getOffers().get(0).getPrice());
         assertEquals("Brand name should match", brand, card.getBrand());
     }
     
     @Test
-    public void testMinimalProductCard() throws MalformedURLException{
+    public void testMinimalProductCard() throws MalformedURLException, JsonProcessingException{
         
         List<Offer> offers = new ArrayList<Offer>();
         Offer offer = new OfferBuilder(price).build();
@@ -118,7 +127,7 @@ public class ProductCardBuilderTest {
     }
     
     @Test
-    public void testExtensiveProductCard(){
+    public void testExtensiveProductCard() throws IOException, URISyntaxException{
         List<Offer> offers = new ArrayList<Offer>();
         Offer offer = new OfferBuilder(price).build();
         offers.add(offer);
@@ -144,6 +153,7 @@ public class ProductCardBuilderTest {
         ProductCard card = builder.build();
         
         testExtensiveCardAttributes(card);
+
     }
     
     // TODO: test validation
