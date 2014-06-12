@@ -1,5 +1,6 @@
 package com.wildcard.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class OfferBuilder {
@@ -10,10 +11,28 @@ public class OfferBuilder {
     String productUniqueId;
     Availability availability;
     Integer quantity;
+    Date saleStartDate;
+    Date saleEndDate;
+    Date expirationDate;
     List<CountryCode> geographicAvailability;
     
     public OfferBuilder(){
         
+    }
+    
+    public OfferBuilder saleStartDate(Date saleStartDate){
+        this.saleStartDate = saleStartDate;
+        return this;
+    }
+    
+    public OfferBuilder saleEndDate(Date saleEndDate){
+        this.saleEndDate = saleEndDate;
+        return this;
+    }
+    
+    public OfferBuilder expirationDate(Date expirationDate){
+        this.expirationDate = expirationDate;
+        return this;
     }
     
     public OfferBuilder geographicAvailability(List<CountryCode> geographicAvailability){
