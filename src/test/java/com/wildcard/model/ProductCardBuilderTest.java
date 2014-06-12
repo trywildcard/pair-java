@@ -37,8 +37,11 @@ public class ProductCardBuilderTest {
             .asList("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0",
                     "https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2",
                     "https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4");
-    // TODO: product.sizes
-    // TODO: product.options
+    final List<Size> sizes = new ArrayList<Size>();
+    final List<String> options = Arrays
+            .asList("example option a", 
+                    "example option b",
+                    "example option c");
     final Float weight = 1.77f;
     final String pattern = "alternating beads with stars";
     final String condition = "new, handmade";
@@ -55,6 +58,8 @@ public class ProductCardBuilderTest {
                 MappingColor.Red);
         
         colors.add(color);
+        
+        sizes.add(new Size("Medium", "md")); 
     }
     
     private void testMinimalCardAttributes(ProductCard card){
@@ -104,6 +109,9 @@ public class ProductCardBuilderTest {
         assertEquals("Rating should match", rating, card.getRating(), FLOAT_COMPARISON_EPSILON);
         assertEquals("Rating scale should match", ratingScale, card.getRatingScale(), FLOAT_COMPARISON_EPSILON);
         assertEquals("Rating count should match", ratingCount, card.getRatingCount());
+        assertEquals("Related Items should match", relatedItems, card.getRelatedItems());
+        assertEquals("Sizes should match", sizes, card.getSizes());
+        assertEquals("Options should match", options, card.getOptions());
         assertEquals("Weight should match", weight, card.getWeight(), FLOAT_COMPARISON_EPSILON);
         assertEquals("Pattern should match", pattern, card.getPattern());
         assertEquals("Condition should match", condition, card.getCondition());
@@ -128,13 +136,15 @@ public class ProductCardBuilderTest {
         builder.image(imgUrl);
         builder.brand(brand);
         builder.merchant(merchant);
-        builder.gender(Gender.valueOf(gender.toUpperCase()));
+        builder.gender(gender);
         builder.colors(colors);
         builder.images(images);
         builder.rating(rating);
         builder.ratingScale(ratingScale);
         builder.ratingCount(ratingCount);
         builder.relatedItems(relatedItems);
+        builder.sizes(sizes);
+        builder.options(options);
         builder.weight(weight);
         builder.pattern(pattern);
         builder.condition(condition);

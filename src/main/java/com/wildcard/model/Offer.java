@@ -1,5 +1,6 @@
 package com.wildcard.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Offer {
@@ -14,9 +15,9 @@ public class Offer {
     private final String productUniqueId;
     private final Availability availability;
     private final Integer quantity;
-    // TODO: saleStartDate
-    // TODO: saleEndDate
-    // TODO: expirationDate
+    private final Date saleStartDate;
+    private final Date saleEndDate;
+    private final Date expirationDate;
     // TODO: use Java Locale instead of CountryCode
     private final List<CountryCode> geographicAvailability;
     
@@ -28,6 +29,9 @@ public class Offer {
         this.productUniqueId = builder.productUniqueId;
         this.availability = builder.availability;
         this.quantity = builder.quantity;
+        this.saleStartDate = builder.saleStartDate;
+        this.saleEndDate = builder.saleEndDate;
+        this.expirationDate = builder.expirationDate;
         this.geographicAvailability = builder.geographicAvailability;
     }
     
@@ -61,5 +65,17 @@ public class Offer {
     
     public Float getPrice(){
         return price;
+    }
+
+    public Date getSaleStartDate() {
+        return saleStartDate;
+    }
+
+    public Date getSaleEndDate() {
+        return saleEndDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
     }
 }

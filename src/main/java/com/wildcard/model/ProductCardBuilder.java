@@ -14,13 +14,14 @@ public class ProductCardBuilder {
     String merchant;
     String brand;
     String description;
-    Gender gender;
+    String gender;
     List<ProductColor> colors = new ArrayList<ProductColor>();
     List<String> images = new ArrayList<String>();
     Float rating;
     Float ratingScale;
     Integer ratingCount;
     List<String> relatedItems = new ArrayList<String>();
+    List<Size> sizes = new ArrayList<Size>();
     List<String> options = new ArrayList<String>();
     Float weight;
     String pattern;
@@ -80,6 +81,18 @@ public class ProductCardBuilder {
 
     public ProductCardBuilder weight(Float weight) {
         this.weight = weight;
+        return this;
+    }
+    
+    public ProductCardBuilder size(Size size){
+        this.sizes.add(size);
+        return this;
+    }
+    
+    public ProductCardBuilder sizes(List<Size> sizes){
+        for (Size size : sizes){
+            this.sizes.add(size);
+        }
         return this;
     }
     
@@ -146,7 +159,7 @@ public class ProductCardBuilder {
         return this;
     }
     
-    public ProductCardBuilder gender(Gender gender) {
+    public ProductCardBuilder gender(String gender) {
         this.gender = gender;
         return this;
     }

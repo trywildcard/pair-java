@@ -10,14 +10,14 @@ public class ProductCard implements Card {
     private final String merchant;
     private final String brand;
     private final String description;
-    private final Gender gender;
+    private final String gender;
     private final List<ProductColor> colors;
     private final List<String> images;
     private final Float rating;
     private final Float ratingScale;
     private final Integer ratingCount;
     private final List<String> relatedItems;
-    // TODO: product.sizes
+    private final List<Size> sizes;
     private final List<String> options;
     private final Float weight;
     private final String pattern;
@@ -43,6 +43,7 @@ public class ProductCard implements Card {
         this.ratingScale = builder.ratingScale;
         this.ratingCount = builder.ratingCount;
         this.relatedItems = builder.relatedItems;
+        this.sizes = builder.sizes;
         this.options = builder.options;
         this.weight = builder.weight;
         this.pattern = builder.pattern;
@@ -110,7 +111,7 @@ public class ProductCard implements Card {
         return images;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
@@ -148,5 +149,9 @@ public class ProductCard implements Card {
 
     public String writeAsJson() {
         return null;
+    }
+
+    public List<Size> getSizes() {
+        return sizes;
     }
 }
