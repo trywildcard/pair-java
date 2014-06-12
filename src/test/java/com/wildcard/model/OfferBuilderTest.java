@@ -15,10 +15,10 @@ public class OfferBuilderTest {
     private final int FLOAT_COMPARISON_EPSILON = 0; // prices should be exact, no error since never computed. 
     
     final Float price = 12.99f;
-    final Float originalPrice = 18f;
     final Currency currency = Currency.getInstance(Locale.US);
+    final Price originalPrice = new Price(18f, currency);
+    final Price shippingCost = new Price(2.99f, currency);
     final String description = "6 pack for $12.99";
-    final String productUniqueId = "AK-91578379523829734";
     final Availability availability = Availability.InStock;
     final Integer quantity = 58;
     final Date saleStartDate = new GregorianCalendar(2014, 06, 23).getTime();
@@ -26,6 +26,8 @@ public class OfferBuilderTest {
     final Date expirationDate = new GregorianCalendar(2014, 06, 29).getTime();
     final List<Locale> geographicAvailability = Arrays
             .asList(Locale.US, Locale.UK);
+    final Gender gender = Gender.FEMALE;
+    final Float weight = 1.77f;
     
     @Test
     public void testMinimalOffer(){
@@ -40,28 +42,30 @@ public class OfferBuilderTest {
         OfferBuilder builder = new OfferBuilder(price);
         
         builder.originalPrice(originalPrice);
-        builder.currency(currency);
+        builder.shippingCost(shippingCost);
         builder.description(description);
-        builder.productUniqueId(productUniqueId);
         builder.availability(availability);
         builder.quantity(quantity);
         builder.saleStartDate(saleStartDate);
         builder.saleEndDate(saleEndDate);
         builder.expirationDate(expirationDate);
         builder.geographicAvailability(geographicAvailability);
+        builder.gender(gender);
+        builder.weight(weight);
         
         Offer offer = builder.build();
 
         assertEquals("Price should match", price, offer.getPrice(), FLOAT_COMPARISON_EPSILON);
-        assertEquals("OriginalPrice should match", originalPrice, offer.getOriginalPrice(), FLOAT_COMPARISON_EPSILON);
-        assertEquals("Currency should match", currency, offer.getCurrency());
+        assertEquals("OriginalPrice should match", originalPrice, offer.getOriginalPrice());
+        assertEquals("Shipping cost should match", shippingCost, offer.getShippingCost());
         assertEquals("Description should match", description, offer.getDescription());
-        assertEquals("ProductUniqueId should match", productUniqueId, offer.getProductUniqueId());
         assertEquals("Availability should match", availability, offer.getAvailability());
         assertEquals("Quantity should match", quantity, offer.getQuantity());
         assertEquals("Sale start date should match", saleStartDate, offer.getSaleStartDate());
         assertEquals("Sale end date should match", saleEndDate, offer.getSaleEndDate());
         assertEquals("Expiration date should match", expirationDate, offer.getExpirationDate());
         assertEquals("Geographic Availability should match", geographicAvailability, offer.getGeographicAvailability());
+        assertEquals("Gender should match", gender, offer.getGender());
+        assertEquals("Weight should match", weight, offer.getWeight(), FLOAT_COMPARISON_EPSILON);
     }
 }

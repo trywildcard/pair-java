@@ -1,6 +1,7 @@
 package com.wildcard.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProductCard implements Card {
     private final CardType cardType;
@@ -10,21 +11,15 @@ public class ProductCard implements Card {
     private final String merchant;
     private final String brand;
     private final String description;
-    private final String gender;
     private final List<ProductColor> colors;
     private final List<String> images;
     private final Float rating;
     private final Float ratingScale;
     private final Integer ratingCount;
     private final List<String> relatedItems;
-    private final List<Size> sizes;
+    private final Map<String, String> sizes;
     private final List<String> options;
-    private final Float weight;
-    private final String pattern;
-    private final String condition;
     private final String model;
-    private final String material;
-    private final Float shippingCost;
     private final String appLinkIos;
     private final String appLinkAndroid;
 
@@ -37,7 +32,6 @@ public class ProductCard implements Card {
         this.brand = builder.brand;
         this.description = builder.description;
         this.colors = builder.colors;
-        this.gender = builder.gender;
         this.images = builder.images;
         this.rating = builder.rating;
         this.ratingScale = builder.ratingScale;
@@ -45,12 +39,7 @@ public class ProductCard implements Card {
         this.relatedItems = builder.relatedItems;
         this.sizes = builder.sizes;
         this.options = builder.options;
-        this.weight = builder.weight;
-        this.pattern = builder.pattern;
-        this.condition = builder.condition;
         this.model = builder.model;
-        this.material = builder.material;
-        this.shippingCost = builder.shippingCost;
         this.appLinkIos = builder.appLinkIos;
         this.appLinkAndroid = builder.appLinkAndroid;
     }
@@ -63,28 +52,8 @@ public class ProductCard implements Card {
         return appLinkIos;
     }
 
-    public Float getShippingCost() {
-        return shippingCost;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
     public String getModel() {
         return model;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
-
-    public String getPattern() {
-        return pattern;
-    }
-
-    public Float getWeight() {
-        return weight;
     }
 
     public List<String> getOptions() {
@@ -109,10 +78,6 @@ public class ProductCard implements Card {
 
     public List<String> getImages() {
         return images;
-    }
-
-    public String getGender() {
-        return gender;
     }
 
     public String getDescription() {
@@ -147,11 +112,12 @@ public class ProductCard implements Card {
         return colors;
     }
 
+    public Map<String, String> getSizes() {
+        return sizes;
+    }
+    
     public String writeAsJson() {
         return null;
     }
 
-    public List<Size> getSizes() {
-        return sizes;
-    }
 }
