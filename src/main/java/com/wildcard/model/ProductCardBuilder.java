@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wildcard.model.util.ValidationTool;
+
 public class ProductCardBuilder {
     
     // required fields
@@ -28,15 +30,12 @@ public class ProductCardBuilder {
     String appLinkIos;
     String appLinkAndroid;
 
-    public ProductCardBuilder(String productName, List<Offer> offers, String url) {
+    public ProductCardBuilder(String name, List<Offer> offers, String url) {
 
-        // very minimal validation
-        // TODO: null check, do it first
-        if (offers == null || offers.isEmpty()) {
-            throw new IllegalStateException("Must specify at least one offer");
-        }
+        ValidationTool.notNullOrEmpty(offers, "Must specify at least one offer");
+        ValidationTool.notNullOrEmpty(name, "Product name cannot be blank");
         
-        this.name = productName;
+        this.name = name;
         this.offers = offers;
         this.url = url;
     }
