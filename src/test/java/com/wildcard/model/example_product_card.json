@@ -1,0 +1,66 @@
+{
+  "cardType": "PRODUCT",
+  "name": "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded",
+  "url": "http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=",
+  "offers": [
+    {
+      "price": {
+        "price": 7.99,
+        "currency": "USD"
+      },
+      "originalPrice": {
+        "price": 17.99,
+        "currency": "USD"
+      },
+      "shippingCost": {
+        "price": 1.50,
+        "currency": "USD"
+      },
+      "description": "Primary offer",
+      "availability": "InStock",
+      "quantity": 15,
+      "saleStartDate": null,
+      "saleEndDate": null,
+      "expirationDate": null,
+      "geographicAvailability": null,
+      "gender": "UNISEX",
+      "weight": null
+    }
+  ],
+  "merchant": "Etsy",
+  "brand": "ItemsByLisa",
+  "description": "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time",
+  "colors": [
+    {
+      "displayName": "Magenta",
+      "swatchLink": "http://https://www.etsy.com/swatches/magenta.jpg",
+      "value": "Magenta color value",
+      "mappingColor": "Red"
+    }
+  ],
+  "images": [
+    "http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg",
+    "http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg",
+    "https://img0.etsystatic.com/020/0/7024554/il_570xN.473259414_3us0.jpg",
+    "https://img0.etsystatic.com/018/0/7024554/il_570xN.473259490_87gc.jpg"
+  ],
+  "rating": 8.0,
+  "ratingScale": 10.0,
+  "ratingCount": 12,
+  "relatedItems": [
+    "https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0",
+    "https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2",
+    "https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"
+  ],
+  "sizes": {
+    "md": "Medium"
+  },
+  "options": [
+    "example option a",
+    "example option b",
+    "example option c"
+  ],
+  "model": "Bead Ankle Bracelet - 10 inch anklet",
+  "appLinkIos": "jump://VerticalA/x123",
+  "appLinkAndroid": "market://search?q=pub:etsy"
+}

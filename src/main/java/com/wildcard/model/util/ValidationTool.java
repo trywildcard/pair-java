@@ -34,12 +34,20 @@ public class ValidationTool {
     }
 
     public static void notNegative(Integer integer, String message){
+        if (integer == null){
+            return;
+        }
+        
         if (integer < 0){
             throw new CardBuilderException(message);
         }
     }
 
     public static void notNegative(Float integer, String message){
+        if (integer == null){
+            return;
+        }
+        
         if (integer < 0){
             throw new CardBuilderException(message);
         }

@@ -5,8 +5,8 @@ import java.util.Currency;
 import com.wildcard.model.util.ValidationTool;
 
 public class Price {
-    private final Float price;
-    private final Currency currency;
+    private Float price;
+    private Currency currency;
     
     public Price(Float price, Currency currency){
         ValidationTool.notNull(price, "Price must not be null.");
@@ -21,7 +21,22 @@ public class Price {
         return price;
     }
     
-    public Currency getCurrenct(){
+    public Currency getCurrency(){
         return currency;
+    }
+    
+
+    /*
+     * The following private constructor and private methods are required by Jackson. 
+     */
+    
+    private Price(){}
+    
+    private void setPrice(Float price){
+        this.price = price;
+    }
+    
+    private void setCurrency(Currency currency){
+        this.currency = currency;
     }
 }

@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(builder = ProductCardBuilder.class)
 public class ProductCard implements Card {
     private final CardType cardType;
     private final String name;
@@ -24,8 +27,9 @@ public class ProductCard implements Card {
     private final String appLinkIos;
     private final String appLinkAndroid;
 
+    
     public ProductCard(ProductCardBuilder builder) {
-        this.cardType = CardType.PRODUCT;
+        this.cardType = builder.cardType;
         this.name = builder.name;
         this.url = builder.url;
         this.offers = builder.offers;
@@ -44,7 +48,7 @@ public class ProductCard implements Card {
         this.appLinkIos = builder.appLinkIos;
         this.appLinkAndroid = builder.appLinkAndroid;
     }
-
+    
     public String getAppLinkAndroid() {
         return appLinkAndroid;
     }
