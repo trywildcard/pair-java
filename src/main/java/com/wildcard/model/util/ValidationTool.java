@@ -16,4 +16,32 @@ public class ValidationTool {
             throw new CardBuilderException(message);
         }
     }
+
+    public static void notNull(Object object, String message) {
+        if (object == null){
+            throw new CardBuilderException(message);
+        }
+    }
+    
+    public static void notEmpty(String string, String message){
+        if (string == null){
+            return;
+        }
+        
+        if (string.isEmpty()){
+            throw new CardBuilderException(message);
+        }
+    }
+
+    public static void notNegative(Integer integer, String message){
+        if (integer < 0){
+            throw new CardBuilderException(message);
+        }
+    }
+
+    public static void notNegative(Float integer, String message){
+        if (integer < 0){
+            throw new CardBuilderException(message);
+        }
+    }
 }

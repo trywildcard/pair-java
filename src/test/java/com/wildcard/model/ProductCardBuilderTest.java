@@ -2,6 +2,8 @@ package com.wildcard.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,25 +20,19 @@ public class ProductCardBuilderTest {
     // minimal attributes
     final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
     final String description = "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time";
-    final String url = "http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=";
-    final String imgUrl = "http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg";
+    URL url;
+    URL imgUrl;
     final Float price = 7.99f;
     final String brand = "ItemsByLisa";
     
     // extensive attributes
     final String merchant = "Etsy";
     final List<ProductColor> colors = new ArrayList<ProductColor>();
-    final List<String> images = Arrays
-            .asList("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg",
-                    "https://img0.etsystatic.com/020/0/7024554/il_570xN.473259414_3us0.jpg",
-                    "https://img0.etsystatic.com/018/0/7024554/il_570xN.473259490_87gc.jpg");
+    final List<URL> images = new ArrayList<URL>();
     final Float rating = 8f;
     final Float ratingScale = 10f;
     final Integer ratingCount = 12;
-    final List<String> relatedItems = Arrays
-            .asList("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0",
-                    "https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2",
-                    "https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4");
+    final List<URL> relatedItems = new ArrayList<URL>();
     final Map<String, String> sizes = new HashMap<String, String>();
     final List<String> options = Arrays
             .asList("example option a", 
@@ -47,14 +43,26 @@ public class ProductCardBuilderTest {
     final String appLinkAndroid = "market://search?q=pub:etsy";
     
     @Before
-    public void prepare(){
-        ProductColor color = new ProductColor("Magenta", "Magenta color value",
-                "http://https://www.etsy.com/swatches/magenta.jpg",
+    public void prepare() throws MalformedURLException{
+        url = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
+        imgUrl = new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg");
+        
+        ProductColor color = new ProductColor("Magenta",
+                "Magenta color value",
+                new URL("http://https://www.etsy.com/swatches/magenta.jpg"),
                 MappingColor.Red);
         
         colors.add(color);
         
-        sizes.put("md", "Medium"); 
+        sizes.put("md", "Medium");
+
+        images.add(new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg"));
+        images.add(new URL("https://img0.etsystatic.com/020/0/7024554/il_570xN.473259414_3us0.jpg"));
+        images.add(new URL("https://img0.etsystatic.com/018/0/7024554/il_570xN.473259490_87gc.jpg"));
+        
+        relatedItems.add(new URL("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0"));
+        relatedItems.add(new URL("https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2"));
+        relatedItems.add(new URL("https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"));
     }
     
     private void testMinimalCardAttributes(ProductCard card){
@@ -68,7 +76,7 @@ public class ProductCardBuilderTest {
     }
     
     @Test
-    public void testMinimalProductCard(){
+    public void testMinimalProductCard() throws MalformedURLException{
         
         List<Offer> offers = new ArrayList<Offer>();
         Offer offer = new OfferBuilder(price).build();
@@ -91,9 +99,9 @@ public class ProductCardBuilderTest {
         assertEquals("Merchant should match", merchant, card.getMerchant());
         assertEquals("Colors should match", colors, card.getColors());
         
-        List<String> combinedImages = new ArrayList<String>();
+        List<URL> combinedImages = new ArrayList<URL>();
         combinedImages.add(imgUrl);
-        for (String img : images){
+        for (URL img : images){
             combinedImages.add(img);
         }
         assertEquals("Images should match", combinedImages, card.getImages());
