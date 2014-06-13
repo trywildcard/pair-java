@@ -6,182 +6,103 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wildcard.model.product.Availability;
-import com.wildcard.model.product.Gender;
-import com.wildcard.model.product.MappingColor;
 import com.wildcard.model.product.Offer;
 import com.wildcard.model.product.OfferBuilder;
-import com.wildcard.model.product.Price;
 import com.wildcard.model.product.ProductCard;
 import com.wildcard.model.product.ProductCardBuilder;
-import com.wildcard.model.product.ProductColor;
 import com.wildcard.model.util.CardMapper;
 import com.wildcard.testUtil.TestUtil;
 
 public class ProductCardBuilderTest {
-
-    private final int FLOAT_COMPARISON_EPSILON = 0; // prices should be exact, no error since never computed. 
+    
     ObjectMapper mapper = new CardMapper().getObjectMapper();
+    private static DummyOffer dummyOffer;
+    private static DummyProduct dummyProduct;
     
-    // minimal attributes
-    final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
-    final String description = "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time";
-    URL url;
-    URL imgUrl;
-    final Price price = new Price(7.99f, Currency.getInstance(Locale.US));
-    final String brand = "ItemsByLisa";
-    
-    // extensive attributes
-    final String merchant = "Etsy";
-    final List<ProductColor> colors = new ArrayList<ProductColor>();
-    final List<URL> images = new ArrayList<URL>();
-    final Float rating = 8f;
-    final Float ratingScale = 10f;
-    final Integer ratingCount = 12;
-    final List<URL> relatedItems = new ArrayList<URL>();
-    final Map<String, String> sizes = new HashMap<String, String>();
-    final List<String> options = Arrays
-            .asList("example option a", 
-                    "example option b",
-                    "example option c");
-    final String model = "Bead Ankle Bracelet - 10 inch anklet";
-    final String appLinkIos = "jump://VerticalA/x123";
-    final String appLinkAndroid = "market://search?q=pub:etsy";
-    
-    // offer attributes
-    
-    final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    
-    final String offerDescription = "Primary offer";
-    final Price originalPrice = new Price(17.99f, Currency.getInstance(Locale.US));
-    final Price shippingCost = new Price(1.50f, Currency.getInstance(Locale.US));
-    final Integer quantity = 15;
-    Date saleStartDate;
-    Date saleEndDate;
-    Date expirationDate;
-    final List<Locale> geographicAvailability = Arrays.asList(Locale.US);
-    final Gender gender = Gender.UNISEX;
-    final Float weight = 17.0f;
-    final String weightUnits = "oz";
-    
-    
-    @Before
-    public void prepare() throws MalformedURLException, ParseException{
-        
-        url = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
-        imgUrl = new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg");
-        
-        ProductColor color = new ProductColor("Magenta",
-                "Magenta color value",
-                new URL("http://https://www.etsy.com/swatches/magenta.jpg"),
-                MappingColor.Red);
-        
-        colors.add(color);
-        
-        sizes.put("md", "Medium");
-
-        images.add(new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg"));
-        images.add(new URL("https://img0.etsystatic.com/020/0/7024554/il_570xN.473259414_3us0.jpg"));
-        images.add(new URL("https://img0.etsystatic.com/018/0/7024554/il_570xN.473259490_87gc.jpg"));
-        
-        relatedItems.add(new URL("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0"));
-        relatedItems.add(new URL("https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2"));
-        relatedItems.add(new URL("https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"));
-        
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        saleStartDate = dateFormat.parse("2014-06-01");
-        saleEndDate = dateFormat.parse("2014-06-24");
-        expirationDate = dateFormat.parse("2014-07-13");
+    @BeforeClass
+    public static void prepare() throws MalformedURLException, ParseException  {
+        dummyOffer = new DummyOffer();
+        dummyProduct = new DummyProduct();
     }
     
     private void testMinimalCardAttributes(ProductCard card){
-        assertEquals("Name should match", name, card.getName());
-        assertEquals("Description should match", description, card.getDescription());
-        assertEquals("Url should match", url, card.getUrl());
-        assertEquals("Image url should match", imgUrl, card.getImages().get(0));
+        assertEquals("Name should match", dummyProduct.name, card.getName());
+        assertEquals("Url should match", dummyProduct.url, card.getUrl());
         
-        assertEquals("Price should match", price, card.getOffers().get(0).getPrice());
-        assertEquals("Brand name should match", brand, card.getBrand());
+        assertEquals("Price should match", dummyOffer.price, card.getOffers().get(0).getPrice());
+    }
+    
+    private ProductCard buildMinimalProductCard(){
+        List<Offer> offers = new ArrayList<Offer>();
+        Offer offer = new OfferBuilder(dummyOffer.price).build();
+        offers.add(offer);
+        
+        ProductCardBuilder cardBuilder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.url); 
+
+        return cardBuilder.build();
     }
     
     @Test
     public void testMinimalProductCard() throws MalformedURLException, JsonProcessingException{
         
-        List<Offer> offers = new ArrayList<Offer>();
-        Offer offer = new OfferBuilder(price).build();
-        offers.add(offer);
-        
-        ProductCardBuilder cardBuilder = new ProductCardBuilder(name, offers, url); 
-        
-        cardBuilder.description(description);
-        cardBuilder.image(imgUrl);
-        cardBuilder.brand(brand);
-        
-        ProductCard card = cardBuilder.build();
-        
+        ProductCard card = buildMinimalProductCard();
         testMinimalCardAttributes(card);
     }
     
     private void testExtensiveCardAttributes(ProductCard card){
         testMinimalCardAttributes(card);
+
+        assertEquals("Image url should match", dummyProduct.imgUrl, card.getImages().get(0));
+        assertEquals("Description should match", dummyProduct.description, card.getDescription());
+        assertEquals("Brand name should match", dummyProduct.brand, card.getBrand());
         
-        assertEquals("Merchant should match", merchant, card.getMerchant());
-        assertEquals("Colors should match", colors, card.getColors());
+        assertEquals("Merchant should match", dummyProduct.merchant, card.getMerchant());
+        assertEquals("Colors should match", dummyProduct.colors, card.getColors());
         
         List<URL> combinedImages = new ArrayList<URL>();
-        combinedImages.add(imgUrl);
-        for (URL img : images){
+        combinedImages.add(dummyProduct.imgUrl);
+        for (URL img : dummyProduct.images){
             combinedImages.add(img);
         }
         assertEquals("Images should match", combinedImages, card.getImages());
         
-        assertEquals("Rating should match", rating, card.getRating(), FLOAT_COMPARISON_EPSILON);
-        assertEquals("Rating scale should match", ratingScale, card.getRatingScale(), FLOAT_COMPARISON_EPSILON);
-        assertEquals("Rating count should match", ratingCount, card.getRatingCount());
-        assertEquals("Related Items should match", relatedItems, card.getRelatedItems());
-        assertEquals("Sizes should match", sizes, card.getSizes());
-        assertEquals("Options should match", options, card.getOptions());
-        assertEquals("Model should match", model, card.getModel());
-        assertEquals("App link ios should match", appLinkIos, card.getAppLinkIos());
-        assertEquals("App link Android should match", appLinkAndroid, card.getAppLinkAndroid());
+        assertEquals("Rating should match", dummyProduct.rating, card.getRating(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
+        assertEquals("Rating scale should match", dummyProduct.ratingScale, card.getRatingScale(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
+        assertEquals("Rating count should match", dummyProduct.ratingCount, card.getRatingCount());
+        assertEquals("Related Items should match", dummyProduct.relatedItems, card.getRelatedItems());
+        assertEquals("Sizes should match", dummyProduct.sizes, card.getSizes());
+        assertEquals("Options should match", dummyProduct.options, card.getOptions());
+        assertEquals("Model should match", dummyProduct.model, card.getModel());
+        assertEquals("App link ios should match", dummyProduct.appLinkIos, card.getAppLinkIos());
+        assertEquals("App link Android should match", dummyProduct.appLinkAndroid, card.getAppLinkAndroid());
     }
     
     
     private Offer buildExtensiveOffer(){
-        OfferBuilder builder = new OfferBuilder(price);
-        builder.originalPrice(originalPrice);
-        builder.description(offerDescription);
-        builder.availability(Availability.InStock);
-        builder.shippingCost(shippingCost);
-        builder.quantity(quantity);
-        builder.saleStartDate(saleStartDate);
-        builder.saleEndDate(saleEndDate);
-        builder.expirationDate(expirationDate);
-        builder.geographicAvailability(geographicAvailability);
-        builder.gender(gender);
-        builder.weight(weight);
-        builder.weightUnits(weightUnits);
+        OfferBuilder builder = new OfferBuilder(dummyOffer.price);
+        builder.originalPrice(dummyOffer.originalPrice);
+        builder.description(dummyOffer.description);
+        builder.availability(dummyOffer.availability);
+        builder.shippingCost(dummyOffer.shippingCost);
+        builder.quantity(dummyOffer.quantity);
+        builder.saleStartDate(dummyOffer.saleStartDate);
+        builder.saleEndDate(dummyOffer.saleEndDate);
+        builder.expirationDate(dummyOffer.expirationDate);
+        builder.geographicAvailability(dummyOffer.geographicAvailability);
+        builder.gender(dummyOffer.gender);
+        builder.weight(dummyOffer.weight);
+        builder.weightUnits(dummyOffer.weightUnits);
         
         return builder.build();
     }
@@ -191,23 +112,23 @@ public class ProductCardBuilderTest {
         Offer offer = buildExtensiveOffer();
         offers.add(offer);
         
-        ProductCardBuilder builder = new ProductCardBuilder(name, offers, url);
+        ProductCardBuilder builder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.url);
 
-        builder.description(description);
-        builder.image(imgUrl);
-        builder.brand(brand);
-        builder.merchant(merchant);
-        builder.colors(colors);
-        builder.images(images);
-        builder.rating(rating);
-        builder.ratingScale(ratingScale);
-        builder.ratingCount(ratingCount);
-        builder.relatedItems(relatedItems);
-        builder.sizes(sizes);
-        builder.options(options);
-        builder.model(model);
-        builder.appLinkIos(appLinkIos);
-        builder.appLinkAndroid(appLinkAndroid);
+        builder.description(dummyProduct.description);
+        builder.image(dummyProduct.imgUrl);
+        builder.brand(dummyProduct.brand);
+        builder.merchant(dummyProduct.merchant);
+        builder.colors(dummyProduct.colors);
+        builder.images(dummyProduct.images);
+        builder.rating(dummyProduct.rating);
+        builder.ratingScale(dummyProduct.ratingScale);
+        builder.ratingCount(dummyProduct.ratingCount);
+        builder.relatedItems(dummyProduct.relatedItems);
+        builder.sizes(dummyProduct.sizes);
+        builder.options(dummyProduct.options);
+        builder.model(dummyProduct.model);
+        builder.appLinkIos(dummyProduct.appLinkIos);
+        builder.appLinkAndroid(dummyProduct.appLinkAndroid);
         
         return builder.build();
     }
@@ -219,10 +140,19 @@ public class ProductCardBuilderTest {
     }
 
     @Test
-    public void testWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException{
+    public void testExtensiveWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException{
         String inputString = TestUtil.readResourceAsString("example_product_card.json");
         ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
         ProductCard generatedCard = buildExtensiveProductCard();
+        
+        assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
+    }
+
+    @Test
+    public void testMinimalWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException{
+        String inputString = TestUtil.readResourceAsString("example_minimal_product_card.json");
+        ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
+        ProductCard generatedCard = buildMinimalProductCard();
         
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
