@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.model.product;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

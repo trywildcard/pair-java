@@ -1,5 +1,7 @@
 package com.wildcard.model;
 
+import java.io.IOException;
+
 public interface Card {
-    public String writeAsJson();
+    public String writeAsJsonString() throws IOException;
 }

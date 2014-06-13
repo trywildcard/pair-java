@@ -1,22 +1,23 @@
-package com.wildcard.model;
+package com.wildcard.model.product;
 
 import java.net.URL;
 
 import com.wildcard.model.util.ValidationTool;
 
 public class ProductColor {
+    // required fields
     private String displayName;
+    
+    // optional fields
     private URL swatchLink;
     private String value;
     private MappingColor mappingColor;
     
     public ProductColor(String displayName, String value, URL swatchLink, MappingColor mappingColor){
-        ValidationTool.notNullOrEmpty(displayName, "Must specify a displayName.");
-        
-        this.displayName = displayName;
-        this.swatchLink = swatchLink;
-        this.value = value;
-        this.mappingColor = mappingColor;
+        setDisplayName(displayName);
+        setSwatchLink(swatchLink);
+        setValue(value);
+        setMappingColor(mappingColor);
     }
 
     public String getDisplayName() {
@@ -42,6 +43,7 @@ public class ProductColor {
     private ProductColor(){}
     
     private void setDisplayName(String displayName){
+        ValidationTool.notNullOrEmpty(displayName, "Must specify a displayName.");
         this.displayName = displayName;
     }
     

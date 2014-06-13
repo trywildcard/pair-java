@@ -23,7 +23,7 @@
       "sale_end_date": "2014-06-24T00:00:00.000+0000",
       "expiration_date": "2014-07-13T00:00:00.000+0000",
       "geographic_availability": [
-        "us"
+        "en_US"
         ],
       "gender": "unisex",
       "weight": 17.0,

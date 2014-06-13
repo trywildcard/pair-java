@@ -6,24 +6,43 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wildcard.model.product.Availability;
+import com.wildcard.model.product.Gender;
+import com.wildcard.model.product.MappingColor;
+import com.wildcard.model.product.Offer;
+import com.wildcard.model.product.OfferBuilder;
+import com.wildcard.model.product.Price;
+import com.wildcard.model.product.ProductCard;
+import com.wildcard.model.product.ProductCardBuilder;
+import com.wildcard.model.product.ProductColor;
+import com.wildcard.model.util.CardMapper;
+import com.wildcard.testUtil.TestUtil;
 
 public class ProductCardBuilderTest {
 
     private final int FLOAT_COMPARISON_EPSILON = 0; // prices should be exact, no error since never computed. 
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = new CardMapper().getObjectMapper();
     
     // minimal attributes
     final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
@@ -50,8 +69,25 @@ public class ProductCardBuilderTest {
     final String appLinkIos = "jump://VerticalA/x123";
     final String appLinkAndroid = "market://search?q=pub:etsy";
     
+    // offer attributes
+    
+    final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    
+    final String offerDescription = "Primary offer";
+    final Price originalPrice = new Price(17.99f, Currency.getInstance(Locale.US));
+    final Price shippingCost = new Price(1.50f, Currency.getInstance(Locale.US));
+    final Integer quantity = 15;
+    Date saleStartDate;
+    Date saleEndDate;
+    Date expirationDate;
+    final List<Locale> geographicAvailability = Arrays.asList(Locale.US);
+    final Gender gender = Gender.UNISEX;
+    final Float weight = 17.0f;
+    final String weightUnits = "oz";
+    
+    
     @Before
-    public void prepare() throws MalformedURLException{
+    public void prepare() throws MalformedURLException, ParseException{
         
         url = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
         imgUrl = new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg");
@@ -72,6 +108,11 @@ public class ProductCardBuilderTest {
         relatedItems.add(new URL("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0"));
         relatedItems.add(new URL("https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2"));
         relatedItems.add(new URL("https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"));
+        
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        saleStartDate = dateFormat.parse("2014-06-01");
+        saleEndDate = dateFormat.parse("2014-06-24");
+        expirationDate = dateFormat.parse("2014-07-13");
     }
     
     private void testMinimalCardAttributes(ProductCard card){
@@ -126,10 +167,28 @@ public class ProductCardBuilderTest {
         assertEquals("App link Android should match", appLinkAndroid, card.getAppLinkAndroid());
     }
     
-    @Test
-    public void testExtensiveProductCard() throws IOException, URISyntaxException{
+    
+    private Offer buildExtensiveOffer(){
+        OfferBuilder builder = new OfferBuilder(price);
+        builder.originalPrice(originalPrice);
+        builder.description(offerDescription);
+        builder.availability(Availability.InStock);
+        builder.shippingCost(shippingCost);
+        builder.quantity(quantity);
+        builder.saleStartDate(saleStartDate);
+        builder.saleEndDate(saleEndDate);
+        builder.expirationDate(expirationDate);
+        builder.geographicAvailability(geographicAvailability);
+        builder.gender(gender);
+        builder.weight(weight);
+        builder.weightUnits(weightUnits);
+        
+        return builder.build();
+    }
+    
+    private ProductCard buildExtensiveProductCard(){
         List<Offer> offers = new ArrayList<Offer>();
-        Offer offer = new OfferBuilder(price).build();
+        Offer offer = buildExtensiveOffer();
         offers.add(offer);
         
         ProductCardBuilder builder = new ProductCardBuilder(name, offers, url);
@@ -150,10 +209,22 @@ public class ProductCardBuilderTest {
         builder.appLinkIos(appLinkIos);
         builder.appLinkAndroid(appLinkAndroid);
         
-        ProductCard card = builder.build();
-        
+        return builder.build();
+    }
+    
+    @Test
+    public void testExtensiveProductCard() throws IOException, URISyntaxException{
+        ProductCard card = buildExtensiveProductCard();
         testExtensiveCardAttributes(card);
+    }
 
+    @Test
+    public void testWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException{
+        String inputString = TestUtil.readResourceAsString("example_product_card.json");
+        ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
+        ProductCard generatedCard = buildExtensiveProductCard();
+        
+        assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
     
     // TODO: test validation
