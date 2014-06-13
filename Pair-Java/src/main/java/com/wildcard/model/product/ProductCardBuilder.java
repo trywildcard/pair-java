@@ -69,6 +69,9 @@ public class ProductCardBuilder {
     }
     
     public ProductCardBuilder sizes(Map<String, String> sizes){
+        if (sizes == null){
+            return this;
+        }
         for (String key : sizes.keySet()){
             String value = sizes.get(key);
             ValidationTool.notNullOrEmpty(value, "Tried to set a null or empty size value.");
@@ -84,6 +87,9 @@ public class ProductCardBuilder {
     }
 
     public ProductCardBuilder options(List<String> options) {
+        if (options == null){
+            return this;
+        }
         for (String option : options){
             ValidationTool.notNullOrEmpty(option, "Tried to add an empty option.");
             this.options.add(option);
@@ -98,6 +104,9 @@ public class ProductCardBuilder {
     }
     
     public ProductCardBuilder relatedItems(List<URL> relatedItems) {
+        if (relatedItems == null){
+            return this;
+        }
         for (URL relatedItem : relatedItems){
             ValidationTool.notNull(relatedItem, "Tried to add an empty relatedItem.");
             this.relatedItems.add(relatedItem);
@@ -128,6 +137,9 @@ public class ProductCardBuilder {
     }
 
     public ProductCardBuilder images(List<URL> images) {
+        if (images == null){
+            return this;
+        }
         for (URL img : images){
             ValidationTool.notNull(img, "Tried to add a null image");
             this.images.add(img);
@@ -142,6 +154,9 @@ public class ProductCardBuilder {
     }
 
     public ProductCardBuilder colors(List<ProductColor> colors){
+        if (colors == null){
+            return this;
+        }
         for (ProductColor color : colors){
             ValidationTool.notNull(color, "Tried to add a null color");
             this.colors.add(color);
