@@ -1,5 +1,5 @@
 {
-  "cardType": "PRODUCT",
+  "card_type": "product",
   "name": "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded",
   "url": "http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=",
   "offers": [
@@ -8,22 +8,22 @@
         "price": 7.99,
         "currency": "USD"
       },
-      "originalPrice": {
+      "original_price": {
         "price": 17.99,
         "currency": "USD"
       },
-      "shippingCost": {
+      "shipping_cost": {
         "price": 1.50,
         "currency": "USD"
       },
       "description": "Primary offer",
       "availability": "InStock",
       "quantity": 15,
-      "saleStartDate": null,
-      "saleEndDate": null,
-      "expirationDate": null,
-      "geographicAvailability": null,
-      "gender": "UNISEX",
+      "sale_start_date": "2014-06-01T00:00:00.000+0000",
+      "sale_end_date": "2014-06-24T00:00:00.000+0000",
+      "expiration_date": "2014-07-13T00:00:00.000+0000",
+      "geographic_availability": null,
+      "gender": "unisex",
       "weight": null
     }
   ],
@@ -32,10 +32,10 @@
   "description": "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time",
   "colors": [
     {
-      "displayName": "Magenta",
-      "swatchLink": "http://https://www.etsy.com/swatches/magenta.jpg",
+      "display_name": "Magenta",
+      "swatch_link": "http://https://www.etsy.com/swatches/magenta.jpg",
       "value": "Magenta color value",
-      "mappingColor": "Red"
+      "mapping_color": "red"
     }
   ],
   "images": [
@@ -45,9 +45,9 @@
     "https://img0.etsystatic.com/018/0/7024554/il_570xN.473259490_87gc.jpg"
   ],
   "rating": 8.0,
-  "ratingScale": 10.0,
-  "ratingCount": 12,
-  "relatedItems": [
+  "rating_scale": 10.0,
+  "rating_count": 12,
+  "related_items": [
     "https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0",
     "https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2",
     "https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"
@@ -61,6 +61,6 @@
     "example option c"
   ],
   "model": "Bead Ankle Bracelet - 10 inch anklet",
-  "appLinkIos": "jump://VerticalA/x123",
-  "appLinkAndroid": "market://search?q=pub:etsy"
+  "app_link_ios": "jump://VerticalA/x123",
+  "app_link_android": "market://search?q=pub:etsy"
 }
