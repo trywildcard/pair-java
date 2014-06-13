@@ -11,6 +11,12 @@ import java.util.Locale;
 
 import org.junit.Test;
 
+import com.wildcard.model.product.Availability;
+import com.wildcard.model.product.Gender;
+import com.wildcard.model.product.Offer;
+import com.wildcard.model.product.OfferBuilder;
+import com.wildcard.model.product.Price;
+
 public class OfferBuilderTest {
     private final int FLOAT_COMPARISON_EPSILON = 0; // should be exact, no error since never computed. 
     

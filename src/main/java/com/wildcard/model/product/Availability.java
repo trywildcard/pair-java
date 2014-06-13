@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.model.product;
 
 /*
  * Created by Michael Garate, June 11 2014.

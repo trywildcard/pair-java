@@ -12,32 +12,32 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.PropertyNamingStrategyBase;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.wildcard.model.product.ProductCard;
+import com.wildcard.model.util.CardMapper;
 import com.wildcard.testUtil.TestUtil;
 
 public class SerializeProductTest {
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = new CardMapper().getObjectMapper();
+    String inputString;
     
     @Before
-    public void prepare(){
+    public void prepare() throws IOException{
         // TODO: test null and empty fields
         //mapper.setSerializationInclusion(Include.NON_NULL);
         //mapper.setSerializationInclusion(Include.NON_EMPTY);
-        
 
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        mapper.setPropertyNamingStrategy(PropertyNamingStrategyBase.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+        inputString = TestUtil.readResourceAsString("example_product_card.json");
     }
     
     @Test
     public void testSerializeProductCard() throws URISyntaxException, JsonMappingException, IOException{
         
-        String inputString = TestUtil.readResourceAsString("example_product_card.json");
         JsonNode inputNode = mapper.readTree(inputString);
 
         ProductCard card = mapper.readValue(inputString, ProductCard.class);
-        JsonNode outputNode = mapper.readTree(mapper.writeValueAsString(card));
+        JsonNode outputNode = mapper.readTree(card.writeAsJsonString());
         
         assertEquals("Expected inputNode and outputNode sizes to match", inputNode.size(), outputNode.size());
 
@@ -51,4 +51,5 @@ public class SerializeProductTest {
             assertEquals("Expected " + inFieldName + " to match", inputNode.get(inFieldName), outputNode.get(outFieldName));
         }
     }
+    
 }

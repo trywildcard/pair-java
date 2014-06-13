@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.model.product;
 
 import java.util.Currency;
 
@@ -9,12 +9,8 @@ public class Price {
     private Currency currency;
     
     public Price(Float price, Currency currency){
-        ValidationTool.notNull(price, "Price must not be null.");
-        ValidationTool.notNegative(price, "Price must be a positive Float.");
-        ValidationTool.notNull(currency, "currency must not be null.");
-        
-        this.price = price;
-        this.currency = currency;
+        setPrice(price);
+        setCurrency(currency);
     }
     
     public Float getPrice(){
@@ -33,10 +29,13 @@ public class Price {
     private Price(){}
     
     private void setPrice(Float price){
+        ValidationTool.notNull(price, "Price must not be null.");
+        ValidationTool.notNegative(price, "Price must be a positive Float.");
         this.price = price;
     }
     
     private void setCurrency(Currency currency){
+        ValidationTool.notNull(currency, "currency must not be null.");
         this.currency = currency;
     }
 }

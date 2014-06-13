@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.model.product;
 
 import java.util.Date;
 import java.util.List;
@@ -27,9 +27,7 @@ public class OfferBuilder {
     String weightUnits;
     
     public OfferBuilder(Price price){
-        ValidationTool.notNull(price, "Price must not be null.");
-        ValidationTool.notNegative(price.getPrice(), "Price must be a positive Float.");
-        this.price = price;
+        price(price);
     }
     
     public OfferBuilder weightUnits(String weightUnits){
@@ -108,6 +106,9 @@ public class OfferBuilder {
     private OfferBuilder(){}
     
     private OfferBuilder price(Price price){
+        ValidationTool.notNull(price, "Price must not be null.");
+        ValidationTool.notNegative(price.getPrice(), "Price must be a positive Float.");
+        
         this.price = price;
         return this;
     }

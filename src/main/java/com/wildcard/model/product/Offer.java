@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.model.product;
 
 import java.util.Date;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.model.product;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.wildcard.model.CardType;
 import com.wildcard.model.util.ValidationTool;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
@@ -35,15 +36,10 @@ public class ProductCardBuilder {
     String appLinkAndroid;
 
     public ProductCardBuilder(String name, List<Offer> offers, URL url) {
-        ValidationTool.notNullOrEmpty(offers, "Must specify at least one offer.");
-        ValidationTool.notNullOrEmpty(name, "Product name cannot be blank.");
-        ValidationTool.notNull(url, "Must specify a product url.");
-        
-        this.cardType = CardType.PRODUCT;
-        
-        this.name = name;
-        this.offers = offers;
-        this.url = url;
+        cardType(CardType.PRODUCT);
+        name(name);
+        offers(offers);
+        url(url);
     }
     
     public ProductCardBuilder appLinkAndroid(String appLinkAndroid) {
@@ -180,16 +176,19 @@ public class ProductCardBuilder {
     }
     
     private ProductCardBuilder name(String name) {
+        ValidationTool.notNullOrEmpty(name, "Product name cannot be blank.");
         this.name = name;
         return this;
     }
     
     private ProductCardBuilder url(URL url){
+        ValidationTool.notNull(url, "Must specify a product url.");
         this.url = url;
         return this;
     }
     
     private ProductCardBuilder offers(List<Offer> offers){
+        ValidationTool.notNullOrEmpty(offers, "Must specify at least one offer.");
         this.offers = offers;
         return this;
     }
