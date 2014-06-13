@@ -16,7 +16,7 @@ public class ProductCardBuilder {
     // required fields
     CardType cardType;
     String name;
-    List<Offer> offers;
+    List<Offer> offers = new ArrayList<Offer>();
     URL url;
 
     // optional filds
@@ -39,6 +39,14 @@ public class ProductCardBuilder {
         cardType(CardType.PRODUCT);
         name(name);
         offers(offers);
+        url(url);
+    }
+    
+    public ProductCardBuilder(String name, Float price, URL url){
+        Offer offer = new OfferBuilder(price).build();
+        offer(offer);
+        cardType(CardType.PRODUCT);
+        name(name);
         url(url);
     }
     
@@ -189,7 +197,16 @@ public class ProductCardBuilder {
     
     private ProductCardBuilder offers(List<Offer> offers){
         ValidationTool.notNullOrEmpty(offers, "Must specify at least one offer.");
-        this.offers = offers;
+        
+        for (Offer offer : offers){
+            this.offers.add(offer);
+        }
+        
+        return this;
+    }
+    
+    private ProductCardBuilder offer(Offer offer){
+        offers.add(offer);
         return this;
     }
 
