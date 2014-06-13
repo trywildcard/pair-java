@@ -52,6 +52,7 @@ public class ProductColor {
     }
     
     private void setValue(String value){
+        ValidationTool.notEmpty(value, "Tried to set value to an empty string.");
         this.value = value;
     }
     
