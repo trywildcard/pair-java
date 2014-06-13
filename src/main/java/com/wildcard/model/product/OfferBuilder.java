@@ -1,5 +1,6 @@
 package com.wildcard.model.product;
 
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -28,6 +29,10 @@ public class OfferBuilder {
     
     public OfferBuilder(Price price){
         price(price);
+    }
+    
+    public OfferBuilder(Float price){
+        price(new Price(price, Currency.getInstance(Locale.US)));
     }
     
     public OfferBuilder weightUnits(String weightUnits){

@@ -29,6 +29,14 @@ public class OfferBuilderTest {
     }
     
     @Test
+    public void testMinimalOfferWithMinimalConstructor(){
+        OfferBuilder builder = new OfferBuilder(dummyOffer.price.getPrice());
+        Offer offer = builder.build();
+        
+        assertEquals("Price should match", dummyOffer.price.getPrice(), offer.getPrice().getPrice());
+    }
+    
+    @Test
     public void testExtensiveOffer(){
         OfferBuilder builder = new OfferBuilder(dummyOffer.price);
         
@@ -61,4 +69,5 @@ public class OfferBuilderTest {
         assertEquals("Weight should match", dummyOffer.weight, offer.getWeight(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
         assertEquals("WeightUnits should match", dummyOffer.weightUnits, offer.getWeightUnits());
     }
+    
 }
