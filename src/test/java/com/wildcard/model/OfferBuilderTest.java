@@ -2,79 +2,63 @@ package com.wildcard.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
+import java.text.ParseException;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.wildcard.model.product.Availability;
-import com.wildcard.model.product.Gender;
 import com.wildcard.model.product.Offer;
 import com.wildcard.model.product.OfferBuilder;
-import com.wildcard.model.product.Price;
+import com.wildcard.testUtil.TestUtil;
 
 public class OfferBuilderTest {
-    private final int FLOAT_COMPARISON_EPSILON = 0; // should be exact, no error since never computed. 
     
-    final Currency currency = Currency.getInstance(Locale.US);
-    final Price price = new Price(12.99f, currency);
-    final Price originalPrice = new Price(18f, currency);
-    final Price shippingCost = new Price(2.99f, currency);
-    final String description = "6 pack for $12.99";
-    final Availability availability = Availability.InStock;
-    final Integer quantity = 58;
-    final Date saleStartDate = new GregorianCalendar(2014, 06, 23).getTime();
-    final Date saleEndDate = new GregorianCalendar(2014, 06, 29).getTime();
-    final Date expirationDate = new GregorianCalendar(2014, 06, 29).getTime();
-    final List<Locale> geographicAvailability = Arrays
-            .asList(Locale.US, Locale.UK);
-    final Gender gender = Gender.FEMALE;
-    final Float weight = 1.77f;
-    final String weightUnits = "lbs";
+    private static DummyOffer dummyOffer;
+    
+    @BeforeClass
+    public static void initialize() throws ParseException{
+        dummyOffer = new DummyOffer();
+    }
     
     @Test
     public void testMinimalOffer(){
-        OfferBuilder builder = new OfferBuilder(price);
+        OfferBuilder builder = new OfferBuilder(dummyOffer.price);
         Offer offer = builder.build();
         
-        assertEquals("Price should match", price, offer.getPrice());
+        assertEquals("Price should match", dummyOffer.price, offer.getPrice());
     }
     
     @Test
     public void testExtensiveOffer(){
-        OfferBuilder builder = new OfferBuilder(price);
+        OfferBuilder builder = new OfferBuilder(dummyOffer.price);
         
-        builder.originalPrice(originalPrice);
-        builder.shippingCost(shippingCost);
-        builder.description(description);
-        builder.availability(availability);
-        builder.quantity(quantity);
-        builder.saleStartDate(saleStartDate);
-        builder.saleEndDate(saleEndDate);
-        builder.expirationDate(expirationDate);
-        builder.geographicAvailability(geographicAvailability);
-        builder.gender(gender);
-        builder.weight(weight);
-        builder.weightUnits(weightUnits);
+        builder.originalPrice(dummyOffer.originalPrice);
+        builder.shippingCost(dummyOffer.shippingCost);
+        builder.description(dummyOffer.description);
+        builder.availability(dummyOffer.availability);
+        builder.quantity(dummyOffer.quantity);
+        builder.saleStartDate(dummyOffer.saleStartDate);
+        builder.saleEndDate(dummyOffer.saleEndDate);
+        builder.expirationDate(dummyOffer.expirationDate);
+        builder.geographicAvailability(dummyOffer.geographicAvailability);
+        builder.gender(dummyOffer.gender);
+        builder.weight(dummyOffer.weight);
+        builder.weightUnits(dummyOffer.weightUnits);
         
         Offer offer = builder.build();
 
-        assertEquals("Price should match", price, offer.getPrice());
-        assertEquals("OriginalPrice should match", originalPrice, offer.getOriginalPrice());
-        assertEquals("Shipping cost should match", shippingCost, offer.getShippingCost());
-        assertEquals("Description should match", description, offer.getDescription());
-        assertEquals("Availability should match", availability, offer.getAvailability());
-        assertEquals("Quantity should match", quantity, offer.getQuantity());
-        assertEquals("Sale start date should match", saleStartDate, offer.getSaleStartDate());
-        assertEquals("Sale end date should match", saleEndDate, offer.getSaleEndDate());
-        assertEquals("Expiration date should match", expirationDate, offer.getExpirationDate());
-        assertEquals("Geographic Availability should match", geographicAvailability, offer.getGeographicAvailability());
-        assertEquals("Gender should match", gender, offer.getGender());
-        assertEquals("Weight should match", weight, offer.getWeight(), FLOAT_COMPARISON_EPSILON);
-        assertEquals("WeightUnits should match", weightUnits, offer.getWeightUnits());
+        assertEquals("Price should match", dummyOffer.price, offer.getPrice());
+        assertEquals("OriginalPrice should match", dummyOffer.originalPrice, offer.getOriginalPrice());
+        assertEquals("Shipping cost should match", dummyOffer.shippingCost, offer.getShippingCost());
+        assertEquals("Description should match", dummyOffer.description, offer.getDescription());
+        assertEquals("Availability should match", dummyOffer.availability, offer.getAvailability());
+        assertEquals("Quantity should match", dummyOffer.quantity, offer.getQuantity());
+        assertEquals("Sale start date should match", dummyOffer.saleStartDate, offer.getSaleStartDate());
+        assertEquals("Sale end date should match", dummyOffer.saleEndDate, offer.getSaleEndDate());
+        assertEquals("Expiration date should match", dummyOffer.expirationDate, offer.getExpirationDate());
+        assertEquals("Geographic Availability should match", dummyOffer.geographicAvailability, offer.getGeographicAvailability());
+        assertEquals("Gender should match", dummyOffer.gender, offer.getGender());
+        assertEquals("Weight should match", dummyOffer.weight, offer.getWeight(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
+        assertEquals("WeightUnits should match", dummyOffer.weightUnits, offer.getWeightUnits());
     }
 }

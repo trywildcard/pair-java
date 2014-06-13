@@ -6,24 +6,22 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.PropertyNamingStrategyBase;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.wildcard.model.product.ProductCard;
 import com.wildcard.model.util.CardMapper;
 import com.wildcard.testUtil.TestUtil;
 
 public class SerializeProductTest {
     ObjectMapper mapper = new CardMapper().getObjectMapper();
-    String inputString;
+    static String inputString;
     
-    @Before
-    public void prepare() throws IOException{
+    @BeforeClass
+    public static void prepare() throws IOException{
         // TODO: test null and empty fields
         //mapper.setSerializationInclusion(Include.NON_NULL);
         //mapper.setSerializationInclusion(Include.NON_EMPTY);
