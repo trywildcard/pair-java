@@ -1,5 +1,12 @@
 package com.wildcard.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum CardType {
-    PRODUCT
+    PRODUCT;
+    
+    @JsonValue
+    public String getName(){
+        return name().toLowerCase();
+    }
 }
