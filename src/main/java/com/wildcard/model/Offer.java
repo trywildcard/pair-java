@@ -23,6 +23,7 @@ public class Offer {
     private final List<Locale> geographicAvailability;
     private final Gender gender;
     private final Float weight;
+    private final String weightUnits;
     
     public Offer(OfferBuilder builder){
         this.price = builder.price;
@@ -37,9 +38,13 @@ public class Offer {
         this.geographicAvailability = builder.geographicAvailability;
         this.gender = builder.gender;
         this.weight = builder.weight;
+        this.weightUnits = builder.weightUnits;
     }
     
-
+    public String getWeightUnits(){
+        return weightUnits;
+    }
+    
     public Float getWeight() {
         return weight;
     }

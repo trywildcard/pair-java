@@ -24,11 +24,17 @@ public class OfferBuilder {
     List<Locale> geographicAvailability;
     Gender gender;
     Float weight;
+    String weightUnits;
     
     public OfferBuilder(Price price){
         ValidationTool.notNull(price, "Price must not be null.");
         ValidationTool.notNegative(price.getPrice(), "Price must be a positive Float.");
         this.price = price;
+    }
+    
+    public OfferBuilder weightUnits(String weightUnits){
+        this.weightUnits = weightUnits;
+        return this;
     }
     
     public OfferBuilder gender(Gender gender) {

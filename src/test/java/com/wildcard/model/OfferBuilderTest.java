@@ -28,6 +28,7 @@ public class OfferBuilderTest {
             .asList(Locale.US, Locale.UK);
     final Gender gender = Gender.FEMALE;
     final Float weight = 1.77f;
+    final String weightUnits = "lbs";
     
     @Test
     public void testMinimalOffer(){
@@ -52,6 +53,7 @@ public class OfferBuilderTest {
         builder.geographicAvailability(geographicAvailability);
         builder.gender(gender);
         builder.weight(weight);
+        builder.weightUnits(weightUnits);
         
         Offer offer = builder.build();
 
@@ -67,5 +69,6 @@ public class OfferBuilderTest {
         assertEquals("Geographic Availability should match", geographicAvailability, offer.getGeographicAvailability());
         assertEquals("Gender should match", gender, offer.getGender());
         assertEquals("Weight should match", weight, offer.getWeight(), FLOAT_COMPARISON_EPSILON);
+        assertEquals("WeightUnits should match", weightUnits, offer.getWeightUnits());
     }
 }
