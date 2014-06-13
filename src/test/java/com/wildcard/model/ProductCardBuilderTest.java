@@ -40,7 +40,7 @@ public class ProductCardBuilderTest {
         assertEquals("Name should match", dummyProduct.name, card.getName());
         assertEquals("Url should match", dummyProduct.url, card.getUrl());
         
-        assertEquals("Price should match", dummyOffer.price, card.getOffers().get(0).getPrice());
+        assertEquals("Price should match", dummyOffer.price.getPrice(), card.getOffers().get(0).getPrice().getPrice());
     }
     
     private ProductCard buildMinimalProductCard(){
@@ -55,8 +55,14 @@ public class ProductCardBuilderTest {
     
     @Test
     public void testMinimalProductCard() throws MalformedURLException, JsonProcessingException{
-        
         ProductCard card = buildMinimalProductCard();
+        testMinimalCardAttributes(card);
+    }
+    
+
+    @Test
+    public void testMinimalProductWithMinimalConstructor(){
+        ProductCard card = new ProductCardBuilder(dummyProduct.name, dummyOffer.price.getPrice(), dummyProduct.url).build();
         testMinimalCardAttributes(card);
     }
     
@@ -156,6 +162,7 @@ public class ProductCardBuilderTest {
         
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
+    
     
     // TODO: test validation
 }
