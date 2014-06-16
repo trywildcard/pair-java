@@ -1,4 +1,4 @@
-package com.wildcard.pair.testUtil;
+package com.wildcard.pair.util;
 
 import java.io.IOException;
 import java.io.InputStream;

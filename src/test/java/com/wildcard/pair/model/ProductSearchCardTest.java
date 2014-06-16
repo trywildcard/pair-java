@@ -11,9 +11,12 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by michaelgarate on 6/16/14.
@@ -69,5 +72,27 @@ public class ProductSearchCardTest {
         assertEquals("Product image should match", searchProduct.getImage(), dummyProduct.images.get(0));
     }
 
-    // TODO: test result with multiple products
+    @Test
+    public void cardWithMultipleProductsTest() throws IOException {
+        this.totalResults = 2;
+
+        SearchProductBuilder builder = new SearchProductBuilder(dummyProduct.name, dummyProduct.url, dummyOffer.price);
+        builder.image(dummyProduct.images.get(0));
+        products.add(builder.build());
+
+        String productName = "My product";
+        URL productUrl = new URL("http://etsy.com/123");
+        Price productPrice = new Price(9.99f, Currency.getInstance(Locale.US));
+
+        builder = new SearchProductBuilder(productName, productUrl, productPrice);
+        builder.image(new URL("http://etsy.com/123.jpg"));
+        products.add(builder.build());
+
+        ProductSearchCard card = new ProductSearchCard(products, totalResults);
+
+        testMinimalCardAttributes(card);
+
+        assertEquals("TotalResults should match", totalResults, card.getTotalResults());
+        assertEquals("Products should match", products, card.getProducts());
+    }
 }
