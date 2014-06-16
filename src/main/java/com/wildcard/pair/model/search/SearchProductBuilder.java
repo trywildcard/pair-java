@@ -1,5 +1,6 @@
 package com.wildcard.pair.model.search;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.wildcard.pair.model.Builder;
 import com.wildcard.pair.model.Price;
 import com.wildcard.pair.util.ValidationTool;
@@ -9,7 +10,8 @@ import java.net.URL;
 /**
  * Created by michaelgarate on 6/16/14.
  */
-public class SearchProductBuilder implements Builder{
+@JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
+public class SearchProductBuilder implements Builder<SearchProduct> {
 
     String name;
     URL url;
@@ -26,23 +28,29 @@ public class SearchProductBuilder implements Builder{
         this.image = image;
     }
 
-    public void name(String name){
-        ValidationTool.notNullOrEmpty(name, "Must supply a name.");
-        this.name = name;
-    }
-
-    public void url(URL url){
-        ValidationTool.notNull(url, "Must supply a url.");
-        this.url = url;
-    }
-
-    public void price(Price price){
-        ValidationTool.notNull(price, "Must supply a price");
-        this.price = price;
-    }
-
     public SearchProduct build(){
         return new SearchProduct(this);
     }
 
+
+    /*
+     * The following private constructor and private methods are required by Jackson.
+     */
+    private SearchProductBuilder(){}
+
+
+    private void name(String name){
+        ValidationTool.notNullOrEmpty(name, "Must supply a name.");
+        this.name = name;
+    }
+
+    private void url(URL url){
+        ValidationTool.notNull(url, "Must supply a url.");
+        this.url = url;
+    }
+
+    private void price(Price price){
+        ValidationTool.notNull(price, "Must supply a price");
+        this.price = price;
+    }
 }
