@@ -21,13 +21,9 @@ public class ProductSearchCard implements Card {
     private List<SearchProduct> products;
 
     public ProductSearchCard(List<SearchProduct> products, Integer totalResults){
-        ValidationTool.notNull(products, "Must supply a list of products.");
-        ValidationTool.notNull(totalResults, "Must supply a value for totalResults.");
-        ValidationTool.notNegative(totalResults, "totalResults must be a positive Integer.");
-
-        cardType = CardType.PRODUCT_SEARCH;
-        this.products = products;
-        this.totalResults = totalResults;
+        setCardType(CardType.PRODUCT_SEARCH);
+        setProducts(products);
+        setTotalResults(totalResults);
     }
 
     public Integer getTotalResults(){
@@ -54,6 +50,8 @@ public class ProductSearchCard implements Card {
     private ProductSearchCard(){}
 
     private void setTotalResults(Integer totalResults){
+        ValidationTool.notNull(totalResults, "Must supply a value for totalResults.");
+        ValidationTool.notNegative(totalResults, "totalResults must be a positive Integer.");
         this.totalResults = totalResults;
     }
 
@@ -62,6 +60,7 @@ public class ProductSearchCard implements Card {
     }
 
     private void setProducts(List<SearchProduct> products){
+        ValidationTool.notNull(products, "Must supply a list of products.");
         this.products = products;
     }
 }
