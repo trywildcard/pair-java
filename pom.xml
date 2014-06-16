@@ -37,20 +37,5 @@
   		<artifactId>jackson-databind</artifactId>
         <version>2.4.0</version>
   	</dependency>
-  	<dependency>
-  		<groupId>com.fasterxml.jackson.jaxrs</groupId>
-  		<artifactId>jackson-jaxrs-json-provider</artifactId>
-        <version>2.4.0</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.fasterxml.jackson.module</groupId>
-  		<artifactId>jackson-module-jaxb-annotations</artifactId>
-        <version>2.4.0</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.fasterxml.jackson.datatype</groupId>
-  		<artifactId>jackson-datatype-guava</artifactId>
-        <version>2.4.0</version>
-  	</dependency>
   </dependencies>
 </project>

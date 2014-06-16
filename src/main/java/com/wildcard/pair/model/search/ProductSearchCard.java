@@ -34,7 +34,6 @@ public class ProductSearchCard implements Card {
         return products;
     }
 
-    @Override
     public String writeAsJsonString() throws IOException {
         return CardSerializer.writeCardAsString(this);
     }
