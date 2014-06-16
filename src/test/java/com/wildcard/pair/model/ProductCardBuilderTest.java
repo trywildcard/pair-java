@@ -9,7 +9,7 @@ import com.wildcard.pair.model.product.OfferBuilder;
 import com.wildcard.pair.model.product.ProductCard;
 import com.wildcard.pair.model.product.ProductCardBuilder;
 import com.wildcard.pair.util.CardMapper;
-import com.wildcard.pair.testUtil.TestUtil;
+import com.wildcard.pair.util.TestUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

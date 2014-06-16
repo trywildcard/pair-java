@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Locale;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.wildcard.pair.model.Builder;
 import com.wildcard.pair.model.Price;
 import com.wildcard.pair.util.ValidationTool;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class OfferBuilder {
+public class OfferBuilder implements Builder {
     // required fields
     Price price;
     
