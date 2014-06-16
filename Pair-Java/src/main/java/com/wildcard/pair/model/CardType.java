@@ -1,9 +1,9 @@
-package com.wildcard.model;
+package com.wildcard.pair.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CardType {
-    PRODUCT;
+    PRODUCT, PRODUCT_SEARCH;
     
     @JsonValue
     public String getName(){

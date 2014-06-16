@@ -1,18 +1,14 @@
-package com.wildcard.model.product;
+package com.wildcard.pair.model.product;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.PropertyNamingStrategyBase;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wildcard.model.Card;
-import com.wildcard.model.CardType;
-import com.wildcard.model.util.CardSerializer;
+import com.wildcard.pair.model.Card;
+import com.wildcard.pair.model.CardType;
+import com.wildcard.pair.util.CardSerializer;
 
 @JsonDeserialize(builder = ProductCardBuilder.class)
 public class ProductCard implements Card {
