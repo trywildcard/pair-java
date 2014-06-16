@@ -1,5 +1,6 @@
 package com.wildcard.pair.model.search;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.wildcard.pair.model.Price;
 
 import java.net.URL;
@@ -7,6 +8,7 @@ import java.net.URL;
 /**
  * Created by michaelgarate on 6/16/14.
  */
+@JsonDeserialize(builder = SearchProductBuilder.class)
 public class SearchProduct {
     private final String name;
     private final Price price;

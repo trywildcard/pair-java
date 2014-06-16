@@ -16,7 +16,7 @@ import com.wildcard.pair.model.product.ProductCard;
 import com.wildcard.pair.util.CardMapper;
 import com.wildcard.pair.util.TestUtil;
 
-public class SerializeProductTest {
+public class SerializeProductCardTest {
     ObjectMapper mapper = new CardMapper().getObjectMapper();
     static String inputString;
     

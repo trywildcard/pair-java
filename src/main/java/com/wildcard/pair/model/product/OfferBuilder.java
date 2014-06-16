@@ -11,7 +11,7 @@ import com.wildcard.pair.model.Price;
 import com.wildcard.pair.util.ValidationTool;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class OfferBuilder implements Builder {
+public class OfferBuilder implements Builder<Offer> {
     // required fields
     Price price;
     
