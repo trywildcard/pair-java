@@ -1,4 +1,4 @@
-package com.wildcard.model.product;
+package com.wildcard.pair.model.product;
 
 import java.util.Currency;
 import java.util.Date;
@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Locale;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.wildcard.model.util.ValidationTool;
+import com.wildcard.pair.model.Price;
+import com.wildcard.pair.util.ValidationTool;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class OfferBuilder {

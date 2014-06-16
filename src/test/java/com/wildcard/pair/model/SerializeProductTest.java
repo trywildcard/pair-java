@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.pair.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,9 +12,9 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wildcard.model.product.ProductCard;
-import com.wildcard.model.util.CardMapper;
-import com.wildcard.testUtil.TestUtil;
+import com.wildcard.pair.model.product.ProductCard;
+import com.wildcard.pair.util.CardMapper;
+import com.wildcard.pair.testUtil.TestUtil;
 
 public class SerializeProductTest {
     ObjectMapper mapper = new CardMapper().getObjectMapper();

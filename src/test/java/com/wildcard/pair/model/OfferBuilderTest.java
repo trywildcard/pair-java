@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.pair.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,9 +7,9 @@ import java.text.ParseException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.wildcard.model.product.Offer;
-import com.wildcard.model.product.OfferBuilder;
-import com.wildcard.testUtil.TestUtil;
+import com.wildcard.pair.model.product.Offer;
+import com.wildcard.pair.model.product.OfferBuilder;
+import com.wildcard.pair.testUtil.TestUtil;
 
 public class OfferBuilderTest {
     

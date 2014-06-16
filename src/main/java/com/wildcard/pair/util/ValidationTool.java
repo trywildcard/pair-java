@@ -1,8 +1,8 @@
-package com.wildcard.model.util;
+package com.wildcard.pair.util;
 
 import java.util.List;
 
-import com.wildcard.model.CardBuilderException;
+import com.wildcard.pair.model.CardBuilderException;
 
 public class ValidationTool {
     public static void notNullOrEmpty(List<?> list, String message){

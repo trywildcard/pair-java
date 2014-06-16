@@ -1,6 +1,17 @@
-package com.wildcard.model;
+package com.wildcard.pair.model;
 
-import static org.junit.Assert.assertEquals;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wildcard.pair.model.product.Offer;
+import com.wildcard.pair.model.product.OfferBuilder;
+import com.wildcard.pair.model.product.ProductCard;
+import com.wildcard.pair.model.product.ProductCardBuilder;
+import com.wildcard.pair.util.CardMapper;
+import com.wildcard.pair.testUtil.TestUtil;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -10,19 +21,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wildcard.model.product.Offer;
-import com.wildcard.model.product.OfferBuilder;
-import com.wildcard.model.product.ProductCard;
-import com.wildcard.model.product.ProductCardBuilder;
-import com.wildcard.model.util.CardMapper;
-import com.wildcard.testUtil.TestUtil;
+import static org.junit.Assert.assertEquals;
 
 public class ProductCardBuilderTest {
     

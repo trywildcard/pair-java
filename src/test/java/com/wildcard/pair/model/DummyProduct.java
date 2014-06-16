@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.pair.model;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.wildcard.model.product.MappingColor;
-import com.wildcard.model.product.ProductColor;
+import com.wildcard.pair.model.product.MappingColor;
+import com.wildcard.pair.model.product.ProductColor;
 
 public class DummyProduct {
 
     // minimal attributes
-    final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
+    protected final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
     final String description = "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time";
     final URL url;
     final URL imgUrl;

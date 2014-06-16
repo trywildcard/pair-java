@@ -1,8 +1,8 @@
-package com.wildcard.model.product;
+package com.wildcard.pair.model;
 
 import java.util.Currency;
 
-import com.wildcard.model.util.ValidationTool;
+import com.wildcard.pair.util.ValidationTool;
 
 public class Price {
     private Float price;
