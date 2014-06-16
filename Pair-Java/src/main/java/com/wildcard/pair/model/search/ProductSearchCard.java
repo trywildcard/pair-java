@@ -18,7 +18,7 @@ public class ProductSearchCard implements Card {
     private final List<SearchProduct> products;
 
     public ProductSearchCard(List<SearchProduct> products, Integer totalResults){
-        ValidationTool.notNull(products, "Must supply a list of products. ");
+        ValidationTool.notNull(products, "Must supply a list of products.");
         ValidationTool.notNull(totalResults, "Must supply a value for totalResults.");
         ValidationTool.notNegative(totalResults, "totalResults must be a positive Integer.");
 

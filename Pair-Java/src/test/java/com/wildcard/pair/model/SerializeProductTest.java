@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wildcard.pair.model.product.ProductCard;
 import com.wildcard.pair.util.CardMapper;
-import com.wildcard.pair.testUtil.TestUtil;
+import com.wildcard.pair.util.TestUtil;
 
 public class SerializeProductTest {
     ObjectMapper mapper = new CardMapper().getObjectMapper();
