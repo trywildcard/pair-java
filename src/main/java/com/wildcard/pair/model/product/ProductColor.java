@@ -1,8 +1,8 @@
-package com.wildcard.model.product;
+package com.wildcard.pair.model.product;
 
 import java.net.URL;
 
-import com.wildcard.model.util.ValidationTool;
+import com.wildcard.pair.util.ValidationTool;
 
 public class ProductColor {
     // required fields

@@ -1,4 +1,4 @@
-package com.wildcard.model.product;
+package com.wildcard.pair.model.product;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.wildcard.model.CardType;
-import com.wildcard.model.util.ValidationTool;
+import com.wildcard.pair.model.Builder;
+import com.wildcard.pair.model.CardType;
+import com.wildcard.pair.util.ValidationTool;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class ProductCardBuilder {
+public class ProductCardBuilder implements Builder {
     
     // required fields
     CardType cardType;
@@ -19,7 +20,7 @@ public class ProductCardBuilder {
     List<Offer> offers = new ArrayList<Offer>();
     URL url;
 
-    // optional filds
+    // optional fields
     String merchant;
     String brand;
     String description;

@@ -1,4 +1,4 @@
-package com.wildcard.model.util;
+package com.wildcard.pair.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;

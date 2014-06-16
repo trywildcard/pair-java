@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.pair.model;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.wildcard.model.product.Availability;
-import com.wildcard.model.product.Gender;
-import com.wildcard.model.product.Price;
+import com.wildcard.pair.model.product.Availability;
+import com.wildcard.pair.model.product.Gender;
 
 public class DummyOffer {
     

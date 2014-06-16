@@ -1,10 +1,11 @@
-package com.wildcard.model.product;
+package com.wildcard.pair.model.product;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wildcard.pair.model.Price;
 
 @JsonDeserialize(builder = OfferBuilder.class)
 public class Offer {

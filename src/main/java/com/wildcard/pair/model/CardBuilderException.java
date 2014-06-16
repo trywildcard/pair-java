@@ -1,4 +1,4 @@
-package com.wildcard.model;
+package com.wildcard.pair.model;
 
 public class CardBuilderException extends RuntimeException {
 
