@@ -1,0 +1,23 @@
+{
+  "card_type": "product_search",
+  "products": [
+    {
+      "name": "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded",
+      "url": "http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=",
+      "price": {
+        "price": 7.99,
+        "currency": "USD"
+      },
+      "image": "http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg"
+    },
+    {
+      "name": "Beautiful Patriotic 4th of July Halter Dress",
+      "url": "https://www.etsy.com/listing/100423075/beautiful-patriotic-4th-of-july-halter?ref=sr_gallery_1",
+      "price": {
+        "price": 28.00,
+        "currency": "USD"
+      },
+      "image": "https://img1.etsystatic.com/000/0/6842447/il_570xN.339122899.jpg"
+    }
+  ]
+}

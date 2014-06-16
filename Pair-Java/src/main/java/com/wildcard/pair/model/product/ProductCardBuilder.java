@@ -12,7 +12,7 @@ import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.util.ValidationTool;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class ProductCardBuilder implements Builder {
+public class ProductCardBuilder implements Builder<ProductCard> {
     
     // required fields
     CardType cardType;
