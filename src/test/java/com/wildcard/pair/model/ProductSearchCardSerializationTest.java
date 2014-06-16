@@ -2,6 +2,7 @@ package com.wildcard.pair.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.wildcard.pair.model.search.ProductSearchCard;
 import com.wildcard.pair.util.CardMapper;
 import com.wildcard.pair.util.TestUtil;
@@ -17,7 +18,7 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by michaelgarate on 6/16/14.
  */
-public class SerializeProductSearchCardTest {
+public class ProductSearchCardSerializationTest {
 
     private static String inputString;
     private ObjectMapper mapper = new CardMapper().getObjectMapper();
@@ -46,8 +47,5 @@ public class SerializeProductSearchCardTest {
 
             Assert.assertEquals("Expected " + inFieldName + " to match", inputNode.get(inFieldName), outputNode.get(outFieldName));
         }
-
-        System.out.println(mapper.writeValueAsString(outputNode));
-
     }
 }
