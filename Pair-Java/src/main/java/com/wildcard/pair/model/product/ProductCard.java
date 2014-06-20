@@ -125,13 +125,8 @@ public final class ProductCard implements Card {
     public Map<String, String> getSizes() {
         return sizes;
     }
-    
-    public String writeAsJson() {
-        return null;
-    }
 
-    
     public String writeAsJsonString() throws IOException{
-        return CardSerializer.writeCardAsString(this);
+        return new CardSerializer().writeCard(this);
     }
 }
