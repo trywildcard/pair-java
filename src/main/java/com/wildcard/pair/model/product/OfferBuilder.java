@@ -1,9 +1,6 @@
 package com.wildcard.pair.model.product;
 
-import java.util.Currency;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.wildcard.pair.model.Builder;
@@ -24,7 +21,7 @@ public class OfferBuilder implements Builder<Offer> {
     Date saleStartDate;
     Date saleEndDate;
     Date expirationDate;
-    List<Locale> geographicAvailability;
+    List<Locale> geographicAvailability = new ArrayList<Locale>();
     Gender gender;
     Float weight;
     String weightUnits;
@@ -38,6 +35,7 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder weightUnits(String weightUnits){
+        ValidationTool.notEmpty(weightUnits, "Tried to set weightUnits to an empty string.");
         this.weightUnits = weightUnits;
         return this;
     }
@@ -63,7 +61,6 @@ public class OfferBuilder implements Builder<Offer> {
         return this;
     }
     
-    
     public OfferBuilder saleEndDate(Date saleEndDate){
         this.saleEndDate = saleEndDate;
         return this;
@@ -75,6 +72,7 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder geographicAvailability(List<Locale> geographicAvailability){
+        ValidationTool.notNull(geographicAvailability, "geographicAvailability must not be null.");
         this.geographicAvailability = geographicAvailability;
         return this;
     }
