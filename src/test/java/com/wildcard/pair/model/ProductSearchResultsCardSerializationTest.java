@@ -2,9 +2,7 @@ package com.wildcard.pair.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.wildcard.pair.model.search.ProductSearchCard;
-import com.wildcard.pair.util.CardMapper;
+import com.wildcard.pair.model.search.ProductSearchResultsCard;
 import com.wildcard.pair.util.TestUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,10 +16,10 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by michaelgarate on 6/16/14.
  */
-public class ProductSearchCardSerializationTest {
+public class ProductSearchResultsCardSerializationTest {
 
     private static String inputString;
-    private ObjectMapper mapper = new CardMapper().getObjectMapper();
+    private ObjectMapper mapper = new TestUtil().getObjectMapper();
 
     @BeforeClass
     public static void initialize() throws IOException {
@@ -33,7 +31,7 @@ public class ProductSearchCardSerializationTest {
     public void serializeProductSearchCardTest() throws IOException {
         JsonNode inputNode = mapper.readTree(inputString);
 
-        ProductSearchCard card = mapper.readValue(inputString, ProductSearchCard.class);
+        ProductSearchResultsCard card = mapper.readValue(inputString, ProductSearchResultsCard.class);
         JsonNode outputNode = mapper.readTree(card.writeAsJsonString());
 
         assertEquals("Expected inputNode and outputNode sizes to match", inputNode.size(), outputNode.size());
