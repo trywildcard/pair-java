@@ -8,7 +8,6 @@ import com.wildcard.pair.model.product.Offer;
 import com.wildcard.pair.model.product.OfferBuilder;
 import com.wildcard.pair.model.product.ProductCard;
 import com.wildcard.pair.model.product.ProductCardBuilder;
-import com.wildcard.pair.util.CardMapper;
 import com.wildcard.pair.util.TestUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ProductCardBuilderTest {
     
-    ObjectMapper mapper = new CardMapper().getObjectMapper();
+    ObjectMapper mapper = TestUtil.getObjectMapper();
     private static DummyOffer dummyOffer;
     private static DummyProduct dummyProduct;
     

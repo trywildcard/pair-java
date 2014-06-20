@@ -11,14 +11,14 @@ import java.net.URL;
  * Created by michaelgarate on 6/16/14.
  */
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class SearchProductBuilder implements Builder<SearchProduct> {
+public class ProductSearchResultBuilder implements Builder<ProductSearchResult> {
 
     String name;
     URL url;
     Price price;
     URL image;
 
-    public SearchProductBuilder(String name, URL url, Price price){
+    public ProductSearchResultBuilder(String name, URL url, Price price){
         name(name);
         url(url);
         price(price);
@@ -28,15 +28,15 @@ public class SearchProductBuilder implements Builder<SearchProduct> {
         this.image = image;
     }
 
-    public SearchProduct build(){
-        return new SearchProduct(this);
+    public ProductSearchResult build(){
+        return new ProductSearchResult(this);
     }
 
 
     /*
      * The following private constructor and private methods are required by Jackson.
      */
-    private SearchProductBuilder(){}
+    private ProductSearchResultBuilder(){}
 
 
     private void name(String name){

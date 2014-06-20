@@ -8,14 +8,14 @@ import java.net.URL;
 /**
  * Created by michaelgarate on 6/16/14.
  */
-@JsonDeserialize(builder = SearchProductBuilder.class)
-public final class SearchProduct {
+@JsonDeserialize(builder = ProductSearchResultBuilder.class)
+public final class ProductSearchResult {
     private final String name;
     private final Price price;
     private final URL url;
     private final URL image;
 
-    public SearchProduct(SearchProductBuilder builder){
+    public ProductSearchResult(ProductSearchResultBuilder builder){
         this.name = builder.name;
         this.price = builder.price;
         this.url = builder.url;
