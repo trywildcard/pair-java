@@ -4,7 +4,7 @@ import java.net.URL;
 
 import com.wildcard.pair.util.ValidationTool;
 
-public class ProductColor {
+public final class ProductColor {
     // required fields
     private String displayName;
     
