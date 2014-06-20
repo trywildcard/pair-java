@@ -9,7 +9,7 @@ import java.net.URL;
  * Created by michaelgarate on 6/16/14.
  */
 @JsonDeserialize(builder = SearchProductBuilder.class)
-public class SearchProduct {
+public final class SearchProduct {
     private final String name;
     private final Price price;
     private final URL url;

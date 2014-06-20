@@ -4,7 +4,7 @@ import java.util.Currency;
 
 import com.wildcard.pair.util.ValidationTool;
 
-public class Price {
+public final class Price {
     private Float price;
     private Currency currency;
     

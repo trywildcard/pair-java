@@ -8,13 +8,14 @@ import com.wildcard.pair.util.CardSerializer;
 import com.wildcard.pair.util.ValidationTool;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by michaelgarate on 6/16/14.
  */
 
-public class ProductSearchCard implements Card {
+public final class ProductSearchCard implements Card {
 
     private CardType cardType;
     private Integer totalResults;
@@ -60,6 +61,6 @@ public class ProductSearchCard implements Card {
 
     private void setProducts(List<SearchProduct> products){
         ValidationTool.notNull(products, "Must supply a list of products.");
-        this.products = products;
+        this.products = Collections.unmodifiableList(products);
     }
 }

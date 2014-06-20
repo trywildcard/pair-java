@@ -2,6 +2,7 @@ package com.wildcard.pair.model.product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.util.CardSerializer;
 
 @JsonDeserialize(builder = ProductCardBuilder.class)
-public class ProductCard implements Card {
+public final class ProductCard implements Card {
     private final CardType cardType;
     private final String name;
     private final URL url;
@@ -36,18 +37,18 @@ public class ProductCard implements Card {
         this.cardType = builder.cardType;
         this.name = builder.name;
         this.url = builder.url;
-        this.offers = builder.offers;
+        this.offers = Collections.unmodifiableList(builder.offers);
         this.merchant = builder.merchant;
         this.brand = builder.brand;
         this.description = builder.description;
-        this.colors = builder.colors;
-        this.images = builder.images;
+        this.colors = Collections.unmodifiableList(builder.colors);
+        this.images = Collections.unmodifiableList(builder.images);
         this.rating = builder.rating;
         this.ratingScale = builder.ratingScale;
         this.ratingCount = builder.ratingCount;
-        this.relatedItems = builder.relatedItems;
-        this.sizes = builder.sizes;
-        this.options = builder.options;
+        this.relatedItems = Collections.unmodifiableList(builder.relatedItems);
+        this.sizes = Collections.unmodifiableMap(builder.sizes);
+        this.options = Collections.unmodifiableList(builder.options);
         this.model = builder.model;
         this.appLinkIos = builder.appLinkIos;
         this.appLinkAndroid = builder.appLinkAndroid;
