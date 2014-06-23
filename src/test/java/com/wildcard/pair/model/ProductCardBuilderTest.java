@@ -110,6 +110,7 @@ public class ProductCardBuilderTest {
         builder.gender(dummyOffer.gender);
         builder.weight(dummyOffer.weight);
         builder.weightUnits(dummyOffer.weightUnits);
+        builder.offerId(dummyOffer.offerId);
         
         return builder.build();
     }
@@ -121,6 +122,7 @@ public class ProductCardBuilderTest {
         
         ProductCardBuilder builder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.url);
 
+        builder.productId(dummyProduct.productId);
         builder.description(dummyProduct.description);
         builder.image(dummyProduct.imgUrl);
         builder.brand(dummyProduct.brand);
@@ -131,6 +133,7 @@ public class ProductCardBuilderTest {
         builder.ratingScale(dummyProduct.ratingScale);
         builder.ratingCount(dummyProduct.ratingCount);
         builder.relatedItems(dummyProduct.relatedItems);
+        builder.referencedItems(dummyProduct.referencedItems);
         builder.sizes(dummyProduct.sizes);
         builder.options(dummyProduct.options);
         builder.model(dummyProduct.model);

@@ -25,6 +25,7 @@ public class OfferBuilder implements Builder<Offer> {
     Gender gender;
     Float weight;
     String weightUnits;
+    String offerId;
 
     /**
      * Construct an <code>OfferBuilder</code> provided a Price object.
@@ -104,6 +105,10 @@ public class OfferBuilder implements Builder<Offer> {
     
     public OfferBuilder originalPrice(Price originalPrice){
         this.originalPrice = originalPrice;
+        return this;
+    }
+    public OfferBuilder offerId(String offerId){
+        this.offerId = offerId;
         return this;
     }
 

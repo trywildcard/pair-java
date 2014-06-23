@@ -9,6 +9,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.wildcard.pair.model.Card;
 import com.wildcard.pair.model.CardType;
+import com.wildcard.pair.translation.pinterest.PinterestProductCard;
 import com.wildcard.pair.util.CardSerializer;
 
 @JsonDeserialize(builder = ProductCardBuilder.class)
@@ -19,6 +20,7 @@ public final class ProductCard implements Card {
     private final CardType cardType;
     private final String name;
     private final URL url;
+    private final String productId;
     private final List<Offer> offers;
     private final String merchant;
     private final String brand;
@@ -29,6 +31,7 @@ public final class ProductCard implements Card {
     private final Float ratingScale;
     private final Integer ratingCount;
     private final List<URL> relatedItems;
+    private final List<URL> referencedItems;
     private final Map<String, String> sizes;
     private final List<String> options;
     private final String model;
@@ -54,11 +57,13 @@ public final class ProductCard implements Card {
         this.ratingScale = builder.ratingScale;
         this.ratingCount = builder.ratingCount;
         this.relatedItems = Collections.unmodifiableList(builder.relatedItems);
+        this.referencedItems = Collections.unmodifiableList(builder.referencedItems);
         this.sizes = Collections.unmodifiableMap(builder.sizes);
         this.options = Collections.unmodifiableList(builder.options);
         this.model = builder.model;
         this.appLinkIos = builder.appLinkIos;
         this.appLinkAndroid = builder.appLinkAndroid;
+        this.productId = builder.productId;
     }
     
     public String getAppLinkAndroid() {
@@ -79,6 +84,10 @@ public final class ProductCard implements Card {
 
     public List<URL> getRelatedItems() {
         return relatedItems;
+    }
+
+    public List<URL> getReferencedItems() {
+        return referencedItems;
     }
 
     public Integer getRatingCount() {
@@ -133,6 +142,10 @@ public final class ProductCard implements Card {
         return sizes;
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
     /**
      * Serialize fields in the Wildcard product card format.
      * @return the string representation of this card.
@@ -140,5 +153,13 @@ public final class ProductCard implements Card {
      */
     public String writeAsJsonString() throws IOException{
         return new CardSerializer().writeCard(this);
+    }
+
+    /**
+     * Serialize fields in the Pinterest product card format.
+     * @returns the Pinterest-formatted string representation of this card.
+     */
+    public String writeAsPinterestJsonString() throws IOException {
+        return new PinterestProductCard(this).writeAsJsonString();
     }
 }
