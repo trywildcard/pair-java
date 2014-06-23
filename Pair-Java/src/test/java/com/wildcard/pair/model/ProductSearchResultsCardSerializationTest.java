@@ -14,7 +14,7 @@ import java.util.Iterator;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Created by michaelgarate on 6/16/14.
+ * Test serializing and deserializing a product search results card from data in a json file.
  */
 public class ProductSearchResultsCardSerializationTest {
 

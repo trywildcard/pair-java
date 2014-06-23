@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by michaelgarate on 6/16/14.
+ * Test building a product search results card from values in code stubs.
  */
 
 
