@@ -2,6 +2,9 @@ package com.wildcard.pair.model.product;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Defines possible colors. 
+ */
 public enum MappingColor {
     Beige, Black, Blue, Bronze, Brown, Gold, Green, Gray, Metallic,
     Multicolored, OffWhite, Orange, Pink, Purple, Red, Silver,
