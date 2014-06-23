@@ -33,7 +33,8 @@ public class DummyOffer {
     final String weightUnits = "oz";
     final Availability availability = Availability.InStock;
     final Price price = new Price(7.99f, Currency.getInstance(Locale.US));
-    
+    final String offerId = "155021118-3";
+
     public DummyOffer() throws ParseException{
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         saleStartDate = dateFormat.parse("2014-06-01");

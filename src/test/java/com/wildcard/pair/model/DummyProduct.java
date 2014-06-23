@@ -31,6 +31,7 @@ public class DummyProduct {
     final Float ratingScale = 10f;
     final Integer ratingCount = 12;
     final List<URL> relatedItems = new ArrayList<URL>();
+    final List<URL> referencedItems = new ArrayList<URL>();
     final Map<String, String> sizes = new HashMap<String, String>();
     final List<String> options = Arrays
             .asList("example option a", 
@@ -39,7 +40,8 @@ public class DummyProduct {
     final String model = "Bead Ankle Bracelet - 10 inch anklet";
     final String appLinkIos = "jump://VerticalA/x123";
     final String appLinkAndroid = "market://search?q=pub:etsy";
-    
+    final String productId = "155021118";
+
     public DummyProduct() throws MalformedURLException{
         
         url = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
@@ -61,5 +63,8 @@ public class DummyProduct {
         relatedItems.add(new URL("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0"));
         relatedItems.add(new URL("https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2"));
         relatedItems.add(new URL("https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"));
+
+        referencedItems.add(new URL("https://www.etsy.com/listing/154992204/beautiful-shimmer-gloss-multicolored?ref=related-6"));
+        referencedItems.add(new URL("https://www.etsy.com/listing/154992842/stunning-blue-glass-beaded-10-anklet?ref=related-5"));
     }
 }

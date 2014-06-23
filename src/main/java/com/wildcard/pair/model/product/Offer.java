@@ -31,6 +31,7 @@ public final class Offer {
     private final Gender gender;
     private final Float weight;
     private final String weightUnits;
+    private final String offerId;
 
     /**
      * Construct an offer using an <code>OfferBuilder</code>, which is responsible for validations.
@@ -50,6 +51,7 @@ public final class Offer {
         this.gender = builder.gender;
         this.weight = builder.weight;
         this.weightUnits = builder.weightUnits;
+        this.offerId = builder.offerId;
     }
 
     public String getWeightUnits(){
@@ -102,5 +104,9 @@ public final class Offer {
 
     public Date getExpirationDate() {
         return expirationDate;
+    }
+
+    public String getOfferId() {
+        return offerId;
     }
 }

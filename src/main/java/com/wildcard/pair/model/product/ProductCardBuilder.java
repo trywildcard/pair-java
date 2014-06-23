@@ -21,6 +21,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     URL url;
 
     // optional fields
+    String productId;
     String merchant;
     String brand;
     String description;
@@ -30,6 +31,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     Float ratingScale;
     Integer ratingCount;
     List<URL> relatedItems = new ArrayList<URL>();
+    List<URL> referencedItems = new ArrayList<URL>();
     Map<String, String> sizes = new HashMap<String,String>();
     List<String> options = new ArrayList<String>();
     String model;
@@ -112,12 +114,27 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         this.relatedItems.add(relatedItem);
         return this;
     }
-    
+
     public ProductCardBuilder relatedItems(List<URL> relatedItems) {
         ValidationTool.notNull(relatedItems, "relatedItems must not be null.");
         for (URL relatedItem : relatedItems){
             ValidationTool.notNull(relatedItem, "Tried to add an empty relatedItem.");
             this.relatedItems.add(relatedItem);
+        }
+        return this;
+    }
+
+    public ProductCardBuilder referencedItem(URL referencedItem){
+        ValidationTool.notNull(referencedItem, "Tried to add an empty relatedItem.");
+        this.relatedItems.add(referencedItem);
+        return this;
+    }
+
+    public ProductCardBuilder referencedItems(List<URL> referencedItems) {
+        ValidationTool.notNull(referencedItems, "relatedItems must not be null.");
+        for (URL referencedItem : referencedItems){
+            ValidationTool.notNull(referencedItem, "Tried to add an empty relatedItem.");
+            this.referencedItems.add(referencedItem);
         }
         return this;
     }
@@ -183,6 +200,12 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     public ProductCardBuilder merchant(String merchant) {
         ValidationTool.notEmpty(merchant, "Tried to set merchant to an empty string.");
         this.merchant = merchant;
+        return this;
+    }
+
+    public ProductCardBuilder productId(String productId){
+        ValidationTool.notEmpty(productId, "Tried to set productId to an empty string");
+        this.productId = productId;
         return this;
     }
 

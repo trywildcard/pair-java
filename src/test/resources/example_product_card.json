@@ -2,6 +2,7 @@
   "card_type": "product",
   "name": "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded",
   "url": "http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=",
+  "product_id" : "155021118",
   "offers": [
     {
       "price": {
@@ -27,7 +28,8 @@
         ],
       "gender": "unisex",
       "weight": 17.0,
-      "weight_units": "oz"
+      "weight_units": "oz",
+      "offer_id": "155021118-3"
     }
   ],
   "merchant": "Etsy",
@@ -54,6 +56,10 @@
     "https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0",
     "https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2",
     "https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"
+  ],
+  "referenced_items": [
+    "https://www.etsy.com/listing/154992204/beautiful-shimmer-gloss-multicolored?ref=related-6",
+    "https://www.etsy.com/listing/154992842/stunning-blue-glass-beaded-10-anklet?ref=related-5"
   ],
   "sizes": {
     "md": "Medium"
