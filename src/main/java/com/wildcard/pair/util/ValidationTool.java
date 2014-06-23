@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.wildcard.pair.model.CardBuilderException;
 
+/**
+ * Static methods to assert validity of parameters.
+ */
 public class ValidationTool {
     public static void notNullOrEmpty(List<?> list, String message){
         if (list == null || list.isEmpty()){

@@ -13,6 +13,9 @@ import java.util.TimeZone;
 import com.wildcard.pair.model.product.Availability;
 import com.wildcard.pair.model.product.Gender;
 
+/**
+ * Offer stub with data supporting Junit tests.
+ */
 public class DummyOffer {
     
     final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

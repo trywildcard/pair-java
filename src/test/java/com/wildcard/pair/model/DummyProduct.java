@@ -11,6 +11,9 @@ import java.util.Map;
 import com.wildcard.pair.model.product.MappingColor;
 import com.wildcard.pair.model.product.ProductColor;
 
+/**
+ * Product stub with data supporting Junit tests.
+ */
 public class DummyProduct {
 
     // minimal attributes

@@ -1,5 +1,8 @@
 package com.wildcard.pair.model;
 
+/**
+ * This exception is thrown upon receipt of invalid card data.
+ */
 public class CardBuilderException extends RuntimeException {
 
     /**
