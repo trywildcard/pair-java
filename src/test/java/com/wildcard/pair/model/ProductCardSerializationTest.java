@@ -14,6 +14,9 @@ import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test serializing and deserializing a product card from data in a json file.
+ */
 public class ProductCardSerializationTest {
     ObjectMapper mapper = new TestUtil().getObjectMapper();
     static String inputString;
