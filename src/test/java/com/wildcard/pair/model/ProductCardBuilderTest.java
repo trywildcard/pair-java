@@ -22,6 +22,9 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test using the productCardBuilder to build a product card from values in code stubs.
+ */
 public class ProductCardBuilderTest {
     
     ObjectMapper mapper = TestUtil.getObjectMapper();

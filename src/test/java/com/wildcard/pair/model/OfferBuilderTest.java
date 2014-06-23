@@ -11,6 +11,9 @@ import com.wildcard.pair.model.product.Offer;
 import com.wildcard.pair.model.product.OfferBuilder;
 import com.wildcard.pair.util.TestUtil;
 
+/**
+ * Test building an offer, using an <code>OfferBuilder</code>, from values in code stubs.
+ */
 public class OfferBuilderTest {
     
     private static DummyOffer dummyOffer;
