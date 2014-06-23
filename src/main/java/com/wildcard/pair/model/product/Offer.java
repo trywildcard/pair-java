@@ -8,7 +8,12 @@ import java.util.Locale;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.wildcard.pair.model.Price;
 
+
 @JsonDeserialize(builder = OfferBuilder.class)
+
+/**
+ * Structures a product offer. Must be constructed using <code>OfferBuilder</code>
+ */
 public final class Offer {
     // required fields
     private final Price price;
@@ -26,7 +31,11 @@ public final class Offer {
     private final Gender gender;
     private final Float weight;
     private final String weightUnits;
-    
+
+    /**
+     * Construct an offer using an <code>OfferBuilder</code>, which is responsible for validations.
+     * @param builder the builder for this offer.
+     */
     public Offer(OfferBuilder builder){
         this.price = builder.price;
         this.originalPrice = builder.originalPrice;
@@ -42,11 +51,11 @@ public final class Offer {
         this.weight = builder.weight;
         this.weightUnits = builder.weightUnits;
     }
-    
+
     public String getWeightUnits(){
         return weightUnits;
     }
-    
+
     public Float getWeight() {
         return weight;
     }

@@ -4,6 +4,9 @@ import java.net.URL;
 
 import com.wildcard.pair.util.ValidationTool;
 
+/**
+ *
+ */
 public final class ProductColor {
     // required fields
     private String displayName;
@@ -12,7 +15,15 @@ public final class ProductColor {
     private URL swatchLink;
     private String value;
     private MappingColor mappingColor;
-    
+
+
+    /**
+     * Construct a product color.
+     * @param displayName the name of the color as presented to the user.
+     * @param value
+     * @param swatchLink link to an image with a sample of the color.
+     * @param mappingColor map to a set of predefined colors
+     */
     public ProductColor(String displayName, String value, URL swatchLink, MappingColor mappingColor){
         setDisplayName(displayName);
         setSwatchLink(swatchLink);
@@ -36,10 +47,10 @@ public final class ProductColor {
         return mappingColor;
     }
 
-    /*
-     * The following private constructor and private methods are required by Jackson. 
+
+    /**
+     * Private constructor to allow for Jackson deserialization.
      */
-    
     private ProductColor(){}
     
     private void setDisplayName(String displayName){

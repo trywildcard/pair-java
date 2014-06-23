@@ -7,9 +7,6 @@ import com.wildcard.pair.util.ValidationTool;
 
 import java.net.URL;
 
-/**
- * Created by michaelgarate on 6/16/14.
- */
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductSearchResultBuilder implements Builder<ProductSearchResult> {
 
@@ -18,6 +15,12 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
     Price price;
     URL image;
 
+    /**
+     * Construct a <code>ProductSearchResultBuilder</code>
+     * @param name the name of the product
+     * @param url the url to access the product in a web browser
+     * @param price the primary price of this product.
+     */
     public ProductSearchResultBuilder(String name, URL url, Price price){
         name(name);
         url(url);
@@ -28,13 +31,17 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
         this.image = image;
     }
 
+    /**
+     * Instantiate a <code>ProductSearchResult</code> with the data in this builder.
+     * @return the constructed product search result
+     */
     public ProductSearchResult build(){
         return new ProductSearchResult(this);
     }
 
 
-    /*
-     * The following private constructor and private methods are required by Jackson.
+    /**
+     * Private constructor to allow for Jackson deserialization.
      */
     private ProductSearchResultBuilder(){}
 

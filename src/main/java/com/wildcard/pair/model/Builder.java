@@ -1,7 +1,9 @@
 package com.wildcard.pair.model;
 
 /**
- * Created by michaelgarate on 6/16/14.
+ * Interface for object builders.
+ *
+ * @param <T> the type of object that the builder constructs.
  */
 public interface Builder<T> {
     public T build();

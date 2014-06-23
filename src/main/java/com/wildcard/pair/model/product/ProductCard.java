@@ -12,6 +12,9 @@ import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.util.CardSerializer;
 
 @JsonDeserialize(builder = ProductCardBuilder.class)
+/**
+ * Structures a Product Card. Must be constructed using <code>ProductCardBuilder</code>.
+ */
 public final class ProductCard implements Card {
     private final CardType cardType;
     private final String name;
@@ -32,7 +35,11 @@ public final class ProductCard implements Card {
     private final String appLinkIos;
     private final String appLinkAndroid;
 
-    
+
+    /**
+     * Construct a product card using an <code>OfferBuilder</code>, which is responsible for validations.
+     * @param builder the builder for this product card.
+     */
     public ProductCard(ProductCardBuilder builder) {
         this.cardType = builder.cardType;
         this.name = builder.name;
@@ -126,6 +133,11 @@ public final class ProductCard implements Card {
         return sizes;
     }
 
+    /**
+     * Serialize fields in the Wildcard product card format.
+     * @return the string representation of this card.
+     * @throws IOException
+     */
     public String writeAsJsonString() throws IOException{
         return new CardSerializer().writeCard(this);
     }

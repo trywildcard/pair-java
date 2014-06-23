@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by michaelgarate on 6/16/14.
+ * Structures a Product Search Results Card, which embeds many ProductSearchResults.
  */
 
 public final class ProductSearchResultsCard implements Card {
@@ -19,6 +19,11 @@ public final class ProductSearchResultsCard implements Card {
     private Integer totalResults;
     private List<ProductSearchResult> products;
 
+    /**
+     * Construct an instance of <code>ProductSearchResultsCard</code>.
+     * @param products a list of <code>ProductSearchResult</code> objects.
+     * @param totalResults the total number of results for this search response.
+     */
     public ProductSearchResultsCard(List<ProductSearchResult> products, Integer totalResults){
         setCardType(CardType.PRODUCT_SEARCH);
         setProducts(products);
@@ -33,6 +38,12 @@ public final class ProductSearchResultsCard implements Card {
         return products;
     }
 
+
+    /**
+     * Serialize fields in the Wildcard product search results card format.
+     * @return the string representation of this card.
+     * @throws IOException
+     */
     public String writeAsJsonString() throws IOException {
         return new CardSerializer().writeCard(this);
     }
@@ -42,8 +53,9 @@ public final class ProductSearchResultsCard implements Card {
     }
 
 
-    /*
-     * The following private constructor and private methods are required by Jackson.
+
+    /**
+     * Private constructor to allow for Jackson deserialization.
      */
     private ProductSearchResultsCard(){}
 

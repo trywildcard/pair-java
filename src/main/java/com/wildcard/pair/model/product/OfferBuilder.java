@@ -25,15 +25,23 @@ public class OfferBuilder implements Builder<Offer> {
     Gender gender;
     Float weight;
     String weightUnits;
-    
+
+    /**
+     * Construct an <code>OfferBuilder</code> provided a Price object.
+     * @param price
+     */
     public OfferBuilder(Price price){
         price(price);
     }
-    
+
+    /**
+     * Construct an <code>OfferBuilder</code> with only a price value, using USD as the default currency.
+     * @param price the price value.
+     */
     public OfferBuilder(Float price){
         price(new Price(price, Currency.getInstance(Locale.US)));
     }
-    
+
     public OfferBuilder weightUnits(String weightUnits){
         ValidationTool.notEmpty(weightUnits, "Tried to set weightUnits to an empty string.");
         this.weightUnits = weightUnits;
@@ -98,18 +106,21 @@ public class OfferBuilder implements Builder<Offer> {
         this.originalPrice = originalPrice;
         return this;
     }
-    
+
+    /**
+     * Instantiate an <code>Offer</code> with the data in this builder.
+     * @return the constructed offer
+     */
     public Offer build(){
         return new Offer(this);
     }
     
 
-    /*
-     * The following private constructor and private methods are required by Jackson. 
+    /**
+     * Private constructor to allow for Jackson deserialization.
      */
-    
     private OfferBuilder(){}
-    
+
     private OfferBuilder price(Price price){
         ValidationTool.notNull(price, "Price must not be null.");
         ValidationTool.notNegative(price.getPrice(), "Price must be a positive Float.");

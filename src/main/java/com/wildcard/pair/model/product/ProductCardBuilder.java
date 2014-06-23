@@ -36,13 +36,26 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     String appLinkIos;
     String appLinkAndroid;
 
+    /**
+     * Construct a builder by providing a list of pre-made offers.
+     *
+     * @param name product name
+     * @param offers list of offers
+     * @param url url to access this product in a web browser
+     */
     public ProductCardBuilder(String name, List<Offer> offers, URL url) {
         cardType(CardType.PRODUCT);
         name(name);
         offers(offers);
         url(url);
     }
-    
+
+    /**
+     * Construct a builder providing a price value instead of a list of offers.
+     * @param name
+     * @param price
+     * @param url
+     */
     public ProductCardBuilder(String name, Float price, URL url){
         Offer offer = new OfferBuilder(price).build();
         offer(offer);
@@ -173,15 +186,19 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
+    /**
+     * Instantiate a <code>ProductCard</code> with the data in this builder.
+     * @return the constructed product card
+     */
     public ProductCard build() {        
         ProductCard card = new ProductCard(this);
         return card;
     }
-    
-    /*
-     * The following private constructor and private methods are required by Jackson. 
-     */
 
+
+    /**
+     * Private constructor to allow for Jackson deserialization.
+     */
     private ProductCardBuilder(){}
     
     private ProductCardBuilder cardType(CardType cardType){

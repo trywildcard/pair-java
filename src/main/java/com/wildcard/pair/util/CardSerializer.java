@@ -7,6 +7,10 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.wildcard.pair.model.Card;
 
+/**
+ * Contains a configured Jackson ObjectMapper instance in order to support JSON serialization.
+ * Classes implementing the <code>Card</code> interface will reference this serializer in the writeAsJsonString() method.
+ */
 public class CardSerializer {
     private final ObjectMapper mapper = new ObjectMapper();
 

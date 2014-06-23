@@ -12,7 +12,13 @@ import java.util.Scanner;
 public class TestUtil {
 
     public final static int FLOAT_EXACT_COMPARISON_EPSILON = 0; // should be exact, no error since never computed. 
-    
+
+    /**
+     * Given a filename, read in a test resource as a string.
+     * @param fileName the name of the file to be read.
+     * @return a string representation of the file contents.
+     * @throws IOException
+     */
     public static String readResourceAsString(String fileName) throws IOException{
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream(fileName);
@@ -23,6 +29,10 @@ public class TestUtil {
         return resourceString;
     }
 
+    /**
+     * Get a configured instance of ObjectMapper for serialization.
+     * @return the configured ObjectMapper.
+     */
     public static ObjectMapper getObjectMapper(){
         ObjectMapper mapper = new ObjectMapper();
 
