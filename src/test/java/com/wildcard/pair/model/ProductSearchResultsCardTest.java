@@ -56,7 +56,7 @@ public class ProductSearchResultsCardTest {
     public void createMinimalSearchCardTest() throws IOException {
         this.totalResults = 1;
 
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.url, dummyOffer.price);
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price);
         builder.image(dummyProduct.images.get(0));
         products.add(builder.build());
         ProductSearchResultsCard card = new ProductSearchResultsCard(products, totalResults);
@@ -67,7 +67,7 @@ public class ProductSearchResultsCardTest {
 
         assertEquals("Product name should match", productSearchResult.getName(), dummyProduct.name);
         assertEquals("Product price should match", productSearchResult.getPrice(), dummyOffer.price);
-        assertEquals("Product url should match", productSearchResult.getUrl(), dummyProduct.url);
+        assertEquals("Product cardUrl should match", productSearchResult.getCardUrl(), dummyProduct.cardUrl);
         assertEquals("Product image should match", productSearchResult.getImage(), dummyProduct.images.get(0));
     }
 
@@ -75,7 +75,7 @@ public class ProductSearchResultsCardTest {
     public void cardWithMultipleProductsTest() throws IOException {
         this.totalResults = 2;
 
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.url, dummyOffer.price);
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price);
         builder.image(dummyProduct.images.get(0));
         products.add(builder.build());
 

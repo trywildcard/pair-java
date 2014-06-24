@@ -12,7 +12,7 @@ import java.net.URL;
 public final class ProductSearchResult {
     private final String name;
     private final Price price;
-    private final URL url;
+    private final URL cardUrl;
     private final URL image;
 
     /**
@@ -22,7 +22,7 @@ public final class ProductSearchResult {
     public ProductSearchResult(ProductSearchResultBuilder builder){
         this.name = builder.name;
         this.price = builder.price;
-        this.url = builder.url;
+        this.cardUrl = builder.cardUrl;
         this.image = builder.image;
     }
 
@@ -34,8 +34,8 @@ public final class ProductSearchResult {
         return price;
     }
 
-    public URL getUrl(){
-        return url;
+    public URL getCardUrl(){
+        return cardUrl;
     }
 
     public URL getImage() {

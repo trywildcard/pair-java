@@ -11,19 +11,19 @@ import java.net.URL;
 public class ProductSearchResultBuilder implements Builder<ProductSearchResult> {
 
     String name;
-    URL url;
+    URL cardUrl;
     Price price;
     URL image;
 
     /**
      * Construct a <code>ProductSearchResultBuilder</code>
      * @param name the name of the product
-     * @param url the url to access the product in a web browser
+     * @param product_card_url the url to access the product in a web browser
      * @param price the primary price of this product.
      */
-    public ProductSearchResultBuilder(String name, URL url, Price price){
+    public ProductSearchResultBuilder(String name, URL cardUrl, Price price){
         name(name);
-        url(url);
+        cardUrl(cardUrl);
         price(price);
     }
 
@@ -51,9 +51,9 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
         this.name = name;
     }
 
-    private void url(URL url){
-        ValidationTool.notNull(url, "Must supply a url.");
-        this.url = url;
+    private void cardUrl(URL cardUrl){
+        ValidationTool.notNull(cardUrl, "Must supply a cardUrl.");
+        this.cardUrl = cardUrl;
     }
 
     private void price(Price price){
