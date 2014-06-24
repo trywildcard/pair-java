@@ -18,7 +18,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     CardType cardType;
     String name;
     List<Offer> offers = new ArrayList<Offer>();
-    URL url;
+    URL webUrl;
 
     // optional fields
     String productId;
@@ -45,25 +45,25 @@ public class ProductCardBuilder implements Builder<ProductCard> {
      * @param offers list of offers
      * @param url url to access this product in a web browser
      */
-    public ProductCardBuilder(String name, List<Offer> offers, URL url) {
+    public ProductCardBuilder(String name, List<Offer> offers, URL webUrl) {
         cardType(CardType.PRODUCT);
         name(name);
         offers(offers);
-        url(url);
+        webUrl(webUrl);
     }
 
     /**
      * Construct a builder providing a price value instead of a list of offers.
      * @param name
      * @param price
-     * @param url
+     * @param webUrl
      */
-    public ProductCardBuilder(String name, Float price, URL url){
+    public ProductCardBuilder(String name, Float price, URL webUrl){
         Offer offer = new OfferBuilder(price).build();
         offer(offer);
         cardType(CardType.PRODUCT);
         name(name);
-        url(url);
+        webUrl(webUrl);
     }
     
     public ProductCardBuilder appLinkAndroid(String appLinkAndroid) {
@@ -235,9 +235,9 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
     
-    private ProductCardBuilder url(URL url){
-        ValidationTool.notNull(url, "Must specify a product url.");
-        this.url = url;
+    private ProductCardBuilder webUrl(URL webUrl){
+        ValidationTool.notNull(webUrl, "Must specify a product webUrl.");
+        this.webUrl = webUrl;
         return this;
     }
     

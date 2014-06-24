@@ -31,7 +31,7 @@ public class PinterestProductCard extends PinterestBasicProductCard implements C
 
         Offer firstOffer = productCard.getOffers().get(0);
 
-        this.url = productCard.getUrl().toString();
+        this.url = productCard.getWebUrl().toString();
         this.price = firstOffer.getPrice().getPrice();
         this.currencyCode = firstOffer.getPrice().getCurrency().toString();
         this.providerName = productCard.getMerchant();
