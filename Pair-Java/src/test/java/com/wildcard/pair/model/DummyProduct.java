@@ -19,7 +19,7 @@ public class DummyProduct {
     // minimal attributes
     protected final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
     final String description = "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time";
-    final URL url;
+    final URL webUrl;
     final URL imgUrl;
     final String brand = "ItemsByLisa";
     
@@ -44,8 +44,8 @@ public class DummyProduct {
     final URL cardUrl;
 
     public DummyProduct() throws MalformedURLException{
-        
-        url = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
+
+        webUrl = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
         imgUrl = new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg");
         cardUrl = new URL("http://www.etsy.com/product_cards/155021118");
 

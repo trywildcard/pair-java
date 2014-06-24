@@ -19,7 +19,7 @@ import com.wildcard.pair.util.CardSerializer;
 public final class ProductCard implements Card {
     private final CardType cardType;
     private final String name;
-    private final URL url;
+    private final URL webUrl;
     private final String productId;
     private final List<Offer> offers;
     private final String merchant;
@@ -46,7 +46,7 @@ public final class ProductCard implements Card {
     public ProductCard(ProductCardBuilder builder) {
         this.cardType = builder.cardType;
         this.name = builder.name;
-        this.url = builder.url;
+        this.webUrl = builder.webUrl;
         this.offers = Collections.unmodifiableList(builder.offers);
         this.merchant = builder.merchant;
         this.brand = builder.brand;
@@ -126,8 +126,8 @@ public final class ProductCard implements Card {
         return brand;
     }
 
-    public URL getUrl() {
-        return url;
+    public URL getWebUrl() {
+        return webUrl;
     }
 
     public CardType getCardType() {
