@@ -39,7 +39,7 @@ public class ProductCardBuilderTest {
     
     private void testMinimalCardAttributes(ProductCard card){
         assertEquals("Name should match", dummyProduct.name, card.getName());
-        assertEquals("Url should match", dummyProduct.url, card.getUrl());
+        assertEquals("Web url should match", dummyProduct.webUrl, card.getWebUrl());
         
         assertEquals("Price should match", dummyOffer.price.getPrice(), card.getOffers().get(0).getPrice().getPrice());
     }
@@ -49,7 +49,7 @@ public class ProductCardBuilderTest {
         Offer offer = new OfferBuilder(dummyOffer.price).build();
         offers.add(offer);
         
-        ProductCardBuilder cardBuilder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.url); 
+        ProductCardBuilder cardBuilder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.webUrl);
 
         return cardBuilder.build();
     }
@@ -63,7 +63,7 @@ public class ProductCardBuilderTest {
 
     @Test
     public void testMinimalProductWithMinimalConstructor(){
-        ProductCard card = new ProductCardBuilder(dummyProduct.name, dummyOffer.price.getPrice(), dummyProduct.url).build();
+        ProductCard card = new ProductCardBuilder(dummyProduct.name, dummyOffer.price.getPrice(), dummyProduct.webUrl).build();
         testMinimalCardAttributes(card);
     }
     
@@ -120,7 +120,7 @@ public class ProductCardBuilderTest {
         Offer offer = buildExtensiveOffer();
         offers.add(offer);
         
-        ProductCardBuilder builder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.url);
+        ProductCardBuilder builder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.webUrl);
 
         builder.productId(dummyProduct.productId);
         builder.description(dummyProduct.description);
