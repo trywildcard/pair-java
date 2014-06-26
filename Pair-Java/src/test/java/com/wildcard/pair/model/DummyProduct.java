@@ -17,14 +17,14 @@ import com.wildcard.pair.model.product.ProductColor;
 public class DummyProduct {
 
     // minimal attributes
-    protected final String name = "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded";
-    final String description = "Celebrate The 4th With This Unique & Original Beautiful Handcrafted Ankle Bracelet!!!  Just In Time";
+    protected final String name = "Green leather shoes";
+    final String description = "Brilliant, colorful shoes made from recycled materials.";
     final URL webUrl;
     final URL imgUrl;
-    final String brand = "ItemsByLisa";
+    final String brand = "Shoemaster";
     
     // extensive attributes
-    final String merchant = "Etsy";
+    final String merchant = "Example Store";
     final List<ProductColor> colors = new ArrayList<ProductColor>();
     final List<URL> images = new ArrayList<URL>();
     final Float rating = 8f;
@@ -37,37 +37,37 @@ public class DummyProduct {
             .asList("example option a", 
                     "example option b",
                     "example option c");
-    final String model = "Bead Ankle Bracelet - 10 inch anklet";
+    final String model = "KICKN-GRL-17";
     final String appLinkIos = "jump://VerticalA/x123";
-    final String appLinkAndroid = "market://search?q=pub:etsy";
-    final String productId = "155021118";
+    final String appLinkAndroid = "market://search?q=pub:examplestore";
+    final String productId = "36226783";
     final URL cardUrl;
 
     public DummyProduct() throws MalformedURLException{
 
-        webUrl = new URL("http://www.etsy.com/listing/155021118/awesome-4th-of-july-patriotic-red-white?ref=&sref=");
-        imgUrl = new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg");
-        cardUrl = new URL("http://www.etsy.com/product_cards/155021118");
+        webUrl = new URL("http://www.examplestore.com/listing/36226783/green-leather-shoes");
+        imgUrl = new URL("http://img.examplestore.com/02/wer4554/il_5d9184_iqm9.jpg");
+        cardUrl = new URL("http://www.examplestore.com/product_cards/36226783/");
 
 
-        ProductColor color = new ProductColor("Magenta",
-                "Magenta color value",
-                new URL("http://https://www.etsy.com/swatches/magenta.jpg"),
-                MappingColor.Red);
-        
+        ProductColor color = new ProductColor("Mint",
+                "RGB(62, 180, 137)",
+                new URL("http://https://www.examplestore.com/swatches/mint.jpg"),
+                MappingColor.Green);
+
         colors.add(color);
         
         sizes.put("md", "Medium");
 
-        images.add(new URL("http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg"));
-        images.add(new URL("https://img0.etsystatic.com/020/0/7024554/il_570xN.473259414_3us0.jpg"));
-        images.add(new URL("https://img0.etsystatic.com/018/0/7024554/il_570xN.473259490_87gc.jpg"));
+        images.add(new URL("http://img.examplestore.com/017/fgh/il_57w9.jpg"));
+        images.add(new URL("https://img.examplestore.com/020rjt/24554/il_570d14_3us0.jpg"));
+        images.add(new URL("https://img.examplestore.com/0166f54/il_570xg90_87gc.jpg"));
         
-        relatedItems.add(new URL("https://www.etsy.com/listing/108648389/glass-beaded-colorful-flower-beads-white?ref=related-0"));
-        relatedItems.add(new URL("https://www.etsy.com/listing/108816901/ooak-glass-and-metal-beaded-anklet-navy?ref=related-2"));
-        relatedItems.add(new URL("https://www.etsy.com/listing/157474664/beach-anklet-beautiful-green-blue?ref=related-4"));
+        relatedItems.add(new URL("http://www.examplestore.com/listing/36226783/green-leather-shoes"));
+        relatedItems.add(new URL("http://www.examplestore.com/listing/16362355/maroon-checkered-shoes"));
+        relatedItems.add(new URL("http://www.examplestore.com/listing/13245522/pink-nylon-shoes"));
 
-        referencedItems.add(new URL("https://www.etsy.com/listing/154992204/beautiful-shimmer-gloss-multicolored?ref=related-6"));
-        referencedItems.add(new URL("https://www.etsy.com/listing/154992842/stunning-blue-glass-beaded-10-anklet?ref=related-5"));
+        referencedItems.add(new URL("http://www.examplestore.com/listing/45637734/blue-leather-shoes"));
+        referencedItems.add(new URL("http://www.examplestore.com/listing/88833589/yellow-leather-shoes"));
     }
 }

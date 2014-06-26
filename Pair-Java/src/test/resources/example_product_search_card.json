@@ -3,22 +3,22 @@
   "total_results": 2,
   "products": [
     {
-      "name": "Awesome 4th Of July Patriotic Red White Blue And Star Glass Beaded",
-      "card_url": "http://www.etsy.com/product_cards/155021118",
+      "name": "Green leather shoes",
+      "card_url": "http://www.examplestore.com/product_cards/36226783/",
       "price": {
         "price": 7.99,
         "currency": "USD"
       },
-      "image": "http://img0.etsystatic.com/017/0/7024554/il_570xN.473259184_iqm9.jpg"
+      "image": "http://img.examplestore.com/02/wer4554/il_5d9184_iqm9.jpg"
     },
     {
-      "name": "Beautiful Patriotic 4th of July Halter Dress",
-      "card_url": "https://www.etsy.com/product_cards/100423075",
+      "name": "Maroon canvas shoes",
+      "card_url": "http://www.examplestore.com/product_cards/36226774/",
       "price": {
         "price": 28.00,
         "currency": "USD"
       },
-      "image": "https://img1.etsystatic.com/000/0/6842447/il_570xN.339122899.jpg"
+      "image": "http://img.examplestore.com/02/wer4554/sfd_74241_Fss.jpg"
     }
   ]
 }
