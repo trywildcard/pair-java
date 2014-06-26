@@ -80,11 +80,11 @@ public class ProductSearchResultsCardTest {
         products.add(builder.build());
 
         String productName = "My product";
-        URL productUrl = new URL("http://etsy.com/123");
+        URL productUrl = new URL("http://examplestore.com/123");
         Price productPrice = new Price(9.99f, Currency.getInstance(Locale.US));
 
         builder = new ProductSearchResultBuilder(productName, productUrl, productPrice);
-        builder.image(new URL("http://etsy.com/123.jpg"));
+        builder.image(new URL("http://examplestore.com/123.jpg"));
         products.add(builder.build());
 
         ProductSearchResultsCard card = new ProductSearchResultsCard(products, totalResults);
