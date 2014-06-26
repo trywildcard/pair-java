@@ -43,7 +43,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
      *
      * @param name product name
      * @param offers list of offers
-     * @param url url to access this product in a web browser
+     * @param webUrl url to access this product in a web browser
      */
     public ProductCardBuilder(String name, List<Offer> offers, URL webUrl) {
         cardType(CardType.PRODUCT);
