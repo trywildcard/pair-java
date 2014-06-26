@@ -68,7 +68,7 @@ public class PinterestBasicProductCard {
     }
 
     public Date getProductExpiration(){
-        return productExpiration;
+        return new Date(productExpiration.getTime());
     }
 
     public List<URL> getRelatedItems(){

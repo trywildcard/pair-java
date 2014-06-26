@@ -82,11 +82,19 @@ public class PinterestProductCard extends PinterestBasicProductCard implements C
     }
 
     public Date getSaleStartDate() {
-        return saleStartDate;
+        if (saleStartDate == null){
+            return null;
+        }
+
+        return new Date(saleStartDate.getTime());
     }
 
     public Date getSaleEndDate() {
-        return saleEndDate;
+        if (saleEndDate == null){
+            return null;
+        }
+
+        return new Date(saleEndDate.getTime());
     }
 
     public List<String> getGeographicAvailability() {

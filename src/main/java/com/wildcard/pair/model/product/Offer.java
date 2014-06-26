@@ -95,15 +95,27 @@ public final class Offer {
     }
 
     public Date getSaleStartDate() {
-        return saleStartDate;
+        if (saleStartDate == null){
+            return null;
+        }
+
+        return new Date(saleStartDate.getTime());
     }
 
     public Date getSaleEndDate() {
-        return saleEndDate;
+        if (saleEndDate == null){
+            return null;
+        }
+
+        return new Date(saleEndDate.getTime());
     }
 
     public Date getExpirationDate() {
-        return expirationDate;
+        if (expirationDate == null){
+            return null;
+        }
+
+        return new Date(expirationDate.getTime());
     }
 
     public String getOfferId() {
