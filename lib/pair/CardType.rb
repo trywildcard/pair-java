@@ -1,0 +1,3 @@
+module CardType
+PRODUCT = 
+end
