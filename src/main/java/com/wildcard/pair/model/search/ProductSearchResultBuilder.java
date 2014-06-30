@@ -10,6 +10,8 @@ import java.net.URL;
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductSearchResultBuilder implements Builder<ProductSearchResult> {
 
+    private ValidationTool v = new ValidationTool();
+
     String name;
     URL cardUrl;
     Price price;
@@ -18,7 +20,7 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
     /**
      * Construct a <code>ProductSearchResultBuilder</code>
      * @param name the name of the product
-     * @param product_card_url the url to access the product in a web browser
+     * @param cardUrl the url to access the product in a web browser
      * @param price the primary price of this product.
      */
     public ProductSearchResultBuilder(String name, URL cardUrl, Price price){
@@ -47,17 +49,17 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
 
 
     private void name(String name){
-        ValidationTool.notNullOrEmpty(name, "Must supply a name.");
+        v.notNullOrEmpty(name, v.REQUIRED, "Must supply a name.");
         this.name = name;
     }
 
     private void cardUrl(URL cardUrl){
-        ValidationTool.notNull(cardUrl, "Must supply a cardUrl.");
+        v.notNull(cardUrl, v.REQUIRED, "Must supply a cardUrl.");
         this.cardUrl = cardUrl;
     }
 
     private void price(Price price){
-        ValidationTool.notNull(price, "Must supply a price");
+        v.notNull(price, v.REQUIRED, "Must supply a price");
         this.price = price;
     }
 }

@@ -11,6 +11,8 @@ import com.wildcard.pair.model.Card;
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.translation.pinterest.PinterestProductCard;
 import com.wildcard.pair.util.CardSerializer;
+import com.wildcard.pair.util.ValidationTool;
+import com.wildcard.pair.util.ValidationType;
 
 @JsonDeserialize(builder = ProductCardBuilder.class)
 /**
@@ -65,7 +67,7 @@ public final class ProductCard implements Card {
         this.appLinkAndroid = builder.appLinkAndroid;
         this.productId = builder.productId;
     }
-    
+
     public String getAppLinkAndroid() {
         return appLinkAndroid;
     }
@@ -162,4 +164,5 @@ public final class ProductCard implements Card {
     public String writeAsPinterestJsonString() throws IOException {
         return new PinterestProductCard(this).writeAsJsonString();
     }
+
 }
