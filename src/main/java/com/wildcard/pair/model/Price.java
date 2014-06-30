@@ -1,15 +1,20 @@
 package com.wildcard.pair.model;
 
-import java.util.Currency;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wildcard.pair.util.ValidationTool;
+
+import java.util.Currency;
 
 /**
  * Keep currency information with the numerical value of a price.
  */
 public final class Price {
+    @JsonIgnore
+    private ValidationTool v = new ValidationTool();
+
     private Float price;
     private Currency currency;
+
 
     /**
      * @param price the numerical value of the price.
@@ -49,8 +54,8 @@ public final class Price {
      * @param price the numerical value of the price.
      */
     private void setPrice(Float price){
-        ValidationTool.notNull(price, "Price must not be null.");
-        ValidationTool.notNegative(price, "Price must be a positive Float.");
+        v.notNull(price, v.REQUIRED, "Price must not be null.");
+        v.notNegative(price, v.REQUIRED, "Price must be a positive Float.");
         this.price = price;
     }
 
@@ -59,7 +64,7 @@ public final class Price {
      * @param currency the currency for this price.
      */
     private void setCurrency(Currency currency){
-        ValidationTool.notNull(currency, "currency must not be null.");
+        v.notNull(currency, v.REQUIRED, "currency must not be null.");
         this.currency = currency;
     }
 }

@@ -1,12 +1,12 @@
 package com.wildcard.pair.model.product;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wildcard.pair.model.Price;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wildcard.pair.model.Price;
 
 
 @JsonDeserialize(builder = OfferBuilder.class)
@@ -121,4 +121,5 @@ public final class Offer {
     public String getOfferId() {
         return offerId;
     }
+
 }

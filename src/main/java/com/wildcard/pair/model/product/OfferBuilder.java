@@ -1,14 +1,18 @@
 package com.wildcard.pair.model.product;
 
-import java.util.*;
-
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.wildcard.pair.model.Builder;
 import com.wildcard.pair.model.Price;
 import com.wildcard.pair.util.ValidationTool;
 
+import java.util.*;
+
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class OfferBuilder implements Builder<Offer> {
+
+
+    private ValidationTool v = new ValidationTool();
+
     // required fields
     Price price;
     
@@ -44,19 +48,23 @@ public class OfferBuilder implements Builder<Offer> {
     }
 
     public OfferBuilder weightUnits(String weightUnits){
-        ValidationTool.notEmpty(weightUnits, "Tried to set weightUnits to an empty string.");
-        this.weightUnits = weightUnits;
+        boolean isValid = v.notEmpty(weightUnits, v.OPTIONAL, "Tried to set weightUnits to an empty string.");
+        if (isValid) {
+            this.weightUnits = weightUnits;
+        }
         return this;
     }
-    
+
     public OfferBuilder gender(Gender gender) {
         this.gender = gender;
         return this;
     }
     
     public OfferBuilder weight(Float weight) {
-        ValidationTool.notNegative(weight, "Weight must be a positive Float.");
-        this.weight = weight;
+        boolean isValid = v.notNegative(weight, v.OPTIONAL, "Weight must be a positive Float.");
+        if (isValid) {
+            this.weight = weight;
+        }
         return this;
     }
     
@@ -81,14 +89,18 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder geographicAvailability(List<Locale> geographicAvailability){
-        ValidationTool.notNull(geographicAvailability, "geographicAvailability must not be null.");
-        this.geographicAvailability = geographicAvailability;
+        boolean isValid = v.notNull(geographicAvailability, v.OPTIONAL, "geographicAvailability must not be null.");
+        if (isValid) {
+            this.geographicAvailability = geographicAvailability;
+        }
         return this;
     }
     
     public OfferBuilder quantity(Integer quantity){
-        ValidationTool.notNegative(quantity,  "quantity must be a positive Integer.");
-        this.quantity = quantity;
+        boolean isValid = v.notNegative(quantity, v.OPTIONAL, "quantity must be a positive Integer.");
+        if (isValid) {
+            this.quantity = quantity;
+        }
         return this;
     }
     
@@ -98,8 +110,10 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder description(String description){
-        ValidationTool.notEmpty(description, "Tried to set description to an empty string.");
-        this.description = description;
+        boolean isValid = v.notEmpty(description, v.OPTIONAL, "Tried to set description to an empty string.");
+        if (isValid) {
+            this.description = description;
+        }
         return this;
     }
     
@@ -119,7 +133,14 @@ public class OfferBuilder implements Builder<Offer> {
     public Offer build(){
         return new Offer(this);
     }
-    
+
+    /**
+     * Get a list of validation errors.
+     * @return the list of errors.
+     */
+    public List<String> getErrors(){
+        return v.getErrors();
+    }
 
     /**
      * Private constructor to allow for Jackson deserialization.
@@ -127,9 +148,9 @@ public class OfferBuilder implements Builder<Offer> {
     private OfferBuilder(){}
 
     private OfferBuilder price(Price price){
-        ValidationTool.notNull(price, "Price must not be null.");
-        ValidationTool.notNegative(price.getPrice(), "Price must be a positive Float.");
-        
+        v.notNull(price, v.REQUIRED, "Price must not be null.");
+        v.notNegative(price.getPrice(), v.REQUIRED, "Price must be a positive Float.");
+
         this.price = price;
         return this;
     }

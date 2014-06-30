@@ -1,5 +1,6 @@
 package com.wildcard.pair.model.search;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wildcard.pair.model.Card;
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.util.CardSerializer;
@@ -14,6 +15,9 @@ import java.util.List;
  */
 
 public final class ProductSearchResultsCard implements Card {
+
+    @JsonIgnore
+    private ValidationTool v = new ValidationTool();
 
     private CardType cardType;
     private Integer totalResults;
@@ -60,8 +64,8 @@ public final class ProductSearchResultsCard implements Card {
     private ProductSearchResultsCard(){}
 
     private void setTotalResults(Integer totalResults){
-        ValidationTool.notNull(totalResults, "Must supply a value for totalResults.");
-        ValidationTool.notNegative(totalResults, "totalResults must be a positive Integer.");
+        v.notNull(totalResults, v.REQUIRED, "Must supply a value for totalResults.");
+        v.notNegative(totalResults, v.REQUIRED, "totalResults must be a positive Integer.");
         this.totalResults = totalResults;
     }
 
@@ -70,7 +74,7 @@ public final class ProductSearchResultsCard implements Card {
     }
 
     private void setProducts(List<ProductSearchResult> products){
-        ValidationTool.notNull(products, "Must supply a list of products.");
+        v.notNull(products, v.REQUIRED, "Must supply a list of products.");
         this.products = Collections.unmodifiableList(products);
     }
 }
