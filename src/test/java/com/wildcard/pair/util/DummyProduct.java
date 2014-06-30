@@ -1,4 +1,4 @@
-package com.wildcard.pair.model;
+package com.wildcard.pair.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,31 +17,31 @@ import com.wildcard.pair.model.product.ProductColor;
 public class DummyProduct {
 
     // minimal attributes
-    protected final String name = "Green leather shoes";
-    final String description = "Brilliant, colorful shoes made from recycled materials.";
-    final URL webUrl;
-    final URL imgUrl;
-    final String brand = "Shoemaster";
+    public final String name = "Green leather shoes";
+    public final String description = "Brilliant, colorful shoes made from recycled materials.";
+    public final URL webUrl;
+    public final URL imgUrl;
+    public final String brand = "Shoemaster";
     
     // extensive attributes
-    final String merchant = "Example Store";
-    final List<ProductColor> colors = new ArrayList<ProductColor>();
-    final List<URL> images = new ArrayList<URL>();
-    final Float rating = 8f;
-    final Float ratingScale = 10f;
-    final Integer ratingCount = 12;
-    final List<URL> relatedItems = new ArrayList<URL>();
-    final List<URL> referencedItems = new ArrayList<URL>();
-    final Map<String, String> sizes = new HashMap<String, String>();
-    final List<String> options = Arrays
+    public final String merchant = "Example Store";
+    public final List<ProductColor> colors = new ArrayList<ProductColor>();
+    public final List<URL> images = new ArrayList<URL>();
+    public final Float rating = 8f;
+    public final Float ratingScale = 10f;
+    public final Integer ratingCount = 12;
+    public final List<URL> relatedItems = new ArrayList<URL>();
+    public final List<URL> referencedItems = new ArrayList<URL>();
+    public final Map<String, String> sizes = new HashMap<String, String>();
+    public final List<String> options = Arrays
             .asList("example option a", 
                     "example option b",
                     "example option c");
-    final String model = "KICKN-GRL-17";
-    final String appLinkIos = "jump://VerticalA/x123";
-    final String appLinkAndroid = "market://search?q=pub:examplestore";
-    final String productId = "36226783";
-    final URL cardUrl;
+    public final String model = "KICKN-GRL-17";
+    public final String appLinkIos = "jump://VerticalA/x123";
+    public final String appLinkAndroid = "market://search?q=pub:examplestore";
+    public final String productId = "36226783";
+    public final URL cardUrl;
 
     public DummyProduct() throws MalformedURLException{
 

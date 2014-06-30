@@ -1,10 +1,10 @@
-package com.wildcard.pair.model;
+package com.wildcard.pair.model.product;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wildcard.pair.model.product.ProductCard;
 import com.wildcard.pair.util.TestUtil;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,7 +38,7 @@ public class ProductCardSerializationTest {
         ProductCard card = mapper.readValue(inputString, ProductCard.class);
         JsonNode outputNode = mapper.readTree(card.writeAsJsonString());
         
-        assertEquals("Expected inputNode and outputNode sizes to match", inputNode.size(), outputNode.size());
+        Assert.assertEquals("Expected inputNode and outputNode sizes to match", inputNode.size(), outputNode.size());
 
         Iterator<String> inputItr = inputNode.fieldNames();
         Iterator<String> outputItr = outputNode.fieldNames();
@@ -47,7 +47,7 @@ public class ProductCardSerializationTest {
             String inFieldName = inputItr.next();
             String outFieldName = outputItr.next();
             
-            assertEquals("Expected " + inFieldName + " to match", inputNode.get(inFieldName), outputNode.get(outFieldName));
+            Assert.assertEquals("Expected " + inFieldName + " to match", inputNode.get(inFieldName), outputNode.get(outFieldName));
         }
     }
     

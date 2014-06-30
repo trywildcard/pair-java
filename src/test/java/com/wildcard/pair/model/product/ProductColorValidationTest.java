@@ -1,8 +1,10 @@
-package com.wildcard.pair.model;
+package com.wildcard.pair.model.product;
 
+import com.wildcard.pair.model.CardBuilderException;
 import com.wildcard.pair.model.product.MappingColor;
 import com.wildcard.pair.model.product.ProductCard;
 import com.wildcard.pair.model.product.ProductColor;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,7 +32,7 @@ public class ProductColorValidationTest {
     @Test
     public void isValidWithAttributes(){
         ProductColor pc = new ProductColor(displayName, value, swatchUrl, mappingColor);
-        assertEquals(pc.getDisplayName(), displayName);
+        Assert.assertEquals(pc.getDisplayName(), displayName);
     }
 
     @Test(expected = CardBuilderException.class)
@@ -41,14 +43,14 @@ public class ProductColorValidationTest {
     @Test
     public void isValidWithoutOptionalFields(){
         ProductColor pc = new ProductColor(displayName, null, null, null);
-        assertEquals(pc.getDisplayName(), displayName);
-        assertEquals("Expected error count to match", 0, pc.getErrors().size());
+        Assert.assertEquals(pc.getDisplayName(), displayName);
+        Assert.assertEquals("Expected error count to match", 0, pc.getErrors().size());
     }
 
     @Test
     public void hasErrorForBlankValueString(){
         ProductColor pc = new ProductColor(displayName, "", null, null);
-        assertEquals("Expected error count to match", 1, pc.getErrors().size());
+        Assert.assertEquals("Expected error count to match", 1, pc.getErrors().size());
     }
 
 }
