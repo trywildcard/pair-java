@@ -11,11 +11,11 @@ require 'date'
 		attr_reader :saleStartDate, :saleEndDate, :expirationDate, :geographicAvailability
 
         validates :price, presence: true
-        validates :description, length: {minimum: 1}
-        validates :availability, inclusion: {in: %w(Discontinued, InStock, InStoreOnly, LimitedAvailability, OnlineOnly, OutOfStock, PreOrder, SoldOut) }
-        validates :gender, inclusion: {in: %w(male, female, unisex)}
-        validates :weight, numericality: {greater_than_or_equal_to: 0}
-        validates :quantity, numericality: {only_integer: true, greater_than_or_equal_to: 0} 
+        validates :description, allow_nil: true, length: {minimum: 1}
+        validates :availability, allow_nil: true, inclusion: {in: %w(Discontinued, InStock, InStoreOnly, LimitedAvailability, OnlineOnly, OutOfStock, PreOrder, SoldOut) }
+        validates :gender, allow_nil: true, inclusion: {in: %w(male, female, unisex)}
+        validates :weight, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
+        validates :quantity, allow_nil: true, numericality: {only_integer: true, greater_than_or_equal_to: 0} 
 
 		def initialize(attributes = {})
 			attributes.each do |name, value|
@@ -40,13 +40,5 @@ require 'date'
 				errors.add(:geographicAvailability, 'Must be an array!')
 			end
 		end
-
-		def validateOffer(offer)
-			puts "Made it here"
-		end
-
-		def writeAsJson
-			puts self.to_json
-		end 
 
 	end
