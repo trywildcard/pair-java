@@ -320,7 +320,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
 
         if (isValid) {
             for (Offer offer : offers){
-                boolean isValidOffer = v.notNull(offer, v.REQUIRED, ".");
+                boolean isValidOffer = v.notNull(offer, v.OPTIONAL, ".");
                 if (isValidOffer){
                     foundValidOffer = true;
                     this.offers.add(offer);
