@@ -8,11 +8,10 @@ require 'uri'
 	class ProductCard
         include ActiveModel::Validations
 
-		attr_accessor :cardType, :name, :webUrl, :productId, :merchant, :brand, :description, :images, :rating, :ratingScale, :ratingCount, :relatedItems, :referencedItems, :sizes, :options, :model, :appLinkIos, :appLinkAndroid
+		attr_accessor :name, :webUrl, :productId, :merchant, :brand, :description, :images, :rating, :ratingScale, :ratingCount, :relatedItems, :referencedItems, :sizes, :options, :model, :appLinkIos, :appLinkAndroid
 
 		attr_reader :offers, :colors
-       # validates_presence_of :cardType
-        validates :cardType, presence: true, inclusion: {in: %w(product product_search) }
+
 		validates :webUrl, presence: true
 		##todo URL regex validation
 		#validates :webUrl, format: { with: /\A#{URI::regexp}\z/, on: :create}
@@ -20,36 +19,39 @@ require 'uri'
 		validates :name, presence: true
 
 		#validate :offers_valid
-
 		valid_colors = %w(Beige, Black, Blue, Bronze, Brown, Gold, Green, Gray, Metallic, Multicolored, OffWhite, Orange, Pink, Purple, Red, Silver, Transparent, Turquoise, White, Yellow)
 
 		def initialize(attributes = {})
 			attributes.each do |name, value|
 				send("#{name}=", value)
-				puts name
-				puts value
 			end	
 
+			@cardType = 'product'
 		end
 
-		def offers=(offers)
+		def offers=(inputoffers)
 
-			if !offers.is_a?(Array)
-				errors.add(:geographicAvailability, 'Must be an array!')
+			if !inputoffers.is_a?(Array)
+				puts "ERROR: offers must be an array"
+				errors.add(:offers, 'Must be an array!')
+				return
 			end
 
-			if offers.nil? || offers.empty? 
+			if inputoffers.nil? || inputoffers.empty? 
+				puts "ERROR: offers must be have atleast one offer"
 				errors.add(:offers, 'Must have atleast one offer!!')
+				return
 			end
 
-			tempOffer = Offer.new
-			for index in 0 ... offers.size
-				#it'd be nice to do Offer.new (offers[index]) so activemodel validation can do all the work for us
-				#tempOffer.validateOffer(offers[index])
+			inputoffers.each do |offer|
+
+				if (!offer.is_a?(Offer)  || !offer.valid?)
+					errors.add(:offer, 'One of the offers is not a properly constructed offer object and/or is not valid')
+					return
+				end
 			end
 
-			self.offers = offers
-
+			@offers = inputoffers
 		end
 
 		def colors=(colors)
@@ -58,19 +60,24 @@ require 'uri'
 				errors.add(:colors, 'Must be an array!')
 			end
 
-			for index in 0 ... colors.size
-				if (self.valid_colors.include? colors[index])
+			colors.each do |color|
+				if (!self.valid_colors.include? color)
 					errors.add(:colors, 'Invalid Color Added')
 				end
 			end
 
-			self.colors = colors
+			@colors = colors
 		
 		end
 
 		
 		def writeAsJson
-			puts self.to_json
+           if self.valid?
+           	   ActiveSupport::JSON.encode(self)	
+           else
+           	   puts "Product Card is not valid"
+           	   self.errors
+           end    
 		end 
 
 	end
