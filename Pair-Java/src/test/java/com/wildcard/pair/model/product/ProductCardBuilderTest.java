@@ -1,4 +1,4 @@
-package com.wildcard.pair.model;
+package com.wildcard.pair.model.product;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,7 +8,10 @@ import com.wildcard.pair.model.product.Offer;
 import com.wildcard.pair.model.product.OfferBuilder;
 import com.wildcard.pair.model.product.ProductCard;
 import com.wildcard.pair.model.product.ProductCardBuilder;
+import com.wildcard.pair.util.DummyOffer;
+import com.wildcard.pair.util.DummyProduct;
 import com.wildcard.pair.util.TestUtil;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,10 +41,10 @@ public class ProductCardBuilderTest {
     }
     
     private void testMinimalCardAttributes(ProductCard card){
-        assertEquals("Name should match", dummyProduct.name, card.getName());
-        assertEquals("Web url should match", dummyProduct.webUrl, card.getWebUrl());
+        Assert.assertEquals("Name should match", dummyProduct.name, card.getName());
+        Assert.assertEquals("Web url should match", dummyProduct.webUrl, card.getWebUrl());
         
-        assertEquals("Price should match", dummyOffer.price.getPrice(), card.getOffers().get(0).getPrice().getPrice());
+        Assert.assertEquals("Price should match", dummyOffer.price.getPrice(), card.getOffers().get(0).getPrice().getPrice());
     }
     
     private ProductCard buildMinimalProductCard(){
@@ -70,29 +73,29 @@ public class ProductCardBuilderTest {
     private void testExtensiveCardAttributes(ProductCard card){
         testMinimalCardAttributes(card);
 
-        assertEquals("Image url should match", dummyProduct.imgUrl, card.getImages().get(0));
-        assertEquals("Description should match", dummyProduct.description, card.getDescription());
-        assertEquals("Brand name should match", dummyProduct.brand, card.getBrand());
+        Assert.assertEquals("Image url should match", dummyProduct.imgUrl, card.getImages().get(0));
+        Assert.assertEquals("Description should match", dummyProduct.description, card.getDescription());
+        Assert.assertEquals("Brand name should match", dummyProduct.brand, card.getBrand());
         
-        assertEquals("Merchant should match", dummyProduct.merchant, card.getMerchant());
-        assertEquals("Colors should match", dummyProduct.colors, card.getColors());
+        Assert.assertEquals("Merchant should match", dummyProduct.merchant, card.getMerchant());
+        Assert.assertEquals("Colors should match", dummyProduct.colors, card.getColors());
         
         List<URL> combinedImages = new ArrayList<URL>();
         combinedImages.add(dummyProduct.imgUrl);
         for (URL img : dummyProduct.images){
             combinedImages.add(img);
         }
-        assertEquals("Images should match", combinedImages, card.getImages());
+        Assert.assertEquals("Images should match", combinedImages, card.getImages());
         
-        assertEquals("Rating should match", dummyProduct.rating, card.getRating(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
-        assertEquals("Rating scale should match", dummyProduct.ratingScale, card.getRatingScale(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
-        assertEquals("Rating count should match", dummyProduct.ratingCount, card.getRatingCount());
-        assertEquals("Related Items should match", dummyProduct.relatedItems, card.getRelatedItems());
-        assertEquals("Sizes should match", dummyProduct.sizes, card.getSizes());
-        assertEquals("Options should match", dummyProduct.options, card.getOptions());
-        assertEquals("Model should match", dummyProduct.model, card.getModel());
-        assertEquals("App link ios should match", dummyProduct.appLinkIos, card.getAppLinkIos());
-        assertEquals("App link Android should match", dummyProduct.appLinkAndroid, card.getAppLinkAndroid());
+        Assert.assertEquals("Rating should match", dummyProduct.rating, card.getRating(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
+        Assert.assertEquals("Rating scale should match", dummyProduct.ratingScale, card.getRatingScale(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
+        Assert.assertEquals("Rating count should match", dummyProduct.ratingCount, card.getRatingCount());
+        Assert.assertEquals("Related Items should match", dummyProduct.relatedItems, card.getRelatedItems());
+        Assert.assertEquals("Sizes should match", dummyProduct.sizes, card.getSizes());
+        Assert.assertEquals("Options should match", dummyProduct.options, card.getOptions());
+        Assert.assertEquals("Model should match", dummyProduct.model, card.getModel());
+        Assert.assertEquals("App link ios should match", dummyProduct.appLinkIos, card.getAppLinkIos());
+        Assert.assertEquals("App link Android should match", dummyProduct.appLinkAndroid, card.getAppLinkAndroid());
     }
     
     
@@ -155,7 +158,7 @@ public class ProductCardBuilderTest {
         ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
         ProductCard generatedCard = buildExtensiveProductCard();
         
-        assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
+        Assert.assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
 
     @Test
@@ -164,7 +167,7 @@ public class ProductCardBuilderTest {
         ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
         ProductCard generatedCard = buildMinimalProductCard();
         
-        assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
+        Assert.assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
     
     

@@ -1,58 +1,91 @@
 package com.wildcard.pair.util;
 
-import java.util.List;
-
 import com.wildcard.pair.model.CardBuilderException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Static methods to assert validity of parameters.
  */
 public class ValidationTool {
-    public static void notNullOrEmpty(List<?> list, String message){
+
+    public ValidationType REQUIRED = ValidationType.REQUIRED;
+    public ValidationType OPTIONAL = ValidationType.OPTIONAL;
+
+    List<String> errors = new ArrayList<String>();
+
+    public ValidationTool(){
+
+    }
+
+    public boolean notNullOrEmpty(List<?> list, ValidationType vType, String message) {
         if (list == null || list.isEmpty()){
-            throw new CardBuilderException(message);
+            return fail(vType, message);
         }
+
+        return true;
     }
     
-    public static void notNullOrEmpty(String string, String message){
+    public boolean notNullOrEmpty(String string, ValidationType vType, String message){
         if (string == null || string.isEmpty()){
-            throw new CardBuilderException(message);
+            return fail(vType, message);
         }
+        return true;
     }
 
-    public static void notNull(Object object, String message) {
+    public boolean notNull(Object object, ValidationType vType, String message) {
         if (object == null){
-            throw new CardBuilderException(message);
+            return fail(vType, message);
         }
+        return true;
     }
     
-    public static void notEmpty(String string, String message){
+    public boolean notEmpty(String string, ValidationType vType, String message){
         if (string == null){
-            return;
+            return true;
         }
-        
+
         if (string.isEmpty()){
-            throw new CardBuilderException(message);
+            return fail(vType, message);
         }
+        return true;
     }
 
-    public static void notNegative(Integer integer, String message){
+    public boolean notNegative(Integer integer, ValidationType vType, String message){
         if (integer == null){
-            return;
+            return true;
         }
         
         if (integer < 0){
-            throw new CardBuilderException(message);
+            return fail(vType, message);
         }
+        return true;
     }
 
-    public static void notNegative(Float integer, String message){
+    public boolean notNegative(Float integer, ValidationType vType, String message){
         if (integer == null){
-            return;
+            return true;
         }
         
         if (integer < 0){
-            throw new CardBuilderException(message);
+            return fail(vType, message);
         }
+        return true;
+    }
+
+    public boolean fail(ValidationType vType, String message) {
+        switch(vType){
+            case REQUIRED: throw new CardBuilderException(message);
+            case OPTIONAL: {
+                errors.add(message);
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public List<String> getErrors(){
+        return errors;
     }
 }

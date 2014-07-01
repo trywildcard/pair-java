@@ -1,10 +1,15 @@
-package com.wildcard.pair.model;
+package com.wildcard.pair.model.search;
 
 import static org.junit.Assert.assertEquals;
 
+import com.wildcard.pair.model.CardType;
+import com.wildcard.pair.model.Price;
 import com.wildcard.pair.model.search.ProductSearchResultBuilder;
 import com.wildcard.pair.model.search.ProductSearchResultsCard;
 import com.wildcard.pair.model.search.ProductSearchResult;
+import com.wildcard.pair.util.DummyOffer;
+import com.wildcard.pair.util.DummyProduct;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -39,8 +44,8 @@ public class ProductSearchResultsCardTest {
     }
 
     private void testMinimalCardAttributes(ProductSearchResultsCard card){
-        assertEquals("TotalResults should match", totalResults, card.getTotalResults());
-        assertEquals("CardType should match", cardType, card.getCardType());
+        Assert.assertEquals("TotalResults should match", totalResults, card.getTotalResults());
+        Assert.assertEquals("CardType should match", cardType, card.getCardType());
     }
 
     @Test
@@ -48,7 +53,7 @@ public class ProductSearchResultsCardTest {
         this.totalResults = 0;
 
         ProductSearchResultsCard card = new ProductSearchResultsCard(products, totalResults);
-        assertEquals("Card should have zero products.",0,card.getProducts().size());
+        Assert.assertEquals("Card should have zero products.", 0, card.getProducts().size());
         testMinimalCardAttributes(card);
     }
 
@@ -65,10 +70,10 @@ public class ProductSearchResultsCardTest {
 
         ProductSearchResult productSearchResult = card.getProducts().get(0);
 
-        assertEquals("Product name should match", productSearchResult.getName(), dummyProduct.name);
-        assertEquals("Product price should match", productSearchResult.getPrice(), dummyOffer.price);
-        assertEquals("Product cardUrl should match", productSearchResult.getCardUrl(), dummyProduct.cardUrl);
-        assertEquals("Product image should match", productSearchResult.getImage(), dummyProduct.images.get(0));
+        Assert.assertEquals("Product name should match", productSearchResult.getName(), dummyProduct.name);
+        Assert.assertEquals("Product price should match", productSearchResult.getPrice(), dummyOffer.price);
+        Assert.assertEquals("Product cardUrl should match", productSearchResult.getCardUrl(), dummyProduct.cardUrl);
+        Assert.assertEquals("Product image should match", productSearchResult.getImage(), dummyProduct.images.get(0));
     }
 
     @Test
@@ -91,7 +96,7 @@ public class ProductSearchResultsCardTest {
 
         testMinimalCardAttributes(card);
 
-        assertEquals("TotalResults should match", totalResults, card.getTotalResults());
-        assertEquals("Products should match", products, card.getProducts());
+        Assert.assertEquals("TotalResults should match", totalResults, card.getTotalResults());
+        Assert.assertEquals("Products should match", products, card.getProducts());
     }
 }

@@ -1,13 +1,19 @@
 package com.wildcard.pair.model.product;
 
-import java.net.URL;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wildcard.pair.util.ValidationTool;
+
+import java.net.URL;
+import java.util.List;
 
 /**
  *
  */
 public final class ProductColor {
+
+    @JsonIgnore
+    private ValidationTool v = new ValidationTool();
+
     // required fields
     private String displayName;
     
@@ -47,6 +53,9 @@ public final class ProductColor {
         return mappingColor;
     }
 
+    public List<String> getErrors(){
+        return v.getErrors();
+    }
 
     /**
      * Private constructor to allow for Jackson deserialization.
@@ -54,7 +63,7 @@ public final class ProductColor {
     private ProductColor(){}
     
     private void setDisplayName(String displayName){
-        ValidationTool.notNullOrEmpty(displayName, "Must specify a displayName.");
+        v.notNullOrEmpty(displayName, v.REQUIRED, "Must specify a displayName.");
         this.displayName = displayName;
     }
     
@@ -63,8 +72,10 @@ public final class ProductColor {
     }
     
     private void setValue(String value){
-        ValidationTool.notEmpty(value, "Tried to set value to an empty string.");
-        this.value = value;
+        boolean isValid = v.notEmpty(value, v.OPTIONAL, "Tried to set value to an empty string.");
+        if (isValid) {
+            this.value = value;
+        }
     }
     
     private void setMappingColor(MappingColor mappingColor){
