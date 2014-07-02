@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.model.Price;
-import com.wildcard.pair.model.search.ProductSearchResultBuilder;
-import com.wildcard.pair.model.search.ProductSearchResultsCard;
-import com.wildcard.pair.model.search.ProductSearchResult;
 import com.wildcard.pair.util.DummyOffer;
 import com.wildcard.pair.util.DummyProduct;
 import org.junit.Assert;
@@ -27,7 +24,7 @@ import java.util.Locale;
  */
 
 
-public class ProductSearchResultsCardTest {
+public class ProductSearchCardTest {
 
     // card attributes
     private static Integer totalResults;
@@ -43,7 +40,7 @@ public class ProductSearchResultsCardTest {
         products = new ArrayList<ProductSearchResult>();
     }
 
-    private void testMinimalCardAttributes(ProductSearchResultsCard card){
+    private void testMinimalCardAttributes(ProductSearchCard card){
         Assert.assertEquals("TotalResults should match", totalResults, card.getTotalResults());
         Assert.assertEquals("CardType should match", cardType, card.getCardType());
     }
@@ -52,7 +49,7 @@ public class ProductSearchResultsCardTest {
     public void createEmptySearchCardTest() throws IOException {
         this.totalResults = 0;
 
-        ProductSearchResultsCard card = new ProductSearchResultsCard(products, totalResults);
+        ProductSearchCard card = new ProductSearchCard(products, totalResults);
         Assert.assertEquals("Card should have zero products.", 0, card.getProducts().size());
         testMinimalCardAttributes(card);
     }
@@ -64,7 +61,7 @@ public class ProductSearchResultsCardTest {
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price);
         builder.image(dummyProduct.images.get(0));
         products.add(builder.build());
-        ProductSearchResultsCard card = new ProductSearchResultsCard(products, totalResults);
+        ProductSearchCard card = new ProductSearchCard(products, totalResults);
 
         testMinimalCardAttributes(card);
 
@@ -92,7 +89,7 @@ public class ProductSearchResultsCardTest {
         builder.image(new URL("http://examplestore.com/123.jpg"));
         products.add(builder.build());
 
-        ProductSearchResultsCard card = new ProductSearchResultsCard(products, totalResults);
+        ProductSearchCard card = new ProductSearchCard(products, totalResults);
 
         testMinimalCardAttributes(card);
 
