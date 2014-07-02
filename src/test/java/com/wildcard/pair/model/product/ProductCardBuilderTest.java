@@ -61,9 +61,6 @@ public class ProductCardBuilderTest {
     public void testMinimalProductCard() throws MalformedURLException, JsonProcessingException{
         ProductCard card = buildMinimalProductCard();
         testMinimalCardAttributes(card);
-
-
-        assertEquals(1,getClass().getPackage());
     }
     
 
