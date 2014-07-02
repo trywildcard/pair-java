@@ -11,14 +11,14 @@ import com.wildcard.pair.model.Card;
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.translation.pinterest.PinterestProductCard;
 import com.wildcard.pair.util.CardSerializer;
-import com.wildcard.pair.util.ValidationTool;
-import com.wildcard.pair.util.ValidationType;
 
 @JsonDeserialize(builder = ProductCardBuilder.class)
 /**
  * Structures a Product Card. Must be constructed using <code>ProductCardBuilder</code>.
  */
 public final class ProductCard implements Card {
+    private final String pairVersion;
+
     private final CardType cardType;
     private final String name;
     private final URL webUrl;
@@ -46,6 +46,7 @@ public final class ProductCard implements Card {
      * @param builder the builder for this product card.
      */
     public ProductCard(ProductCardBuilder builder) {
+        this.pairVersion = builder.pairVersion;
         this.cardType = builder.cardType;
         this.name = builder.name;
         this.webUrl = builder.webUrl;
@@ -66,6 +67,10 @@ public final class ProductCard implements Card {
         this.appLinkIos = builder.appLinkIos;
         this.appLinkAndroid = builder.appLinkAndroid;
         this.productId = builder.productId;
+    }
+
+    public String getPairVersion(){
+        return pairVersion;
     }
 
     public String getAppLinkAndroid() {
