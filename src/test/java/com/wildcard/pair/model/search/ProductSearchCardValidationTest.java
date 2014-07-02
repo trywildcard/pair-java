@@ -16,7 +16,7 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by michaelgarate on 6/30/14.
  */
-public class ProductSearchResultsCardValidationTest {
+public class ProductSearchCardValidationTest {
 
     DummyProduct dummyProduct;
     DummyOffer dummyOffer;
@@ -34,29 +34,29 @@ public class ProductSearchResultsCardValidationTest {
 
     @Test
     public void isValidWithAttributes(){
-        ProductSearchResultsCard card = new ProductSearchResultsCard(products, 1);
+        ProductSearchCard card = new ProductSearchCard(products, 1);
         assertEquals("Expected name to match", dummyProduct.name, card.getProducts().get(0).getName());
         assertEquals("Expected totalResults to match", 1, card.getTotalResults().intValue());
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullTotalResults(){
-        ProductSearchResultsCard card = new ProductSearchResultsCard(products, null);
+        ProductSearchCard card = new ProductSearchCard(products, null);
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNegativeTotalResults(){
-        ProductSearchResultsCard card = new ProductSearchResultsCard(products, -1);
+        ProductSearchCard card = new ProductSearchCard(products, -1);
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullProductsList(){
-        ProductSearchResultsCard card = new ProductSearchResultsCard(null, 1);
+        ProductSearchCard card = new ProductSearchCard(null, 1);
     }
 
     public void isValidWithEmptyProductsList(){
         List<ProductSearchResult> emptyList = new ArrayList<ProductSearchResult>();
-        ProductSearchResultsCard card = new ProductSearchResultsCard(emptyList, 0);
+        ProductSearchCard card = new ProductSearchCard(emptyList, 0);
         assertEquals("Expected total results to match", 0, card.getTotalResults().intValue());
     }
 }

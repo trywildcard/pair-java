@@ -14,7 +14,7 @@ import java.util.List;
  * Structures a Product Search Results Card, which embeds many ProductSearchResults.
  */
 
-public final class ProductSearchResultsCard implements Card {
+public final class ProductSearchCard implements Card {
 
     @JsonIgnore
     private ValidationTool v = new ValidationTool();
@@ -28,7 +28,7 @@ public final class ProductSearchResultsCard implements Card {
      * @param products a list of <code>ProductSearchResult</code> objects.
      * @param totalResults the total number of results for this search response.
      */
-    public ProductSearchResultsCard(List<ProductSearchResult> products, Integer totalResults){
+    public ProductSearchCard(List<ProductSearchResult> products, Integer totalResults){
         setCardType(CardType.PRODUCT_SEARCH);
         setProducts(products);
         setTotalResults(totalResults);
@@ -61,7 +61,7 @@ public final class ProductSearchResultsCard implements Card {
     /**
      * Private constructor to allow for Jackson deserialization.
      */
-    private ProductSearchResultsCard(){}
+    private ProductSearchCard(){}
 
     private void setTotalResults(Integer totalResults){
         v.notNull(totalResults, v.REQUIRED, "Must supply a value for totalResults.");
