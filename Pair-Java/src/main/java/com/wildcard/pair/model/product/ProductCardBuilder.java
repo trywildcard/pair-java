@@ -2,6 +2,7 @@ package com.wildcard.pair.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.wildcard.pair.Pair;
 import com.wildcard.pair.model.Builder;
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.util.ValidationTool;
@@ -16,6 +17,8 @@ import java.util.Map;
 public class ProductCardBuilder implements Builder<ProductCard> {
 
     private ValidationTool v = new ValidationTool();
+
+    String pairVersion = Pair.VERSION;
 
     // required fields
     CardType cardType;
@@ -337,6 +340,11 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     
     private ProductCardBuilder offer(Offer offer){
         offers.add(offer);
+        return this;
+    }
+
+    private ProductCardBuilder pairVersion(String pairVersion){
+        this.pairVersion = pairVersion;
         return this;
     }
 

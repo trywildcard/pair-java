@@ -1,6 +1,7 @@
 package com.wildcard.pair.model.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wildcard.pair.Pair;
 import com.wildcard.pair.model.Card;
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.util.CardSerializer;
@@ -19,6 +20,8 @@ public final class ProductSearchCard implements Card {
     @JsonIgnore
     private ValidationTool v = new ValidationTool();
 
+    private String pairVersion = Pair.VERSION;
+
     private CardType cardType;
     private Integer totalResults;
     private List<ProductSearchResult> products;
@@ -32,6 +35,10 @@ public final class ProductSearchCard implements Card {
         setCardType(CardType.PRODUCT_SEARCH);
         setProducts(products);
         setTotalResults(totalResults);
+    }
+
+    public String getPairVersion(){
+        return pairVersion;
     }
 
     public Integer getTotalResults(){
@@ -57,7 +64,6 @@ public final class ProductSearchCard implements Card {
     }
 
 
-
     /**
      * Private constructor to allow for Jackson deserialization.
      */
@@ -76,5 +82,9 @@ public final class ProductSearchCard implements Card {
     private void setProducts(List<ProductSearchResult> products){
         v.notNull(products, v.REQUIRED, "Must supply a list of products.");
         this.products = Collections.unmodifiableList(products);
+    }
+
+    private void setPairVersion(String pairVersion){
+        this.pairVersion = pairVersion;
     }
 }
