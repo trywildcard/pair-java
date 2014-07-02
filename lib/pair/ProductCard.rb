@@ -27,6 +27,9 @@ require 'uri'
 			end	
 
 			@cardType = 'product'
+			
+			#todo tie this into gem config?
+			@pairversion = 0.1
 		end
 
 		def offers=(inputoffers)
@@ -75,7 +78,7 @@ require 'uri'
            if self.valid?
            	   ActiveSupport::JSON.encode(self)	
            else
-           	   puts "Product Card is not valid"
+           	   puts "Product Card is not valid - please remedy below errors:"
            	   self.errors
            end    
 		end 
