@@ -1,0 +1,38 @@
+{
+  "title": "Green leather shoes",
+  "description": "Brilliant, colorful shoes made from recycled materials.",
+  "brand": "Shoemaster",
+  "product_id": "36226783",
+  "gender": "unisex",
+  "images": [
+    "http://img.examplestore.com/02/wer4554/il_5d9184_iqm9.jpg",
+    "http://img.examplestore.com/017/fgh/il_57w9.jpg",
+    "https://img.examplestore.com/020rjt/24554/il_570d14_3us0.jpg",
+    "https://img.examplestore.com/0166f54/il_570xg90_87gc.jpg"
+  ],
+  "product_expiration": "2014-07-13T00:00:00.000+0000",
+  "related_items": [
+    "http://www.examplestore.com/listing/36226783/green-leather-shoes",
+    "http://www.examplestore.com/listing/16362355/maroon-checkered-shoes",
+    "http://www.examplestore.com/listing/13245522/pink-nylon-shoes"
+  ],
+  "referenced_items": [
+    "http://www.examplestore.com/listing/45637734/blue-leather-shoes",
+    "http://www.examplestore.com/listing/88833589/yellow-leather-shoes"
+  ],
+  "rating": 8.0,
+  "rating_scale": 10.0,
+  "rating_count": 12,
+  "url": "http://www.examplestore.com/listing/36226783/green-leather-shoes",
+  "price": 7.99,
+  "currency_code": "USD",
+  "provider_name": "Example Store",
+  "availability": "in stock",
+  "quantity": 15,
+  "standard_price": 17.99,
+  "sale_start_date": "2014-06-01T00:00:00.000+0000",
+  "sale_end_date": "2014-06-24T00:00:00.000+0000",
+  "geographic_availability": [
+    "USA"
+  ]
+}
