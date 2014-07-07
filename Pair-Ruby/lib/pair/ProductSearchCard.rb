@@ -19,6 +19,8 @@ require 'uri'
 			end	
 
 			@cardType = 'product_search'
+			#todo tie this into gem config?
+			@pairversion = 0.1
 		end
 
 		def searchresults=(searchresults)
