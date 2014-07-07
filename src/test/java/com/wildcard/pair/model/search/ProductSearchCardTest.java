@@ -1,7 +1,5 @@
 package com.wildcard.pair.model.search;
 
-import static org.junit.Assert.assertEquals;
-
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.model.Price;
 import com.wildcard.pair.util.DummyOffer;
@@ -12,7 +10,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -82,11 +79,11 @@ public class ProductSearchCardTest {
         products.add(builder.build());
 
         String productName = "My product";
-        URL productUrl = new URL("http://examplestore.com/123");
+        String productUrl = "http://examplestore.com/123";
         Price productPrice = new Price(9.99f, Currency.getInstance(Locale.US));
 
         builder = new ProductSearchResultBuilder(productName, productUrl, productPrice);
-        builder.image(new URL("http://examplestore.com/123.jpg"));
+        builder.image("http://examplestore.com/123.jpg");
         products.add(builder.build());
 
         ProductSearchCard card = new ProductSearchCard(products, totalResults);

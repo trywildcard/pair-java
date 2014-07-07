@@ -1,13 +1,11 @@
 package com.wildcard.pair.model.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.wildcard.pair.Pair;
 import com.wildcard.pair.model.Builder;
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.util.ValidationTool;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +22,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     protected CardType cardType;
     protected String name;
     protected List<Offer> offers = new ArrayList<Offer>();
-    protected URL webUrl;
+    protected String webUrl;
 
     // optional fields
     protected String productId;
@@ -32,12 +30,12 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     protected String brand;
     protected String description;
     protected List<ProductColor> colors = new ArrayList<ProductColor>();
-    protected List<URL> images = new ArrayList<URL>();
+    protected List<String> images = new ArrayList<String>();
     protected Float rating;
     protected Float ratingScale;
     protected Integer ratingCount;
-    protected List<URL> relatedItems = new ArrayList<URL>();
-    protected List<URL> referencedItems = new ArrayList<URL>();
+    protected List<String> relatedItems = new ArrayList<String>();
+    protected List<String> referencedItems = new ArrayList<String>();
     protected Map<String, String> sizes = new HashMap<String,String>();
     protected List<String> options = new ArrayList<String>();
     protected String model;
@@ -51,7 +49,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
      * @param offers list of offers
      * @param webUrl url to access this product in a web browser
      */
-    public ProductCardBuilder(String name, List<Offer> offers, URL webUrl) {
+    public ProductCardBuilder(String name, List<Offer> offers, String webUrl) {
         cardType(CardType.PRODUCT);
         name(name);
         offers(offers);
@@ -64,7 +62,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
      * @param price
      * @param webUrl
      */
-    public ProductCardBuilder(String name, Float price, URL webUrl){
+    public ProductCardBuilder(String name, Float price, String webUrl){
         Offer offer = new OfferBuilder(price).build();
         offer(offer);
         cardType(CardType.PRODUCT);
@@ -139,7 +137,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder relatedItem(URL relatedItem){
+    public ProductCardBuilder relatedItem(String relatedItem){
         boolean isValid = v.notNull(relatedItem, v.OPTIONAL, "Tried to add an empty relatedItem.");
         if (isValid) {
             this.relatedItems.add(relatedItem);
@@ -147,10 +145,10 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder relatedItems(List<URL> relatedItems) {
+    public ProductCardBuilder relatedItems(List<String> relatedItems) {
         boolean isValid = v.notNull(relatedItems, v.OPTIONAL, "relatedItems must not be null.");
         if (isValid) {
-            for (URL relatedItem : relatedItems){
+            for (String relatedItem : relatedItems){
                 boolean isValidRelatedItem = v.notNull(relatedItem, v.OPTIONAL, "Tried to add an empty relatedItem.");
                 if (isValidRelatedItem) {
                     this.relatedItems.add(relatedItem);
@@ -160,7 +158,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder referencedItem(URL referencedItem){
+    public ProductCardBuilder referencedItem(String referencedItem){
         boolean isValid = v.notNull(referencedItem, v.OPTIONAL, "Tried to add an empty relatedItem.");
         if (isValid) {
             this.relatedItems.add(referencedItem);
@@ -168,10 +166,10 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder referencedItems(List<URL> referencedItems) {
+    public ProductCardBuilder referencedItems(List<String> referencedItems) {
         boolean isValid = v.notNull(referencedItems, v.OPTIONAL, "relatedItems must not be null.");
         if (isValid) {
-            for (URL referencedItem : referencedItems){
+            for (String referencedItem : referencedItems){
                 boolean isValidReferenceItem = v.notNull(referencedItem, v.OPTIONAL, "Tried to add an empty relatedItem.");
                 if (isValidReferenceItem) {
                     this.referencedItems.add(referencedItem);
@@ -199,7 +197,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
     
-    public ProductCardBuilder image(URL imgUrl){
+    public ProductCardBuilder image(String imgUrl){
         boolean isValid = v.notNull(imgUrl, v.OPTIONAL, "Tried to add a null imgUrl");
         if (isValid) {
             images.add(imgUrl);
@@ -207,10 +205,10 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder images(List<URL> images) {
+    public ProductCardBuilder images(List<String> images) {
         boolean isValid = v.notNull(images, v.OPTIONAL, "images must not be null.");
         if (isValid) {
-            for (URL img : images){
+            for (String img : images){
                 boolean isValidImg = v.notNull(img, v.OPTIONAL, "Tried to add a null image");
                 if (isValidImg) {
                     this.images.add(img);
@@ -308,7 +306,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
     
-    private ProductCardBuilder webUrl(URL webUrl){
+    private ProductCardBuilder webUrl(String webUrl){
         boolean isValid = v.notNull(webUrl, v.REQUIRED, "Must specify a product webUrl.");
         if (isValid) {
             this.webUrl = webUrl;
