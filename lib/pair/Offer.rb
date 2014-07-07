@@ -1,44 +1,60 @@
 
 require 'active_model'
-require 'date'
+#require 'date_validator'
+#require 'date'
+#require 'validates_timeliness'
 
 
-	class Offer
+
+#todo instance variables usually with underscores, not camel case
+
+#module PairSDK  
+  class Offer
         include ActiveModel::Validations
+        include ActiveModel::Serializers::JSON
 
-		attr_accessor :price, :originalPrice, :shippingCost, :description, :availability, :quantity, :gender, :weight, :weightUnits, :offerId
+    attr_accessor :price, :original_price, :shipping_cost, :description, :availability, :quantity, :gender, :weight, :weight_units, :offerId, :sale_start_date, :sale_end_date, :expiration_date
 
-		attr_reader :saleStartDate, :saleEndDate, :expirationDate, :geographicAvailability
+    attr_reader :geographic_availability
 
-        validates :price, presence: true
-        validates :description, allow_nil: true, length: {minimum: 1}
-        validates :availability, allow_nil: true, inclusion: {in: %w(Discontinued, InStock, InStoreOnly, LimitedAvailability, OnlineOnly, OutOfStock, PreOrder, SoldOut) }
-        validates :gender, allow_nil: true, inclusion: {in: %w(male, female, unisex)}
-        validates :weight, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
-        validates :quantity, allow_nil: true, numericality: {only_integer: true, greater_than_or_equal_to: 0} 
+    validates :price, presence: true, numericality: {greater_than_or_equal_to: 0}
+    validates :original_price, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
+    validates :shipping_cost, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
+    validates :description, allow_nil: true, length: {minimum: 1}
+    validates :availability, allow_nil: true, inclusion: {in: %w(Discontinued InStock InStoreOnly LimitedAvailability OnlineOnly OutOfStock PreOrder SoldOut) }
+    validates :gender, allow_nil: true, inclusion: {in: %w(male female unisex) }
+    validates :weight, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
+    validates :quantity, allow_nil: true, numericality: {only_integer: true, greater_than_or_equal_to: 0} 
+ 
+    #validate :validateDates
+ 
+    #handle exception for unknown attribute
+    def initialize(attributes = {})
+      attributes.each do |name, value|
+        send("#{name}=", value)
+      end 
+    end
 
-		def initialize(attributes = {})
-			attributes.each do |name, value|
-				send("#{name}=", value)
-			end	
-		end
+    def attributes
+      instance_values
+    end
 
-		def saleStartDate(saleStartDate)
-			self.saleStartDate = Date.strptime(saleStartDate, '%m-%d-%Y')
-		end
+    def geographic_availability(geographic_availability)
+      if !geographic_availability.is_a?(Array)
+        @geographic_availability = [geographic_availability]
+      else
+        @geographic_availability = geographic_availability
+      end
+    end
 
-		def saleEndDate(saleEndDate)
-			self.saleEndDate = Date.strptime(saleEndDate, '%m-%d-%Y')
-		end
 
-		def expirationDate(expirationDate)
-			self.expirationDate = Date.strptime(expirationDate, '%m-%d-%Y')
-		end
+    def to_json
+      if self.valid?
+        ActiveSupport::JSON.encode(self.as_json)
+      else
+        raise "Offer is not valid - please remedy the following errors:" << self.errors.messages.to_s
+      end   
+    end 
 
-		def geographicAvailability(geographicAvailability)
-			if !geographicAvailability.is_a?(Array)
-				errors.add(:geographicAvailability, 'Must be an array!')
-			end
-		end
-
-	end
+  end
+#end
