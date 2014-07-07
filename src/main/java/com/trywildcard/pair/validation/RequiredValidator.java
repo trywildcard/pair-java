@@ -9,6 +9,7 @@ import java.util.List;
  * Created by michaelgarate on 7/7/14.
  */
 public class RequiredValidator {
+
     List<String> errors = new ArrayList<String>();
 
     boolean fail(String message) throws CardBuilderException {

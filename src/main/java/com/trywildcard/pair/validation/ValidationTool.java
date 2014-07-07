@@ -2,14 +2,13 @@ package com.trywildcard.pair.validation;
 
 import com.trywildcard.pair.exception.CardBuilderException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Static methods to assert validity of parameters.
  */
 public class ValidationTool extends ValidationHelpers {
-
+    
     OptionalValidator optionalValidator = new OptionalValidator();
     RequiredValidator requiredValidator = new RequiredValidator();
 
