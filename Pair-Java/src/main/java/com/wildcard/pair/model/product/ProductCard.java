@@ -1,16 +1,15 @@
 package com.wildcard.pair.model.product;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.wildcard.pair.model.Card;
 import com.wildcard.pair.model.CardType;
 import com.wildcard.pair.translation.pinterest.PinterestProductCard;
 import com.wildcard.pair.util.CardSerializer;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 @JsonDeserialize(builder = ProductCardBuilder.class)
 /**
@@ -21,19 +20,19 @@ public final class ProductCard implements Card {
 
     private final CardType cardType;
     private final String name;
-    private final URL webUrl;
+    private final String webUrl;
     private final String productId;
     private final List<Offer> offers;
     private final String merchant;
     private final String brand;
     private final String description;
     private final List<ProductColor> colors;
-    private final List<URL> images;
+    private final List<String> images;
     private final Float rating;
     private final Float ratingScale;
     private final Integer ratingCount;
-    private final List<URL> relatedItems;
-    private final List<URL> referencedItems;
+    private final List<String> relatedItems;
+    private final List<String> referencedItems;
     private final Map<String, String> sizes;
     private final List<String> options;
     private final String model;
@@ -89,11 +88,11 @@ public final class ProductCard implements Card {
         return options;
     }
 
-    public List<URL> getRelatedItems() {
+    public List<String> getRelatedItems() {
         return relatedItems;
     }
 
-    public List<URL> getReferencedItems() {
+    public List<String> getReferencedItems() {
         return referencedItems;
     }
 
@@ -109,7 +108,7 @@ public final class ProductCard implements Card {
         return rating;
     }
 
-    public List<URL> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
@@ -133,7 +132,7 @@ public final class ProductCard implements Card {
         return brand;
     }
 
-    public URL getWebUrl() {
+    public String getWebUrl() {
         return webUrl;
     }
 

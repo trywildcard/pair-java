@@ -39,7 +39,7 @@
   "colors": [
     {
       "display_name": "Mint",
-      "swatch_link": "http://https://www.examplestore.com/swatches/mint.jpg",
+      "swatch_url": "http://https://www.examplestore.com/swatches/mint.jpg",
       "value": "RGB(62, 180, 137)",
       "mapping_color": "green"
     }

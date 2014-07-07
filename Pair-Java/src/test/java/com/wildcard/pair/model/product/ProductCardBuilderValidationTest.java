@@ -6,13 +6,11 @@ import com.wildcard.pair.util.DummyProduct;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,7 +25,7 @@ public class ProductCardBuilderValidationTest {
     ProductCardBuilder builder;
 
     @Before
-    public void setUp() throws MalformedURLException, ParseException {
+    public void setUp() throws ParseException {
         dummyProduct = new DummyProduct();
         dummyOffer = new DummyOffer();
         builder = new ProductCardBuilder(dummyProduct.name, dummyOffer.price.getPrice(), dummyProduct.webUrl);
@@ -158,7 +156,7 @@ public class ProductCardBuilderValidationTest {
     @Test
     public void hasErrorForNullRelatedItemsListItem(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        List<URL> relatedItems = new ArrayList<URL>();
+        List<String> relatedItems = new ArrayList<String>();
         relatedItems.add(null);
         builder.relatedItems(relatedItems);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
@@ -182,9 +180,9 @@ public class ProductCardBuilderValidationTest {
     @Test
     public void hasErrorForNullReferencedItemsListItem(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        List<URL> referencedItems = new ArrayList<URL>();
+        List<String> referencedItems = new ArrayList<String>();
         referencedItems.add(null);
-        builder.relatedItems(referencedItems);
+        builder.referencedItems(referencedItems);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
@@ -212,7 +210,7 @@ public class ProductCardBuilderValidationTest {
     @Test
     public void hasErrorForNullImagesListItem(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        List<URL> images = new ArrayList<URL>();
+        List<String> images = new ArrayList<String>();
         images.add(null);
         builder.images(images);
         assertEquals("Errors size should match", 1, builder.getErrors().size());

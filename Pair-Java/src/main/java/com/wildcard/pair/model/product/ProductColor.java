@@ -3,7 +3,6 @@ package com.wildcard.pair.model.product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wildcard.pair.util.ValidationTool;
 
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ public final class ProductColor {
     private String displayName;
     
     // optional fields
-    private URL swatchLink;
+    private String swatchUrl;
     private String value;
     private MappingColor mappingColor;
 
@@ -27,12 +26,12 @@ public final class ProductColor {
      * Construct a product color.
      * @param displayName the name of the color as presented to the user.
      * @param value
-     * @param swatchLink link to an image with a sample of the color.
+     * @param swatchUrl link to an image with a sample of the color.
      * @param mappingColor map to a set of predefined colors
      */
-    public ProductColor(String displayName, String value, URL swatchLink, MappingColor mappingColor){
+    public ProductColor(String displayName, String value, String swatchUrl, MappingColor mappingColor){
         setDisplayName(displayName);
-        setSwatchLink(swatchLink);
+        setSwatchUrl(swatchUrl);
         setValue(value);
         setMappingColor(mappingColor);
     }
@@ -41,8 +40,8 @@ public final class ProductColor {
         return displayName;
     }
 
-    public URL getSwatchLink() {
-        return swatchLink;
+    public String getSwatchUrl() {
+        return swatchUrl;
     }
 
     public String getValue() {
@@ -67,8 +66,8 @@ public final class ProductColor {
         this.displayName = displayName;
     }
     
-    private void setSwatchLink(URL swatchLink){
-        this.swatchLink = swatchLink;
+    private void setSwatchUrl(String swatchUrl){
+        this.swatchUrl = swatchUrl;
     }
     
     private void setValue(String value){
