@@ -14,22 +14,22 @@ public class OfferBuilder implements Builder<Offer> {
     private ValidationTool v = new ValidationTool();
 
     // required fields
-    Price price;
+    protected Price price;
     
     // optional fields
-    Price originalPrice;
-    Price shippingCost;
-    String description;
-    Availability availability;
-    Integer quantity;
-    Date saleStartDate;
-    Date saleEndDate;
-    Date expirationDate;
-    List<Locale> geographicAvailability = new ArrayList<Locale>();
-    Gender gender;
-    Float weight;
-    String weightUnits;
-    String offerId;
+    protected Price originalPrice;
+    protected Price shippingCost;
+    protected String description;
+    protected Availability availability;
+    protected Integer quantity;
+    protected Date saleStartDate;
+    protected Date saleEndDate;
+    protected Date expirationDate;
+    protected List<Locale> geographicAvailability = new ArrayList<Locale>();
+    protected Gender gender;
+    protected Float weight;
+    protected String weightUnits;
+    protected String offerId;
 
     /**
      * Construct an <code>OfferBuilder</code> provided a Price object.
