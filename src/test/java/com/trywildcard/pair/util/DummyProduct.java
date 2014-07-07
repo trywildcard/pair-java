@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.product.MappingColor;
 import com.trywildcard.pair.model.product.ProductColor;
 
@@ -41,7 +42,7 @@ public class DummyProduct {
     public final String productId = "36226783";
     public final String cardUrl;
 
-    public DummyProduct() {
+    public DummyProduct() throws CardBuilderException {
 
         webUrl = "http://www.examplestore.com/listing/36226783/green-leather-shoes";
         imgUrl = "http://img.examplestore.com/02/wer4554/il_5d9184_iqm9.jpg";

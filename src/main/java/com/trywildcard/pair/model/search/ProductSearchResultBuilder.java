@@ -1,9 +1,10 @@
 package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.Price;
-import com.trywildcard.pair.util.ValidationTool;
+import com.trywildcard.pair.validation.ValidationTool;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductSearchResultBuilder implements Builder<ProductSearchResult> {
@@ -21,7 +22,7 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
      * @param cardUrl the url to access the product in a web browser
      * @param price the primary price of this product.
      */
-    public ProductSearchResultBuilder(String name, String cardUrl, Price price){
+    public ProductSearchResultBuilder(String name, String cardUrl, Price price) throws CardBuilderException {
         name(name);
         cardUrl(cardUrl);
         price(price);
@@ -46,18 +47,18 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
     private ProductSearchResultBuilder(){}
 
 
-    private void name(String name){
-        v.notNullOrEmpty(name, v.REQUIRED, "Must supply a name.");
+    private void name(String name) throws CardBuilderException {
+        v.required(v.notNullOrEmpty(name), "Must supply a name.");
         this.name = name;
     }
 
-    private void cardUrl(String cardUrl){
-        v.notNull(cardUrl, v.REQUIRED, "Must supply a cardUrl.");
+    private void cardUrl(String cardUrl) throws CardBuilderException {
+        v.required(v.notNull(cardUrl), "Must supply a cardUrl.");
         this.cardUrl = cardUrl;
     }
 
-    private void price(Price price){
-        v.notNull(price, v.REQUIRED, "Must supply a price");
+    private void price(Price price) throws CardBuilderException {
+        v.required(v.notNull(price), "Must supply a price");
         this.price = price;
     }
 }

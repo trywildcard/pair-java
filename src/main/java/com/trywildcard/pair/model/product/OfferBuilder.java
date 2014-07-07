@@ -1,9 +1,10 @@
 package com.trywildcard.pair.model.product;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.Price;
-import com.trywildcard.pair.util.ValidationTool;
+import com.trywildcard.pair.validation.ValidationTool;
 
 import java.util.*;
 
@@ -35,7 +36,7 @@ public class OfferBuilder implements Builder<Offer> {
      * Construct an <code>OfferBuilder</code> provided a Price object.
      * @param price
      */
-    public OfferBuilder(Price price){
+    public OfferBuilder(Price price) throws CardBuilderException {
         price(price);
     }
 
@@ -43,12 +44,12 @@ public class OfferBuilder implements Builder<Offer> {
      * Construct an <code>OfferBuilder</code> with only a price value, using USD as the default currency.
      * @param price the price value.
      */
-    public OfferBuilder(Float price){
+    public OfferBuilder(Float price) throws CardBuilderException {
         price(new Price(price, Currency.getInstance(Locale.US)));
     }
 
     public OfferBuilder weightUnits(String weightUnits){
-        boolean isValid = v.notEmpty(weightUnits, v.OPTIONAL, "Tried to set weightUnits to an empty string.");
+        boolean isValid = v.optional(v.notEmpty(weightUnits), "Tried to set weightUnits to an empty string.");
         if (isValid) {
             this.weightUnits = weightUnits;
         }
@@ -61,7 +62,7 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder weight(Float weight) {
-        boolean isValid = v.notNegative(weight, v.OPTIONAL, "Weight must be a positive Float.");
+        boolean isValid = v.optional(v.notNegative(weight), "Weight must be a positive Float.");
         if (isValid) {
             this.weight = weight;
         }
@@ -89,7 +90,7 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder geographicAvailability(List<Locale> geographicAvailability){
-        boolean isValid = v.notNull(geographicAvailability, v.OPTIONAL, "geographicAvailability must not be null.");
+        boolean isValid = v.optional(v.notNull(geographicAvailability), "geographicAvailability must not be null.");
         if (isValid) {
             this.geographicAvailability = geographicAvailability;
         }
@@ -97,7 +98,7 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder quantity(Integer quantity){
-        boolean isValid = v.notNegative(quantity, v.OPTIONAL, "quantity must be a positive Integer.");
+        boolean isValid = v.optional(v.notNegative(quantity), "quantity must be a positive Integer.");
         if (isValid) {
             this.quantity = quantity;
         }
@@ -110,7 +111,7 @@ public class OfferBuilder implements Builder<Offer> {
     }
     
     public OfferBuilder description(String description){
-        boolean isValid = v.notEmpty(description, v.OPTIONAL, "Tried to set description to an empty string.");
+        boolean isValid = v.optional(v.notEmpty(description), "Tried to set description to an empty string.");
         if (isValid) {
             this.description = description;
         }
@@ -147,9 +148,9 @@ public class OfferBuilder implements Builder<Offer> {
      */
     private OfferBuilder(){}
 
-    private OfferBuilder price(Price price){
-        v.notNull(price, v.REQUIRED, "Price must not be null.");
-        v.notNegative(price.getPrice(), v.REQUIRED, "Price must be a positive Float.");
+    private OfferBuilder price(Price price) throws CardBuilderException {
+        v.required(v.notNull(price), "Price must not be null.");
+        v.required(v.notNegative(price.getPrice()), "Price must be a positive Float.");
 
         this.price = price;
         return this;

@@ -1,5 +1,6 @@
 package com.trywildcard.pair.model.search;
 
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.util.DummyOffer;
@@ -31,7 +32,7 @@ public class ProductSearchCardTest {
     private static CardType cardType = CardType.PRODUCT_SEARCH;
 
     @BeforeClass
-    public static void initialize() throws MalformedURLException, ParseException {
+    public static void initialize() throws MalformedURLException, ParseException, CardBuilderException {
         dummyProduct = new DummyProduct();
         dummyOffer = new DummyOffer();
         products = new ArrayList<ProductSearchResult>();
@@ -43,7 +44,7 @@ public class ProductSearchCardTest {
     }
 
     @Test
-    public void createEmptySearchCardTest() throws IOException {
+    public void createEmptySearchCardTest() throws IOException, CardBuilderException {
         this.totalResults = 0;
 
         ProductSearchCard card = new ProductSearchCard(products, totalResults);
@@ -52,7 +53,7 @@ public class ProductSearchCardTest {
     }
 
     @Test
-    public void createMinimalSearchCardTest() throws IOException {
+    public void createMinimalSearchCardTest() throws IOException, CardBuilderException {
         this.totalResults = 1;
 
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price);
@@ -71,7 +72,7 @@ public class ProductSearchCardTest {
     }
 
     @Test
-    public void cardWithMultipleProductsTest() throws IOException {
+    public void cardWithMultipleProductsTest() throws IOException, CardBuilderException {
         this.totalResults = 2;
 
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price);

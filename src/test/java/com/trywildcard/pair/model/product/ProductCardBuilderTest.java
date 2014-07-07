@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
 import com.trywildcard.pair.util.TestUtil;
@@ -27,7 +28,7 @@ public class ProductCardBuilderTest {
     private static DummyProduct dummyProduct;
     
     @BeforeClass
-    public static void prepare() throws ParseException  {
+    public static void prepare() throws ParseException, CardBuilderException {
         dummyOffer = new DummyOffer();
         dummyProduct = new DummyProduct();
     }
@@ -39,7 +40,7 @@ public class ProductCardBuilderTest {
         Assert.assertEquals("Price should match", dummyOffer.price.getPrice(), card.getOffers().get(0).getPrice().getPrice());
     }
     
-    private ProductCard buildMinimalProductCard(){
+    private ProductCard buildMinimalProductCard() throws CardBuilderException {
         List<Offer> offers = new ArrayList<Offer>();
         Offer offer = new OfferBuilder(dummyOffer.price).build();
         offers.add(offer);
@@ -50,14 +51,14 @@ public class ProductCardBuilderTest {
     }
     
     @Test
-    public void testMinimalProductCard() throws JsonProcessingException{
+    public void testMinimalProductCard() throws JsonProcessingException, CardBuilderException {
         ProductCard card = buildMinimalProductCard();
         testMinimalCardAttributes(card);
     }
     
 
     @Test
-    public void testMinimalProductWithMinimalConstructor(){
+    public void testMinimalProductWithMinimalConstructor() throws CardBuilderException {
         ProductCard card = new ProductCardBuilder(dummyProduct.name, dummyOffer.price.getPrice(), dummyProduct.webUrl).build();
         testMinimalCardAttributes(card);
     }
@@ -91,7 +92,7 @@ public class ProductCardBuilderTest {
     }
     
     
-    private Offer buildExtensiveOffer(){
+    private Offer buildExtensiveOffer() throws CardBuilderException {
         OfferBuilder builder = new OfferBuilder(dummyOffer.price);
         builder.originalPrice(dummyOffer.originalPrice);
         builder.description(dummyOffer.description);
@@ -110,7 +111,7 @@ public class ProductCardBuilderTest {
         return builder.build();
     }
     
-    private ProductCard buildExtensiveProductCard(){
+    private ProductCard buildExtensiveProductCard() throws CardBuilderException {
         List<Offer> offers = new ArrayList<Offer>();
         Offer offer = buildExtensiveOffer();
         offers.add(offer);
@@ -139,13 +140,13 @@ public class ProductCardBuilderTest {
     }
     
     @Test
-    public void testExtensiveProductCard() throws IOException, URISyntaxException{
+    public void testExtensiveProductCard() throws IOException, URISyntaxException, CardBuilderException {
         ProductCard card = buildExtensiveProductCard();
         testExtensiveCardAttributes(card);
     }
 
     @Test
-    public void testExtensiveWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException{
+    public void testExtensiveWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException, CardBuilderException {
         String inputString = TestUtil.readResourceAsString("example_product_card.json");
         ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
         ProductCard generatedCard = buildExtensiveProductCard();
@@ -154,7 +155,7 @@ public class ProductCardBuilderTest {
     }
 
     @Test
-    public void testMinimalWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException{
+    public void testMinimalWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException, CardBuilderException {
         String inputString = TestUtil.readResourceAsString("example_minimal_product_card.json");
         ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
         ProductCard generatedCard = buildMinimalProductCard();

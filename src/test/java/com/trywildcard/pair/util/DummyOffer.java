@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.model.product.Availability;
 import com.trywildcard.pair.model.product.Gender;
@@ -36,7 +37,7 @@ public class DummyOffer {
     public final Price price = new Price(7.99f, Currency.getInstance(Locale.US));
     public final String offerId = "36226783-3";
 
-    public DummyOffer() throws ParseException{
+    public DummyOffer() throws ParseException, CardBuilderException {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         saleStartDate = dateFormat.parse("2014-06-01");
         saleEndDate = dateFormat.parse("2014-06-24");

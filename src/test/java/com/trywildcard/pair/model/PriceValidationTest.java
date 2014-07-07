@@ -1,5 +1,6 @@
 package com.trywildcard.pair.model;
 
+import com.trywildcard.pair.exception.CardBuilderException;
 import org.junit.Test;
 
 import java.util.Currency;
@@ -16,22 +17,22 @@ public class PriceValidationTest {
     Currency currency = Currency.getInstance(Locale.US);
 
     @Test
-    public void isValidWithAttributes(){
+    public void isValidWithAttributes() throws CardBuilderException {
         Price price = new Price(priceVal, currency);
     }
 
     @Test(expected=CardBuilderException.class)
-    public void isInvalidWithNullPriceValue(){
+    public void isInvalidWithNullPriceValue() throws CardBuilderException {
         Price price = new Price(null, currency);
     }
 
     @Test(expected=CardBuilderException.class)
-    public void isInvalidWithNegativePriceValue(){
+    public void isInvalidWithNegativePriceValue() throws CardBuilderException {
         Price proce = new Price(-7.00f, currency);
     }
 
     @Test(expected=CardBuilderException.class)
-    public void isInvalidWithNullCurrency(){
+    public void isInvalidWithNullCurrency() throws CardBuilderException {
         Price price = new Price(priceVal,null);
     }
 

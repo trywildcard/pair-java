@@ -1,6 +1,6 @@
 package com.trywildcard.pair.model.search;
 
-import com.trywildcard.pair.model.CardBuilderException;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
 import org.junit.Before;
@@ -20,34 +20,34 @@ public class ProductSearchResultBuilderValidationTest {
     DummyOffer dummyOffer;
 
     @Before
-    public void setUp() throws ParseException, MalformedURLException {
+    public void setUp() throws ParseException, MalformedURLException, CardBuilderException {
         this.dummyOffer = new DummyOffer();
         this.dummyProduct = new DummyProduct();
     }
 
     @Test
-    public void isValidWithAttributes(){
+    public void isValidWithAttributes() throws CardBuilderException {
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price);
         assertEquals(dummyProduct.name, builder.build().getName());
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNullName(){
+    public void isInvalidWithNullName() throws CardBuilderException {
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder(null, dummyProduct.webUrl, dummyOffer.price);
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithEmptyNameString(){
+    public void isInvalidWithEmptyNameString() throws CardBuilderException {
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder("", dummyProduct.webUrl, dummyOffer.price);
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNullUrl(){
+    public void isInvalidWithNullUrl() throws CardBuilderException {
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, null, dummyOffer.price);
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNullPrice(){
+    public void isInvalidWithNullPrice() throws CardBuilderException {
         ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, null);
     }
 }
