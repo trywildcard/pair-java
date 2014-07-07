@@ -17,7 +17,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
 
     protected ValidationTool v = new ValidationTool();
 
-    protected String pairVersion = Pair.VERSION;
+    protected String pairVersion = Pair.getVersion();
 
     // required fields
     protected CardType cardType;
