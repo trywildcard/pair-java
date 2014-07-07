@@ -16,33 +16,33 @@ import java.util.Map;
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductCardBuilder implements Builder<ProductCard> {
 
-    private ValidationTool v = new ValidationTool();
+    protected ValidationTool v = new ValidationTool();
 
-    String pairVersion = Pair.VERSION;
+    protected String pairVersion = Pair.VERSION;
 
     // required fields
-    CardType cardType;
-    String name;
-    List<Offer> offers = new ArrayList<Offer>();
-    URL webUrl;
+    protected CardType cardType;
+    protected String name;
+    protected List<Offer> offers = new ArrayList<Offer>();
+    protected URL webUrl;
 
     // optional fields
-    String productId;
-    String merchant;
-    String brand;
-    String description;
-    List<ProductColor> colors = new ArrayList<ProductColor>();
-    List<URL> images = new ArrayList<URL>();
-    Float rating;
-    Float ratingScale;
-    Integer ratingCount;
-    List<URL> relatedItems = new ArrayList<URL>();
-    List<URL> referencedItems = new ArrayList<URL>();
-    Map<String, String> sizes = new HashMap<String,String>();
-    List<String> options = new ArrayList<String>();
-    String model;
-    String appLinkIos;
-    String appLinkAndroid;
+    protected String productId;
+    protected String merchant;
+    protected String brand;
+    protected String description;
+    protected List<ProductColor> colors = new ArrayList<ProductColor>();
+    protected List<URL> images = new ArrayList<URL>();
+    protected Float rating;
+    protected Float ratingScale;
+    protected Integer ratingCount;
+    protected List<URL> relatedItems = new ArrayList<URL>();
+    protected List<URL> referencedItems = new ArrayList<URL>();
+    protected Map<String, String> sizes = new HashMap<String,String>();
+    protected List<String> options = new ArrayList<String>();
+    protected String model;
+    protected String appLinkIos;
+    protected String appLinkAndroid;
 
     /**
      * Construct a builder by providing a list of pre-made offers.
