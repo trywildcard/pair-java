@@ -1,7 +1,8 @@
 package com.trywildcard.pair.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.trywildcard.pair.util.ValidationTool;
+import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.validation.ValidationTool;
 
 import java.util.Currency;
 
@@ -20,7 +21,7 @@ public final class Price {
      * @param price the numerical value of the price.
      * @param currency the currency for this price.
      */
-    public Price(Float price, Currency currency){
+    public Price(Float price, Currency currency) throws CardBuilderException {
         setPrice(price);
         setCurrency(currency);
     }
@@ -53,9 +54,10 @@ public final class Price {
      * Setter to allow Jackson deserialization.
      * @param price the numerical value of the price.
      */
-    private void setPrice(Float price){
-        v.notNull(price, v.REQUIRED, "Price must not be null.");
-        v.notNegative(price, v.REQUIRED, "Price must be a positive Float.");
+    private void setPrice(Float price) throws CardBuilderException {
+        v.required(v.notNull(price), "Price must not be null");
+        v.required(v.notNegative(price), "Price must be a positive Float.");
+
         this.price = price;
     }
 
@@ -63,8 +65,8 @@ public final class Price {
      * Setter to allow jackson deserialization.
      * @param currency the currency for this price.
      */
-    private void setCurrency(Currency currency){
-        v.notNull(currency, v.REQUIRED, "currency must not be null.");
+    private void setCurrency(Currency currency) throws CardBuilderException {
+        v.required(v.notNull(currency), "currency must not be null");
         this.currency = currency;
     }
 }

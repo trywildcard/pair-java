@@ -1,7 +1,8 @@
 package com.trywildcard.pair.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.trywildcard.pair.util.ValidationTool;
+import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.validation.ValidationTool;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public final class ProductColor {
      * @param swatchUrl link to an image with a sample of the color.
      * @param mappingColor map to a set of predefined colors
      */
-    public ProductColor(String displayName, String value, String swatchUrl, MappingColor mappingColor){
+    public ProductColor(String displayName, String value, String swatchUrl, MappingColor mappingColor) throws CardBuilderException {
         setDisplayName(displayName);
         setSwatchUrl(swatchUrl);
         setValue(value);
@@ -61,9 +62,12 @@ public final class ProductColor {
      */
     private ProductColor(){}
     
-    private void setDisplayName(String displayName){
-        v.notNullOrEmpty(displayName, v.REQUIRED, "Must specify a displayName.");
-        this.displayName = displayName;
+    private void setDisplayName(String displayName) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(displayName), "Must specify a displayName.");
+
+        if (isValid) {
+            this.displayName = displayName;
+        }
     }
     
     private void setSwatchUrl(String swatchUrl){
@@ -71,7 +75,7 @@ public final class ProductColor {
     }
     
     private void setValue(String value){
-        boolean isValid = v.notEmpty(value, v.OPTIONAL, "Tried to set value to an empty string.");
+        boolean isValid = v.optional(v.notEmpty(value), "Tried to set value to an empty string.");
         if (isValid) {
             this.value = value;
         }

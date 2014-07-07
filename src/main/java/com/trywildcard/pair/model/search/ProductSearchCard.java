@@ -2,10 +2,11 @@ package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trywildcard.pair.Pair;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Card;
 import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.util.CardSerializer;
-import com.trywildcard.pair.util.ValidationTool;
+import com.trywildcard.pair.validation.ValidationTool;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -31,7 +32,7 @@ public final class ProductSearchCard implements Card {
      * @param products a list of <code>ProductSearchResult</code> objects.
      * @param totalResults the total number of results for this search response.
      */
-    public ProductSearchCard(List<ProductSearchResult> products, Integer totalResults){
+    public ProductSearchCard(List<ProductSearchResult> products, Integer totalResults) throws CardBuilderException {
         setCardType(CardType.PRODUCT_SEARCH);
         setProducts(products);
         setTotalResults(totalResults);
@@ -69,9 +70,9 @@ public final class ProductSearchCard implements Card {
      */
     private ProductSearchCard(){}
 
-    private void setTotalResults(Integer totalResults){
-        v.notNull(totalResults, v.REQUIRED, "Must supply a value for totalResults.");
-        v.notNegative(totalResults, v.REQUIRED, "totalResults must be a positive Integer.");
+    private void setTotalResults(Integer totalResults) throws CardBuilderException {
+        v.required(v.notNull(totalResults), "Must supply a value for totalResults.");
+        v.required(v.notNegative(totalResults), "totalResults must be a positive Integer.");
         this.totalResults = totalResults;
     }
 
@@ -79,8 +80,8 @@ public final class ProductSearchCard implements Card {
         this.cardType = CardType.PRODUCT_SEARCH;
     }
 
-    private void setProducts(List<ProductSearchResult> products){
-        v.notNull(products, v.REQUIRED, "Must supply a list of products.");
+    private void setProducts(List<ProductSearchResult> products) throws CardBuilderException {
+        v.required(v.notNull(products), "Must supply a list of products.");
         this.products = Collections.unmodifiableList(products);
     }
 

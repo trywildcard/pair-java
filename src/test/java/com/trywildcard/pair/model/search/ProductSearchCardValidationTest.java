@@ -1,6 +1,6 @@
 package com.trywildcard.pair.model.search;
 
-import com.trywildcard.pair.model.CardBuilderException;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
 import org.junit.Before;
@@ -24,7 +24,7 @@ public class ProductSearchCardValidationTest {
     List<ProductSearchResult> products;
 
     @Before
-    public void setUp() throws ParseException, MalformedURLException {
+    public void setUp() throws ParseException, MalformedURLException, CardBuilderException {
         dummyProduct = new DummyProduct();
         dummyOffer = new DummyOffer();
         builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price);
@@ -33,28 +33,28 @@ public class ProductSearchCardValidationTest {
     }
 
     @Test
-    public void isValidWithAttributes(){
+    public void isValidWithAttributes() throws CardBuilderException {
         ProductSearchCard card = new ProductSearchCard(products, 1);
         assertEquals("Expected name to match", dummyProduct.name, card.getProducts().get(0).getName());
         assertEquals("Expected totalResults to match", 1, card.getTotalResults().intValue());
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNullTotalResults(){
+    public void isInvalidWithNullTotalResults() throws CardBuilderException {
         ProductSearchCard card = new ProductSearchCard(products, null);
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNegativeTotalResults(){
+    public void isInvalidWithNegativeTotalResults() throws CardBuilderException {
         ProductSearchCard card = new ProductSearchCard(products, -1);
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNullProductsList(){
+    public void isInvalidWithNullProductsList() throws CardBuilderException {
         ProductSearchCard card = new ProductSearchCard(null, 1);
     }
 
-    public void isValidWithEmptyProductsList(){
+    public void isValidWithEmptyProductsList() throws CardBuilderException {
         List<ProductSearchResult> emptyList = new ArrayList<ProductSearchResult>();
         ProductSearchCard card = new ProductSearchCard(emptyList, 0);
         assertEquals("Expected total results to match", 0, card.getTotalResults().intValue());

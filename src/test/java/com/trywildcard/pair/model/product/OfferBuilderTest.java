@@ -1,15 +1,13 @@
 package com.trywildcard.pair.model.product;
 
-import static org.junit.Assert.assertEquals;
-
-import java.text.ParseException;
-
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.util.DummyOffer;
+import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.trywildcard.pair.util.TestUtil;
+import java.text.ParseException;
 
 /**
  * Test building an offer, using an <code>OfferBuilder</code>, from values in code stubs.
@@ -19,12 +17,12 @@ public class OfferBuilderTest {
     private static DummyOffer dummyOffer;
     
     @BeforeClass
-    public static void initialize() throws ParseException{
+    public static void initialize() throws ParseException, CardBuilderException {
         dummyOffer = new DummyOffer();
     }
     
     @Test
-    public void testMinimalOffer(){
+    public void testMinimalOffer() throws CardBuilderException {
         OfferBuilder builder = new OfferBuilder(dummyOffer.price);
         Offer offer = builder.build();
         
@@ -32,7 +30,7 @@ public class OfferBuilderTest {
     }
     
     @Test
-    public void testMinimalOfferWithMinimalConstructor(){
+    public void testMinimalOfferWithMinimalConstructor() throws CardBuilderException {
         OfferBuilder builder = new OfferBuilder(dummyOffer.price.getPrice());
         Offer offer = builder.build();
         
@@ -40,7 +38,7 @@ public class OfferBuilderTest {
     }
     
     @Test
-    public void testExtensiveOffer(){
+    public void testExtensiveOffer() throws CardBuilderException {
         OfferBuilder builder = new OfferBuilder(dummyOffer.price);
         
         builder.originalPrice(dummyOffer.originalPrice);

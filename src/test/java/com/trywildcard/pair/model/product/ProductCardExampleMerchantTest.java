@@ -1,6 +1,6 @@
 package com.trywildcard.pair.model.product;
 
-import com.trywildcard.pair.model.CardBuilderException;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
@@ -24,7 +24,7 @@ public class ProductCardExampleMerchantTest {
     private static DummyProduct dummyProduct;
 
     @BeforeClass
-    public static void prepare() throws MalformedURLException, ParseException {
+    public static void prepare() throws MalformedURLException, ParseException, CardBuilderException {
         dummyOffer = new DummyOffer();
         dummyProduct = new DummyProduct();
     }

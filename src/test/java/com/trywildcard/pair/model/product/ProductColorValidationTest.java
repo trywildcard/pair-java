@@ -1,13 +1,11 @@
 package com.trywildcard.pair.model.product;
 
-import com.trywildcard.pair.model.CardBuilderException;
+import com.trywildcard.pair.exception.CardBuilderException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by michaelgarate on 6/30/14.
@@ -25,25 +23,25 @@ public class ProductColorValidationTest {
     }
 
     @Test
-    public void isValidWithAttributes(){
+    public void isValidWithAttributes() throws CardBuilderException {
         ProductColor pc = new ProductColor(displayName, value, swatchUrl, mappingColor);
         Assert.assertEquals(pc.getDisplayName(), displayName);
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNullDisplayName(){
+    public void isInvalidWithNullDisplayName() throws CardBuilderException {
         ProductColor pc = new ProductColor(null, value, swatchUrl, mappingColor);
     }
 
     @Test
-    public void isValidWithoutOptionalFields(){
+    public void isValidWithoutOptionalFields() throws CardBuilderException {
         ProductColor pc = new ProductColor(displayName, null, null, null);
         Assert.assertEquals(pc.getDisplayName(), displayName);
         Assert.assertEquals("Expected error count to match", 0, pc.getErrors().size());
     }
 
     @Test
-    public void hasErrorForBlankValueString(){
+    public void hasErrorForBlankValueString() throws CardBuilderException {
         ProductColor pc = new ProductColor(displayName, "", null, null);
         Assert.assertEquals("Expected error count to match", 1, pc.getErrors().size());
     }
