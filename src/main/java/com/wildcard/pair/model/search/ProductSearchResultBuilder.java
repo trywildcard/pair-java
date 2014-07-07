@@ -12,10 +12,10 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
 
     private ValidationTool v = new ValidationTool();
 
-    String name;
-    URL cardUrl;
-    Price price;
-    URL image;
+    protected String name;
+    protected URL cardUrl;
+    protected Price price;
+    protected URL image;
 
     /**
      * Construct a <code>ProductSearchResultBuilder</code>

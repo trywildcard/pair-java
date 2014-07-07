@@ -23,7 +23,6 @@ import java.util.Locale;
  */
 public class ProductCardExampleMerchantTest {
 
-    ObjectMapper mapper = TestUtil.getObjectMapper();
     private static DummyOffer dummyOffer;
     private static DummyProduct dummyProduct;
 
@@ -60,7 +59,6 @@ public class ProductCardExampleMerchantTest {
             // handle failure
             return;
         }
-
 
         offerBuilder.weight(-99f); // this will log an error but not throw an exception
 
