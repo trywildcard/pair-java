@@ -5,17 +5,15 @@ import com.wildcard.pair.model.Builder;
 import com.wildcard.pair.model.Price;
 import com.wildcard.pair.util.ValidationTool;
 
-import java.net.URL;
-
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductSearchResultBuilder implements Builder<ProductSearchResult> {
 
     private ValidationTool v = new ValidationTool();
 
     protected String name;
-    protected URL cardUrl;
+    protected String cardUrl;
     protected Price price;
-    protected URL image;
+    protected String image;
 
     /**
      * Construct a <code>ProductSearchResultBuilder</code>
@@ -23,13 +21,13 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
      * @param cardUrl the url to access the product in a web browser
      * @param price the primary price of this product.
      */
-    public ProductSearchResultBuilder(String name, URL cardUrl, Price price){
+    public ProductSearchResultBuilder(String name, String cardUrl, Price price){
         name(name);
         cardUrl(cardUrl);
         price(price);
     }
 
-    public void image(URL image){
+    public void image(String image){
         this.image = image;
     }
 
@@ -53,7 +51,7 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
         this.name = name;
     }
 
-    private void cardUrl(URL cardUrl){
+    private void cardUrl(String cardUrl){
         v.notNull(cardUrl, v.REQUIRED, "Must supply a cardUrl.");
         this.cardUrl = cardUrl;
     }

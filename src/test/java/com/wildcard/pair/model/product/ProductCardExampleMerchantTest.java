@@ -1,17 +1,14 @@
 package com.wildcard.pair.model.product;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wildcard.pair.model.CardBuilderException;
 import com.wildcard.pair.model.Price;
 import com.wildcard.pair.util.DummyOffer;
 import com.wildcard.pair.util.DummyProduct;
-import com.wildcard.pair.util.TestUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -36,7 +33,7 @@ public class ProductCardExampleMerchantTest {
     public void buildMinimalProduct() throws IOException {
         ProductCardBuilder productCardBuilder;
         try {
-            URL url = new URL("http://mystore.com/products/9125");
+            String url = "http://mystore.com/products/9125";
             productCardBuilder = new ProductCardBuilder("Green shoes", 19.99f, url);
         } catch (Exception e){
             // handle failure
@@ -71,7 +68,7 @@ public class ProductCardExampleMerchantTest {
         ProductCardBuilder productCardBuilder;
 
         try {
-            URL url = new URL("http://myproducts.com/23556");
+            String url = "http://myproducts.com/23556";
             productCardBuilder = new ProductCardBuilder("Green shoes", offers, url);
         } catch (Exception e){
             // handle failure
@@ -80,13 +77,8 @@ public class ProductCardExampleMerchantTest {
 
         productCardBuilder.description(""); // this will log an error but not throw an exception
 
-        try {
-            URL url = new URL("http://myproducts.com/images/23556-1.jpg");
-            productCardBuilder.image(url);
-        } catch (MalformedURLException e) {
-            // handle failure
-            // no return since this field is optional
-        }
+        String url = "http://myproducts.com/images/23556-1.jpg";
+        productCardBuilder.image(url);
 
         ProductCard productCard = productCardBuilder.build();
 

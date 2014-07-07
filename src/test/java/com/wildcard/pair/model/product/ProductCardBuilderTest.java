@@ -4,10 +4,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wildcard.pair.model.product.Offer;
-import com.wildcard.pair.model.product.OfferBuilder;
-import com.wildcard.pair.model.product.ProductCard;
-import com.wildcard.pair.model.product.ProductCardBuilder;
 import com.wildcard.pair.util.DummyOffer;
 import com.wildcard.pair.util.DummyProduct;
 import com.wildcard.pair.util.TestUtil;
@@ -16,14 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Test using the productCardBuilder to build a product card from values in code stubs.
@@ -35,7 +27,7 @@ public class ProductCardBuilderTest {
     private static DummyProduct dummyProduct;
     
     @BeforeClass
-    public static void prepare() throws MalformedURLException, ParseException  {
+    public static void prepare() throws ParseException  {
         dummyOffer = new DummyOffer();
         dummyProduct = new DummyProduct();
     }
@@ -58,7 +50,7 @@ public class ProductCardBuilderTest {
     }
     
     @Test
-    public void testMinimalProductCard() throws MalformedURLException, JsonProcessingException{
+    public void testMinimalProductCard() throws JsonProcessingException{
         ProductCard card = buildMinimalProductCard();
         testMinimalCardAttributes(card);
     }
@@ -80,9 +72,9 @@ public class ProductCardBuilderTest {
         Assert.assertEquals("Merchant should match", dummyProduct.merchant, card.getMerchant());
         Assert.assertEquals("Colors should match", dummyProduct.colors, card.getColors());
         
-        List<URL> combinedImages = new ArrayList<URL>();
+        List<String> combinedImages = new ArrayList<String>();
         combinedImages.add(dummyProduct.imgUrl);
-        for (URL img : dummyProduct.images){
+        for (String img : dummyProduct.images){
             combinedImages.add(img);
         }
         Assert.assertEquals("Images should match", combinedImages, card.getImages());

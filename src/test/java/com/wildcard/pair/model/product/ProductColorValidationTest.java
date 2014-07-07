@@ -21,12 +21,12 @@ public class ProductColorValidationTest {
 
     String displayName = "magenta";
     String value = "FF00FF";
-    URL swatchUrl;
+    String swatchUrl;
     MappingColor mappingColor = MappingColor.Pink;
 
     @Before
     public void setUp() throws MalformedURLException {
-        this.swatchUrl = new URL("http://myproducts.com/swatches/magenta");
+        this.swatchUrl = "http://myproducts.com/swatches/magenta";
     }
 
     @Test
