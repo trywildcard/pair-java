@@ -5,4 +5,18 @@ package com.trywildcard.pair;
  */
 public class Pair {
     public static final String VERSION = "0.0.1";
+
+    public static boolean strictValidation = false;
+
+    public static String getVersion(){
+        return VERSION;
+    }
+
+    public static boolean getStrictValidation(){
+        return strictValidation;
+    }
+
+    public static void setStrictValidation(boolean b){
+        strictValidation = b;
+    }
 }
