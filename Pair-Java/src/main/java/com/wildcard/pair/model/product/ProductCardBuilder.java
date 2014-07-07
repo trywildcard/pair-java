@@ -111,7 +111,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
 
                 if (isValidSize){
                     this.sizes.put(key, value);
-                };
+                }
             }
 
         }
@@ -173,7 +173,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         if (isValid) {
             for (URL referencedItem : referencedItems){
                 boolean isValidReferenceItem = v.notNull(referencedItem, v.OPTIONAL, "Tried to add an empty relatedItem.");
-                if (isValid) {
+                if (isValidReferenceItem) {
                     this.referencedItems.add(referencedItem);
                 }
             }
