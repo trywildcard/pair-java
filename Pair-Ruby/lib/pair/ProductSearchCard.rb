@@ -3,15 +3,16 @@
 
 require 'json'
 require 'active_model'
-require 'uri'
 
+module PairSDK
 	class ProductSearchCard
         include ActiveModel::Validations
+        include ActiveModel::Serializers::JSON
 
-		attr_accessor :totalResults
-		attr_reader :searchresults
+		attr_accessor :total_results, :search_results
 
-        validates :totalResults, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+        validates :total_results, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+        validate :validateSearchResults
 
 		def initialize(attributes = {})
 			attributes.each do |name, value|
@@ -23,34 +24,35 @@ require 'uri'
 			@pairversion = 0.1
 		end
 
-		def searchresults=(searchresults)
+		def attributes
+			instance_values
+		end
 
-			if searchresults.nil? || !searchresults.is_a?(Array)
+		def validateSearchResults
+			if self.search_results.nil? || !self.search_results.is_a?(Array)
 				puts "ERROR: searchresults cannot be nil and must be an array"
-				errors.add(:searchresults, 'Cannot be Nil and must be an array!')
+				errors.add(:search_results, 'Cannot be Nil and must be an array!')
 				return
 			end
 
-			searchresults.each do |searchresult|
+			self.search_results.each do |search_result|
 
-				if (!searchresult.is_a?(ProductSearchResult)  || !searchresult.valid?)
-					errors.add(:offer, 'One of the searchresults is not a properly constructed ProductSearchResult object and/or is not valid')
+				if (!search_result.is_a?(ProductSearchResult)  || !search_result.valid?)
+					errors.add(:search_results, 'One of the searchresults is not a properly constructed ProductSearchResult object and/or is not valid')
 					return
 				end
 			end
 
-			@searchresults = searchresults
 		end
-
 		
-		def writeAsJson
+		def to_json
            if self.valid?
-           	   ActiveSupport::JSON.encode(self)	
+           	   ActiveSupport::JSON.encode(self.as_json)	
            else
-           	   puts "Product Search Card is not valid - please remedy below errors:"
-           	   self.errors
+           	   raise "Product Search Card is not valid - please remedy below errors:" << self.errors.messages.to_s
            end    
 		end 
 
 	end
+end
 
