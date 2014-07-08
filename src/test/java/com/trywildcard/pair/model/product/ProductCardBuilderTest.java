@@ -165,7 +165,4 @@ public class ProductCardBuilderTest {
         
         Assert.assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
-    
-    
-    // TODO: test validation
 }

@@ -32,8 +32,8 @@ public class ProductCardExampleMerchantTest {
     @Test
     public void buildMinimalProduct() throws IOException {
         ProductCardBuilder productCardBuilder;
+        String url = "http://mystore.com/products/9125";
         try {
-            String url = "http://mystore.com/products/9125";
             productCardBuilder = new ProductCardBuilder("Green shoes", 19.99f, url);
         } catch (Exception e){
             // handle failure
@@ -67,9 +67,10 @@ public class ProductCardExampleMerchantTest {
 
         ProductCardBuilder productCardBuilder;
 
+        String productUrl = "http://myproducts.com/23556";
+
         try {
-            String url = "http://myproducts.com/23556";
-            productCardBuilder = new ProductCardBuilder("Green shoes", offers, url);
+            productCardBuilder = new ProductCardBuilder("Green shoes", offers, productUrl);
         } catch (Exception e){
             // handle failure
             return;
@@ -77,8 +78,8 @@ public class ProductCardExampleMerchantTest {
 
         productCardBuilder.description(""); // this will log an error but not throw an exception
 
-        String url = "http://myproducts.com/images/23556-1.jpg";
-        productCardBuilder.image(url);
+        String imageUrl = "http://myproducts.com/images/23556-1.jpg";
+        productCardBuilder.image(imageUrl);
 
         ProductCard productCard = productCardBuilder.build();
 

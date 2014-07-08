@@ -6,7 +6,6 @@ import com.trywildcard.pair.model.Price;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 
 @JsonDeserialize(builder = OfferBuilder.class)
@@ -27,7 +26,7 @@ public final class Offer {
     private final Date saleStartDate;
     private final Date saleEndDate;
     private final Date expirationDate;
-    private final List<Locale> geographicAvailability;
+    private final List<String> geographicAvailability;
     private final Gender gender;
     private final Float weight;
     private final String weightUnits;
@@ -70,7 +69,7 @@ public final class Offer {
         return shippingCost;
     }
     
-    public List<Locale> getGeographicAvailability(){
+    public List<String> getGeographicAvailability(){
         return geographicAvailability;
     }
     

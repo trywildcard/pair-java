@@ -1,5 +1,6 @@
 package com.trywildcard.pair.model.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
@@ -26,7 +27,7 @@ public class OfferBuilder implements Builder<Offer> {
     protected Date saleStartDate;
     protected Date saleEndDate;
     protected Date expirationDate;
-    protected List<Locale> geographicAvailability = new ArrayList<Locale>();
+    protected List<String> geographicAvailability = new ArrayList<String>();
     protected Gender gender;
     protected Float weight;
     protected String weightUnits;
@@ -92,7 +93,9 @@ public class OfferBuilder implements Builder<Offer> {
     public OfferBuilder geographicAvailability(List<Locale> geographicAvailability){
         boolean isValid = v.optional(v.notNull(geographicAvailability), "geographicAvailability must not be null.");
         if (isValid) {
-            this.geographicAvailability = geographicAvailability;
+            for (Locale locale : geographicAvailability){
+                this.geographicAvailability.add(locale.getCountry());
+            }
         }
         return this;
     }
@@ -153,6 +156,13 @@ public class OfferBuilder implements Builder<Offer> {
         v.required(v.notNegative(price.getPrice()), "Price must be a positive Float.");
 
         this.price = price;
+        return this;
+    }
+
+    @JsonProperty("geographic_availability")
+    private OfferBuilder setGeographicAvailability(List<String> geographicAvailability){
+        boolean isValid = v.optional(v.notNull(geographicAvailability), "geographicAvailability must not be null.");
+        this.geographicAvailability = geographicAvailability;
         return this;
     }
 }
