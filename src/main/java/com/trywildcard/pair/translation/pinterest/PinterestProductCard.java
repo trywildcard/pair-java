@@ -40,17 +40,7 @@ public class PinterestProductCard extends PinterestBasicProductCard implements C
         this.standardPrice = firstOffer.getOriginalPrice().getPrice();
         this.saleStartDate = firstOffer.getSaleStartDate();
         this.saleEndDate = firstOffer.getSaleEndDate();
-        this.geographicAvailability = buildGeographicAvailability(firstOffer.getGeographicAvailability());
-    }
-
-    private List<String> buildGeographicAvailability(List<Locale> locales){
-        List<String> countryStrings = new ArrayList<String>();
-
-        for (Locale locale : locales){
-            countryStrings.add(locale.getISO3Country());
-        }
-
-        return countryStrings;
+        this.geographicAvailability = firstOffer.getGeographicAvailability();
     }
 
     public String getUrl(){
