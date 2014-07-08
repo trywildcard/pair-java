@@ -24,8 +24,6 @@ public class Pair {
         }
     }
 
-
-
     public static String getVersion(){
         return properties.getProperty("pairVersion");
     }

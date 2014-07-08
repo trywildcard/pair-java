@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
@@ -31,6 +32,8 @@ public class ProductCardBuilderTest {
     public static void prepare() throws ParseException, CardBuilderException {
         dummyOffer = new DummyOffer();
         dummyProduct = new DummyProduct();
+
+        Pair.init();
     }
     
     private void testMinimalCardAttributes(ProductCard card){

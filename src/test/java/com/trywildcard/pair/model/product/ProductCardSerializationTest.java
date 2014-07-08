@@ -3,6 +3,7 @@ package com.trywildcard.pair.model.product;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -28,11 +29,11 @@ public class ProductCardSerializationTest {
         //mapper.setSerializationInclusion(Include.NON_EMPTY);
 
         inputString = TestUtil.readResourceAsString("example_product_card.json");
+        Pair.init();
     }
     
     @Test
     public void testSerializeProductCard() throws URISyntaxException, JsonMappingException, IOException{
-        
         JsonNode inputNode = mapper.readTree(inputString);
 
         ProductCard card = mapper.readValue(inputString, ProductCard.class);
