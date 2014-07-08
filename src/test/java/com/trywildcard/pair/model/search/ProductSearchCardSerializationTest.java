@@ -2,6 +2,7 @@ package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.util.TestUtil;
 import junit.framework.TestCase;
 import org.junit.Assert;
@@ -24,7 +25,7 @@ public class ProductSearchCardSerializationTest {
     @BeforeClass
     public static void initialize() throws IOException {
         inputString = TestUtil.readResourceAsString("example_product_search_card.json");
-
+        Pair.init();
     }
 
     @Test
