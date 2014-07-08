@@ -1,11 +1,10 @@
 #ProductCard
 #!/usr/bin/env ruby -wKU
 
-require 'json'
+#require 'json'
 require 'active_model'
-require 'uri'
 
-#module PairSDK
+module PairSDK
 	class ProductCard
         include ActiveModel::Validations
         include ActiveModel::Serializers::JSON
@@ -19,7 +18,8 @@ require 'uri'
 
 		validate :validateOffers
 		validate :validateColors
-		valid_colors = %w(Beige, Black, Blue, Bronze, Brown, Gold, Green, Gray, Metallic, Multicolored, OffWhite, Orange, Pink, Purple, Red, Silver, Transparent, Turquoise, White, Yellow)
+
+		@@valid_colors = %w(Beige Black Blue Bronze Brown Gold Green Gray Metallic Multicolored OffWhite Orange Pink Purple Red Silver Transparent Turquoise White Yellow)
 
 		def initialize(attributes = {})
 			@card_type = 'product'
@@ -27,13 +27,29 @@ require 'uri'
 			#todo tie this into gem config?
 			@pair_version = 0.1
 
-			begin
-				attributes.each do |name, value|
-					send("#{name}=", value)
-				end
-			rescue NoMethodError => e
-				#todo probably handle this better, but for now - do nothing
-			end
+			attributes.each do |name, value|
+				send("#{name}=", value)
+			end 
+
+			#self.name=attributes[:name]
+			#self.web_url=attributes[:web_url]
+			#self.offers=attributes[:offers]
+			#self.product_id=attributes[:product_id]
+			#self.merchant=attributes[:merchant]
+			#self.brand=attributes[:brand]
+			#self.description=attributes[:description]
+			#self.images=attributes[:images]
+			#self.rating=attributes[:rating]
+			#self.rating_scale=attributes[:rating_scale]
+			#self.rating_count=attributes[:rating_count]
+			#self.related_items=attributes[:related_items]
+			#self.referenced_items=attributes[:referenced_items]
+			#self.sizes=attributes[:sizes]
+			#self.options=attributes[:options]
+			#self.model=attributes[:model]
+			#self.app_link_android=attributes[:app_link_android]
+			#self.app_link_ios=attributes[:app_link_ios]
+		#	self.colors=attributes[:colors]
 			
 		end
 
@@ -41,14 +57,12 @@ require 'uri'
 			instance_values
 		end
 
-		#todo: support both the singular offer object as well as the array of objects
-		def offers=(inputoffers)
-			if !inputoffers.is_a?(Array)
-				@offers = [inputoffers]
+		def offers=(offers)
+			if !offers.is_a?(Array)
+				@offers = [offers]
 			else
-				@offers = inputoffers
+				@offers = offers
 			end
-
 		end
 
 		def colors=(colors)
@@ -60,13 +74,12 @@ require 'uri'
 		end
 
 		def validateOffers
-			if self.offers.nil? || (self.offers.is_a?(Array) && self.offers.empty?)
+			if @offers.nil? || (@offers.is_a?(Array) && !@offers.any?)
 				errors.add(:offers, 'Offers cannot be nil or an empty array')
 				return
 			end
 
 			@offers.each do |offer|
-
 				if (!offer.is_a?(Offer)  || !offer.valid?)
 					errors.add(:offer, 'One of the offers is not a properly constructed offer object and/or is not valid')
 					return
@@ -75,24 +88,28 @@ require 'uri'
 		end
 
 		def validateColors
-			if (!self.colors.nil?)
+			if (!@colors.nil? && @colors.any?)
 				@colors.each do |color|
-					if (!self.valid_colors.include? color)
+					if (!@@valid_colors.include? color)
 						errors.add(:colors, 'Invalid Color Added')
 					end
 				end
 			end
 		end
 
-		#tell active support which fields to include/exclude
+		#exclude validation fields in the JSON output
+		def as_json(options={})
+			super(:except => [:errors, :validation_context])
+		end
+
 		def to_json
            if self.valid?
-           	ActiveSupport::JSON.encode(self.as_json)
+           	super
            else
            	raise "Product Card is not valid - please remedy the following errors:" << self.errors.messages.to_s
            end    
 		end 
 
 	end
-#end
+end
 

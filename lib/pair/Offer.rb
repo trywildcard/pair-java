@@ -8,7 +8,7 @@ require 'active_model'
 
 #todo instance variables usually with underscores, not camel case
 
-#module PairSDK  
+module PairSDK  
   class Offer
         include ActiveModel::Validations
         include ActiveModel::Serializers::JSON
@@ -26,9 +26,6 @@ require 'active_model'
     validates :weight, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
     validates :quantity, allow_nil: true, numericality: {only_integer: true, greater_than_or_equal_to: 0} 
  
-    #validate :validateDates
- 
-    #handle exception for unknown attribute
     def initialize(attributes = {})
       attributes.each do |name, value|
         send("#{name}=", value)
@@ -39,6 +36,7 @@ require 'active_model'
       instance_values
     end
 
+    #todo, this probably needs to be a hash
     def geographic_availability(geographic_availability)
       if !geographic_availability.is_a?(Array)
         @geographic_availability = [geographic_availability]
@@ -47,14 +45,19 @@ require 'active_model'
       end
     end
 
+    #exclude validation fields in the JSON output
+    def as_json(options={})
+      super(:except => [:errors, :validation_context])
+    end
 
-    def to_json
+
+    def to_json(options = {})
       if self.valid?
-        ActiveSupport::JSON.encode(self.as_json)
+        super
       else
         raise "Offer is not valid - please remedy the following errors:" << self.errors.messages.to_s
       end   
     end 
 
   end
-#end
+end
