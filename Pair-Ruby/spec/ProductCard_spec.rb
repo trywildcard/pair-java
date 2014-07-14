@@ -4,8 +4,9 @@ require 'pp'
 describe PairSDK::ProductCard do
 
 before :each do
-    @validoffer = PairSDK::Offer.new price: 5.00
-    @validoffer2 = PairSDK::Offer.new price: 10.00, gender: 'male', availability: 'InStock'
+	@price = PairSDK::Price.new price: 5.00
+    @validoffer = PairSDK::Offer.new price: @price
+    @validoffer2 = PairSDK::Offer.new price: @price, gender: 'male', availability: 'InStock'
     @validoffers = [@validoffer, @validoffer2]
 end
 
@@ -42,7 +43,8 @@ describe '#no_web_url' do
 end
 
 describe '#web_url' do
-	offer = PairSDK::Offer.new price: 5
+	price = PairSDK::Price.new price: 5.0
+	offer = PairSDK::Offer.new price: price
 	product_card33 = PairSDK::ProductCard.new offers: offer, web_url: 'http://brand.com/product/123', name: 'product test' 
 	it "web url" do
 		product_card33.valid?.should eql true
@@ -59,7 +61,8 @@ describe '#no_name' do
 end
 
 describe '#name' do
-	offer = PairSDK::Offer.new price: 5
+	price = PairSDK::Price.new price: 5.0
+	offer = PairSDK::Offer.new price: price
 	product_card33 = PairSDK::ProductCard.new offers: offer, web_url: 'http://brand.com/product/123', name: 'product test' 
 	it "name" do
 		product_card33.valid?.should eql true
@@ -77,10 +80,12 @@ describe '#nooffers' do
 end
 
 describe '#invalidoffers' do
-	invalidoffer = PairSDK::Offer.new price: -4
+	invalidprice = PairSDK::Price.new price: -4
+	invalidoffer = PairSDK::Offer.new price: invalidprice
 	product_card = PairSDK::ProductCard.new offers: invalidoffer, web_url: 'http://brand.com/product/123', name: 'product test' 
 
-	validoffer = PairSDK::Offer.new price: 4
+	validprice = PairSDK::Price.new price: 4
+	validoffer = PairSDK::Offer.new price: validprice
 	invalidoffers = [validoffer, nil]
 	product_card2 = PairSDK::ProductCard.new offers: invalidoffers, web_url: 'http://brand.com/product/123', name: 'product test' 
 	it "name" do
@@ -92,7 +97,8 @@ describe '#invalidoffers' do
 end
 
 describe '#oneinvalidcolor' do
-	validoffer = PairSDK::Offer.new price: 4
+	validprice = PairSDK::Price.new price: 4
+	validoffer = PairSDK::Offer.new price: validprice
 	invalidcolor = 'Aqua'
 	product_card = PairSDK::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: invalidcolor
 
@@ -102,7 +108,8 @@ describe '#oneinvalidcolor' do
 end
 
 describe '#invalidcolors' do
-	validoffer = PairSDK::Offer.new price: 4
+	validprice = PairSDK::Price.new price: 4
+	validoffer = PairSDK::Offer.new price: validprice
 	invalidcolors = ['Beige', 'Aqua']
 	product_card = PairSDK::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: invalidcolors
 
@@ -113,7 +120,8 @@ describe '#invalidcolors' do
 end
 
 describe '#validcolors' do
-	validoffer = PairSDK::Offer.new price: 4
+	validprice = PairSDK::Price.new price: 4
+	validoffer = PairSDK::Offer.new price: validprice
 	validcolor = 'OffWhite'
 	validcolors = ['Beige', 'Black', 'Blue', 'Bronze', 'Brown', 'Gold', 'Green', 'Gray', 'Metallic', 'Multicolored', 'OffWhite', 'Orange', 'Pink', 'Purple', 'Red', 'Silver', 'Transparent', 'Turquoise', 'White', 'Yellow']
 	
