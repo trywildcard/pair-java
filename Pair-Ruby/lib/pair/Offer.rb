@@ -29,7 +29,6 @@ module PairSDK
       instance_values
     end
 
-    #todo, this probably needs to be a hash
     def geographic_availability(geographic_availability)
       if !geographic_availability.is_a?(Array)
         @geographic_availability = [geographic_availability]
