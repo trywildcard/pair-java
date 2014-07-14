@@ -3,8 +3,10 @@ require 'spec_helper'
 describe PairSDK::ProductSearchCard do
 
 before :each do
-    @validsearchresult = PairSDK::ProductSearchResult.new price: 5, name: 'ProductResult', product_url: 'http://brand.com/product/123'
-    @validsearchresult2 = PairSDK::ProductSearchResult.new price: 7.99, name: 'Product Result', product_url: 'http://brand.com/product/123', image_url: 'http://brand.com/product/123/image.jpg'
+	price = PairSDK::Price.new price: 5
+	price2 = PairSDK::Price.new price: 7.99
+    @validsearchresult = PairSDK::ProductSearchResult.new price: price, name: 'ProductResult', product_card_url: 'http://brand.com/product/123'
+    @validsearchresult2 = PairSDK::ProductSearchResult.new price: price2, name: 'Product Result', product_card_url: 'http://brand.com/product/123', image_url: 'http://brand.com/product/123/image.jpg'
     @validsearchresults = [@validsearchresult, @validsearchresult2]
 end
 
@@ -68,7 +70,8 @@ describe '#nosearchresults' do
 end
 
 describe '#invalidsearchresults' do
-	invalidSearchResult = PairSDK::ProductSearchResult.new price: -4.50, name: 'ProductResult', product_url: 'http://brand.com/product/123'
+	invalidprice = PairSDK::Price.new price: -4.50, currency: "USD"
+	invalidSearchResult = PairSDK::ProductSearchResult.new price: invalidprice, name: 'ProductResult', product_card_url: 'http://brand.com/product/123'
 
 	invalidsearchresults1 = [@validsearchresult, @validsearchresult2, invalidSearchResult]
 	invalidsearchresults2 = [@validsearchresult, @validsearchresult2, nil]
