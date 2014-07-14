@@ -30,26 +30,6 @@ module PairSDK
 			attributes.each do |name, value|
 				send("#{name}=", value)
 			end 
-
-			#self.name=attributes[:name]
-			#self.web_url=attributes[:web_url]
-			#self.offers=attributes[:offers]
-			#self.product_id=attributes[:product_id]
-			#self.merchant=attributes[:merchant]
-			#self.brand=attributes[:brand]
-			#self.description=attributes[:description]
-			#self.images=attributes[:images]
-			#self.rating=attributes[:rating]
-			#self.rating_scale=attributes[:rating_scale]
-			#self.rating_count=attributes[:rating_count]
-			#self.related_items=attributes[:related_items]
-			#self.referenced_items=attributes[:referenced_items]
-			#self.sizes=attributes[:sizes]
-			#self.options=attributes[:options]
-			#self.model=attributes[:model]
-			#self.app_link_android=attributes[:app_link_android]
-			#self.app_link_ios=attributes[:app_link_ios]
-		#	self.colors=attributes[:colors]
 			
 		end
 
