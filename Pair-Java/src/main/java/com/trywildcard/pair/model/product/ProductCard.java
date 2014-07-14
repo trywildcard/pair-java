@@ -6,8 +6,8 @@ import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.translation.pinterest.PinterestProductCard;
 import com.trywildcard.pair.util.CardSerializer;
 
-import java.net.URL;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ public final class ProductCard implements Card {
 
     private final CardType cardType;
     private final String name;
-    private final String webUrl;
+    private final URL webUrl;
     private final String productId;
     private final List<Offer> offers;
     private final String merchant;
@@ -133,7 +133,7 @@ public final class ProductCard implements Card {
         return brand;
     }
 
-    public String getWebUrl() {
+    public URL getWebUrl() {
         return webUrl;
     }
 

@@ -25,7 +25,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     protected CardType cardType;
     protected String name;
     protected List<Offer> offers = new ArrayList<Offer>();
-    protected String webUrl;
+    protected URL webUrl;
 
     // optional fields
     protected String productId;
@@ -337,7 +337,11 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     private ProductCardBuilder webUrl(String webUrl) throws CardBuilderException {
         boolean isValid = v.required(v.notNull(webUrl), "Must specify a product webUrl.");
         if (isValid) {
-            this.webUrl = webUrl;
+            try {
+                this.webUrl = new URL(webUrl);
+            } catch (MalformedURLException e) {
+                v.required(v.fail(), "Could not parse URL from webUrl string.");
+            }
         }
         return this;
     }

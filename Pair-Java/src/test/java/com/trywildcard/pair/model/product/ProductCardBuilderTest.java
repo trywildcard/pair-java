@@ -40,7 +40,7 @@ public class ProductCardBuilderTest {
     
     private void testMinimalCardAttributes(ProductCard card){
         Assert.assertEquals("Name should match", dummyProduct.name, card.getName());
-        Assert.assertEquals("Web url should match", dummyProduct.webUrl, card.getWebUrl());
+        Assert.assertEquals("Web url should match", dummyProduct.webUrl, card.getWebUrl().toString());
         
         Assert.assertEquals("Price should match", dummyOffer.price.getPrice(), card.getOffers().get(0).getPrice().getPrice());
     }
