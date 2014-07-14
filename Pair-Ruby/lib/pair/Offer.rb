@@ -1,12 +1,5 @@
 
 require 'active_model'
-#require 'date_validator'
-#require 'date'
-#require 'validates_timeliness'
-
-
-
-#todo instance variables usually with underscores, not camel case
 
 module PairSDK  
   class Offer

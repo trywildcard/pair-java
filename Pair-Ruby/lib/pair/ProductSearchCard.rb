@@ -1,7 +1,6 @@
 #ProductCard
 #!/usr/bin/env ruby -wKU
 
-require 'json'
 require 'active_model'
 
 module PairSDK
