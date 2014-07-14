@@ -25,7 +25,7 @@ module PairSDK
 			@card_type = 'product'
 
 			#todo tie this into gem config?
-			@pair_version = 0.0.1
+			@pair_version = "0.0.1"
 
 			attributes.each do |name, value|
 				send("#{name}=", value)
