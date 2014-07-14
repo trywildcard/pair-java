@@ -2,6 +2,7 @@ package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.model.Price;
+import java.net.URL;
 
 /**
  * Product search result. Several of these are embedded in a <code>ProductSearchResults</code> card.
@@ -10,7 +11,7 @@ import com.trywildcard.pair.model.Price;
 public final class ProductSearchResult {
     private final String name;
     private final Price price;
-    private final String cardUrl;
+    private final URL cardUrl;
     private final String image;
 
     /**
@@ -32,7 +33,7 @@ public final class ProductSearchResult {
         return price;
     }
 
-    public String getCardUrl(){
+    public URL getCardUrl(){
         return cardUrl;
     }
 

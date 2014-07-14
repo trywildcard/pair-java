@@ -6,13 +6,16 @@ import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.validation.ValidationTool;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductSearchResultBuilder implements Builder<ProductSearchResult> {
 
     private ValidationTool v = new ValidationTool();
 
     protected String name;
-    protected String cardUrl;
+    protected URL cardUrl;
     protected Price price;
     protected String image;
 
@@ -54,7 +57,11 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
 
     private void cardUrl(String cardUrl) throws CardBuilderException {
         v.required(v.notNull(cardUrl), "Must supply a cardUrl.");
-        this.cardUrl = cardUrl;
+        try {
+            this.cardUrl = new URL(cardUrl);
+        } catch (MalformedURLException e) {
+            v.optional(v.fail(), "Could not parse URL from cardUrl string.");
+        }
     }
 
     private void price(Price price) throws CardBuilderException {

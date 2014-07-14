@@ -7,6 +7,8 @@ import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.validation.ValidationTool;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,12 +33,12 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     protected String brand;
     protected String description;
     protected List<ProductColor> colors = new ArrayList<ProductColor>();
-    protected List<String> images = new ArrayList<String>();
+    protected List<URL> images = new ArrayList<URL>();
     protected Float rating;
     protected Float ratingScale;
     protected Integer ratingCount;
-    protected List<String> relatedItems = new ArrayList<String>();
-    protected List<String> referencedItems = new ArrayList<String>();
+    protected List<URL> relatedItems = new ArrayList<URL>();
+    protected List<URL> referencedItems = new ArrayList<URL>();
     protected Map<String, String> sizes = new HashMap<String,String>();
     protected List<String> options = new ArrayList<String>();
     protected String model;
@@ -141,7 +143,11 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     public ProductCardBuilder relatedItem(String relatedItem){
         boolean isValid = v.optional(v.notNull(relatedItem), "Tried to add an empty relatedItem.");
         if (isValid) {
-            this.relatedItems.add(relatedItem);
+            try {
+                this.relatedItems.add(new URL(relatedItem));
+            } catch (MalformedURLException e) {
+                v.optional(v.fail(), "Could not parse URL from relatedItem string.");
+            }
         }
         return this;
     }
@@ -152,7 +158,11 @@ public class ProductCardBuilder implements Builder<ProductCard> {
             for (String relatedItem : relatedItems){
                 boolean isValidRelatedItem = v.optional(v.notNull(relatedItem), "Tried to add an empty relatedItem.");
                 if (isValidRelatedItem) {
-                    this.relatedItems.add(relatedItem);
+                    try {
+                        this.relatedItems.add(new URL(relatedItem));
+                    } catch (MalformedURLException e) {
+                        v.optional(v.fail(), "Could not parse URL from relatedItem string.");
+                    }
                 }
             }
         }
@@ -162,7 +172,11 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     public ProductCardBuilder referencedItem(String referencedItem){
         boolean isValid = v.optional(v.notNull(referencedItem), "Tried to add an empty relatedItem.");
         if (isValid) {
-            this.relatedItems.add(referencedItem);
+            try {
+                this.relatedItems.add(new URL(referencedItem));
+            } catch (MalformedURLException e) {
+                v.optional(v.fail(), "Could not parse URL from string.");
+            }
         }
         return this;
     }
@@ -173,7 +187,11 @@ public class ProductCardBuilder implements Builder<ProductCard> {
             for (String referencedItem : referencedItems){
                 boolean isValidReferenceItem = v.optional(v.notNull(referencedItem), "Tried to add an empty relatedItem.");
                 if (isValidReferenceItem) {
-                    this.referencedItems.add(referencedItem);
+                    try {
+                        this.referencedItems.add(new URL(referencedItem));
+                    } catch (MalformedURLException e) {
+                        v.optional(v.fail(), "Could not parse URL from string.");
+                    }
                 }
             }
         }
@@ -200,8 +218,13 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     
     public ProductCardBuilder image(String imgUrl){
         boolean isValid = v.optional(v.notNull(imgUrl), "Tried to add a null imgUrl");
+
         if (isValid) {
-            images.add(imgUrl);
+            try {
+                images.add(new URL(imgUrl));
+            } catch (MalformedURLException e) {
+                v.optional(v.fail(), "Could not parse image URL from string.");
+            }
         }
         return this;
     }
@@ -212,7 +235,11 @@ public class ProductCardBuilder implements Builder<ProductCard> {
             for (String img : images){
                 boolean isValidImg = v.optional(v.notNull(img), "Tried to add a null image");
                 if (isValidImg) {
-                    this.images.add(img);
+                    try {
+                        this.images.add(new URL(img));
+                    } catch (MalformedURLException e) {
+                        v.optional(v.fail(),"Could not parse image URL from string.");
+                    }
                 }
             }
         }

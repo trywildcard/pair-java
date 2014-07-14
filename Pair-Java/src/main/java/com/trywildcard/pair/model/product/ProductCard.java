@@ -6,6 +6,7 @@ import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.translation.pinterest.PinterestProductCard;
 import com.trywildcard.pair.util.CardSerializer;
 
+import java.net.URL;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -27,12 +28,12 @@ public final class ProductCard implements Card {
     private final String brand;
     private final String description;
     private final List<ProductColor> colors;
-    private final List<String> images;
+    private final List<URL> images;
     private final Float rating;
     private final Float ratingScale;
     private final Integer ratingCount;
-    private final List<String> relatedItems;
-    private final List<String> referencedItems;
+    private final List<URL> relatedItems;
+    private final List<URL> referencedItems;
     private final Map<String, String> sizes;
     private final List<String> options;
     private final String model;
@@ -88,11 +89,11 @@ public final class ProductCard implements Card {
         return options;
     }
 
-    public List<String> getRelatedItems() {
+    public List<URL> getRelatedItems() {
         return relatedItems;
     }
 
-    public List<String> getReferencedItems() {
+    public List<URL> getReferencedItems() {
         return referencedItems;
     }
 
@@ -108,7 +109,7 @@ public final class ProductCard implements Card {
         return rating;
     }
 
-    public List<String> getImages() {
+    public List<URL> getImages() {
         return images;
     }
 

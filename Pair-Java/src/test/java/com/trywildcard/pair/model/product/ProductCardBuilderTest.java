@@ -14,7 +14,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,27 +68,33 @@ public class ProductCardBuilderTest {
         testMinimalCardAttributes(card);
     }
     
-    private void testExtensiveCardAttributes(ProductCard card){
+    private void testExtensiveCardAttributes(ProductCard card) throws MalformedURLException {
         testMinimalCardAttributes(card);
 
-        Assert.assertEquals("Image url should match", dummyProduct.imgUrl, card.getImages().get(0));
+        Assert.assertEquals("Image url should match", dummyProduct.imgUrl, card.getImages().get(0).toString());
         Assert.assertEquals("Description should match", dummyProduct.description, card.getDescription());
         Assert.assertEquals("Brand name should match", dummyProduct.brand, card.getBrand());
         
         Assert.assertEquals("Merchant should match", dummyProduct.merchant, card.getMerchant());
         Assert.assertEquals("Colors should match", dummyProduct.colors, card.getColors());
         
-        List<String> combinedImages = new ArrayList<String>();
-        combinedImages.add(dummyProduct.imgUrl);
+        List<URL> combinedImages = new ArrayList<URL>();
+        combinedImages.add(new URL(dummyProduct.imgUrl));
         for (String img : dummyProduct.images){
-            combinedImages.add(img);
+            combinedImages.add(new URL(img));
         }
         Assert.assertEquals("Images should match", combinedImages, card.getImages());
         
         Assert.assertEquals("Rating should match", dummyProduct.rating, card.getRating(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
         Assert.assertEquals("Rating scale should match", dummyProduct.ratingScale, card.getRatingScale(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
         Assert.assertEquals("Rating count should match", dummyProduct.ratingCount, card.getRatingCount());
-        Assert.assertEquals("Related Items should match", dummyProduct.relatedItems, card.getRelatedItems());
+
+        List<URL> relatedItems = new ArrayList<URL>();
+        for (String url : dummyProduct.relatedItems){
+            relatedItems.add(new URL(url));
+        }
+
+        Assert.assertEquals("Related Items should match", relatedItems, card.getRelatedItems());
         Assert.assertEquals("Sizes should match", dummyProduct.sizes, card.getSizes());
         Assert.assertEquals("Options should match", dummyProduct.options, card.getOptions());
         Assert.assertEquals("Model should match", dummyProduct.model, card.getModel());

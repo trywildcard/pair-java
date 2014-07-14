@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.validation.ValidationTool;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ public final class ProductColor {
     private String displayName;
     
     // optional fields
-    private String swatchUrl;
+    private URL swatchUrl;
     private String value;
     private MappingColor mappingColor;
 
@@ -41,7 +43,7 @@ public final class ProductColor {
         return displayName;
     }
 
-    public String getSwatchUrl() {
+    public URL getSwatchUrl() {
         return swatchUrl;
     }
 
@@ -71,7 +73,15 @@ public final class ProductColor {
     }
     
     private void setSwatchUrl(String swatchUrl){
-        this.swatchUrl = swatchUrl;
+        if (swatchUrl == null){
+            return;
+        }
+
+        try {
+            this.swatchUrl = new URL(swatchUrl);
+        } catch (MalformedURLException e) {
+            v.optional(v.fail(), "Could not parse URL from swatchUrl string.");
+        }
     }
     
     private void setValue(String value){

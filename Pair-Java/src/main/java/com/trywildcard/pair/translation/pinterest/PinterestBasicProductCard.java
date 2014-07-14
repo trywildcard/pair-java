@@ -4,6 +4,7 @@ import com.trywildcard.pair.model.product.Gender;
 import com.trywildcard.pair.model.product.Offer;
 import com.trywildcard.pair.model.product.ProductCard;
 
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +17,10 @@ public class PinterestBasicProductCard {
     private String brand;
     private String productId;
     private Gender gender;
-    private List<String> images;
+    private List<URL> images;
     private Date productExpiration;
-    private List<String> relatedItems;
-    private List<String> referencedItems;
+    private List<URL> relatedItems;
+    private List<URL> referencedItems;
     private Number rating;
     private Number ratingScale;
     private Number ratingCount;
@@ -54,7 +55,7 @@ public class PinterestBasicProductCard {
         return gender;
     }
 
-    public List<String> getImages() {
+    public List<URL> getImages() {
         return images;
     }
 
@@ -70,11 +71,11 @@ public class PinterestBasicProductCard {
         return new Date(productExpiration.getTime());
     }
 
-    public List<String> getRelatedItems(){
+    public List<URL> getRelatedItems(){
         return relatedItems;
     }
 
-    public List<String> getReferencedItems(){
+    public List<URL> getReferencedItems(){
         return referencedItems;
     }
 

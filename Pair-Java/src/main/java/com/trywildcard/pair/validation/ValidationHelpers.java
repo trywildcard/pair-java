@@ -61,4 +61,8 @@ public abstract class ValidationHelpers {
         }
         return true;
     }
+
+    public static boolean fail(){
+        return false;
+    }
 }
