@@ -22,7 +22,7 @@ module PairSDK
 
 			@card_type = 'product_search'
 			#todo tie this into gem config?
-			@pair_version = 0.1
+			@pair_version = 0.0.1
 		end
 
 		def attributes
