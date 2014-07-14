@@ -1,7 +1,6 @@
 package com.trywildcard.pair.validation;
 
 import com.trywildcard.pair.Pair;
-import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.exception.StrictCardBuilderException;
 
 import java.util.ArrayList;

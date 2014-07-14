@@ -1,9 +1,7 @@
 package com.trywildcard.pair;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
 
 /**
@@ -17,8 +15,13 @@ public class Pair {
         InputStream input = null;
 
         try {
-            input = new FileInputStream("config.properties");
-            properties.load(input);
+            input = Pair.class.getClassLoader().getResourceAsStream("config.properties");
+
+            if (input != null){
+                properties.load(input);
+            } else {
+                throw new IOException();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
