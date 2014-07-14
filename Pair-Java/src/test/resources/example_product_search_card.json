@@ -5,21 +5,22 @@
   "products": [
     {
       "name": "Green leather shoes",
-      "card_url": "http://www.examplestore.com/product_cards/36226783/",
+      "product_card_url": "http://www.examplestore.com/product_cards/36226783/",
       "price": {
         "price": 7.99,
         "currency": "USD"
       },
-      "image": "http://img.examplestore.com/02/wer4554/il_5d9184_iqm9.jpg"
+      "image_url": "http://img.examplestore.com/02/wer4554/il_5d9184_iqm9.jpg"
     },
     {
       "name": "Maroon canvas shoes",
-      "card_url": "http://www.examplestore.com/product_cards/36226774/",
+      "product_card_url": "http://www.examplestore.com/product_cards/36226774/",
+
       "price": {
         "price": 28.00,
         "currency": "USD"
       },
-      "image": "http://img.examplestore.com/02/wer4554/sfd_74241_Fss.jpg"
+      "image_url": "http://img.examplestore.com/02/wer4554/sfd_74241_Fss.jpg"
     }
   ]
 }

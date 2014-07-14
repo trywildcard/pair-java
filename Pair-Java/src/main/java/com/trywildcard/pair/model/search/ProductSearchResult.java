@@ -11,8 +11,8 @@ import java.net.URL;
 public final class ProductSearchResult {
     private final String name;
     private final Price price;
-    private final URL cardUrl;
-    private final String image;
+    private final URL productCardUrl;
+    private final String imageUrl;
 
     /**
      * Construct a product search result using a <code>ProductSearchResultBuilder</code>.
@@ -21,8 +21,8 @@ public final class ProductSearchResult {
     public ProductSearchResult(ProductSearchResultBuilder builder){
         this.name = builder.name;
         this.price = builder.price;
-        this.cardUrl = builder.cardUrl;
-        this.image = builder.image;
+        this.productCardUrl = builder.productCardUrl;
+        this.imageUrl = builder.imageUrl;
     }
 
     public String getName(){
@@ -33,11 +33,11 @@ public final class ProductSearchResult {
         return price;
     }
 
-    public URL getCardUrl(){
-        return cardUrl;
+    public URL getProductCardUrl(){
+        return productCardUrl;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
