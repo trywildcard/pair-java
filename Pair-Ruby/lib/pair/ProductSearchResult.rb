@@ -6,11 +6,11 @@ module PairSDK
         include ActiveModel::Validations
         include ActiveModel::Serializers::JSON
 
-        attr_accessor :name, :price, :product_url, :image_url
+        attr_accessor :name, :price, :product_card_url, :image_url
 
         validates :name, presence: true
         validates :price, presence: true, numericality: {greater_than_or_equal_to: 0}
-        validates :product_url, presence: true
+        validates :product_card_url, presence: true
         
         def initialize(attributes = {})
             attributes.each do |name, value|
