@@ -9,8 +9,10 @@ module PairSDK
         attr_accessor :name, :price, :product_card_url, :image_url
 
         validates :name, presence: true
-        validates :price, presence: true, numericality: {greater_than_or_equal_to: 0}
+        validates :price, presence: true
         validates :product_card_url, presence: true
+
+        validate :validatePrice
         
         def initialize(attributes = {})
             attributes.each do |name, value|
@@ -20,6 +22,13 @@ module PairSDK
 
         def attributes
             instance_values
+        end
+
+        def validatePrice
+          if @price.nil? || !@price.is_a?(Price) || !@price.valid?
+            errors.add(:price, 'price cannot be nil and must be a valid Price object')
+            return
+          end
         end
 
         #exclude validation fields in the JSON output
