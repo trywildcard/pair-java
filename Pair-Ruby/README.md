@@ -6,15 +6,15 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'wildcard-pair'
+  gem 'wildcard-pair'
 
 And then execute:
 
-    $ bundle
+  $ bundle
 
 Or install it yourself as:
 
-    $ gem install wildcard-pair
+  $ gem install wildcard-pair
 
 ## Usage
 
