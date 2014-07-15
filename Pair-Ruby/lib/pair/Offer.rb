@@ -3,8 +3,8 @@ require 'active_model'
 
 module PairSDK  
   class Offer
-        include ActiveModel::Validations
-        include ActiveModel::Serializers::JSON
+      include ActiveModel::Validations
+      include ActiveModel::Serializers::JSON
 
     attr_accessor :price, :original_price, :shipping_cost, :description, :availability, :quantity, :gender, :weight, :weight_units, :offer_id, :sale_start_date, :sale_end_date, :expiration_date
 
@@ -55,20 +55,18 @@ module PairSDK
           errors.add(:shipping_cost, 'shipping cost must be a valid Price object')
           return
         end
-      end
-  
+      end  
     end
-
 
     #exclude validation fields in the JSON output
     def as_json(options={})
-      super(:except => [:errors, :validation_context])
+      super(options.merge({:except => [:errors, :validation_context]}))
     end
 
 
     def to_json(options = {})
       if self.valid?
-        super
+        super(options)
       else
         raise "Offer is not valid - please remedy the following errors:" << self.errors.messages.to_s
       end   

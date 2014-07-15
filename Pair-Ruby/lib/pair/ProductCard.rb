@@ -22,15 +22,14 @@ module PairSDK
 		@@valid_colors = %w(Beige Black Blue Bronze Brown Gold Green Gray Metallic Multicolored OffWhite Orange Pink Purple Red Silver Transparent Turquoise White Yellow)
 
 		def initialize(attributes = {})
+			attributes.each do |name, value|
+				send("#{name}=", value)
+			end
+
 			@card_type = 'product'
 
 			#todo tie this into gem config?
 			@pair_version = "0.0.1"
-
-			attributes.each do |name, value|
-				send("#{name}=", value)
-			end 
-			
 		end
 
 		def attributes
@@ -79,15 +78,15 @@ module PairSDK
 
 		#exclude validation fields in the JSON output
 		def as_json(options={})
-			super(:except => [:errors, :validation_context])
+			super(options.merge({:except => [:errors, :validation_context]}))
 		end
 
-		def to_json
-           if self.valid?
-           	super
-           else
-           	raise "Product Card is not valid - please remedy the following errors:" << self.errors.messages.to_s
-           end    
+		def to_json(options={})
+      if self.valid?
+        super(options)
+      else
+        raise "Product Card is not valid - please remedy the following errors:" << self.errors.messages.to_s
+      end    
 		end 
 
 	end

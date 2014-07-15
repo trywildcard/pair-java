@@ -3,8 +3,8 @@ require 'active_model'
 
 module PairSDK  
   class Price
-        include ActiveModel::Validations
-        include ActiveModel::Serializers::JSON
+    include ActiveModel::Validations
+    include ActiveModel::Serializers::JSON
 
     attr_accessor :price, :currency
 
@@ -26,13 +26,13 @@ module PairSDK
 
     #exclude validation fields in the JSON output
     def as_json(options={})
-      super(:except => [:errors, :validation_context])
+      super(options.merge({:except => [:errors, :validation_context]}))
     end
 
 
     def to_json(options = {})
       if self.valid?
-        super
+        super(options)
       else
         raise "Price is not valid - please remedy the following errors:" << self.errors.messages.to_s
       end   

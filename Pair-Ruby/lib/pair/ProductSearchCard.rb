@@ -5,15 +5,15 @@ require 'active_model'
 
 module PairSDK
 	class ProductSearchCard
-        include ActiveModel::Validations
-        include ActiveModel::Serializers::JSON
+      include ActiveModel::Validations
+      include ActiveModel::Serializers::JSON
 
 		attr_accessor :total_results
 
 		attr_reader :search_results, :card_type, :pair_version
 
-        validates :total_results, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
-        validate :validateSearchResults
+    validates :total_results, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+    validate :validateSearchResults
 
 		def initialize(attributes = {})
 			attributes.each do |name, value|
@@ -54,15 +54,15 @@ module PairSDK
 
 		#exclude validation fields in the JSON output
 		def as_json(options={})
-			super(:except => [:errors, :validation_context])
+			super(options.merge({:except => [:errors, :validation_context]}))
 		end
 		
-		def to_json
-           if self.valid?
-           	   super	
-           else
-           	   raise "Product Search Card is not valid - please remedy below errors:" << self.errors.messages.to_s
-           end    
+		def to_json(options={})
+			if self.valid?
+				super(options)
+      else
+        raise "Product Search Card is not valid - please remedy below errors:" << self.errors.messages.to_s
+      end    
 		end 
 
 	end
