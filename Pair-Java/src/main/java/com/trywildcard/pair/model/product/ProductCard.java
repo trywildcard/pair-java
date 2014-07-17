@@ -3,7 +3,6 @@ package com.trywildcard.pair.model.product;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.model.Card;
 import com.trywildcard.pair.model.CardType;
-import com.trywildcard.pair.translation.pinterest.PinterestProductCard;
 import com.trywildcard.pair.util.CardSerializer;
 
 import java.io.IOException;
@@ -160,14 +159,6 @@ public final class ProductCard implements Card {
      */
     public String writeAsJsonString() throws IOException{
         return new CardSerializer().writeCard(this);
-    }
-
-    /**
-     * Serialize fields in the Pinterest product card format.
-     * @returns the Pinterest-formatted string representation of this card.
-     */
-    public String writeAsPinterestJsonString() throws IOException {
-        return new PinterestProductCard(this).writeAsJsonString();
     }
 
 }
