@@ -21,7 +21,7 @@ public final class ProductSearchCard implements Card {
     @JsonIgnore
     private ValidationTool v = new ValidationTool();
 
-    private String pairVersion = Pair.getVersion();
+    private String pairVersion = Pair.getInstance().getVersion();
 
     private CardType cardType;
     private Integer totalResults;

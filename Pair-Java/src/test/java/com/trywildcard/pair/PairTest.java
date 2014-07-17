@@ -10,15 +10,15 @@ import static junit.framework.TestCase.assertEquals;
 public class PairTest {
     @Test
     public void testPairVersion() {
-        Pair.init();
-        assertEquals(Pair.getVersion(), "0.0.1");
+        assertEquals(Pair.getInstance().getVersion(), "0.0.1");
     }
 
     @Test
     public void testPairValidation(){
-        Pair.init();
-        assertEquals(Pair.getStrictValidation(), false);
-        Pair.setStrictValidation(true);
-        assertEquals(Pair.getStrictValidation(), true);
+        assertEquals(Pair.getInstance().getStrictValidation(), false);
+        Pair.getInstance().setStrictValidation(true);
+        assertEquals(Pair.getInstance().getStrictValidation(), true);
+        Pair.getInstance().setStrictValidation(false);
+        assertEquals(Pair.getInstance().getStrictValidation(), false);
     }
 }

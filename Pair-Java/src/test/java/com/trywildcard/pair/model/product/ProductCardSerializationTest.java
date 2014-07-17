@@ -29,7 +29,6 @@ public class ProductCardSerializationTest {
         //mapper.setSerializationInclusion(Include.NON_EMPTY);
 
         inputString = TestUtil.readResourceAsString("example_product_card.json");
-        Pair.init();
     }
     
     @Test

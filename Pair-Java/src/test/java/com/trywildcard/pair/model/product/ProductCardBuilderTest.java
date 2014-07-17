@@ -34,8 +34,6 @@ public class ProductCardBuilderTest {
     public static void prepare() throws ParseException, CardBuilderException {
         dummyOffer = new DummyOffer();
         dummyProduct = new DummyProduct();
-
-        Pair.init();
     }
     
     private void testMinimalCardAttributes(ProductCard card){

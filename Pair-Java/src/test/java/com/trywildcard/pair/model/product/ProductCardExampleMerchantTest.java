@@ -32,8 +32,6 @@ public class ProductCardExampleMerchantTest {
 
     @Test
     public void buildMinimalProduct() throws IOException {
-        Pair.init();
-
         ProductCardBuilder productCardBuilder;
         String url = "http://mystore.com/products/9125";
         try {
@@ -49,8 +47,6 @@ public class ProductCardExampleMerchantTest {
 
     @Test
     public void buildStandardProduct() throws IOException {
-        Pair.init();
-
         Price price;
         OfferBuilder offerBuilder;
 

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class OptionalValidator {
     List<String> errors = new ArrayList<String>();
-    boolean strictValidation = Pair.getStrictValidation();
+    boolean strictValidation = Pair.getInstance().getStrictValidation();
 
     boolean fail(String message) {
         errors.add(message);

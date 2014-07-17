@@ -8,10 +8,10 @@ import java.util.Properties;
  * Created by michaelgarate on 7/2/14.
  */
 public class Pair {
-
+    private static volatile Pair instance = null;
     private static Properties properties = new Properties();
 
-    public static void init(){
+    private Pair() {
         InputStream input = null;
 
         try {
@@ -27,15 +27,28 @@ public class Pair {
         }
     }
 
-    public static String getVersion(){
+    public static Pair getInstance(){
+        if (instance == null) {
+            synchronized (Pair.class) {
+                if (instance == null) {
+                    instance = new Pair();
+                }
+            }
+        }
+
+        return instance;
+    }
+
+
+    public String getVersion(){
         return properties.getProperty("pairVersion");
     }
 
-    public static boolean getStrictValidation(){
+    public boolean getStrictValidation(){
         return Boolean.valueOf(properties.getProperty("strictValidation"));
     }
 
-    public static void setStrictValidation(boolean b){
+    public void setStrictValidation(boolean b){
         properties.setProperty("strictValidation", String.valueOf(b));
     }
 }

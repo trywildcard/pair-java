@@ -25,7 +25,6 @@ public class ProductSearchCardSerializationTest {
     @BeforeClass
     public static void initialize() throws IOException {
         inputString = TestUtil.readResourceAsString("example_product_search_card.json");
-        Pair.init();
     }
 
     @Test
