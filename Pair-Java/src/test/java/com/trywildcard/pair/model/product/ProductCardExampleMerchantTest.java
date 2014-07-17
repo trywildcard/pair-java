@@ -1,5 +1,6 @@
 package com.trywildcard.pair.model.product;
 
+import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.util.DummyOffer;
@@ -31,6 +32,8 @@ public class ProductCardExampleMerchantTest {
 
     @Test
     public void buildMinimalProduct() throws IOException {
+        Pair.init();
+
         ProductCardBuilder productCardBuilder;
         String url = "http://mystore.com/products/9125";
         try {
@@ -46,6 +49,8 @@ public class ProductCardExampleMerchantTest {
 
     @Test
     public void buildStandardProduct() throws IOException {
+        Pair.init();
+
         Price price;
         OfferBuilder offerBuilder;
 
