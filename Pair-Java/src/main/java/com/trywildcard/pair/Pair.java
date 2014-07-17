@@ -8,7 +8,7 @@ import java.util.Properties;
  * Created by michaelgarate on 7/2/14.
  */
 public class Pair {
-    private static volatile Pair instance = null;
+    private static Pair instance = null;
     private static Properties properties = new Properties();
 
     private Pair() {
@@ -27,13 +27,9 @@ public class Pair {
         }
     }
 
-    public static Pair getInstance(){
+    public static synchronized Pair getInstance(){
         if (instance == null) {
-            synchronized (Pair.class) {
-                if (instance == null) {
-                    instance = new Pair();
-                }
-            }
+            instance = new Pair();
         }
 
         return instance;
