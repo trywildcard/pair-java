@@ -25,7 +25,12 @@ module WildcardPair
       end
 
       @card_type = 'product'
-      @pair_version = Gem.loaded_specs['wildcard-pair'].version.to_s
+
+      if !Gem.loaded_specs['wildcard-pair'].nil?
+        @pair_version = Gem.loaded_specs['wildcard-pair'].version.to_s
+      else
+        @pair_version = "unknown"
+      end
     end
 
     def attributes
