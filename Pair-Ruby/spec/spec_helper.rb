@@ -1,8 +1,8 @@
-require_relative '../lib/pair/ProductCard'
-require_relative '../lib/pair/Offer'
-require_relative '../lib/pair/Price'
-require_relative '../lib/pair/ProductSearchCard'
-require_relative '../lib/pair/ProductSearchResult'
+require_relative '../lib/wildcard-pair/ProductCard'
+require_relative '../lib/wildcard-pair/Offer'
+require_relative '../lib/wildcard-pair/Price'
+require_relative '../lib/wildcard-pair/ProductSearchCard'
+require_relative '../lib/wildcard-pair/ProductSearchResult'
 
 
 require 'yaml'
