@@ -1,10 +1,12 @@
 
+require_relative 'hash_mappable.rb'
 require 'active_model'
 
 module WildcardPair  
   class Price
     include ActiveModel::Validations
     include ActiveModel::Serializers::JSON
+    include WildcardPair::HashMappable
 
     attr_accessor :price, :currency
 
@@ -18,6 +20,13 @@ module WildcardPair
       attributes.each do |name, value|
         send("#{name}=", value)
       end 
+    end
+
+
+    def attributes=(hash)
+      hash.each do |key, value|
+        send("#{key}=", value)
+      end
     end
 
     def attributes

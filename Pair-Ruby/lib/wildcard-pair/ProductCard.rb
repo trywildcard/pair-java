@@ -1,23 +1,26 @@
 #!/usr/bin/env ruby -wKU
 
 require 'active_model'
+require_relative 'hash_mappable.rb'
 
 module WildcardPair
   class ProductCard
-        include ActiveModel::Validations
-        include ActiveModel::Serializers::JSON
+    include ActiveModel::Validations
+    include ActiveModel::Serializers::JSON
+    include WildcardPair::HashMappable
 
     attr_accessor :name, :web_url, :product_id, :merchant, :brand, :description, :images, :rating, :rating_scale, :rating_count, :related_items, :referenced_items, :sizes, :options, :model, :app_link_ios, :app_link_android
 
-    attr_reader :offers, :colors, :card_type, :pair_version
+    private
+    attr_accessor :offers, :card_type, :pair_version
+    public
+
+    attr_reader :offers, :card_type, :pair_version
 
     validates :web_url, presence: true
     validates :name, presence: true
 
     validate :validateOffers
-    validate :validateColors
-
-    @@valid_colors = %w(Beige Black Blue Bronze Brown Gold Green Gray Metallic Multicolored OffWhite Orange Pink Purple Red Silver Transparent Turquoise White Yellow)
 
     def initialize(attributes = {})
       attributes.each do |name, value|
@@ -32,25 +35,40 @@ module WildcardPair
         @pair_version = "unknown"
       end
     end
+    
+    def attributes=(hash)
+      hash.each do |key, value|
+        send("#{key}=", value)
+      end
+    end
 
     def attributes
       instance_values
     end
 
-    def offers=(offers)
-      if !offers.is_a?(Array)
-        @offers = [offers]
+    def add_offer(offer)
+      if offer.is_a? Hash
+        wc_offer = WildcardPair::Offer.new
+        wc_offer.attributes = offer
+        offer = wc_offer
       else
-        @offers = offers
+        offer = offer
       end
+
+      @offers ||= Array.new
+      @offers << offer 
     end
 
-    def colors=(colors)
-      if !colors.is_a?(Array)
-        @colors = [colors]
+    def offers=(offers)
+      if offers.is_a?(Array)
+        offers.each do |offer|
+          add_offer(offer)
+        end
+      elsif offers.is_a?(Offer)
+        add_offer(offers)
       else
-        @colors = colors
-      end   
+        add_offer(offers)
+      end
     end
 
     def validateOffers
@@ -60,19 +78,9 @@ module WildcardPair
       end
 
       @offers.each do |offer|
-        if (!offer.is_a?(Offer)  || !offer.valid?)
-          errors.add(:offer, 'One of the offers is not a properly constructed offer object and/or is not valid')
+        if (!offer.is_a?(Offer) || !offer.valid?)
+          errors.add(:offer, "One of the offers is not a properly constructed offer object and/or is not valid")
           return
-        end
-      end
-    end
-
-    def validateColors
-      if (!@colors.nil? && @colors.any?)
-        @colors.each do |color|
-          if (!@@valid_colors.include? color)
-            errors.add(:colors, 'Invalid Color Added')
-          end
         end
       end
     end

@@ -6,3 +6,7 @@ require_relative '../lib/wildcard-pair/ProductSearchResult'
 
 
 require 'yaml'
+
+RSpec.configure do |config|
+  config.color = true
+end
