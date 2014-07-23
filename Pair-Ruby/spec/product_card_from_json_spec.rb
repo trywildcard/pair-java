@@ -7,5 +7,6 @@ describe "product card" do
     product_card.from_json(json)
     product_card.valid?
     expect(product_card.valid?).to be(true)
+    expect(JSON.parse(product_card.to_json)).to eq(JSON.parse(json)) 
   end
 end
