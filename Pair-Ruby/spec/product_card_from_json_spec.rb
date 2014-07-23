@@ -7,5 +7,6 @@ describe "product card" do
     product_card.from_json(json)
     product_card.valid?
     expect(product_card.valid?).to be(true)
+    puts "CARD:"
   end
 end

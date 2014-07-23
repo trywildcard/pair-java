@@ -39,12 +39,6 @@ module WildcardPair
       @shipping_cost = map_hash(shipping_cost, WildcardPair::Price.new)
     end
 
-    def attributes=(hash)
-      hash.each do |key, value|
-        send("#{key}=", value)
-      end
-    end
-
     def attributes
       instance_values
     end
