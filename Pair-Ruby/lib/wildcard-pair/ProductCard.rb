@@ -5,21 +5,21 @@ require_relative 'hash_mappable.rb'
 
 module WildcardPair
   class ProductCard
+    private
+
+    attr_accessor :offers, :card_type, :pair_version
+
+    public
+
     include ActiveModel::Validations
     include ActiveModel::Serializers::JSON
     include WildcardPair::HashMappable
 
     attr_accessor :name, :web_url, :product_id, :merchant, :brand, :description, :images, :rating, :rating_scale, :rating_count, :related_items, :referenced_items, :sizes, :options, :model, :app_link_ios, :app_link_android
-
-    private
-    attr_accessor :offers, :card_type, :pair_version
-    public
-
     attr_reader :offers, :card_type, :pair_version
 
     validates :web_url, presence: true
     validates :name, presence: true
-
     validate :validateOffers
 
     def initialize(attributes = {})
