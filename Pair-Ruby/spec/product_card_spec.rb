@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 describe WildcardPair::ProductCard do
 
@@ -93,6 +92,16 @@ describe '#invalidoffers' do
     expect {product_card2.to_json}.to raise_error(RuntimeError)
   end
 end
-#todo add tests to verify errors and validationcontext are not in the as_json hash
+
+describe "product card" do
+  it "is built from json" do
+    json = File.read("spec/fixtures/example_product_card.json")
+    product_card = WildcardPair::ProductCard.new
+    product_card.from_json(json)
+    product_card.valid?
+    expect(product_card.valid?).to be(true)
+    expect(JSON.parse(product_card.to_json)).to eq(JSON.parse(json)) 
+  end
+end
 
 end
