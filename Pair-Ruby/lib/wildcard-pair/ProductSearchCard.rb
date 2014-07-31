@@ -64,7 +64,6 @@ module WildcardPair
 
       @products.each do |product|
         if (!product.is_a?(ProductSearchResult)  || !product.valid?)
-          #puts product.valid?
           errors.add(:products, "One of the product search results is not a properly constructed ProductSearchResult object and/or is not valid")
           return
         end
