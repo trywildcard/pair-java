@@ -25,6 +25,10 @@ module WildcardPair
       instance_values
     end
 
+    def price=(price)
+      @price = map_hash(price, WildcardPair::Price.new)
+    end
+
     def validatePrice
       if @price.nil? || !@price.is_a?(Price) || !@price.valid?
         errors.add(:price, 'price cannot be nil and must be a valid Price object')
