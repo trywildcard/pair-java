@@ -40,28 +40,17 @@ module WildcardPair
       instance_values
     end
 
-    def add_offer(offer)
-      if offer.is_a? Hash
-        wc_offer = WildcardPair::Offer.new
-        wc_offer.attributes = offer
-        offer = wc_offer
-      else
-        offer = offer
-      end
-
-      @offers ||= Array.new
-      @offers << offer 
-    end
-
     def offers=(offers)
+      @offers ||= Array.new
+
       if offers.is_a?(Array)
         offers.each do |offer|
-          add_offer(offer)
+          @offers << map_hash(offer, Offer.new)
         end
       elsif offers.is_a?(Offer)
-        add_offer(offers)
+          @offers << offers
       else
-        add_offer(offers)
+        @offers << map_hash(offers, Offer.new)
       end
     end
 
