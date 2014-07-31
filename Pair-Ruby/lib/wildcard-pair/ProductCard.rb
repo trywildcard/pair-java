@@ -89,10 +89,12 @@ module WildcardPair
         return
       end
 
-      @colors.each do |color|
-        if (!color.is_a?(Color) || !color.valid?)
-          errors.add(:color, "One of the colors is not a properly constructed color object and/or is not valid")
-          return
+      if (!@colors.nil? && @colors.any?)
+        @colors.each do |color|
+          if (!color.is_a?(Color) || !color.valid?)
+            errors.add(:color, "One of the colors is not a properly constructed color object and/or is not valid")
+            return
+          end
         end
       end
     end
