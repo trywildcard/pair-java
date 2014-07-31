@@ -15,7 +15,7 @@ module WildcardPair
     include ActiveModel::Serializers::JSON
     include WildcardPair::HashMappable
 
-    attr_accessor :name, :web_url, :product_id, :merchant, :brand, :description, :images, :rating, :rating_scale, :rating_count, :related_items, :referenced_items, :sizes, :options, :model, :app_link_ios, :app_link_android
+    attr_accessor :name, :web_url, :product_id, :merchant, :brand, :description, :images, :colors, :rating, :rating_scale, :rating_count, :related_items, :referenced_items, :sizes, :options, :model, :app_link_ios, :app_link_android
     attr_reader :offers, :card_type, :pair_version
 
     validates :web_url, presence: true
@@ -51,6 +51,20 @@ module WildcardPair
           @offers << offers
       else
         @offers << map_hash(offers, Offer.new)
+      end
+    end
+
+    def colors=(colors)
+      @colors ||= Array.new
+
+      if colors.is_a?(Array)
+        colors.each do |color|
+          @colors << map_hash(color, Color.new)
+        end
+      elsif colors.is_a?(Color)
+          @colors << colors
+      else
+        @colors << map_hash(colors, Color.new)
       end
     end
 
