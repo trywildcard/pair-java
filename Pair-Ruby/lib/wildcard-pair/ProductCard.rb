@@ -84,11 +84,6 @@ module WildcardPair
     end
 
     def validateColors
-      if @colors.nil? || (@colors.is_a?(Array) && !@colors.any?)
-        #no colors exist which is ok - just return out
-        return
-      end
-
       if (!@colors.nil? && @colors.any?)
         @colors.each do |color|
           if (!color.is_a?(Color) || !color.valid?)
