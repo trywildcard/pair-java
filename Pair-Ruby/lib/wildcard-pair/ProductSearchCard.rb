@@ -2,11 +2,20 @@
 #!/usr/bin/env ruby -wKU
 
 require 'active_model'
+require_relative 'hash_mappable.rb'
 
 module WildcardPair
   class ProductSearchCard
+
+    private
+
+    attr_accessor :search_results, :card_type, :pair_version
+
+    public
+
       include ActiveModel::Validations
       include ActiveModel::Serializers::JSON
+      include WildcardPair::HashMappable
 
     attr_accessor :total_results
 
@@ -33,11 +42,17 @@ module WildcardPair
       instance_values
     end
 
-    def search_results=(search_results)
-      if !search_results.is_a?(Array)
-        @search_results = [search_results]
+     def search_results=(search_results)
+      @search_results ||= Array.new
+
+      if search_results.is_a?(Array)
+        search_results.each do |search_result|
+          @search_results << map_hash(search_result, ProductSearchResult.new)
+        end
+      elsif search_results.is_a?(ProductSearchResult)
+          @search_results << search_results
       else
-        @search_results = search_results
+        @search_results << map_hash(search_results, ProductSearchResult.new)
       end
     end
 
