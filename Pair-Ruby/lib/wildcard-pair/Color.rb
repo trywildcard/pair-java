@@ -8,7 +8,7 @@ module WildcardPair
     include ActiveModel::Serializers::JSON
     include WildcardPair::HashMappable
 
-    attr_accessor :display_name, :swatch_link, :value, :mapping_color
+    attr_accessor :display_name, :swatch_url, :value, :mapping_color
 
     validates :mapping_color, allow_nil: true, inclusion: {in: %w(beige black blue bronze brown gold green gray metallic multicolored offWhite orange pink purple red silver transparent turquoise white yellow)}
  
