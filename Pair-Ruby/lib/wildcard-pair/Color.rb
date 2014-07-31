@@ -3,19 +3,16 @@ require_relative 'hash_mappable.rb'
 require 'active_model'
 
 module WildcardPair  
-  class Price
+  class Color
     include ActiveModel::Validations
     include ActiveModel::Serializers::JSON
     include WildcardPair::HashMappable
 
-    attr_accessor :price, :currency
+    attr_accessor :display_name, :swatch_url, :value, :mapping_color
 
-    validates :price, presence: true, numericality: {greater_than_or_equal_to: 0}
+    validates :mapping_color, allow_nil: true, inclusion: {in: %w(beige black blue bronze brown gold green gray metallic multicolored offwhite orange pink purple red silver transparent turquoise white yellow)}
  
     def initialize(attributes = {})
-
-      #let's set currency to USD by default
-      @currency = "USD"
 
       attributes.each do |name, value|
         send("#{name}=", value)
@@ -36,7 +33,7 @@ module WildcardPair
       if self.valid?
         super(options)
       else
-        raise "Price is not valid - please remedy the following errors:" << self.errors.messages.to_s
+        raise "Color is not valid - please remedy the following errors:" << self.errors.messages.to_s
       end   
     end 
 

@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 describe WildcardPair::ProductCard do
 
@@ -94,45 +93,15 @@ describe '#invalidoffers' do
   end
 end
 
-describe '#oneinvalidcolor' do
-  validprice = WildcardPair::Price.new price: 4
-  validoffer = WildcardPair::Offer.new price: validprice
-  invalidcolor = 'Aqua'
-  product_card = WildcardPair::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: invalidcolor
-
-  it "oneinvalidcolor" do
-    product_card.valid?.should eql false
+describe "product card" do
+  it "is built from json" do
+    json = File.read("spec/fixtures/example_product_card.json")
+    product_card = WildcardPair::ProductCard.new
+    product_card.from_json(json)
+    product_card.valid?
+    expect(product_card.valid?).to be(true)
+    expect(JSON.parse(product_card.to_json)).to eq(JSON.parse(json)) 
   end
 end
-
-describe '#invalidcolors' do
-  validprice = WildcardPair::Price.new price: 4
-  validoffer = WildcardPair::Offer.new price: validprice
-  invalidcolors = ['Beige', 'Aqua']
-  product_card = WildcardPair::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: invalidcolors
-
-  it "invalidcolors" do
-    product_card.valid?.should eql false
-    expect {product_card.to_json}.to raise_error(RuntimeError)
-  end
-end
-
-describe '#validcolors' do
-  validprice = WildcardPair::Price.new price: 4
-  validoffer = WildcardPair::Offer.new price: validprice
-  validcolor = 'OffWhite'
-  validcolors = ['Beige', 'Black', 'Blue', 'Bronze', 'Brown', 'Gold', 'Green', 'Gray', 'Metallic', 'Multicolored', 'OffWhite', 'Orange', 'Pink', 'Purple', 'Red', 'Silver', 'Transparent', 'Turquoise', 'White', 'Yellow']
-  
-  product_card = WildcardPair::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: validcolor
-  product_card2 = WildcardPair::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: validcolors
-
-  it "validcolors" do
-    product_card.valid?.should eql true
-    product_card2.valid?.should eql true
-    expect {product_card.to_json}.not_to raise_error
-  end
-end
-
-#todo add tests to verify errors and validationcontext are not in the as_json hash
 
 end

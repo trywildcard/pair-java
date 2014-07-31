@@ -1,9 +1,11 @@
 require 'active_model'
+require_relative 'hash_mappable.rb'
 
 module WildcardPair
   class ProductSearchResult
     include ActiveModel::Validations
     include ActiveModel::Serializers::JSON
+    include WildcardPair::HashMappable
 
     attr_accessor :name, :price, :product_card_url, :image_url
 
@@ -21,6 +23,10 @@ module WildcardPair
 
     def attributes
       instance_values
+    end
+
+    def price=(price)
+      @price = map_hash(price, WildcardPair::Price.new)
     end
 
     def validatePrice
