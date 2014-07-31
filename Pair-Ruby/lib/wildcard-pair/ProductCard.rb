@@ -21,6 +21,7 @@ module WildcardPair
     validates :web_url, presence: true
     validates :name, presence: true
     validate :validateOffers
+    validate :validateColors
 
     def initialize(attributes = {})
       attributes.each do |name, value|
@@ -77,6 +78,20 @@ module WildcardPair
       @offers.each do |offer|
         if (!offer.is_a?(Offer) || !offer.valid?)
           errors.add(:offer, "One of the offers is not a properly constructed offer object and/or is not valid")
+          return
+        end
+      end
+    end
+
+    def validateColors
+      if @colors.nil? || (@colors.is_a?(Array) && !@colors.any?)
+        #no colors exist which is ok - just return out
+        return
+      end
+
+      @colors.each do |color|
+        if (!color.is_a?(Color) || !color.valid?)
+          errors.add(:color, "One of the colors is not a properly constructed color object and/or is not valid")
           return
         end
       end
