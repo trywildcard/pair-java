@@ -9,7 +9,7 @@ module WildcardPair
 
     private
 
-    attr_accessor :search_results, :card_type, :pair_version
+    attr_accessor :products, :card_type, :pair_version
 
     public
 
@@ -19,7 +19,7 @@ module WildcardPair
 
     attr_accessor :total_results
 
-    attr_reader :search_results, :card_type, :pair_version
+    attr_reader :products, :card_type, :pair_version
 
     validates :total_results, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
     validate :validateSearchResults
@@ -42,29 +42,30 @@ module WildcardPair
       instance_values
     end
 
-     def search_results=(search_results)
-      @search_results ||= Array.new
+     def products=(products)
+      @products ||= Array.new
 
-      if search_results.is_a?(Array)
-        search_results.each do |search_result|
-          @search_results << map_hash(search_result, ProductSearchResult.new)
+      if products.is_a?(Array)
+        products.each do |product|
+          @products << map_hash(product, ProductSearchResult.new)
         end
-      elsif search_results.is_a?(ProductSearchResult)
-          @search_results << search_results
+      elsif products.is_a?(ProductSearchResult)
+          @products << products
       else
-        @search_results << map_hash(search_results, ProductSearchResult.new)
+        @products << map_hash(products, ProductSearchResult.new)
       end
     end
 
     def validateSearchResults
-      if @search_results.nil? || (@search_results.is_a?(Array) && !@search_results.any?)
-        errors.add(:search_results, 'Cannot be Nil and must be an array!')
+      if @products.nil? || (@products.is_a?(Array) && !@products.any?)
+        errors.add(:products, "Cannot be Nil and must be an array!")
         return
       end
 
-      @search_results.each do |search_result|
-        if (!search_result.is_a?(ProductSearchResult)  || !search_result.valid?)
-          errors.add(:search_results, 'One of the searchresults is not a properly constructed ProductSearchResult object and/or is not valid')
+      @products.each do |product|
+        if (!product.is_a?(ProductSearchResult)  || !product.valid?)
+          #puts product.valid?
+          errors.add(:products, "One of the product search results is not a properly constructed ProductSearchResult object and/or is not valid")
           return
         end
       end
