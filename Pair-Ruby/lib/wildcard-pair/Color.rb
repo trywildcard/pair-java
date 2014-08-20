@@ -1,6 +1,6 @@
 
-require_relative 'hash_mappable.rb'
 require 'active_model'
+require_relative 'hash_mappable.rb'
 
 module WildcardPair  
   class Color
