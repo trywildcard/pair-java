@@ -3,6 +3,23 @@
   <groupId>Pair-Java</groupId>
   <artifactId>Pair-Java</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <distributionManagement>
+    <repository>
+      <id>pair</id>
+      <name>Pair Releases</name>
+      <url>http://repo.trywildcard.com/nexus/content/repositories/pair</url>
+    </repository>
+    <snapshotRepository>
+      <id>pair</id>
+      <name>Pair Snapshot</name>
+      <url>http://repo.trywildcard.com/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <site>
+      <id>pair</id>
+      <name>Pair Sites</name>
+      <url>dav:http://repo.trywildcard.com/nexus/content/sites/site/</url>
+    </site>
+  </distributionManagement>
   <build>
     <plugins>
       <plugin>
