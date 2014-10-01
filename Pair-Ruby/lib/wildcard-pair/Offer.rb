@@ -8,9 +8,9 @@ module WildcardPair
     include ActiveModel::Serializers::JSON
     include WildcardPair::HashMappable
 
-    attr_accessor :price, :original_price, :shipping_cost, :description, :availability, :quantity, :gender, :weight, :weight_units, :offer_id, :sale_start_date, :sale_end_date, :expiration_date
+    attr_accessor :description, :availability, :quantity, :gender, :weight, :weight_units, :offer_id, :sale_start_date, :sale_end_date, :expiration_date
 
-    attr_reader :geographic_availability
+    attr_reader :price, :original_price, :shipping_cost, :geographic_availability
 
     validates :price, presence: true
     validates :description, allow_nil: true, length: {minimum: 1}
@@ -44,16 +44,18 @@ module WildcardPair
     end
 
     def geographic_availability=(geographic_availability)
-      if !geographic_availability.is_a?(Array)
-        @geographic_availability = [geographic_availability]
-      else
+      @geographic_availability ||= Array.new
+
+      if geographic_availability.is_a?(Array)
         @geographic_availability = geographic_availability
+      else
+        @geographic_availability << geographic_availability
       end
     end
 
     def validatePrices
       if @price.nil? || !@price.is_a?(Price) || !@price.valid?
-        errors.add(:price, "price cannot be nil and must be a valid Price object")
+        errors.add(:price, "Price cannot be nil and must be a valid Price object")
         return
       end
 
@@ -66,7 +68,7 @@ module WildcardPair
 
       if !@shipping_cost.nil?
         if !@shipping_cost.is_a?(Price) || !@shipping_cost.valid?
-          errors.add(:shipping_cost, 'shipping cost must be a valid Price object')
+          errors.add(:shipping_cost, 'Shipping cost must be a valid Price object')
           return
         end
       end  

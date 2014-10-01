@@ -58,13 +58,13 @@ module WildcardPair
 
     def validateSearchResults
       if @products.nil? || (@products.is_a?(Array) && !@products.any?)
-        errors.add(:products, "Cannot be Nil and must be an array!")
+        errors.add(:products, "Products cannot be Nil and must be an array!")
         return
       end
 
       @products.each do |product|
         if (!product.is_a?(ProductSearchResult)  || !product.valid?)
-          errors.add(:products, "One of the product search results is not a properly constructed ProductSearchResult object and/or is not valid")
+          errors.add(:products, "One of the products in the search result is not a properly constructed ProductSearchResult object and/or is not valid")
           return
         end
       end

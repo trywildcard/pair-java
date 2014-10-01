@@ -31,7 +31,7 @@ module WildcardPair
 
     def validatePrice
       if @price.nil? || !@price.is_a?(Price) || !@price.valid?
-        errors.add(:price, 'price cannot be nil and must be a valid Price object')
+        errors.add(:price, 'Price cannot be nil and must be a valid Price object')
         return
       end
     end
