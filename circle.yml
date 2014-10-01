@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - bundle exec sh Pair-Ruby/run_tests.sh
+    - (cd Pair-Ruby && bundle exec sh run_tests.sh)
