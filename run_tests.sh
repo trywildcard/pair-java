@@ -1,1 +1,0 @@
-Pair-Ruby/rspec
