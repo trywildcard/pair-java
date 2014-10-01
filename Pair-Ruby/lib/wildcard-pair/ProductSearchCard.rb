@@ -2,15 +2,24 @@
 #!/usr/bin/env ruby -wKU
 
 require 'active_model'
+require_relative 'hash_mappable.rb'
 
 module WildcardPair
   class ProductSearchCard
+
+    private
+
+    attr_accessor :products, :card_type, :pair_version
+
+    public
+
       include ActiveModel::Validations
       include ActiveModel::Serializers::JSON
+      include WildcardPair::HashMappable
 
     attr_accessor :total_results
 
-    attr_reader :search_results, :card_type, :pair_version
+    attr_reader :products, :card_type, :pair_version
 
     validates :total_results, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
     validate :validateSearchResults
@@ -33,23 +42,29 @@ module WildcardPair
       instance_values
     end
 
-    def search_results=(search_results)
-      if !search_results.is_a?(Array)
-        @search_results = [search_results]
+     def products=(products)
+      @products ||= Array.new
+
+      if products.is_a?(Array)
+        products.each do |product|
+          @products << map_hash(product, ProductSearchResult.new)
+        end
+      elsif products.is_a?(ProductSearchResult)
+          @products << products
       else
-        @search_results = search_results
+        @products << map_hash(products, ProductSearchResult.new)
       end
     end
 
     def validateSearchResults
-      if @search_results.nil? || (@search_results.is_a?(Array) && !@search_results.any?)
-        errors.add(:search_results, 'Cannot be Nil and must be an array!')
+      if @products.nil? || (@products.is_a?(Array) && !@products.any?)
+        errors.add(:products, "Cannot be Nil and must be an array!")
         return
       end
 
-      @search_results.each do |search_result|
-        if (!search_result.is_a?(ProductSearchResult)  || !search_result.valid?)
-          errors.add(:search_results, 'One of the searchresults is not a properly constructed ProductSearchResult object and/or is not valid')
+      @products.each do |product|
+        if (!product.is_a?(ProductSearchResult)  || !product.valid?)
+          errors.add(:products, "One of the product search results is not a properly constructed ProductSearchResult object and/or is not valid")
           return
         end
       end

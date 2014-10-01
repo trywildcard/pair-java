@@ -1,23 +1,27 @@
 #!/usr/bin/env ruby -wKU
 
 require 'active_model'
+require_relative 'hash_mappable.rb'
 
 module WildcardPair
   class ProductCard
-        include ActiveModel::Validations
-        include ActiveModel::Serializers::JSON
+    private
 
-    attr_accessor :name, :web_url, :product_id, :merchant, :brand, :description, :images, :rating, :rating_scale, :rating_count, :related_items, :referenced_items, :sizes, :options, :model, :app_link_ios, :app_link_android
+    attr_accessor :offers, :card_type, :pair_version
 
-    attr_reader :offers, :colors, :card_type, :pair_version
+    public
+
+    include ActiveModel::Validations
+    include ActiveModel::Serializers::JSON
+    include WildcardPair::HashMappable
+
+    attr_accessor :name, :web_url, :product_id, :merchant, :brand, :description, :images, :colors, :rating, :rating_scale, :rating_count, :related_items, :referenced_items, :sizes, :options, :model, :app_link_ios, :app_link_android
+    attr_reader :offers, :card_type, :pair_version
 
     validates :web_url, presence: true
     validates :name, presence: true
-
     validate :validateOffers
     validate :validateColors
-
-    @@valid_colors = %w(Beige Black Blue Bronze Brown Gold Green Gray Metallic Multicolored OffWhite Orange Pink Purple Red Silver Transparent Turquoise White Yellow)
 
     def initialize(attributes = {})
       attributes.each do |name, value|
@@ -38,19 +42,31 @@ module WildcardPair
     end
 
     def offers=(offers)
-      if !offers.is_a?(Array)
-        @offers = [offers]
+      @offers ||= Array.new
+
+      if offers.is_a?(Array)
+        offers.each do |offer|
+          @offers << map_hash(offer, Offer.new)
+        end
+      elsif offers.is_a?(Offer)
+          @offers << offers
       else
-        @offers = offers
+        @offers << map_hash(offers, Offer.new)
       end
     end
 
     def colors=(colors)
-      if !colors.is_a?(Array)
-        @colors = [colors]
+      @colors ||= Array.new
+
+      if colors.is_a?(Array)
+        colors.each do |color|
+          @colors << map_hash(color, Color.new)
+        end
+      elsif colors.is_a?(Color)
+          @colors << colors
       else
-        @colors = colors
-      end   
+        @colors << map_hash(colors, Color.new)
+      end
     end
 
     def validateOffers
@@ -60,8 +76,8 @@ module WildcardPair
       end
 
       @offers.each do |offer|
-        if (!offer.is_a?(Offer)  || !offer.valid?)
-          errors.add(:offer, 'One of the offers is not a properly constructed offer object and/or is not valid')
+        if (!offer.is_a?(Offer) || !offer.valid?)
+          errors.add(:offer, "One of the offers is not a properly constructed offer object and/or is not valid")
           return
         end
       end
@@ -70,8 +86,9 @@ module WildcardPair
     def validateColors
       if (!@colors.nil? && @colors.any?)
         @colors.each do |color|
-          if (!@@valid_colors.include? color)
-            errors.add(:colors, 'Invalid Color Added')
+          if (!color.is_a?(Color) || !color.valid?)
+            errors.add(:color, "One of the colors is not a properly constructed color object and/or is not valid")
+            return
           end
         end
       end
