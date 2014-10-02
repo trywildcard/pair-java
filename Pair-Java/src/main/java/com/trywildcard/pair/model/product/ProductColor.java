@@ -18,25 +18,18 @@ public final class ProductColor {
 
     // required fields
     private String displayName;
-    
+
     // optional fields
     private URL swatchUrl;
-    private String value;
-    private MappingColor mappingColor;
-
 
     /**
      * Construct a product color.
      * @param displayName the name of the color as presented to the user.
-     * @param value
      * @param swatchUrl link to an image with a sample of the color.
-     * @param mappingColor map to a set of predefined colors
      */
-    public ProductColor(String displayName, String value, String swatchUrl, MappingColor mappingColor) throws CardBuilderException {
+    public ProductColor(String displayName, String swatchUrl) throws CardBuilderException {
         setDisplayName(displayName);
         setSwatchUrl(swatchUrl);
-        setValue(value);
-        setMappingColor(mappingColor);
     }
 
     public String getDisplayName() {
@@ -45,14 +38,6 @@ public final class ProductColor {
 
     public URL getSwatchUrl() {
         return swatchUrl;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public MappingColor getMappingColor() {
-        return mappingColor;
     }
 
     public List<String> getErrors(){
@@ -83,15 +68,6 @@ public final class ProductColor {
             v.optional(v.fail(), "Could not parse URL from swatchUrl string.");
         }
     }
-    
-    private void setValue(String value){
-        boolean isValid = v.optional(v.notEmpty(value), "Tried to set value to an empty string.");
-        if (isValid) {
-            this.value = value;
-        }
-    }
-    
-    private void setMappingColor(MappingColor mappingColor){
-        this.mappingColor = mappingColor;
-    }
+
+
 }

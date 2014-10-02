@@ -13,9 +13,7 @@ import java.net.MalformedURLException;
 public class ProductColorValidationTest {
 
     String displayName = "magenta";
-    String value = "FF00FF";
     String swatchUrl;
-    MappingColor mappingColor = MappingColor.Pink;
 
     @Before
     public void setUp() throws MalformedURLException {
@@ -24,26 +22,21 @@ public class ProductColorValidationTest {
 
     @Test
     public void isValidWithAttributes() throws CardBuilderException {
-        ProductColor pc = new ProductColor(displayName, value, swatchUrl, mappingColor);
+        ProductColor pc = new ProductColor(displayName, swatchUrl);
         Assert.assertEquals(pc.getDisplayName(), displayName);
+        Assert.assertEquals(pc.getSwatchUrl(), swatchUrl);
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullDisplayName() throws CardBuilderException {
-        ProductColor pc = new ProductColor(null, value, swatchUrl, mappingColor);
+        ProductColor pc = new ProductColor(null, swatchUrl);
     }
 
     @Test
     public void isValidWithoutOptionalFields() throws CardBuilderException {
-        ProductColor pc = new ProductColor(displayName, null, null, null);
+        ProductColor pc = new ProductColor(displayName, null);
         Assert.assertEquals(pc.getDisplayName(), displayName);
         Assert.assertEquals("Expected error count to match", 0, pc.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForBlankValueString() throws CardBuilderException {
-        ProductColor pc = new ProductColor(displayName, "", null, null);
-        Assert.assertEquals("Expected error count to match", 1, pc.getErrors().size());
     }
 
 }
