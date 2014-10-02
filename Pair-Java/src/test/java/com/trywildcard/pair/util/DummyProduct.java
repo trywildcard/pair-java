@@ -50,9 +50,7 @@ public class DummyProduct {
 
 
         ProductColor color = new ProductColor("Mint",
-                "RGB(62, 180, 137)",
-                "http://https://www.examplestore.com/swatches/mint.jpg",
-                MappingColor.Green);
+                "http://https://www.examplestore.com/swatches/mint.jpg");
 
         colors.add(color);
         
