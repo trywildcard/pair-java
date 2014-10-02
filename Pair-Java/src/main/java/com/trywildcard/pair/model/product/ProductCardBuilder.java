@@ -335,7 +335,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     }
     
     private ProductCardBuilder webUrl(String webUrl) throws CardBuilderException {
-        boolean isValid = v.required(v.notNull(webUrl), "Must specify a product webUrl.");
+        boolean isValid = v.required(v.notNullOrEmpty(webUrl), "Must specify a product webUrl.");
         if (isValid) {
             try {
                 this.webUrl = new URL(webUrl);
