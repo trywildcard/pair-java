@@ -19,25 +19,10 @@ public final class ProductCard implements Card {
     private final String pairVersion;
 
     private final CardType cardType;
-    private final String name;
+
     private final URL webUrl;
-    private final String productId;
     private final List<Offer> offers;
-    private final String merchant;
-    private final String brand;
-    private final String description;
-    private final List<ProductColor> colors;
-    private final List<URL> images;
-    private final Float rating;
-    private final Float ratingScale;
-    private final Integer ratingCount;
-    private final List<URL> relatedItems;
-    private final List<URL> referencedItems;
-    private final Map<String, String> sizes;
-    private final List<String> options;
-    private final String model;
-    private final String appLinkIos;
-    private final String appLinkAndroid;
+
 
 
     /**
