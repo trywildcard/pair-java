@@ -93,7 +93,7 @@ public class ProductBuilderTest {
     }
 
 
-     Product buildExtensiveProduct() throws CardBuilderException {
+     private Product buildExtensiveProduct() throws CardBuilderException {
         ProductBuilder builder = new ProductBuilder(dummyProduct.name);
 
         builder.description(dummyProduct.description);
