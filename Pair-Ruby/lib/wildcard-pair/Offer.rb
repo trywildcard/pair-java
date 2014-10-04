@@ -8,14 +8,13 @@ module WildcardPair
     include ActiveModel::Serializers::JSON
     include WildcardPair::HashMappable
 
-    attr_accessor :description, :availability, :quantity, :gender, :weight, :weight_units, :offer_id, :sale_start_date, :sale_end_date, :expiration_date
+    attr_accessor :description, :availability, :quantity, :weight, :weight_units, :offer_id, :sale_start_date, :sale_end_date, :expiration_date
 
     attr_reader :price, :original_price, :shipping_cost, :geographic_availability
 
     validates :price, presence: true
     validates :description, allow_nil: true, length: {minimum: 1}
     validates :availability, allow_nil: true, inclusion: {in: %w(Discontinued InStock InStoreOnly LimitedAvailability OnlineOnly OutOfStock PreOrder SoldOut) }
-    validates :gender, allow_nil: true, inclusion: {in: %w(male female unisex) }
     validates :weight, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
     validates :quantity, allow_nil: true, numericality: {only_integer: true, greater_than_or_equal_to: 0} 
 

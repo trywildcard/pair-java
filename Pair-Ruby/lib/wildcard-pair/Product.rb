@@ -10,10 +10,12 @@ module WildcardPair
     include ActiveModel::Serializers::JSON
     include WildcardPair::HashMappable
 
-    attr_accessor :name, :merchant, :brand, :description, :rating, :rating_scale, :rating_count, :sizes, :model, :app_link_ios, :app_link_android
+    attr_accessor :name, :merchant, :brand, :description, :gender, :rating, :rating_scale, :rating_count, :sizes, :model, :app_link_ios, :app_link_android
     attr_reader :colors, :images, :related_items, :referenced_items, :options
 
     validates :name, presence: true, length: {minimum: 1}
+    validates :gender, allow_nil: true, inclusion: {in: %w(male female unisex) }
+
     validate :validateColors
 
     def initialize(attributes = {})

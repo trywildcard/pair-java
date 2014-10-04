@@ -132,31 +132,6 @@ describe '#availability' do
   end
 end
 
-describe '#nil_gender' do
-  price = WildcardPair::Price.new price: 5
-  offer = WildcardPair::Offer.new price: price, gender: nil
-  it "nil_gender" do
-    offer.valid?.should eql true
-  end
-end
-
-describe '#invalid_gender' do
-  price = WildcardPair::Price.new price: 5
-  offer = WildcardPair::Offer.new price: price, gender: 'malefemale'
-  it "invalid_gender" do
-    offer.valid?.should eql false
-  end
-end
-
-describe '#gender' do
-  price = WildcardPair::Price.new price: 5
-  offer = WildcardPair::Offer.new price: price, gender: 'unisex'
-  it "gender" do
-    offer.valid?.should eql true
-    offer.gender.should eql 'unisex'
-  end
-end
-
 describe '#no_weight' do
   price = WildcardPair::Price.new price: 5
   offer = WildcardPair::Offer.new price: price, weight: nil

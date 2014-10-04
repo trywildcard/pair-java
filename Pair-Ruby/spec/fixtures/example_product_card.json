@@ -25,7 +25,6 @@
             "geographic_availability": [
                 "US"
             ],
-            "gender": "unisex",
             "weight": 17,
             "weight_units": "oz"
         }
@@ -35,6 +34,7 @@
         "merchant": "Example Store",
         "brand": "Shoemaster",
         "description": "Brilliant, colorful shoes made from recycled materials.",
+        "gender": "unisex",
         "colors": [
             {
                 "display_name": "Mint",

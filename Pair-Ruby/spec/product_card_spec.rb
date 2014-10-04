@@ -3,10 +3,10 @@ require 'spec_helper'
 describe WildcardPair::ProductCard do
 
 before :each do
-    @product = WildcardPair::Product.new name: 'product test'
+    @product = WildcardPair::Product.new name: 'product test', gender: 'male'
     @price = WildcardPair::Price.new price: 5.00
     @validoffer = WildcardPair::Offer.new price: @price
-    @validoffer2 = WildcardPair::Offer.new price: @price, gender: 'male', availability: 'InStock'
+    @validoffer2 = WildcardPair::Offer.new price: @price, availability: 'InStock'
     @validoffers = [@validoffer, @validoffer2]
 end
 
