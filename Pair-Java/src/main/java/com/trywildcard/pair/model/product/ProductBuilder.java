@@ -2,6 +2,7 @@ package com.trywildcard.pair.model.product;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.validation.ValidationTool;
 
@@ -13,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class ProductBuilder {
+public class ProductBuilder implements Builder<Product> {
 
-    private ValidationTool v = new ValidationTool();
+    protected ValidationTool v = new ValidationTool();
 
     //required fields
     protected String name;
