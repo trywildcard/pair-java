@@ -9,7 +9,6 @@ import java.util.List;
 
 
 @JsonDeserialize(builder = OfferBuilder.class)
-
 /**
  * Structures a product offer. Must be constructed using <code>OfferBuilder</code>
  */
@@ -30,7 +29,6 @@ public final class Offer {
     private final Gender gender;
     private final Float weight;
     private final String weightUnits;
-    private final String offerId;
 
     /**
      * Construct an offer using an <code>OfferBuilder</code>, which is responsible for validations.
@@ -50,7 +48,6 @@ public final class Offer {
         this.gender = builder.gender;
         this.weight = builder.weight;
         this.weightUnits = builder.weightUnits;
-        this.offerId = builder.offerId;
     }
 
     public String getWeightUnits(){
@@ -115,10 +112,6 @@ public final class Offer {
         }
 
         return new Date(expirationDate.getTime());
-    }
-
-    public String getOfferId() {
-        return offerId;
     }
 
 }
