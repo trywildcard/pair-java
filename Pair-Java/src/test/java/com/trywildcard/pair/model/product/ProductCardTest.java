@@ -118,6 +118,15 @@ public class ProductCardTest {
     }
 
     @Test(expected = CardBuilderException.class)
+    public void isInvalidWithNullOfferListItems() throws CardBuilderException {
+
+        Product product = new ProductBuilder(dummyProduct.name).build();
+        Offer offer = null;
+
+        ProductCard card = new ProductCard(product, offer, dummyProduct.webUrl);
+    }
+
+    @Test(expected = CardBuilderException.class)
     public void isInvalidWithOnlyNullOffersListItems() throws CardBuilderException {
         List<Offer> offers = new ArrayList<Offer>();
         offers.add(null);
@@ -139,6 +148,19 @@ public class ProductCardTest {
 
         try {
             ProductCard card = new ProductCard(product, offers, dummyProduct.webUrl);
+            assertEquals("Offer size should only be 1", 1, card.getOffers().size());
+        } catch (CardBuilderException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void isValidOneOffers() throws CardBuilderException {
+        Offer offer = new OfferBuilder(12.99f).build();
+        Product product = new ProductBuilder(dummyProduct.name).build();
+
+        try {
+            ProductCard card = new ProductCard(product, offer, dummyProduct.webUrl);
             assertEquals("Offer size should only be 1", 1, card.getOffers().size());
         } catch (CardBuilderException e) {
             e.printStackTrace();
