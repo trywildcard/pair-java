@@ -1,4 +1,5 @@
 require_relative '../lib/wildcard-pair/ProductCard'
+require_relative '../lib/wildcard-pair/Product'
 require_relative '../lib/wildcard-pair/Offer'
 require_relative '../lib/wildcard-pair/Price'
 require_relative '../lib/wildcard-pair/Color'
