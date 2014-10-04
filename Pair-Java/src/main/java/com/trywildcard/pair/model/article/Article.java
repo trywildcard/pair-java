@@ -1,9 +1,11 @@
 package com.trywildcard.pair.model.article;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.model.media.Media;
 
 import java.util.Date;
 
+@JsonDeserialize(builder = ArticleBuilder.class)
 public class Article {
 
     //required fields

@@ -16,8 +16,6 @@ public class Image extends Media {
     private URL imageUrl;
     private String imageCaption;
 
-    private final MediaType mediaType = MediaType.IMAGE;
-
     public Image(String imageUrl) throws CardBuilderException {
         imageUrl(imageUrl);
     }
@@ -25,6 +23,7 @@ public class Image extends Media {
     public Image(String imageUrl, String imageCaption) throws CardBuilderException  {
         imageUrl(imageUrl);
         imageCaption(imageCaption);
+        this.mediaType = MediaType.IMAGE;
     }
 
     private void imageUrl(String imageUrl) throws CardBuilderException {
@@ -55,5 +54,19 @@ public class Image extends Media {
 
     public MediaType getMediaType() {
         return mediaType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Image image = (Image) o;
+
+        if (imageCaption != null ? !imageCaption.equals(image.imageCaption) : image.imageCaption != null) return false;
+        if (imageUrl != null ? !imageUrl.equals(image.imageUrl) : image.imageUrl != null) return false;
+        if (mediaType != image.mediaType) return false;
+
+        return true;
     }
 }

@@ -76,7 +76,7 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    private ArticleBuilder abstractContent(String abstractContent) {
+    public ArticleBuilder abstractContent(String abstractContent) {
         boolean isValid = v.optional(v.notNullOrEmpty(abstractContent), "Article Abstract cannot be blank.");
         if (isValid) {
             this.abstractContent = abstractContent;
@@ -84,7 +84,7 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    private ArticleBuilder byLine(String byLine) {
+    public ArticleBuilder byLine(String byLine) {
         boolean isValid = v.optional(v.notNullOrEmpty(byLine), "Article By-Line cannot be blank.");
         if (isValid) {
             this.byLine = byLine;
@@ -92,7 +92,7 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    private ArticleBuilder source(String source) {
+    public ArticleBuilder source(String source) {
         boolean isValid = v.optional(v.notNullOrEmpty(source), "Article Source cannot be blank.");
         if (isValid) {
             this.source = source;
