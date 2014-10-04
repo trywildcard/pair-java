@@ -60,13 +60,13 @@ module WildcardPair
 
     def validateOffers
       if @offers.nil? || (@offers.is_a?(Array) && !@offers.any?)
-        errors.add(:offers, 'Offers cannot be nil or an empty array')
+        errors.add(:offers, 'Atleast one offer is required')
         return
       end
 
       @offers.each do |offer|
         if (!offer.is_a?(Offer) || !offer.valid?)
-          errors.add(:offers, "Atleast one of the offers is not a properly constructed offer object and/or is not valid")
+          errors.add(:offers, "Atleast one of the offers is invalid")
           return
         end
       end
@@ -74,7 +74,7 @@ module WildcardPair
 
     def validateProduct
       if @product.nil? || !@product.is_a?(Product) || !@product.valid?
-        errors.add(:product, "Product cannot be nil and must be a valid Product object")
+        errors.add(:product, "A product is required")
         return
       end
     end
