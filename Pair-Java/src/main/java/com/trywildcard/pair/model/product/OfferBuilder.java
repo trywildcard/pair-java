@@ -27,7 +27,6 @@ public class OfferBuilder implements Builder<Offer> {
     protected Date saleEndDate;
     protected Date expirationDate;
     protected List<String> geographicAvailability = new ArrayList<String>();
-    protected Gender gender;
     protected Float weight;
     protected String weightUnits;
 
@@ -52,11 +51,6 @@ public class OfferBuilder implements Builder<Offer> {
         if (isValid) {
             this.weightUnits = weightUnits;
         }
-        return this;
-    }
-
-    public OfferBuilder gender(Gender gender) {
-        this.gender = gender;
         return this;
     }
     
