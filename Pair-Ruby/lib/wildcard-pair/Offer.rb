@@ -55,20 +55,20 @@ module WildcardPair
 
     def validatePrices
       if @price.nil? || !@price.is_a?(Price) || !@price.valid?
-        errors.add(:price, "Price cannot be nil and must be a valid Price object")
+        errors.add(:price, "Price does not exist or is invalid")
         return
       end
 
       if !@original_price.nil?
         if !@original_price.is_a?(Price) || !@original_price.valid?
-          errors.add(:original_price, "Original Price must be a valid Price object")
+          errors.add(:original_price, "Original Price is invalid")
           return
         end
       end
 
       if !@shipping_cost.nil?
         if !@shipping_cost.is_a?(Price) || !@shipping_cost.valid?
-          errors.add(:shipping_cost, 'Shipping cost must be a valid Price object')
+          errors.add(:shipping_cost, 'Shipping Cost is invalid')
           return
         end
       end  
