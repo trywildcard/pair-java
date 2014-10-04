@@ -78,7 +78,6 @@ public class ProductCardTest {
         builder.gender(dummyOffer.gender);
         builder.weight(dummyOffer.weight);
         builder.weightUnits(dummyOffer.weightUnits);
-        builder.offerId(dummyOffer.offerId);
 
         return builder.build();
     }
