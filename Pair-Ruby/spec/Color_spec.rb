@@ -26,22 +26,19 @@ describe '#valid_color' do
 end
   
  describe '#invalidcolors' do
-   validprice = WildcardPair::Price.new price: 4
-   validoffer = WildcardPair::Offer.new price: validprice
    invalidcolor = WildcardPair::Color.new mapping_color: 'beige'
    invalidcolor2 = WildcardPair::Color.new mapping_color: 'aqua'
    invalidcolors = [invalidcolor, invalidcolor2]
-   product_card = WildcardPair::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: invalidcolors
+
+   product = WildcardPair::Product.new name: 'product test', colors: invalidcolors
  
    it "invalidcolors" do
-     product_card.valid?.should eql false
-     expect {product_card.to_json}.to raise_error(RuntimeError)
+     product.valid?.should eql false
+     expect {product.to_json}.to raise_error(RuntimeError)
    end
  end
  
  describe '#validcolors' do
-   validprice = WildcardPair::Price.new price: 4
-   validoffer = WildcardPair::Offer.new price: validprice
    validcolor = WildcardPair::Color.new mapping_color: 'offwhite'
    validcolor2 = WildcardPair::Color.new mapping_color: 'black'
    validcolor3= WildcardPair::Color.new mapping_color: 'gray'
@@ -50,13 +47,13 @@ end
    validcolor6 = WildcardPair::Color.new mapping_color: 'transparent'
    validcolors =[validcolor, validcolor2, validcolor3, validcolor4, validcolor5, validcolor6]
 
-   product_card = WildcardPair::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: validcolor
-   product_card2 = WildcardPair::ProductCard.new offers: validoffer, web_url: 'http://brand.com/product/123', name: 'product test', colors: validcolors
+   product = WildcardPair::Product.new name: 'product test', colors: validcolor
+   product2 = WildcardPair::Product.new name: 'product test', colors: validcolors
  
    it "validcolors" do
-     product_card.valid?.should eql true
-     product_card2.valid?.should eql true
-     expect {product_card.to_json}.not_to raise_error
+     product.valid?.should eql true
+     product2.valid?.should eql true
+     expect {product.to_json}.not_to raise_error
    end
  end
 
