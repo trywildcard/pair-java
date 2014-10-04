@@ -26,7 +26,6 @@ public final class Offer {
     private final Date saleEndDate;
     private final Date expirationDate;
     private final List<String> geographicAvailability;
-    private final Gender gender;
     private final Float weight;
     private final String weightUnits;
 
@@ -45,7 +44,6 @@ public final class Offer {
         this.saleEndDate = builder.saleEndDate;
         this.expirationDate = builder.expirationDate;
         this.geographicAvailability = Collections.unmodifiableList(builder.geographicAvailability);
-        this.gender = builder.gender;
         this.weight = builder.weight;
         this.weightUnits = builder.weightUnits;
     }
@@ -56,10 +54,6 @@ public final class Offer {
 
     public Float getWeight() {
         return weight;
-    }
-
-    public Gender getGender() {
-        return gender;
     }
 
     public Price getShippingCost() {
