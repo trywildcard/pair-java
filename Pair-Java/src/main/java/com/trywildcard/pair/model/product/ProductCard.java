@@ -1,5 +1,6 @@
 package com.trywildcard.pair.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
@@ -11,6 +12,7 @@ import com.trywildcard.pair.validation.ValidationTool;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +25,11 @@ public final class ProductCard implements Card {
     private final CardType cardType = CardType.PRODUCT;
 
     private URL webUrl;
-    private List<Offer> offers;
+    private List<Offer> offers = new ArrayList<Offer>();
     private Product product;
 
+    @JsonIgnore
     protected ValidationTool v = new ValidationTool();
-
 
     /**
      * Construct a product card
@@ -116,6 +118,11 @@ public final class ProductCard implements Card {
     public Product getProduct() {
         return product;
     }
+
+    /**
+     * Private constructor to allow for Jackson deserialization.
+     */
+    private ProductCard(){}
 
     /**
      * Serialize fields in the Wildcard product card format.
