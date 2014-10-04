@@ -25,7 +25,6 @@
       "geographic_availability": [
         "US"
       ],
-      "gender": "unisex",
       "weight": 17.0,
       "weight_units": "oz"
     }
@@ -70,6 +69,7 @@
       "example option c"
     ],
     "model": "KICKN-GRL-17",
+    "gender": "unisex",
     "app_link_ios": "jump://VerticalA/x123",
     "app_link_android": "market://search?q=pub:examplestore"
   }

@@ -75,7 +75,6 @@ public class ProductCardTest {
         builder.saleEndDate(dummyOffer.saleEndDate);
         builder.expirationDate(dummyOffer.expirationDate);
         builder.geographicAvailability(dummyOffer.geographicAvailability);
-        builder.gender(dummyOffer.gender);
         builder.weight(dummyOffer.weight);
         builder.weightUnits(dummyOffer.weightUnits);
 
@@ -183,6 +182,7 @@ public class ProductCardTest {
         builder.referencedItems(dummyProduct.referencedItems);
         builder.sizes(dummyProduct.sizes);
         builder.options(dummyProduct.options);
+        builder.gender(dummyProduct.gender);
         builder.model(dummyProduct.model);
         builder.appLinkIos(dummyProduct.appLinkIos);
         builder.appLinkAndroid(dummyProduct.appLinkAndroid);

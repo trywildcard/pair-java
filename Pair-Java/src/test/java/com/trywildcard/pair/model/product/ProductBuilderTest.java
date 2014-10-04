@@ -84,6 +84,7 @@ public class ProductBuilderTest {
             relatedItems.add(new URL(url));
         }
 
+        Assert.assertEquals("Gender should match", dummyProduct.gender, product.getGender());
         Assert.assertEquals("Related Items should match", relatedItems, product.getRelatedItems());
         Assert.assertEquals("Sizes should match", dummyProduct.sizes, product.getSizes());
         Assert.assertEquals("Options should match", dummyProduct.options, product.getOptions());
@@ -107,6 +108,7 @@ public class ProductBuilderTest {
         builder.ratingCount(dummyProduct.ratingCount);
         builder.relatedItems(dummyProduct.relatedItems);
         builder.referencedItems(dummyProduct.referencedItems);
+        builder.gender(dummyProduct.gender);
         builder.sizes(dummyProduct.sizes);
         builder.options(dummyProduct.options);
         builder.model(dummyProduct.model);
