@@ -34,6 +34,7 @@ public class ProductBuilder implements Builder<Product> {
     protected List<URL> referencedItems = new ArrayList<URL>();
     protected Map<String, String> sizes = new HashMap<String,String>();
     protected List<String> options = new ArrayList<String>();
+    protected Gender gender;
     protected String model;
     protected String appLinkIos;
     protected String appLinkAndroid;
@@ -73,6 +74,11 @@ public class ProductBuilder implements Builder<Product> {
         if (isValid){
             this.model = model;
         }
+        return this;
+    }
+
+    public ProductBuilder gender(Gender gender) {
+        this.gender = gender;
         return this;
     }
 
