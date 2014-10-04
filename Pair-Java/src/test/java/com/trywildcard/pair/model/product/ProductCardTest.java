@@ -87,7 +87,7 @@ public class ProductCardTest {
     public void testExtensiveWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException, CardBuilderException {
         String inputString = TestUtil.readResourceAsString("example_product_card.json");
         ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
-        Product generatedProduct = new ProductBuilderTest().buildExtensiveProduct();
+        Product generatedProduct = buildExtensiveProduct();
         Offer generatedOffer = buildExtensiveOffer();
 
         ProductCard generatedCard = new ProductCard(generatedProduct, generatedOffer, dummyProduct.webUrl);
@@ -97,6 +97,7 @@ public class ProductCardTest {
 
     @Test
     public void testMinimalWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException, CardBuilderException {
+
         String inputString = TestUtil.readResourceAsString("example_minimal_product_card.json");
         ProductCard fixtureCard = mapper.readValue(inputString,  ProductCard.class);
         ProductCard generatedCard = buildMinimalProductCard();
@@ -142,5 +143,28 @@ public class ProductCardTest {
         } catch (CardBuilderException e) {
             e.printStackTrace();
         }
+    }
+
+    private Product buildExtensiveProduct() throws CardBuilderException {
+        ProductBuilder builder = new ProductBuilder(dummyProduct.name);
+
+        builder.description(dummyProduct.description);
+        builder.image(dummyProduct.imgUrl);
+        builder.brand(dummyProduct.brand);
+        builder.merchant(dummyProduct.merchant);
+        builder.colors(dummyProduct.colors);
+        builder.images(dummyProduct.images);
+        builder.rating(dummyProduct.rating);
+        builder.ratingScale(dummyProduct.ratingScale);
+        builder.ratingCount(dummyProduct.ratingCount);
+        builder.relatedItems(dummyProduct.relatedItems);
+        builder.referencedItems(dummyProduct.referencedItems);
+        builder.sizes(dummyProduct.sizes);
+        builder.options(dummyProduct.options);
+        builder.model(dummyProduct.model);
+        builder.appLinkIos(dummyProduct.appLinkIos);
+        builder.appLinkAndroid(dummyProduct.appLinkAndroid);
+
+        return builder.build();
     }
 }
