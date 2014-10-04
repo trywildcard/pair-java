@@ -17,18 +17,18 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by michaelgarate on 7/1/14.
  */
-public class ProductCardBuilderValidationTest {
+public class ProductBuilderValidationTest {
 
     DummyProduct dummyProduct;
     DummyOffer dummyOffer;
     List<Offer> offers = new ArrayList<Offer>();
-    ProductCardBuilder builder;
+    ProductBuilder builder;
 
     @Before
     public void setUp() throws ParseException, CardBuilderException {
         dummyProduct = new DummyProduct();
         dummyOffer = new DummyOffer();
-        builder = new ProductCardBuilder(dummyProduct.name, dummyOffer.price.getPrice(), dummyProduct.webUrl);
+        builder = new ProductBuilder(dummyProduct.name);
     }
 
     @Test
@@ -37,45 +37,8 @@ public class ProductCardBuilderValidationTest {
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithNullName() throws CardBuilderException {
-        ProductCardBuilder builder = new ProductCardBuilder(null, dummyOffer.price.getPrice(), dummyProduct.webUrl);
-    }
-
-    @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyNameString() throws CardBuilderException {
-        ProductCardBuilder builder = new ProductCardBuilder("", dummyOffer.price.getPrice(), dummyProduct.webUrl);
-    }
-
-    @Test(expected = CardBuilderException.class)
-    public void isInvalidWithEmptyOffersList() throws CardBuilderException {
-        List<Offer> emptyList = new ArrayList<Offer>();
-        ProductCardBuilder builder = new ProductCardBuilder(dummyProduct.name, emptyList, dummyProduct.webUrl);
-    }
-
-    @Test(expected = CardBuilderException.class)
-    public void isInvalidWithOnlyNullOffersListItems() throws CardBuilderException {
-        List<Offer> offers = new ArrayList<Offer>();
-        offers.add(null);
-        offers.add(null);
-
-        ProductCardBuilder builder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.webUrl);
-    }
-
-    @Test
-    public void isValidWithSomeNullOffersListItems() throws CardBuilderException {
-        List<Offer> offers = new ArrayList<Offer>();
-        offers.add(null);
-        offers.add(new OfferBuilder(12.99f).build());
-        offers.add(null);
-
-        ProductCardBuilder builder = null;
-        try {
-            builder = new ProductCardBuilder(dummyProduct.name, offers, dummyProduct.webUrl);
-        } catch (CardBuilderException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals("Errors size should match", 2, builder.getErrors().size());
+        Product product = new ProductBuilder("").build();
     }
 
     @Test
@@ -264,13 +227,6 @@ public class ProductCardBuilderValidationTest {
     public void hasErrorForEmptyMerchantString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
         builder.merchant("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyProductIdString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.productId("");
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 

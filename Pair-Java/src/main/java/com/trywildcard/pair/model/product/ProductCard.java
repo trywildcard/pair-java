@@ -1,135 +1,110 @@
 package com.trywildcard.pair.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.trywildcard.pair.Pair;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Card;
 import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.util.CardSerializer;
+import com.trywildcard.pair.validation.ValidationTool;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@JsonDeserialize(builder = ProductCardBuilder.class)
 /**
- * Structures a Product Card. Must be constructed using <code>ProductCardBuilder</code>.
+ * Structures a Product Card.
  */
 public final class ProductCard implements Card {
-    private final String pairVersion;
+    private final String pairVersion = Pair.getInstance().getVersion();
+    private final CardType cardType = CardType.PRODUCT;
 
-    private final CardType cardType;
-    private final String name;
-    private final URL webUrl;
-    private final String productId;
-    private final List<Offer> offers;
-    private final String merchant;
-    private final String brand;
-    private final String description;
-    private final List<ProductColor> colors;
-    private final List<URL> images;
-    private final Float rating;
-    private final Float ratingScale;
-    private final Integer ratingCount;
-    private final List<URL> relatedItems;
-    private final List<URL> referencedItems;
-    private final Map<String, String> sizes;
-    private final List<String> options;
-    private final String model;
-    private final String appLinkIos;
-    private final String appLinkAndroid;
+    private URL webUrl;
+    private List<Offer> offers = new ArrayList<Offer>();
+    private Product product;
 
+    @JsonIgnore
+    protected ValidationTool v = new ValidationTool();
 
     /**
-     * Construct a product card using an <code>OfferBuilder</code>, which is responsible for validations.
-     * @param builder the builder for this product card.
+     * Construct a product card
      */
-    public ProductCard(ProductCardBuilder builder) {
-        this.pairVersion = builder.pairVersion;
-        this.cardType = builder.cardType;
-        this.name = builder.name;
-        this.webUrl = builder.webUrl;
-        this.offers = Collections.unmodifiableList(builder.offers);
-        this.merchant = builder.merchant;
-        this.brand = builder.brand;
-        this.description = builder.description;
-        this.colors = Collections.unmodifiableList(builder.colors);
-        this.images = Collections.unmodifiableList(builder.images);
-        this.rating = builder.rating;
-        this.ratingScale = builder.ratingScale;
-        this.ratingCount = builder.ratingCount;
-        this.relatedItems = Collections.unmodifiableList(builder.relatedItems);
-        this.referencedItems = Collections.unmodifiableList(builder.referencedItems);
-        this.sizes = Collections.unmodifiableMap(builder.sizes);
-        this.options = Collections.unmodifiableList(builder.options);
-        this.model = builder.model;
-        this.appLinkIos = builder.appLinkIos;
-        this.appLinkAndroid = builder.appLinkAndroid;
-        this.productId = builder.productId;
+    public ProductCard(Product product, Offer offer, String webUrl) throws CardBuilderException {
+        product(product);
+        offer(offer);
+        webUrl(webUrl);
+    }
+
+    /**
+     * Construct a product card
+     */
+    public ProductCard(Product product, List<Offer> offers, String webUrl) throws CardBuilderException {
+        product(product);
+        offers(offers);
+        webUrl(webUrl);
+    }
+
+    /**
+     * Construct a product card
+     */
+    public ProductCard(Product product, Float price, String webUrl) throws CardBuilderException {
+        product(product);
+        Offer offer = new OfferBuilder(price).build();
+        offer(offer);
+        webUrl(webUrl);
     }
 
     public String getPairVersion(){
         return pairVersion;
     }
 
-    public String getAppLinkAndroid() {
-        return appLinkAndroid;
-    }
-
-    public String getAppLinkIos() {
-        return appLinkIos;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public List<String> getOptions() {
-        return options;
-    }
-
-    public List<URL> getRelatedItems() {
-        return relatedItems;
-    }
-
-    public List<URL> getReferencedItems() {
-        return referencedItems;
-    }
-
-    public Integer getRatingCount() {
-        return ratingCount;
-    }
-
-    public Float getRatingScale() {
-        return ratingScale;
-    }
-
-    public Float getRating() {
-        return rating;
-    }
-
-    public List<URL> getImages() {
-        return images;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getMerchant() {
-        return merchant;
-    }
-
     public List<Offer> getOffers() {
         return offers;
     }
 
-    public String getName() {
-        return name;
+    private void webUrl(String webUrl) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(webUrl), "Must specify a product webUrl.");
+        if (isValid) {
+            try {
+                this.webUrl = new URL(webUrl);
+            } catch (MalformedURLException e) {
+                v.required(v.fail(), "Could not parse URL from webUrl string.");
+            }
+        }
     }
 
-    public String getBrand() {
-        return brand;
+    private void offers(List<Offer> offers) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(offers), "Must specify at least one offer.");
+
+        boolean foundValidOffer = false;
+
+        if (isValid) {
+            for (Offer offer : offers){
+                boolean isValidOffer = v.optional(v.notNull(offer), "Tried to set null offer.");
+                if (isValidOffer){
+                    foundValidOffer = true;
+                    this.offers.add(offer);
+                }
+            }
+        }
+
+        v.required(foundValidOffer, "Must specify at least one offer.");
+    }
+
+    private void offer(Offer offer) throws CardBuilderException {
+        boolean isValidOffer = v.required(v.notNull(offer), "Tried to set null offer.");
+        offers.add(offer);
+    }
+
+    private void product(Product product) throws CardBuilderException {
+        v.required(v.notNull(product), "Must specify a product.");
+
+        this.product = product;
     }
 
     public URL getWebUrl() {
@@ -140,17 +115,14 @@ public final class ProductCard implements Card {
         return cardType;
     }
 
-    public List<ProductColor> getColors() {
-        return colors;
+    public Product getProduct() {
+        return product;
     }
 
-    public Map<String, String> getSizes() {
-        return sizes;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
+    /**
+     * Private constructor to allow for Jackson deserialization.
+     */
+    private ProductCard(){}
 
     /**
      * Serialize fields in the Wildcard product card format.
