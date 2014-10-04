@@ -16,14 +16,20 @@ public class Image extends Media {
     private URL imageUrl;
     private String imageCaption;
 
+    /** Needed for Jackson deserialization **/
+    private Image() {
+        super(MediaType.IMAGE);
+    }
+
     public Image(String imageUrl) throws CardBuilderException {
+        super(MediaType.IMAGE);
         imageUrl(imageUrl);
     }
 
     public Image(String imageUrl, String imageCaption) throws CardBuilderException  {
+        super(MediaType.IMAGE);
         imageUrl(imageUrl);
         imageCaption(imageCaption);
-        this.mediaType = MediaType.IMAGE;
     }
 
     private void imageUrl(String imageUrl) throws CardBuilderException {
@@ -52,8 +58,8 @@ public class Image extends Media {
         return imageUrl;
     }
 
-    public MediaType getMediaType() {
-        return mediaType;
+    public MediaType getType() {
+        return type;
     }
 
     @Override
@@ -65,7 +71,7 @@ public class Image extends Media {
 
         if (imageCaption != null ? !imageCaption.equals(image.imageCaption) : image.imageCaption != null) return false;
         if (imageUrl != null ? !imageUrl.equals(image.imageUrl) : image.imageUrl != null) return false;
-        if (mediaType != image.mediaType) return false;
+        if (type != image.type) return false;
 
         return true;
     }

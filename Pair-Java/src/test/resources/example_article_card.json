@@ -11,7 +11,7 @@
         "by_line": "by Jans Koepling, Senior Editor",
         "updated_date": "2014-09-23T00:00:00.000+0000",
         "media": {
-            "media_type": "image",
+            "type": "image",
             "image_url": "http://www.un.org/climatechange/summit/wp-content/uploads/sites/2/2013/09/climate_summit_2014.jpg",
             "image_caption": "Climate Summit 2014"
         },

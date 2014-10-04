@@ -14,8 +14,12 @@ import com.sun.xml.internal.ws.api.PropertySet;
         @JsonSubTypes.Type(value = Image.class, name = "image") })
 public abstract class Media {
 
-    protected MediaType mediaType;
+    private Media() {}
+    public Media(MediaType type) {this.type = type;}
 
-    public abstract MediaType getMediaType();
+    @PropertySet.Property("type")
+    protected MediaType type;
+
+    public abstract MediaType getType();
 
 }
