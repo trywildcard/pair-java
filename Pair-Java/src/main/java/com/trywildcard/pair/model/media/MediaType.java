@@ -1,12 +1,11 @@
-package com.trywildcard.pair.model;
+package com.trywildcard.pair.model.media;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * The type of card.
- */
-public enum CardType {
-    PRODUCT, PRODUCT_SEARCH, ARTICLE;
+
+/** Defines types of allowable media **/
+public enum MediaType {
+    IMAGE, VIDEO;
 
     /**
      * Get the value name as a lowercase string.
