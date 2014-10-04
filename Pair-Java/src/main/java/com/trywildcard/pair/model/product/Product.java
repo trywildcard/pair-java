@@ -28,6 +28,7 @@ public class Product {
     private final List<URL> referencedItems;
     private final Map<String, String> sizes;
     private final List<String> options;
+    private final Gender gender;
     private final String model;
     private final String appLinkIos;
     private final String appLinkAndroid;
@@ -50,6 +51,7 @@ public class Product {
         this.referencedItems = Collections.unmodifiableList(builder.referencedItems);
         this.sizes = Collections.unmodifiableMap(builder.sizes);
         this.options = Collections.unmodifiableList(builder.options);
+        this.gender = builder.gender;
         this.model = builder.model;
         this.appLinkIos = builder.appLinkIos;
         this.appLinkAndroid = builder.appLinkAndroid;
@@ -69,6 +71,10 @@ public class Product {
 
     public List<String> getOptions() {
         return options;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     public Map<String, String> getSizes() {
