@@ -12,7 +12,6 @@ import java.util.*;
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class OfferBuilder implements Builder<Offer> {
 
-
     private ValidationTool v = new ValidationTool();
 
     // required fields
