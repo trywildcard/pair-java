@@ -1,14 +1,18 @@
 package com.trywildcard.pair.model.product;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.validation.ValidationTool;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class ProductBuilder {
 
     private ValidationTool v = new ValidationTool();
@@ -20,15 +24,15 @@ public class ProductBuilder {
     protected String merchant;
     protected String brand;
     protected String description;
-    protected List<ProductColor> colors;
-    protected List<URL> images;
+    protected List<ProductColor> colors = new ArrayList<ProductColor>();
+    protected List<URL> images = new ArrayList<URL>();
     protected Float rating;
     protected Float ratingScale;
     protected Integer ratingCount;
-    protected List<URL> relatedItems;
-    protected List<URL> referencedItems;
-    protected Map<String, String> sizes;
-    protected List<String> options;
+    protected List<URL> relatedItems = new ArrayList<URL>();
+    protected List<URL> referencedItems = new ArrayList<URL>();
+    protected Map<String, String> sizes = new HashMap<String,String>();
+    protected List<String> options = new ArrayList<String>();
     protected String model;
     protected String appLinkIos;
     protected String appLinkAndroid;
