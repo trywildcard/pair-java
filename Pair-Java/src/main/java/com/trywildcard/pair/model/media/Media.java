@@ -11,7 +11,8 @@ import com.sun.xml.internal.ws.api.PropertySet;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Image.class, name = "image") })
+        @JsonSubTypes.Type(value = Image.class, name = "image"),
+        @JsonSubTypes.Type(value = Video.class, name = "video")})
 public abstract class Media {
 
     private Media() {}
