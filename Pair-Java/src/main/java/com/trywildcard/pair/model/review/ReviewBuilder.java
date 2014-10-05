@@ -1,18 +1,17 @@
-package com.trywildcard.pair.model.article;
+package com.trywildcard.pair.model.review;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.media.Media;
-import com.trywildcard.pair.model.product.Product;
 import com.trywildcard.pair.validation.ValidationTool;
 
 import java.util.Date;
 import java.util.List;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class ArticleBuilder implements Builder<Article> {
+public class ReviewBuilder implements Builder<Review> {
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -28,105 +27,109 @@ public class ArticleBuilder implements Builder<Article> {
     protected String byLine;
     protected Date updatedDate;
     protected Media media;
-    protected Boolean isBreaking;
+    protected String productName;
+    protected Rating rating;
     protected String appLinkIos;
     protected String appLinkAndroid;
 
-    /** Private Constructor **/
-    private ArticleBuilder() { }
-
     /**
-     * Construct an <code>ArticleBuilder</code> provided a title and htmlContent.
+     * Construct an <code>ReviewBuilder</code> provided a title and htmlContent.
      */
-    public ArticleBuilder(String title, String htmlContent) throws CardBuilderException {
+    public ReviewBuilder(String title, String htmlContent) throws CardBuilderException {
         title(title);
         htmlContent(htmlContent);
-        this.isBreaking = Boolean.FALSE;
     }
 
     /**
-     * Construct an <code>ArticleBuilder</code> provided a title, htmlContent, and publicationDate.
+     * Construct an <code>ReviewBuilder</code> provided a title, htmlContent, and publicationDate.
      */
-    public ArticleBuilder(String title, String htmlContent, Date publicationDate) throws CardBuilderException {
+    public ReviewBuilder(String title, String htmlContent, Date publicationDate) throws CardBuilderException {
         title(title);
         htmlContent(htmlContent);
         publicationDate(publicationDate);
-        this.isBreaking = Boolean.FALSE;
     }
 
-    private ArticleBuilder title(String title) throws CardBuilderException {
-        boolean isValid = v.required(v.notNullOrEmpty(title), "Article Title cannot be blank.");
+    private ReviewBuilder title(String title) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(title), "Review Title cannot be blank.");
         if (isValid) {
             this.title = title;
         }
         return this;
     }
 
-    private ArticleBuilder htmlContent(String htmlContent) throws CardBuilderException {
-        boolean isValid = v.required(v.notNullOrEmpty(htmlContent), "Article Html Content cannot be blank.");
+    private ReviewBuilder htmlContent(String htmlContent) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(htmlContent), "Review Html Content cannot be blank.");
         if (isValid) {
             this.htmlContent = htmlContent;
         }
         return this;
     }
 
-    public ArticleBuilder publicationDate(Date publicationDate) {
-        boolean isValid = v.optional(v.notNull(publicationDate), "Article Publication Date cannot be null.");
+    public ReviewBuilder publicationDate(Date publicationDate) {
+        boolean isValid = v.optional(v.notNull(publicationDate), "Review Publication Date cannot be null.");
         if (isValid) {
             this.publicationDate = publicationDate;
         }
         return this;
     }
 
-    public ArticleBuilder abstractContent(String abstractContent) {
-        boolean isValid = v.optional(v.notNullOrEmpty(abstractContent), "Article Abstract cannot be blank.");
+    public ReviewBuilder abstractContent(String abstractContent) {
+        boolean isValid = v.optional(v.notNullOrEmpty(abstractContent), "Review Abstract cannot be blank.");
         if (isValid) {
             this.abstractContent = abstractContent;
         }
         return this;
     }
 
-    public ArticleBuilder byLine(String byLine) {
-        boolean isValid = v.optional(v.notNullOrEmpty(byLine), "Article By-Line cannot be blank.");
+    public ReviewBuilder byLine(String byLine) {
+        boolean isValid = v.optional(v.notNullOrEmpty(byLine), "Review By-Line cannot be blank.");
         if (isValid) {
             this.byLine = byLine;
         }
         return this;
     }
 
-    public ArticleBuilder source(String source) {
-        boolean isValid = v.optional(v.notNullOrEmpty(source), "Article Source cannot be blank.");
+    public ReviewBuilder source(String source) {
+        boolean isValid = v.optional(v.notNullOrEmpty(source), "Review Source cannot be blank.");
         if (isValid) {
             this.source = source;
         }
         return this;
     }
 
-    public ArticleBuilder updatedDate(Date updatedDate) {
-        boolean isValid = v.optional(v.notNull(updatedDate), "Article Updated Date cannot be null.");
+    public ReviewBuilder productName(String productName) {
+        boolean isValid = v.optional(v.notNullOrEmpty(productName), "Review Product Name cannot be blank.");
+        if (isValid) {
+            this.productName = productName;
+        }
+        return this;
+    }
+
+    public ReviewBuilder updatedDate(Date updatedDate) {
+        boolean isValid = v.optional(v.notNull(updatedDate), "Review Updated Date cannot be null.");
         if (isValid) {
             this.updatedDate = updatedDate;
         }
         return this;
     }
 
-    public ArticleBuilder media(Media media) {
-        boolean isValid = v.optional(v.notNull(media), "Article Media cannot be null.");
+    public ReviewBuilder media(Media media) {
+        boolean isValid = v.optional(v.notNull(media), "Review Media cannot be null.");
         if (isValid) {
             this.media = media;
         }
         return this;
     }
 
-    public ArticleBuilder isBreaking(Boolean isBreaking) {
-        boolean isValid = v.optional(v.notNull(isBreaking), "Article isBreaking flag cannot be null.");
+    public ReviewBuilder rating(Rating rating) {
+        boolean isValid = v.optional(v.notNull(rating), "Review Rating cannot be null.");
         if (isValid) {
-            this.isBreaking = isBreaking;
+            this.rating = rating;
         }
         return this;
     }
 
-    public ArticleBuilder appLinkIos(String appLinkIos) {
+    public ReviewBuilder appLinkIos(String appLinkIos) {
         boolean isValid = v.optional(v.notNullOrEmpty(appLinkIos), "App Link Ios cannot be blank.");
         if (isValid) {
             this.appLinkIos = appLinkIos;
@@ -134,7 +137,7 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    public ArticleBuilder appLinkAndroid(String appLinkAndroid) {
+    public ReviewBuilder appLinkAndroid(String appLinkAndroid) {
         boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
         if (isValid) {
             this.appLinkAndroid = appLinkAndroid;
@@ -142,13 +145,16 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
+    /** Private Constructor **/
+    private ReviewBuilder() { }
+
     /**
      * Instantiate a <code>Article</code> with the data in this builder.
      * @return the constructed article
      */
-    public Article build() {
-        Article article = new Article(this);
-        return article;
+    public Review build() {
+        Review review = new Review(this);
+        return review;
     }
 
     /**
@@ -158,6 +164,5 @@ public class ArticleBuilder implements Builder<Article> {
     public List<String> getErrors(){
         return v.getErrors();
     }
-
 
 }

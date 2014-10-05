@@ -1,7 +1,7 @@
-package com.trywildcard.pair.model.article;
+package com.trywildcard.pair.model.review;
 
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.util.DummyArticle;
+import com.trywildcard.pair.util.DummyReview;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,15 +9,18 @@ import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
 
-public class ArticleBuilderValidationTest {
+/**
+ * Created by karthiksenthil on 10/5/14.
+ */
+public class ReviewBuilderValidationTest {
 
-    DummyArticle dummyArticle;
-    ArticleBuilder builder;
+    DummyReview dummyReview;
+    ReviewBuilder builder;
 
     @Before
     public void setUp() throws ParseException, CardBuilderException {
-        dummyArticle = new DummyArticle();
-        builder = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent);
+        dummyReview = new DummyReview();
+        builder = new ReviewBuilder(dummyReview.title, dummyReview.htmlContent);
     }
 
     @Test
@@ -27,17 +30,17 @@ public class ArticleBuilderValidationTest {
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyTitleString() throws CardBuilderException {
-        Article article = new ArticleBuilder("", dummyArticle.htmlContent).build();
+        Review review = new ReviewBuilder("", dummyReview.htmlContent).build();
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyHtmlContent() throws CardBuilderException {
-        Article article = new ArticleBuilder(dummyArticle.title, "").build();
+        Review review = new ReviewBuilder(dummyReview.title, "").build();
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyTitleAndHtmlContent() throws CardBuilderException {
-        Article article = new ArticleBuilder("", "").build();
+        Review review = new ReviewBuilder("", "").build();
     }
 
     @Test
@@ -90,9 +93,9 @@ public class ArticleBuilderValidationTest {
     }
 
     @Test
-    public void hasErrorForNullBreaking (){
+    public void hasErrorForNullProductName (){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.isBreaking(null);
+        builder.productName(null);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
@@ -100,6 +103,13 @@ public class ArticleBuilderValidationTest {
     public void hasErrorForNullSourceString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
         builder.source(null);
+        assertEquals("Errors size should match", 1, builder.getErrors().size());
+    }
+
+    @Test
+    public void hasErrorForNullRating (){
+        assertEquals("Errors size should match", 0, builder.getErrors().size());
+        builder.rating(null);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
@@ -137,5 +147,6 @@ public class ArticleBuilderValidationTest {
         builder.appLinkAndroid("");
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
+
 
 }

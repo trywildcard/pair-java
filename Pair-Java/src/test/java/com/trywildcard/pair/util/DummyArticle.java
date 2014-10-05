@@ -37,6 +37,8 @@ public class DummyArticle {
     public final Date updatedDate;
     public Image image;
     public final Boolean isBreaking = Boolean.TRUE;
+    public final String appLinkIos = "ios://applink";
+    public final String appLinkAndroid = "android://applink";
 
     public DummyArticle() throws ParseException, CardBuilderException {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));

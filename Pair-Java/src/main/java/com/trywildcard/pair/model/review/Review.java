@@ -1,12 +1,12 @@
-package com.trywildcard.pair.model.article;
+package com.trywildcard.pair.model.review;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.model.media.Media;
 
 import java.util.Date;
 
-@JsonDeserialize(builder = ArticleBuilder.class)
-public class Article {
+@JsonDeserialize(builder = ReviewBuilder.class)
+public class Review {
 
     //required fields
     private String title;
@@ -19,15 +19,13 @@ public class Article {
     private String byLine;
     private Date updatedDate;
     private Media media;
-    private Boolean isBreaking;
-    private final String appLinkIos;
-    private final String appLinkAndroid;
+    private String productName;
+    //todo: should rating be required?
+    private Rating rating;
+    private String appLinkIos;
+    private String appLinkAndroid;
 
-    /**
-     * Construct a article using a <code>ArticleBuilder</code>, which is responsible for validations.
-     * @param builder the builder for this article.
-     */
-    public Article(ArticleBuilder builder) {
+    public Review(ReviewBuilder builder) {
         this.title = builder.title;
         this.htmlContent = builder.htmlContent;
         this.publicationDate = builder.publicationDate;
@@ -36,7 +34,8 @@ public class Article {
         this.byLine = builder.byLine;
         this.updatedDate = builder.updatedDate;
         this.media = builder.media;
-        this.isBreaking = builder.isBreaking;
+        this.productName = builder.productName;
+        this.rating = builder.rating;
         this.appLinkAndroid = builder.appLinkAndroid;
         this.appLinkIos = builder.appLinkIos;
     }
@@ -73,8 +72,12 @@ public class Article {
         return media;
     }
 
-    public Boolean getIsBreaking() {
-        return isBreaking;
+    public String getProductName() {
+        return productName;
+    }
+
+    public Rating getRating() {
+        return rating;
     }
 
     public String getAppLinkIos() {
@@ -90,22 +93,23 @@ public class Article {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Article article = (Article) o;
+        Review review = (Review) o;
 
-        if (abstractContent != null ? !abstractContent.equals(article.abstractContent) : article.abstractContent != null)
+        if (abstractContent != null ? !abstractContent.equals(review.abstractContent) : review.abstractContent != null)
             return false;
-        if (appLinkAndroid != null ? !appLinkAndroid.equals(article.appLinkAndroid) : article.appLinkAndroid != null)
+        if (appLinkAndroid != null ? !appLinkAndroid.equals(review.appLinkAndroid) : review.appLinkAndroid != null)
             return false;
-        if (appLinkIos != null ? !appLinkIos.equals(article.appLinkIos) : article.appLinkIos != null) return false;
-        if (byLine != null ? !byLine.equals(article.byLine) : article.byLine != null) return false;
-        if (htmlContent != null ? !htmlContent.equals(article.htmlContent) : article.htmlContent != null) return false;
-        if (isBreaking != null ? !isBreaking.equals(article.isBreaking) : article.isBreaking != null) return false;
-        if (media != null ? !media.equals(article.media) : article.media != null) return false;
-        if (publicationDate != null ? !publicationDate.equals(article.publicationDate) : article.publicationDate != null)
+        if (appLinkIos != null ? !appLinkIos.equals(review.appLinkIos) : review.appLinkIos != null) return false;
+        if (byLine != null ? !byLine.equals(review.byLine) : review.byLine != null) return false;
+        if (htmlContent != null ? !htmlContent.equals(review.htmlContent) : review.htmlContent != null) return false;
+        if (media != null ? !media.equals(review.media) : review.media != null) return false;
+        if (productName != null ? !productName.equals(review.productName) : review.productName != null) return false;
+        if (publicationDate != null ? !publicationDate.equals(review.publicationDate) : review.publicationDate != null)
             return false;
-        if (source != null ? !source.equals(article.source) : article.source != null) return false;
-        if (title != null ? !title.equals(article.title) : article.title != null) return false;
-        if (updatedDate != null ? !updatedDate.equals(article.updatedDate) : article.updatedDate != null) return false;
+        if (rating != null ? !rating.equals(review.rating) : review.rating != null) return false;
+        if (source != null ? !source.equals(review.source) : review.source != null) return false;
+        if (title != null ? !title.equals(review.title) : review.title != null) return false;
+        if (updatedDate != null ? !updatedDate.equals(review.updatedDate) : review.updatedDate != null) return false;
 
         return true;
     }
@@ -120,7 +124,8 @@ public class Article {
         result = 31 * result + (byLine != null ? byLine.hashCode() : 0);
         result = 31 * result + (updatedDate != null ? updatedDate.hashCode() : 0);
         result = 31 * result + (media != null ? media.hashCode() : 0);
-        result = 31 * result + (isBreaking != null ? isBreaking.hashCode() : 0);
+        result = 31 * result + (productName != null ? productName.hashCode() : 0);
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
         result = 31 * result + (appLinkIos != null ? appLinkIos.hashCode() : 0);
         result = 31 * result + (appLinkAndroid != null ? appLinkAndroid.hashCode() : 0);
         return result;

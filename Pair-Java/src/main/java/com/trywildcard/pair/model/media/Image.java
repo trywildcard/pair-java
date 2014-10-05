@@ -23,16 +23,16 @@ public class Image extends Media {
 
     public Image(String imageUrl) throws CardBuilderException {
         super(MediaType.IMAGE);
-        imageUrl(imageUrl);
+        setImageUrl(imageUrl);
     }
 
     public Image(String imageUrl, String imageCaption) throws CardBuilderException  {
         super(MediaType.IMAGE);
-        imageUrl(imageUrl);
-        imageCaption(imageCaption);
+        setImageUrl(imageUrl);
+        setImageCaption(imageCaption);
     }
 
-    private void imageUrl(String imageUrl) throws CardBuilderException {
+    private void setImageUrl(String imageUrl) throws CardBuilderException {
         boolean isValid = v.required(v.notNullOrEmpty(imageUrl), "Must specify a image webUrl.");
         if (isValid) {
             try {
@@ -43,7 +43,7 @@ public class Image extends Media {
         }
     }
 
-    private void imageCaption(String imageCaption) {
+    public void setImageCaption(String imageCaption) {
         boolean isValid = v.optional(v.notNullOrEmpty(imageCaption), "Must specify a valid image caption.");
         if (isValid) {
             this.imageCaption = imageCaption;
@@ -74,5 +74,13 @@ public class Image extends Media {
         if (type != image.type) return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = v != null ? v.hashCode() : 0;
+        result = 31 * result + (imageUrl != null ? imageUrl.hashCode() : 0);
+        result = 31 * result + (imageCaption != null ? imageCaption.hashCode() : 0);
+        return result;
     }
 }

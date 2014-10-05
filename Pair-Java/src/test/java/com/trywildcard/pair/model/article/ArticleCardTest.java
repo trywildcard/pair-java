@@ -45,14 +45,14 @@ public class ArticleCardTest {
     }
 
     @Test
-    public void testMinimalProductCard() throws JsonProcessingException, CardBuilderException {
+    public void testMinimalArticleCard() throws JsonProcessingException, CardBuilderException {
         ArticleCard card = buildMinimalArticleCard();
         testMinimalCardAttributes(card);
     }
 
 
     @Test
-    public void testMinimalProductWithMinimalConstructor() throws CardBuilderException {
+    public void testMinimalArticleCardWithMinimalConstructor() throws CardBuilderException {
         Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent).build();
         ArticleCard articleCard = new ArticleCard(article, dummyArticle.webUrl);
         testMinimalCardAttributes(articleCard);
@@ -104,6 +104,8 @@ public class ArticleCardTest {
         builder.publicationDate(dummyArticle.publicationDate);
         builder.updatedDate(dummyArticle.updatedDate);
         builder.source(dummyArticle.source);
+        builder.appLinkAndroid(dummyArticle.appLinkAndroid);
+        builder.appLinkIos(dummyArticle.appLinkIos);
 
         return builder.build();
     }

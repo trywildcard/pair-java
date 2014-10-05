@@ -51,6 +51,7 @@ public class ImageValidationTest {
         image = new Image("http://www.un.org/climatechange/summit/wp-content/uploads/sites/2/2013/09/climate_summit_2014.jpg", "Image Caption");
         assertEquals(image.getImageUrl(), new URL("http://www.un.org/climatechange/summit/wp-content/uploads/sites/2/2013/09/climate_summit_2014.jpg"));
         assertEquals(image.getImageCaption(), "Image Caption");
+        assertEquals(image.getType() , MediaType.IMAGE);
         assertEquals("Errors size should match", 0, image.v.getErrors().size());
     }
 

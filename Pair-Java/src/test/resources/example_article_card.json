@@ -15,6 +15,8 @@
             "image_url": "http://www.un.org/climatechange/summit/wp-content/uploads/sites/2/2013/09/climate_summit_2014.jpg",
             "image_caption": "Climate Summit 2014"
         },
-        "is_breaking": true
+        "is_breaking": true,
+        "app_link_android": "android://applink",
+        "app_link_ios": "ios://applink"
     }
 }
