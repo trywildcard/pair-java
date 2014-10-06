@@ -1,6 +1,5 @@
 package com.trywildcard.pair.model.media;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.net.URL;
 import java.util.Date;
@@ -13,15 +12,16 @@ public class Video extends Media {
 
     //required fields
     private String title;
-    private URL embeddedURL;
-    private Integer embeddedURLWidth;
-    private Integer embeddedURLHeight;
+    private URL embeddedUrl;
+    private Integer embeddedUrlWidth;
+    private Integer embeddedUrlHeight;
 
     //optional fields
-    private URL streamURL;
+    private URL streamUrl;
+    private String streamContentType;
     private Date publicationDate;
     private String description;
-    private URL posterImageURL;
+    private URL posterImageUrl;
     private String contributor;
     private String source;
     private String appLinkIos;
@@ -35,13 +35,14 @@ public class Video extends Media {
     public Video(VideoBuilder builder) {
         super(MediaType.VIDEO);
         this.title = builder.title;
-        this.embeddedURL = builder.embeddedURL;
-        this.embeddedURLHeight = builder.embeddedURLHeight;
-        this.embeddedURLWidth = builder.embeddedURLWidth;
-        this.streamURL = builder.streamURL;
+        this.embeddedUrl = builder.embeddedUrl;
+        this.embeddedUrlHeight = builder.embeddedUrlHeight;
+        this.embeddedUrlWidth = builder.embeddedUrlWidth;
+        this.streamUrl = builder.streamUrl;
+        this.streamContentType = builder.streamContentType;
         this.publicationDate = builder.publicationDate;
         this.description = builder.description;
-        this.posterImageURL = builder.posterImageURL;
+        this.posterImageUrl = builder.posterImageUrl;
         this.contributor = builder.contributor;
         this.source = builder.source;
         this.appLinkAndroid = builder.appLinkAndroid;
@@ -68,8 +69,8 @@ public class Video extends Media {
         return contributor;
     }
 
-    public URL getPosterImageURL() {
-        return posterImageURL;
+    public URL getPosterImageUrl() {
+        return posterImageUrl;
     }
 
     public String getDescription() {
@@ -80,24 +81,28 @@ public class Video extends Media {
         return publicationDate;
     }
 
-    public URL getStreamURL() {
-        return streamURL;
+    public URL getStreamUrl() {
+        return streamUrl;
     }
 
-    public Integer getEmbeddedURLHeight() {
-        return embeddedURLHeight;
+    public Integer getEmbeddedUrlHeight() {
+        return embeddedUrlHeight;
     }
 
-    public Integer getEmbeddedURLWidth() {
-        return embeddedURLWidth;
+    public Integer getEmbeddedUrlWidth() {
+        return embeddedUrlWidth;
     }
 
-    public URL getEmbeddedURL() {
-        return embeddedURL;
+    public URL getEmbeddedUrl() {
+        return embeddedUrl;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getStreamContentType() {
+        return streamContentType;
     }
 
     @Override
@@ -112,17 +117,19 @@ public class Video extends Media {
         if (appLinkIos != null ? !appLinkIos.equals(video.appLinkIos) : video.appLinkIos != null) return false;
         if (contributor != null ? !contributor.equals(video.contributor) : video.contributor != null) return false;
         if (description != null ? !description.equals(video.description) : video.description != null) return false;
-        if (embeddedURL != null ? !embeddedURL.equals(video.embeddedURL) : video.embeddedURL != null) return false;
-        if (embeddedURLHeight != null ? !embeddedURLHeight.equals(video.embeddedURLHeight) : video.embeddedURLHeight != null)
+        if (embeddedUrl != null ? !embeddedUrl.equals(video.embeddedUrl) : video.embeddedUrl != null) return false;
+        if (embeddedUrlHeight != null ? !embeddedUrlHeight.equals(video.embeddedUrlHeight) : video.embeddedUrlHeight != null)
             return false;
-        if (embeddedURLWidth != null ? !embeddedURLWidth.equals(video.embeddedURLWidth) : video.embeddedURLWidth != null)
+        if (embeddedUrlWidth != null ? !embeddedUrlWidth.equals(video.embeddedUrlWidth) : video.embeddedUrlWidth != null)
             return false;
-        if (posterImageURL != null ? !posterImageURL.equals(video.posterImageURL) : video.posterImageURL != null)
+        if (posterImageUrl != null ? !posterImageUrl.equals(video.posterImageUrl) : video.posterImageUrl != null)
             return false;
         if (publicationDate != null ? !publicationDate.equals(video.publicationDate) : video.publicationDate != null)
             return false;
         if (source != null ? !source.equals(video.source) : video.source != null) return false;
-        if (streamURL != null ? !streamURL.equals(video.streamURL) : video.streamURL != null) return false;
+        if (streamContentType != null ? !streamContentType.equals(video.streamContentType) : video.streamContentType != null)
+            return false;
+        if (streamUrl != null ? !streamUrl.equals(video.streamUrl) : video.streamUrl != null) return false;
         if (title != null ? !title.equals(video.title) : video.title != null) return false;
 
         return true;
@@ -131,13 +138,14 @@ public class Video extends Media {
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (embeddedURL != null ? embeddedURL.hashCode() : 0);
-        result = 31 * result + (embeddedURLWidth != null ? embeddedURLWidth.hashCode() : 0);
-        result = 31 * result + (embeddedURLHeight != null ? embeddedURLHeight.hashCode() : 0);
-        result = 31 * result + (streamURL != null ? streamURL.hashCode() : 0);
+        result = 31 * result + (embeddedUrl != null ? embeddedUrl.hashCode() : 0);
+        result = 31 * result + (embeddedUrlWidth != null ? embeddedUrlWidth.hashCode() : 0);
+        result = 31 * result + (embeddedUrlHeight != null ? embeddedUrlHeight.hashCode() : 0);
+        result = 31 * result + (streamUrl != null ? streamUrl.hashCode() : 0);
+        result = 31 * result + (streamContentType != null ? streamContentType.hashCode() : 0);
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (posterImageURL != null ? posterImageURL.hashCode() : 0);
+        result = 31 * result + (posterImageUrl != null ? posterImageUrl.hashCode() : 0);
         result = 31 * result + (contributor != null ? contributor.hashCode() : 0);
         result = 31 * result + (source != null ? source.hashCode() : 0);
         result = 31 * result + (appLinkIos != null ? appLinkIos.hashCode() : 0);

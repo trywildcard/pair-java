@@ -1,0 +1,12 @@
+{
+    "pair_version": "0.1.0",
+    "card_type": "video",
+    "web_url": "https://www.youtube.com/watch?v=0RFfrsABtQo",
+    "video": {
+        "type": "video",
+        "title": "Best of Phantom: Cavaliers Practice",
+        "embedded_url": "https://www.youtube.com/embed/0RFfrsABtQo",
+        "embedded_url_width": 400,
+        "embedded_url_height": 400
+    }
+}

@@ -21,15 +21,16 @@ public class VideoBuilder implements Builder<Video> {
     protected ValidationTool v = new ValidationTool();
 
     protected String title;
-    protected URL embeddedURL;
-    protected Integer embeddedURLWidth;
-    protected Integer embeddedURLHeight;
+    protected URL embeddedUrl;
+    protected Integer embeddedUrlWidth;
+    protected Integer embeddedUrlHeight;
 
     //optional fields
-    protected URL streamURL;
+    protected URL streamUrl;
+    protected String streamContentType;
     protected Date publicationDate;
     protected String description;
-    protected URL posterImageURL;
+    protected URL posterImageUrl;
     protected String contributor;
     protected String source;
     protected String appLinkIos;
@@ -39,13 +40,13 @@ public class VideoBuilder implements Builder<Video> {
     private VideoBuilder() { }
 
     /**
-     * Construct an <code>VideoBuilder</code> provided a title and embeddedURL.
+     * Construct an <code>VideoBuilder</code> provided a title and embeddedUrl.
      */
-    public VideoBuilder(String title, String embeddedURL, Integer embeddedURLWidth, Integer embeddedURLHeight) throws CardBuilderException {
+    public VideoBuilder(String title, String embeddedUrl, Integer embeddedUrlWidth, Integer embeddedUrlHeight) throws CardBuilderException {
         title(title);
-        embeddedURL(embeddedURL);
-        embeddedURLHeight(embeddedURLHeight);
-        embeddedURLWidth(embeddedURLWidth);
+        embeddedUrl(embeddedUrl);
+        embeddedUrlHeight(embeddedUrlHeight);
+        embeddedUrlWidth(embeddedUrlWidth);
     }
 
     private VideoBuilder title(String title) throws CardBuilderException {
@@ -56,11 +57,11 @@ public class VideoBuilder implements Builder<Video> {
         return this;
     }
 
-    private VideoBuilder embeddedURL(String embeddedURL) throws CardBuilderException {
+    private VideoBuilder embeddedUrl(String embeddedURL) throws CardBuilderException {
         boolean isValid = v.required(v.notNullOrEmpty(embeddedURL), "Must specify a video embedded URL.");
         if (isValid) {
             try {
-                this.embeddedURL = new URL(embeddedURL);
+                this.embeddedUrl = new URL(embeddedURL);
             } catch (MalformedURLException e) {
                 v.required(v.fail(), "Could not parse URL from embedded URL.");
             }
@@ -69,29 +70,29 @@ public class VideoBuilder implements Builder<Video> {
         return this;
     }
 
-    public void embeddedURLHeight(Integer embeddedURLHeight) throws CardBuilderException {
-        boolean isNotNull = v.required(v.notNull(embeddedURLHeight), "Video embeddedURLHeight must not be null");
-        boolean isNotNegative = v.required(v.notNegative(embeddedURLHeight), "Video embeddedURLHeight must be a non-negative Integer.");
+    private void embeddedUrlHeight(Integer embeddedURLHeight) throws CardBuilderException {
+        boolean isNotNull = v.required(v.notNull(embeddedURLHeight), "Video embeddedUrlHeight must not be null");
+        boolean isNotNegative = v.required(v.notNegative(embeddedURLHeight), "Video embeddedUrlHeight must be a non-negative Integer.");
 
         if (isNotNull && isNotNegative) {
-            this.embeddedURLHeight = embeddedURLHeight;
+            this.embeddedUrlHeight = embeddedURLHeight;
         }
     }
 
-    public void embeddedURLWidth(Integer embeddedURLWidth) throws CardBuilderException {
-        boolean isNotNull = v.optional(v.notNull(embeddedURLWidth), "Video embeddedURLWidth must not be null");
-        boolean isNotNegative = v.optional(v.notNegative(embeddedURLWidth), "Video embeddedURLWidth must be a non-negative Integer.");
+    private void embeddedUrlWidth(Integer embeddedURLWidth) throws CardBuilderException {
+        boolean isNotNull = v.required(v.notNull(embeddedURLWidth), "Video embeddedUrlWidth must not be null");
+        boolean isNotNegative = v.required(v.notNegative(embeddedURLWidth), "Video embeddedUrlWidth must be a non-negative Integer.");
 
         if (isNotNull && isNotNegative) {
-            this.embeddedURLWidth = embeddedURLWidth;
+            this.embeddedUrlWidth = embeddedURLWidth;
         }
     }
 
-    public VideoBuilder streamURL(String streamURL) throws CardBuilderException {
-        boolean isValid = v.optional(v.notNullOrEmpty(streamURL), "Must specify a video streamURL.");
+    public VideoBuilder streamUrl(String streamUrl) {
+        boolean isValid = v.optional(v.notNullOrEmpty(streamUrl), "Must specify a video streamUrl.");
         if (isValid) {
             try {
-                this.streamURL = new URL(streamURL);
+                this.streamUrl = new URL(streamUrl);
             } catch (MalformedURLException e) {
                 v.optional(v.fail(), "Could not parse URL from video stream URL.");
             }
@@ -100,13 +101,23 @@ public class VideoBuilder implements Builder<Video> {
         return this;
     }
 
-    public VideoBuilder posterImageURL(String posterImageURL) throws CardBuilderException {
-        boolean isValid = v.optional(v.notNullOrEmpty(posterImageURL), "Must specify a posterImageURL.");
+    public VideoBuilder streamContentType(String streamContentType) {
+        boolean isValid = v.optional(v.notNullOrEmpty(streamContentType), "Must specify a video streamUrl.");
+        if (isValid) {
+            this.streamContentType = streamContentType;
+        }
+
+
+        return this;
+    }
+
+    public VideoBuilder posterImageUrl(String posterImageUrl) {
+        boolean isValid = v.optional(v.notNullOrEmpty(posterImageUrl), "Must specify a posterImageUrl.");
         if (isValid) {
             try {
-                this.posterImageURL = new URL(posterImageURL);
+                this.posterImageUrl = new URL(posterImageUrl);
             } catch (MalformedURLException e) {
-                v.optional(v.fail(), "Could not parse URL from video posterImageURL.");
+                v.optional(v.fail(), "Could not parse URL from video posterImageUrl.");
             }
         }
 
