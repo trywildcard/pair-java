@@ -1,5 +1,5 @@
 {
-    "pair_version": "0.1.0",
+    "pair_version": "0.2.0",
     "card_type": "video",
     "web_url": "https://www.youtube.com/watch?v=0RFfrsABtQo",
     "video": {
@@ -13,8 +13,8 @@
         "publication_date": "2014-09-22T00:00:00.000+0000",
         "description": "Take a look at the new-look Cleveland Cavaliers through the lens of the Phantom camera during a practice session. Visit nba.com/video for more highlights.About the NBA: The NBA is the premier professional basketball league in the United States and Canada. The league is truly global, with games and programming in 215 countries and territories in 47 languages, as well as NBA rosters at the start of the 2013-14 season featuring a record 92 international players from 39 countries and territories.",
         "poster_image_url": "https://wildcard-branddata.s3.amazonaws.com/staging/youtube/bg_img.jpg",
-        "contributor": "Cleveland Cavaliers",
-        "source": "NBA",
+        "creator": "NBA",
+        "source": "Youtube",
         "app_link_ios": "ios://applink",
         "app_link_android": "android://applink"
     }
