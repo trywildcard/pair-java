@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.media.Media;
-import com.trywildcard.pair.model.product.Product;
 import com.trywildcard.pair.validation.ValidationTool;
 
 import java.util.Date;
@@ -25,7 +24,7 @@ public class ArticleBuilder implements Builder<Article> {
     protected Date publicationDate;
     protected String abstractContent;
     protected String source;
-    protected String byLine;
+    protected String author;
     protected Date updatedDate;
     protected Media media;
     protected Boolean isBreaking;
@@ -86,10 +85,10 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    public ArticleBuilder byLine(String byLine) {
-        boolean isValid = v.optional(v.notNullOrEmpty(byLine), "Article By-Line cannot be blank.");
+    public ArticleBuilder author(String author) {
+        boolean isValid = v.optional(v.notNullOrEmpty(author), "Article Author cannot be blank.");
         if (isValid) {
-            this.byLine = byLine;
+            this.author = author;
         }
         return this;
     }

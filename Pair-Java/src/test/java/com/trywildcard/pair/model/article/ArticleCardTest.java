@@ -99,7 +99,7 @@ public class ArticleCardTest {
 
         builder.isBreaking(dummyArticle.isBreaking);
         builder.abstractContent(dummyArticle.abstractContent);
-        builder.byLine(dummyArticle.byLine);
+        builder.author(dummyArticle.author);
         builder.media(dummyArticle.image);
         builder.publicationDate(dummyArticle.publicationDate);
         builder.updatedDate(dummyArticle.updatedDate);

@@ -71,14 +71,14 @@ public class ArticleBuilderValidationTest {
     @Test
     public void hasErrorForNullBylineString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.byLine(null);
+        builder.author(null);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
     @Test
     public void hasErrorForEmptyBylineString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.byLine("");
+        builder.author("");
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 

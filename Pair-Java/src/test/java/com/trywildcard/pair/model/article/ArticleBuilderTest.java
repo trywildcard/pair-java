@@ -57,7 +57,7 @@ public class ArticleBuilderTest {
         Assert.assertEquals("Updated Date should match", dummyArticle.updatedDate, article.getUpdatedDate());
 
 
-        Assert.assertEquals("By-Line should match", dummyArticle.byLine, article.getByLine());
+        Assert.assertEquals("By-Line should match", dummyArticle.author, article.getAuthor());
         Assert.assertEquals("Media should match", dummyArticle.image, article.getMedia());
         Assert.assertEquals("Source should match", dummyArticle.source, article.getSource());
         Assert.assertEquals("Source should match", dummyArticle.appLinkAndroid, article.getAppLinkAndroid());
@@ -70,7 +70,7 @@ public class ArticleBuilderTest {
 
         builder.isBreaking(dummyArticle.isBreaking);
         builder.abstractContent(dummyArticle.abstractContent);
-        builder.byLine(dummyArticle.byLine);
+        builder.author(dummyArticle.author);
         builder.media(dummyArticle.image);
         builder.publicationDate(dummyArticle.publicationDate);
         builder.updatedDate(dummyArticle.updatedDate);
