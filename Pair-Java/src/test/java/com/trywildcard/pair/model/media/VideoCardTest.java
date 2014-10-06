@@ -29,10 +29,10 @@ public class VideoCardTest {
     }
 
     private void testMinimalVideoCardAttributes(VideoCard videoCard){
-        Assert.assertEquals("Name should match", dummyVideo.title, videoCard.getVideo().getTitle());
-        Assert.assertEquals("embeddedUrl should match", dummyVideo.embeddedURL, videoCard.getVideo().getEmbeddedUrl().toString());
-        Assert.assertEquals("embeddedUrlHeight should match", dummyVideo.embeddedURLHeight,  videoCard.getVideo().getEmbeddedUrlHeight());
-        Assert.assertEquals("embeddedUrlWidth should match", dummyVideo.embeddedURLWidth,  videoCard.getVideo().getEmbeddedUrlWidth());
+        Assert.assertEquals("Name should match", dummyVideo.title, videoCard.getMedia().getTitle());
+        Assert.assertEquals("embeddedUrl should match", dummyVideo.embeddedURL, videoCard.getMedia().getEmbeddedUrl().toString());
+        Assert.assertEquals("embeddedUrlHeight should match", dummyVideo.embeddedURLHeight,  videoCard.getMedia().getEmbeddedUrlHeight());
+        Assert.assertEquals("embeddedUrlWidth should match", dummyVideo.embeddedURLWidth,  videoCard.getMedia().getEmbeddedUrlWidth());
     }
 
 

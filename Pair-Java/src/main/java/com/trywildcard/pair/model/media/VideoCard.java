@@ -21,7 +21,7 @@ public class VideoCard implements Card {
     private final CardType cardType = CardType.VIDEO;
 
     private URL webUrl;
-    private Video video;
+    private Video media;
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -29,8 +29,8 @@ public class VideoCard implements Card {
     /**
      * Construct a product card
      */
-    public VideoCard(Video video, String webUrl) throws CardBuilderException {
-        video(video);
+    public VideoCard(Video media, String webUrl) throws CardBuilderException {
+        media(media);
         webUrl(webUrl);
     }
 
@@ -45,10 +45,10 @@ public class VideoCard implements Card {
         }
     }
 
-    private void video(Video video) throws CardBuilderException {
-        v.required(v.notNull(video), "Must specify a video.");
+    private void media(Video media) throws CardBuilderException {
+        v.required(v.notNull(media), "Must specify a video.");
 
-        this.video = video;
+        this.media = media;
     }
 
     public String getPairVersion() {
@@ -63,8 +63,8 @@ public class VideoCard implements Card {
         return webUrl;
     }
 
-    public Video getVideo() {
-        return video;
+    public Video getMedia() {
+        return media;
     }
 
     /**
