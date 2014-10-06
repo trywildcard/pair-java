@@ -102,7 +102,7 @@ public class ReviewCardTest {
         builder.productName(dummyReview.productName);
         builder.rating(dummyReview.rating);
         builder.abstractContent(dummyReview.abstractContent);
-        builder.byLine(dummyReview.byLine);
+        builder.author(dummyReview.author);
         builder.media(dummyReview.image);
         builder.publicationDate(dummyReview.publicationDate);
         builder.updatedDate(dummyReview.updatedDate);

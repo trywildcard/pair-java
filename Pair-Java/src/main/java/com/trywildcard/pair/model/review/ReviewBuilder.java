@@ -24,7 +24,7 @@ public class ReviewBuilder implements Builder<Review> {
     protected Date publicationDate;
     protected String abstractContent;
     protected String source;
-    protected String byLine;
+    protected String author;
     protected Date updatedDate;
     protected Media media;
     protected String productName;
@@ -81,10 +81,10 @@ public class ReviewBuilder implements Builder<Review> {
         return this;
     }
 
-    public ReviewBuilder byLine(String byLine) {
-        boolean isValid = v.optional(v.notNullOrEmpty(byLine), "Review By-Line cannot be blank.");
+    public ReviewBuilder author(String author) {
+        boolean isValid = v.optional(v.notNullOrEmpty(author), "Review Author cannot be blank.");
         if (isValid) {
-            this.byLine = byLine;
+            this.author = author;
         }
         return this;
     }

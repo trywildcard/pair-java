@@ -72,16 +72,16 @@ public class ReviewBuilderValidationTest {
     }
 
     @Test
-    public void hasErrorForNullBylineString(){
+    public void hasErrorForNullAuthorString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.byLine(null);
+        builder.author(null);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
     @Test
-    public void hasErrorForEmptyBylineString(){
+    public void hasErrorForEmptyAuthorString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.byLine("");
+        builder.author("");
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 

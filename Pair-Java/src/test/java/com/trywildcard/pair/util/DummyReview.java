@@ -31,7 +31,7 @@ public class DummyReview {
     // extensive attributes
     public final Date publicationDate;
     public final String source = "Engadget";
-    public final String byLine = "by Jans Koepling, Senior Editor";
+    public final String author = "Jans Koepling, Senior Editor";
     public final Date updatedDate;
     public Image image;
     public final String productName = "LG G2";

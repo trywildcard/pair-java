@@ -16,7 +16,7 @@ public class Review {
     private Date publicationDate;
     private String abstractContent;
     private String source;
-    private String byLine;
+    private String author;
     private Date updatedDate;
     private Media media;
     private String productName;
@@ -31,7 +31,7 @@ public class Review {
         this.publicationDate = builder.publicationDate;
         this.abstractContent = builder.abstractContent;
         this.source = builder.source;
-        this.byLine = builder.byLine;
+        this.author = builder.author;
         this.updatedDate = builder.updatedDate;
         this.media = builder.media;
         this.productName = builder.productName;
@@ -60,8 +60,8 @@ public class Review {
         return source;
     }
 
-    public String getByLine() {
-        return byLine;
+    public String getAuthor() {
+        return author;
     }
 
     public Date getUpdatedDate() {
@@ -100,7 +100,7 @@ public class Review {
         if (appLinkAndroid != null ? !appLinkAndroid.equals(review.appLinkAndroid) : review.appLinkAndroid != null)
             return false;
         if (appLinkIos != null ? !appLinkIos.equals(review.appLinkIos) : review.appLinkIos != null) return false;
-        if (byLine != null ? !byLine.equals(review.byLine) : review.byLine != null) return false;
+        if (author != null ? !author.equals(review.author) : review.author != null) return false;
         if (htmlContent != null ? !htmlContent.equals(review.htmlContent) : review.htmlContent != null) return false;
         if (media != null ? !media.equals(review.media) : review.media != null) return false;
         if (productName != null ? !productName.equals(review.productName) : review.productName != null) return false;
@@ -121,7 +121,7 @@ public class Review {
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
         result = 31 * result + (abstractContent != null ? abstractContent.hashCode() : 0);
         result = 31 * result + (source != null ? source.hashCode() : 0);
-        result = 31 * result + (byLine != null ? byLine.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (updatedDate != null ? updatedDate.hashCode() : 0);
         result = 31 * result + (media != null ? media.hashCode() : 0);
         result = 31 * result + (productName != null ? productName.hashCode() : 0);
