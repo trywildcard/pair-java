@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.trywildcard.pair</groupId>
   <artifactId>wildcard-pair</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <distributionManagement>
     <repository>
       <id>pair</id>
