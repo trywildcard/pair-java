@@ -22,7 +22,7 @@ public class Video extends Media {
     private Date publicationDate;
     private String description;
     private URL posterImageUrl;
-    private String contributor;
+    private String creator;
     private String source;
     private String appLinkIos;
     private String appLinkAndroid;
@@ -43,7 +43,7 @@ public class Video extends Media {
         this.publicationDate = builder.publicationDate;
         this.description = builder.description;
         this.posterImageUrl = builder.posterImageUrl;
-        this.contributor = builder.contributor;
+        this.creator = builder.creator;
         this.source = builder.source;
         this.appLinkAndroid = builder.appLinkAndroid;
         this.appLinkIos = builder.appLinkIos;
@@ -65,8 +65,8 @@ public class Video extends Media {
         return source;
     }
 
-    public String getContributor() {
-        return contributor;
+    public String getCreator() {
+        return creator;
     }
 
     public URL getPosterImageUrl() {
@@ -115,7 +115,7 @@ public class Video extends Media {
         if (appLinkAndroid != null ? !appLinkAndroid.equals(video.appLinkAndroid) : video.appLinkAndroid != null)
             return false;
         if (appLinkIos != null ? !appLinkIos.equals(video.appLinkIos) : video.appLinkIos != null) return false;
-        if (contributor != null ? !contributor.equals(video.contributor) : video.contributor != null) return false;
+        if (creator != null ? !creator.equals(video.creator) : video.creator != null) return false;
         if (description != null ? !description.equals(video.description) : video.description != null) return false;
         if (embeddedUrl != null ? !embeddedUrl.equals(video.embeddedUrl) : video.embeddedUrl != null) return false;
         if (embeddedUrlHeight != null ? !embeddedUrlHeight.equals(video.embeddedUrlHeight) : video.embeddedUrlHeight != null)
@@ -146,7 +146,7 @@ public class Video extends Media {
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (posterImageUrl != null ? posterImageUrl.hashCode() : 0);
-        result = 31 * result + (contributor != null ? contributor.hashCode() : 0);
+        result = 31 * result + (creator != null ? creator.hashCode() : 0);
         result = 31 * result + (source != null ? source.hashCode() : 0);
         result = 31 * result + (appLinkIos != null ? appLinkIos.hashCode() : 0);
         result = 31 * result + (appLinkAndroid != null ? appLinkAndroid.hashCode() : 0);
