@@ -31,7 +31,7 @@ public class VideoBuilder implements Builder<Video> {
     protected Date publicationDate;
     protected String description;
     protected URL posterImageUrl;
-    protected String contributor;
+    protected String creator;
     protected String source;
     protected String appLinkIos;
     protected String appLinkAndroid;
@@ -141,10 +141,10 @@ public class VideoBuilder implements Builder<Video> {
         return this;
     }
 
-    public VideoBuilder contributor(String contributor) {
-        boolean isValid = v.optional(v.notNullOrEmpty(contributor), "Video Contributor cannot be blank.");
+    public VideoBuilder creator(String creator) {
+        boolean isValid = v.optional(v.notNullOrEmpty(creator), "Video Creator cannot be blank.");
         if (isValid) {
-            this.contributor = contributor;
+            this.creator = creator;
         }
         return this;
     }
