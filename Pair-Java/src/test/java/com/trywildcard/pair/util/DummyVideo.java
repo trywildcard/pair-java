@@ -26,8 +26,8 @@ public class DummyVideo {
 
     // extensive attributes
     public final Date publicationDate;
-    public final String source = "NBA";
-    public final String contributor = "Cleveland Cavaliers";
+    public final String source = "Youtube";
+    public final String creator = "NBA";
     public final String embeddedURL = "https://www.youtube.com/embed/0RFfrsABtQo";
     public final String streamURL = "https://www.youtube.com/stream/0RFfrsABtQo";
     public final String streamContentType = "video/mp4";
