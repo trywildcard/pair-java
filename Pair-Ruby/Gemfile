@@ -1,9 +1,0 @@
-source 'http://rubygems.org'
-
-# Specify your gem's dependencies in wildcard-pair.gemspec
-#gemspec
-gem 'activemodel'
-
-group :development, :test do
-  gem 'rspec'
-end
