@@ -50,7 +50,6 @@ public class OfferBuilderTest {
         builder.saleEndDate(dummyOffer.saleEndDate);
         builder.expirationDate(dummyOffer.expirationDate);
         builder.geographicAvailability(dummyOffer.geographicAvailability);
-        builder.gender(dummyOffer.gender);
         builder.weight(dummyOffer.weight);
         builder.weightUnits(dummyOffer.weightUnits);
         
@@ -65,7 +64,6 @@ public class OfferBuilderTest {
         Assert.assertEquals("Sale start date should match", dummyOffer.saleStartDate, offer.getSaleStartDate());
         Assert.assertEquals("Sale end date should match", dummyOffer.saleEndDate, offer.getSaleEndDate());
         Assert.assertEquals("Expiration date should match", dummyOffer.expirationDate, offer.getExpirationDate());
-        Assert.assertEquals("Gender should match", dummyOffer.gender, offer.getGender());
         Assert.assertEquals("Weight should match", dummyOffer.weight, offer.getWeight(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
         Assert.assertEquals("WeightUnits should match", dummyOffer.weightUnits, offer.getWeightUnits());
     }

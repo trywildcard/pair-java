@@ -32,17 +32,15 @@ public class ProductCardExampleMerchantTest {
 
     @Test
     public void buildMinimalProduct() throws IOException {
-        ProductCardBuilder productCardBuilder;
         String url = "http://mystore.com/products/9125";
         try {
-            productCardBuilder = new ProductCardBuilder("Green shoes", 19.99f, url);
+            ProductBuilder productBuilder = new ProductBuilder("Green shoes", "http://image.com");
+            ProductCard productCard = new ProductCard(productBuilder.build(), 19.99f, url);
+            System.out.println(productCard.writeAsJsonString());
         } catch (Exception e){
             // handle failure
             return;
         }
-
-        ProductCard productCard = productCardBuilder.build();
-        System.out.println(productCard.writeAsJsonString());
     }
 
     @Test
@@ -66,28 +64,26 @@ public class ProductCardExampleMerchantTest {
         List<Offer> offers = new ArrayList<Offer>();
         offers.add(offer);
 
-        ProductCardBuilder productCardBuilder;
+        ProductBuilder productBuilder;
 
         String productUrl = "http://myproducts.com/23556";
 
         try {
-            productCardBuilder = new ProductCardBuilder("Green shoes", offers, productUrl);
+            String imageUrl = "http://myproducts.com/images/23556-1.jpg";
+
+            productBuilder = new ProductBuilder("Green shoes", imageUrl);
+            productBuilder.description(""); // this will log an error but not throw an exception
+            ProductCard productCard = new ProductCard(productBuilder.build(), offers, productUrl);
+
+            System.out.println(productCard.writeAsJsonString());
+
+            System.err.println(offerBuilder.getErrors());
+            System.err.println(productBuilder.getErrors());
+
         } catch (Exception e){
             // handle failure
             return;
         }
-
-        productCardBuilder.description(""); // this will log an error but not throw an exception
-
-        String imageUrl = "http://myproducts.com/images/23556-1.jpg";
-        productCardBuilder.image(imageUrl);
-
-        ProductCard productCard = productCardBuilder.build();
-
-        System.out.println(productCard.writeAsJsonString());
-
-        System.err.println(offerBuilder.getErrors());
-        System.err.println(productCardBuilder.getErrors());
 
     }
 }

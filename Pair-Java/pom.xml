@@ -1,9 +1,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>Pair-Java</groupId>
-  <artifactId>Pair-Java</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <build>
+  <groupId>com.trywildcard.pair</groupId>
+  <artifactId>wildcard-pair</artifactId>
+  <version>0.1.2</version>
+  <distributionManagement>
+    <repository>
+      <id>repo-trywildcard</id>
+      <name>Pair Releases</name>
+      <url>http://repo.trywildcard.com/nexus/content/repositories/pair</url>
+    </repository>
+    <snapshotRepository>
+      <id>repo-trywildcard</id>
+      <name>Pair Snapshot</name>
+      <url>http://repo.trywildcard.com/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <site>
+      <id>repo-trywildcard</id>
+      <name>Pair Sites</name>
+      <url>dav:http://repo.trywildcard.com/nexus/content/sites/site/</url>
+    </site>
+  </distributionManagement>
+  <build> 
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
