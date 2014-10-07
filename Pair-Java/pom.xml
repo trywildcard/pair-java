@@ -5,22 +5,22 @@
   <version>0.1.2</version>
   <distributionManagement>
     <repository>
-      <id>pair</id>
+      <id>repo-trywildcard</id>
       <name>Pair Releases</name>
       <url>http://repo.trywildcard.com/nexus/content/repositories/pair</url>
     </repository>
     <snapshotRepository>
-      <id>pair</id>
+      <id>repo-trywildcard</id>
       <name>Pair Snapshot</name>
       <url>http://repo.trywildcard.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
     <site>
-      <id>pair</id>
+      <id>repo-trywildcard</id>
       <name>Pair Sites</name>
       <url>dav:http://repo.trywildcard.com/nexus/content/sites/site/</url>
     </site>
   </distributionManagement>
-  <build>
+  <build> 
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
