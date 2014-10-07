@@ -56,8 +56,7 @@ public class ProductSearchCardTest {
     public void createMinimalSearchCardTest() throws IOException, CardBuilderException {
         this.totalResults = 1;
 
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price);
-        builder.imageUrl(dummyProduct.images.get(0));
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price, dummyProduct.images.get(0));
         products.add(builder.build());
         ProductSearchCard card = new ProductSearchCard(products, totalResults);
 
@@ -68,23 +67,21 @@ public class ProductSearchCardTest {
         Assert.assertEquals("Product name should match", productSearchResult.getName(), dummyProduct.name);
         Assert.assertEquals("Product price should match", productSearchResult.getPrice(), dummyOffer.price);
         Assert.assertEquals("Product cardUrl should match", productSearchResult.getProductCardUrl().toString(), dummyProduct.cardUrl);
-        Assert.assertEquals("Product image should match", productSearchResult.getImageUrl(), dummyProduct.images.get(0));
+        Assert.assertEquals("Product image should match", productSearchResult.getImageUrl().toString(), dummyProduct.images.get(0));
     }
 
     @Test
     public void cardWithMultipleProductsTest() throws IOException, CardBuilderException {
         this.totalResults = 2;
 
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price);
-        builder.imageUrl(dummyProduct.images.get(0));
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.cardUrl, dummyOffer.price, dummyProduct.images.get(0));
         products.add(builder.build());
 
         String productName = "My product";
         String productUrl = "http://examplestore.com/123";
         Price productPrice = new Price(9.99f, Currency.getInstance(Locale.US));
 
-        builder = new ProductSearchResultBuilder(productName, productUrl, productPrice);
-        builder.imageUrl("http://examplestore.com/123.jpg");
+        builder = new ProductSearchResultBuilder(productName, productUrl, productPrice, "http://examplestore.com/123.jpg");
         products.add(builder.build());
 
         ProductSearchCard card = new ProductSearchCard(products, totalResults);
