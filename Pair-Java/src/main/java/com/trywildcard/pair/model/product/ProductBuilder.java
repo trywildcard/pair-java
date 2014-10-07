@@ -20,13 +20,13 @@ public class ProductBuilder implements Builder<Product> {
 
     //required fields
     protected String name;
+    protected List<URL> images = new ArrayList<URL>();
 
     //optional fields
     protected String merchant;
     protected String brand;
     protected String description;
     protected List<ProductColor> colors = new ArrayList<ProductColor>();
-    protected List<URL> images = new ArrayList<URL>();
     protected Float rating;
     protected Float ratingScale;
     protected Integer ratingCount;
@@ -42,11 +42,21 @@ public class ProductBuilder implements Builder<Product> {
     private ProductBuilder(){}
 
     /**
-     * Construct an <code>ProductBuilder</code> provided a name.
+     * Construct an <code>ProductBuilder</code> provided a name and list of images.
      * @param name
      */
-    public ProductBuilder(String name) throws CardBuilderException {
+    public ProductBuilder(String name, String image) throws CardBuilderException {
         name(name);
+        image(image);
+    }
+
+    /**
+     * Construct an <code>ProductBuilder</code> provided a name and list of images.
+     * @param name
+     */
+    public ProductBuilder(String name, List<String> images) throws CardBuilderException {
+        name(name);
+        images(images);
     }
 
     public ProductBuilder appLinkAndroid(String appLinkAndroid) {
@@ -197,29 +207,29 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder image(String imgUrl){
-        boolean isValid = v.optional(v.notNull(imgUrl), "Tried to add a null imgUrl");
+    private ProductBuilder image(String imgUrl) throws CardBuilderException {
+        boolean isValid = v.required(v.notNull(imgUrl), "Tried to add a null imgUrl");
 
         if (isValid) {
             try {
                 images.add(new URL(imgUrl));
             } catch (MalformedURLException e) {
-                v.optional(v.fail(), "Could not parse image URL from string.");
+                v.required(v.fail(), "Could not parse image URL from string.");
             }
         }
         return this;
     }
 
-    public ProductBuilder images(List<String> images) {
-        boolean isValid = v.optional(v.notNull(images), "images must not be null.");
+    private ProductBuilder images(List<String> images) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(images), "images must not be null.");
         if (isValid) {
             for (String img : images){
-                boolean isValidImg = v.optional(v.notNull(img), "Tried to add a null image");
+                boolean isValidImg = v.required(v.notNull(img), "Tried to add a null image");
                 if (isValidImg) {
                     try {
                         this.images.add(new URL(img));
                     } catch (MalformedURLException e) {
-                        v.optional(v.fail(),"Could not parse image URL from string.");
+                        v.required(v.fail(),"Could not parse image URL from string.");
                     }
                 }
             }

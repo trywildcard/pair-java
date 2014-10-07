@@ -40,7 +40,7 @@ public class ProductBuilderTest {
 
     private Product buildMinimalProduct() throws CardBuilderException {
 
-        ProductBuilder cardBuilder = new ProductBuilder(dummyProduct.name);
+        ProductBuilder cardBuilder = new ProductBuilder(dummyProduct.name, dummyProduct.images);
 
         return cardBuilder.build();
     }
@@ -54,7 +54,7 @@ public class ProductBuilderTest {
 
     @Test
     public void testMinimalProductWithMinimalConstructor() throws CardBuilderException {
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
         testMinimalProductAttributes(product);
     }
     
@@ -67,13 +67,11 @@ public class ProductBuilderTest {
         
         Assert.assertEquals("Merchant should match", dummyProduct.merchant, product.getMerchant());
         Assert.assertEquals("Colors should match", dummyProduct.colors, product.getColors());
-        
-        List<URL> combinedImages = new ArrayList<URL>();
-        combinedImages.add(new URL(dummyProduct.imgUrl));
-        for (String img : dummyProduct.images){
-            combinedImages.add(new URL(img));
+        Assert.assertEquals("Images should match", dummyProduct.images.size(), product.getImages().size());
+
+        for (URL imageUrl : product.getImages()) {
+            Assert.assertTrue(dummyProduct.images.contains(imageUrl.toString()));
         }
-        Assert.assertEquals("Images should match", combinedImages, product.getImages());
         
         Assert.assertEquals("Rating should match", dummyProduct.rating, product.getRating(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
         Assert.assertEquals("Rating scale should match", dummyProduct.ratingScale, product.getRatingScale(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
@@ -95,14 +93,12 @@ public class ProductBuilderTest {
 
 
      private Product buildExtensiveProduct() throws CardBuilderException {
-        ProductBuilder builder = new ProductBuilder(dummyProduct.name);
+        ProductBuilder builder = new ProductBuilder(dummyProduct.name, dummyProduct.images);
 
         builder.description(dummyProduct.description);
-        builder.image(dummyProduct.imgUrl);
         builder.brand(dummyProduct.brand);
         builder.merchant(dummyProduct.merchant);
         builder.colors(dummyProduct.colors);
-        builder.images(dummyProduct.images);
         builder.rating(dummyProduct.rating);
         builder.ratingScale(dummyProduct.ratingScale);
         builder.ratingCount(dummyProduct.ratingCount);
