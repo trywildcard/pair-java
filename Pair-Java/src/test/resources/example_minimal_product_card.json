@@ -1,14 +1,22 @@
 {
-  "pair_version": "0.0.1",
-  "card_type": "product",
-  "name": "Green leather shoes",
-  "web_url": "http://www.examplestore.com/listing/36226783/green-leather-shoes",
-  "offers": [
-    {
-      "price": {
-        "price": 7.99,
-        "currency": "USD"
-      }
+    "pair_version": "0.1.0",
+    "card_type": "product",
+    "web_url": "http://www.examplestore.com/listing/36226783/green-leather-shoes",
+    "offers": [
+        {
+            "price": {
+                "price": 7.99,
+                "currency": "USD"
+            }
+        }
+    ],
+    "product": {
+        "name": "Green leather shoes",
+        "images": [
+            "http://img.examplestore.com/02/wer4554/il_5d9184_iqm9.jpg",
+            "http://img.examplestore.com/017/fgh/il_57w9.jpg",
+            "https://img.examplestore.com/020rjt/24554/il_570d14_3us0.jpg",
+            "https://img.examplestore.com/0166f54/il_570xg90_87gc.jpg"
+        ]
     }
-  ]
 }

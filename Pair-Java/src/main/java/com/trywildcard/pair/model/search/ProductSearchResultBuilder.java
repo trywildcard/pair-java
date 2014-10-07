@@ -17,7 +17,7 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
     protected String name;
     protected URL productCardUrl;
     protected Price price;
-    protected String imageUrl;
+    protected URL imageUrl;
 
     /**
      * Construct a <code>ProductSearchResultBuilder</code>
@@ -25,14 +25,11 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
      * @param productCardUrl the url to access the product in a web browser
      * @param price the primary price of this product.
      */
-    public ProductSearchResultBuilder(String name, String productCardUrl, Price price) throws CardBuilderException {
+    public ProductSearchResultBuilder(String name, String productCardUrl, Price price, String imageUrl) throws CardBuilderException {
         name(name);
         productCardUrl(productCardUrl);
         price(price);
-    }
-
-    public void imageUrl(String imageUrl){
-        this.imageUrl = imageUrl;
+        imageUrl(imageUrl);
     }
 
     /**
@@ -60,12 +57,24 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
         try {
             this.productCardUrl = new URL(productCardUrl);
         } catch (MalformedURLException e) {
-            v.optional(v.fail(), "Could not parse URL from cardUrl string.");
+            v.required(v.fail(), "Could not parse URL from cardUrl string.");
         }
     }
 
     private void price(Price price) throws CardBuilderException {
         v.required(v.notNull(price), "Must supply a price");
         this.price = price;
+    }
+
+    private void imageUrl(String imgUrl) throws CardBuilderException {
+        boolean isValid = v.required(v.notNull(imgUrl), "Tried to add a null imgUrl");
+
+        if (isValid) {
+            try {
+                this.imageUrl = new URL(imgUrl);
+            } catch (MalformedURLException e) {
+                v.required(v.fail(), "Could not parse image URL from string.");
+            }
+        }
     }
 }

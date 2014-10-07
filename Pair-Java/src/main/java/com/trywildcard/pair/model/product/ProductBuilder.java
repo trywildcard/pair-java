@@ -1,10 +1,9 @@
 package com.trywildcard.pair.model.product;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
-import com.trywildcard.pair.model.CardType;
+import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.validation.ValidationTool;
 
 import java.net.MalformedURLException;
@@ -15,25 +14,19 @@ import java.util.List;
 import java.util.Map;
 
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
-public class ProductCardBuilder implements Builder<ProductCard> {
+public class ProductBuilder implements Builder<Product> {
 
     protected ValidationTool v = new ValidationTool();
 
-    protected String pairVersion = Pair.getInstance().getVersion();
-
-    // required fields
-    protected CardType cardType;
+    //required fields
     protected String name;
-    protected List<Offer> offers = new ArrayList<Offer>();
-    protected URL webUrl;
+    protected List<URL> images = new ArrayList<URL>();
 
-    // optional fields
-    protected String productId;
+    //optional fields
     protected String merchant;
     protected String brand;
     protected String description;
     protected List<ProductColor> colors = new ArrayList<ProductColor>();
-    protected List<URL> images = new ArrayList<URL>();
     protected Float rating;
     protected Float ratingScale;
     protected Integer ratingCount;
@@ -41,39 +34,32 @@ public class ProductCardBuilder implements Builder<ProductCard> {
     protected List<URL> referencedItems = new ArrayList<URL>();
     protected Map<String, String> sizes = new HashMap<String,String>();
     protected List<String> options = new ArrayList<String>();
+    protected Gender gender;
     protected String model;
     protected String appLinkIos;
     protected String appLinkAndroid;
 
+    private ProductBuilder(){}
+
     /**
-     * Construct a builder by providing a list of pre-made offers.
-     *
-     * @param name product name
-     * @param offers list of offers
-     * @param webUrl url to access this product in a web browser
+     * Construct an <code>ProductBuilder</code> provided a name and list of images.
+     * @param name
      */
-    public ProductCardBuilder(String name, List<Offer> offers, String webUrl) throws CardBuilderException {
-        cardType(CardType.PRODUCT);
+    public ProductBuilder(String name, String image) throws CardBuilderException {
         name(name);
-        offers(offers);
-        webUrl(webUrl);
+        image(image);
     }
 
     /**
-     * Construct a builder providing a price value instead of a list of offers.
+     * Construct an <code>ProductBuilder</code> provided a name and list of images.
      * @param name
-     * @param price
-     * @param webUrl
      */
-    public ProductCardBuilder(String name, Float price, String webUrl) throws CardBuilderException {
-        Offer offer = new OfferBuilder(price).build();
-        offer(offer);
-        cardType(CardType.PRODUCT);
+    public ProductBuilder(String name, List<String> images) throws CardBuilderException {
         name(name);
-        webUrl(webUrl);
+        images(images);
     }
-    
-    public ProductCardBuilder appLinkAndroid(String appLinkAndroid) {
+
+    public ProductBuilder appLinkAndroid(String appLinkAndroid) {
         boolean isValid = v.optional(v.notEmpty(appLinkAndroid), "Tried to set appLinkAndroid to an empty string.");
 
         if (isValid) {
@@ -83,7 +69,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder appLinkIos(String appLinkIos) {
+    public ProductBuilder appLinkIos(String appLinkIos) {
         boolean isValid = v.optional(v.notEmpty(appLinkIos), "Tried to set appLinkIos to an empty string.");
 
         if (isValid){
@@ -92,7 +78,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder model(String model) {
+    public ProductBuilder model(String model) {
         boolean isValid = v.optional(v.notEmpty(model), "Tried to set model to an empty string.");
 
         if (isValid){
@@ -100,8 +86,13 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         }
         return this;
     }
-    
-    public ProductCardBuilder sizes(Map<String, String> sizes){
+
+    public ProductBuilder gender(Gender gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public ProductBuilder sizes(Map<String, String> sizes){
         boolean isValid = v.optional(v.notNull(sizes), "Sizes must not be null.");
 
         if (isValid){
@@ -118,8 +109,8 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         }
         return this;
     }
-    
-    public ProductCardBuilder option(String option){
+
+    public ProductBuilder option(String option){
         boolean isValid = v.optional(v.notNullOrEmpty(option), "Tried to add an empty option.");
         if (isValid) {
             this.options.add(option);
@@ -127,7 +118,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder options(List<String> options) {
+    public ProductBuilder options(List<String> options) {
         boolean isValid = v.optional(v.notNull(options), "Options must not be null.");
         if (isValid) {
             for (String option : options){
@@ -140,7 +131,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder relatedItem(String relatedItem){
+    public ProductBuilder relatedItem(String relatedItem){
         boolean isValid = v.optional(v.notNull(relatedItem), "Tried to add an empty relatedItem.");
         if (isValid) {
             try {
@@ -152,7 +143,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder relatedItems(List<String> relatedItems) {
+    public ProductBuilder relatedItems(List<String> relatedItems) {
         boolean isValid = v.optional(v.notNull(relatedItems), "relatedItems must not be null.");
         if (isValid) {
             for (String relatedItem : relatedItems){
@@ -169,7 +160,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder referencedItem(String referencedItem){
+    public ProductBuilder referencedItem(String referencedItem){
         boolean isValid = v.optional(v.notNull(referencedItem), "Tried to add an empty relatedItem.");
         if (isValid) {
             try {
@@ -181,7 +172,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder referencedItems(List<String> referencedItems) {
+    public ProductBuilder referencedItems(List<String> referencedItems) {
         boolean isValid = v.optional(v.notNull(referencedItems), "relatedItems must not be null.");
         if (isValid) {
             for (String referencedItem : referencedItems){
@@ -198,7 +189,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder ratingCount(Integer ratingCount) {
+    public ProductBuilder ratingCount(Integer ratingCount) {
         boolean isValid = v.optional(v.notNegative(ratingCount), "ratingCount must be a positive integer.");
         if (isValid) {
             this.ratingCount = ratingCount;
@@ -206,47 +197,47 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder ratingScale(Float ratingScale) {
+    public ProductBuilder ratingScale(Float ratingScale) {
         this.ratingScale = ratingScale;
         return this;
     }
 
-    public ProductCardBuilder rating(Float rating) {
+    public ProductBuilder rating(Float rating) {
         this.rating = rating;
         return this;
     }
-    
-    public ProductCardBuilder image(String imgUrl){
-        boolean isValid = v.optional(v.notNull(imgUrl), "Tried to add a null imgUrl");
+
+    private ProductBuilder image(String imgUrl) throws CardBuilderException {
+        boolean isValid = v.required(v.notNull(imgUrl), "Tried to add a null imgUrl");
 
         if (isValid) {
             try {
                 images.add(new URL(imgUrl));
             } catch (MalformedURLException e) {
-                v.optional(v.fail(), "Could not parse image URL from string.");
+                v.required(v.fail(), "Could not parse image URL from string.");
             }
         }
         return this;
     }
 
-    public ProductCardBuilder images(List<String> images) {
-        boolean isValid = v.optional(v.notNull(images), "images must not be null.");
+    private ProductBuilder images(List<String> images) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(images), "images must not be null.");
         if (isValid) {
             for (String img : images){
-                boolean isValidImg = v.optional(v.notNull(img), "Tried to add a null image");
+                boolean isValidImg = v.required(v.notNull(img), "Tried to add a null image");
                 if (isValidImg) {
                     try {
                         this.images.add(new URL(img));
                     } catch (MalformedURLException e) {
-                        v.optional(v.fail(),"Could not parse image URL from string.");
+                        v.required(v.fail(),"Could not parse image URL from string.");
                     }
                 }
             }
         }
         return this;
     }
-    
-    public ProductCardBuilder color(ProductColor color){
+
+    public ProductBuilder color(ProductColor color){
         boolean isValid = v.optional(v.notNull(color), "Tried to add a null color");
         if (isValid) {
             colors.add(color);
@@ -254,7 +245,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder colors(List<ProductColor> colors){
+    public ProductBuilder colors(List<ProductColor> colors){
         boolean isValid = v.optional(v.notNull(colors), "colors must not be null.");
         if (isValid) {
             for (ProductColor color : colors){
@@ -267,7 +258,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder description(String description) {
+    public ProductBuilder description(String description) {
         boolean isValid = v.optional(v.notEmpty(description), "Tried to set description to an empty string.");
         if (isValid) {
             this.description = description;
@@ -275,7 +266,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder brand(String brand) {
+    public ProductBuilder brand(String brand) {
         boolean isValid = v.optional(v.notEmpty(brand), "Tried to set brand to an empty string.");
         if (isValid) {
             this.brand = brand;
@@ -283,7 +274,7 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder merchant(String merchant) {
+    public ProductBuilder merchant(String merchant) {
         boolean isValid = v.optional(v.notEmpty(merchant), "Tried to set merchant to an empty string.");
         if (isValid) {
             this.merchant = merchant;
@@ -291,10 +282,10 @@ public class ProductCardBuilder implements Builder<ProductCard> {
         return this;
     }
 
-    public ProductCardBuilder productId(String productId){
-        boolean isValid = v.optional(v.notEmpty(productId), "Tried to set productId to an empty string");
+    private ProductBuilder name(String name) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(name), "Product name cannot be blank.");
         if (isValid) {
-            this.productId = productId;
+            this.name = name;
         }
         return this;
     }
@@ -303,9 +294,9 @@ public class ProductCardBuilder implements Builder<ProductCard> {
      * Instantiate a <code>ProductCard</code> with the data in this builder.
      * @return the constructed product card
      */
-    public ProductCard build() {        
-        ProductCard card = new ProductCard(this);
-        return card;
+    public Product build() {
+        Product product = new Product(this);
+        return product;
     }
 
     /**
@@ -314,66 +305,6 @@ public class ProductCardBuilder implements Builder<ProductCard> {
      */
     public List<String> getErrors(){
         return v.getErrors();
-    }
-
-    /**
-     * Private constructor to allow for Jackson deserialization.
-     */
-    private ProductCardBuilder(){}
-    
-    private ProductCardBuilder cardType(CardType cardType){
-        this.cardType = cardType;
-        return this;
-    }
-    
-    private ProductCardBuilder name(String name) throws CardBuilderException {
-        boolean isValid = v.required(v.notNullOrEmpty(name), "Product name cannot be blank.");
-        if (isValid) {
-            this.name = name;
-        }
-        return this;
-    }
-    
-    private ProductCardBuilder webUrl(String webUrl) throws CardBuilderException {
-        boolean isValid = v.required(v.notNull(webUrl), "Must specify a product webUrl.");
-        if (isValid) {
-            try {
-                this.webUrl = new URL(webUrl);
-            } catch (MalformedURLException e) {
-                v.required(v.fail(), "Could not parse URL from webUrl string.");
-            }
-        }
-        return this;
-    }
-    
-    private ProductCardBuilder offers(List<Offer> offers) throws CardBuilderException {
-        boolean isValid = v.required(v.notNullOrEmpty(offers), "Must specify at least one offer.");
-
-        boolean foundValidOffer = false;
-
-        if (isValid) {
-            for (Offer offer : offers){
-                boolean isValidOffer = v.optional(v.notNull(offer), "Tried to set null offer.");
-                if (isValidOffer){
-                    foundValidOffer = true;
-                    this.offers.add(offer);
-                }
-            }
-        }
-
-        v.required(foundValidOffer, "Must specify at least one offer.");
-
-        return this;
-    }
-    
-    private ProductCardBuilder offer(Offer offer){
-        offers.add(offer);
-        return this;
-    }
-
-    private ProductCardBuilder pairVersion(String pairVersion){
-        this.pairVersion = pairVersion;
-        return this;
     }
 
 }

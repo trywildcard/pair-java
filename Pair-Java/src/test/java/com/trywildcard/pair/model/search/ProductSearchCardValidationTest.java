@@ -27,7 +27,7 @@ public class ProductSearchCardValidationTest {
     public void setUp() throws ParseException, MalformedURLException, CardBuilderException {
         dummyProduct = new DummyProduct();
         dummyOffer = new DummyOffer();
-        builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price);
+        builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price, dummyProduct.imgUrl);
         products = new ArrayList<ProductSearchResult>();
         products.add(builder.build());
     }

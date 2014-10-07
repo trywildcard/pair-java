@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.model.product.Gender;
 import com.trywildcard.pair.model.product.MappingColor;
 import com.trywildcard.pair.model.product.ProductColor;
 
@@ -32,6 +33,7 @@ public class DummyProduct {
     public final List<String> relatedItems = new ArrayList<String>();
     public final List<String> referencedItems = new ArrayList<String>();
     public final Map<String, String> sizes = new HashMap<String, String>();
+    public final Gender gender = Gender.UNISEX;
     public final List<String> options = Arrays
             .asList("example option a", 
                     "example option b",
@@ -58,6 +60,7 @@ public class DummyProduct {
         
         sizes.put("md", "Medium");
 
+        images.add(imgUrl);
         images.add("http://img.examplestore.com/017/fgh/il_57w9.jpg");
         images.add("https://img.examplestore.com/020rjt/24554/il_570d14_3us0.jpg");
         images.add("https://img.examplestore.com/0166f54/il_570xg90_87gc.jpg");

@@ -30,7 +30,6 @@ public class DummyOffer {
     public final Date saleEndDate;
     public final Date expirationDate;
     public final List<Locale> geographicAvailability = Arrays.asList(Locale.US);
-    public final Gender gender = Gender.UNISEX;
     public final Float weight = 17.0f;
     public final String weightUnits = "oz";
     public final Availability availability = Availability.InStock;
