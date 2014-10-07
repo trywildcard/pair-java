@@ -17,6 +17,7 @@ module WildcardPair
     validates :gender, allow_nil: true, inclusion: {in: %w(male female unisex) }
 
     validate :validateColors
+    validate :validateImages
 
     def initialize(attributes = {})
       attributes.each do |name, value|
@@ -90,6 +91,13 @@ module WildcardPair
             return
           end
         end
+      end
+    end
+
+    def validateImages
+      if @images.nil? || (@images.is_a?(Array) && !@images.any?)
+        errors.add(:images, 'A product image is required')
+        return
       end
     end
 
