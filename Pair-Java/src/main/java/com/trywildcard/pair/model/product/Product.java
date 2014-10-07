@@ -13,7 +13,7 @@ import java.util.Map;
 public class Product {
 
     //required fields
-    protected String name;
+    private String name;
     private final List<URL> images;
 
     //optional fields

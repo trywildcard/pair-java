@@ -52,7 +52,7 @@ public class ProductBuilderValidationTest {
     @Test
     public void isValidWithOneImage() throws CardBuilderException {
         Product product = new ProductBuilder(dummyProduct.name, dummyProduct.imgUrl).build();
-        assertEquals(product.name, dummyProduct.name);
+        assertEquals(product.getName(), dummyProduct.name);
         assertEquals(product.getImages().size(), 1);
         assertEquals(product.getImages().get(0).toString(), dummyProduct.imgUrl);
     }
@@ -60,7 +60,7 @@ public class ProductBuilderValidationTest {
     @Test
     public void isValidWithMultipleImages() throws CardBuilderException {
         Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
-        assertEquals(product.name, dummyProduct.name);
+        assertEquals(product.getName(), dummyProduct.name);
         assertEquals(product.getImages().size(), 4);
     }
 
