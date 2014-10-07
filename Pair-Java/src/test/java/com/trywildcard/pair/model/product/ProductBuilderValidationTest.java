@@ -7,10 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +25,7 @@ public class ProductBuilderValidationTest {
     public void setUp() throws ParseException, CardBuilderException {
         dummyProduct = new DummyProduct();
         dummyOffer = new DummyOffer();
-        builder = new ProductBuilder(dummyProduct.name);
+        builder = new ProductBuilder(dummyProduct.name, dummyProduct.images);
     }
 
     @Test
@@ -38,7 +35,33 @@ public class ProductBuilderValidationTest {
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyNameString() throws CardBuilderException {
-        Product product = new ProductBuilder("").build();
+        Product product = new ProductBuilder("", dummyProduct.images).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void isInvalidWithNullImages() throws CardBuilderException {
+        List<String> images = null;
+        Product product = new ProductBuilder(dummyProduct.name, images).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void isInvalidWithEmptyImages() throws CardBuilderException {
+        Product product = new ProductBuilder(dummyProduct.name, Collections.EMPTY_LIST).build();
+    }
+
+    @Test
+    public void isValidWithOneImage() throws CardBuilderException {
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.imgUrl).build();
+        assertEquals(product.name, dummyProduct.name);
+        assertEquals(product.getImages().size(), 1);
+        assertEquals(product.getImages().get(0).toString(), dummyProduct.imgUrl);
+    }
+
+    @Test
+    public void isValidWithMultipleImages() throws CardBuilderException {
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
+        assertEquals(product.name, dummyProduct.name);
+        assertEquals(product.getImages().size(), 4);
     }
 
     @Test
@@ -158,29 +181,6 @@ public class ProductBuilderValidationTest {
     public void hasErrorForNegativeRatingCount() {
         assertEquals("Errors size should match", 0, builder.getErrors().size());
         builder.ratingCount(-5);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullImageUrl(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.image(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullImagesList(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.images(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullImagesListItem(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        List<String> images = new ArrayList<String>();
-        images.add(null);
-        builder.images(images);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 

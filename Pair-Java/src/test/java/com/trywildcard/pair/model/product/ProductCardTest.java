@@ -43,7 +43,7 @@ public class ProductCardTest {
     private ProductCard buildMinimalProductCard() throws CardBuilderException {
 
         Offer offer = new OfferBuilder(dummyOffer.price).build();
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
 
         ProductCard productCard = new ProductCard(product, offer, dummyProduct.webUrl);
 
@@ -59,7 +59,7 @@ public class ProductCardTest {
 
     @Test
     public void testMinimalProductWithMinimalConstructor() throws CardBuilderException {
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
         ProductCard card = new ProductCard(product, dummyOffer.price.getPrice(), dummyProduct.webUrl);
         testMinimalCardAttributes(card);
     }
@@ -112,14 +112,14 @@ public class ProductCardTest {
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyOffersList() throws CardBuilderException {
         List<Offer> emptyList = new ArrayList<Offer>();
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
         ProductCard card = new ProductCard(product, emptyList, dummyProduct.webUrl);
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullOfferListItems() throws CardBuilderException {
 
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
         Offer offer = null;
 
         ProductCard card = new ProductCard(product, offer, dummyProduct.webUrl);
@@ -131,7 +131,7 @@ public class ProductCardTest {
         offers.add(null);
         offers.add(null);
 
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
 
         ProductCard card = new ProductCard(product, offers, dummyProduct.webUrl);
     }
@@ -143,7 +143,7 @@ public class ProductCardTest {
         offers.add(new OfferBuilder(12.99f).build());
         offers.add(null);
 
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
 
         try {
             ProductCard card = new ProductCard(product, offers, dummyProduct.webUrl);
@@ -156,7 +156,7 @@ public class ProductCardTest {
     @Test
     public void isValidOneOffers() throws CardBuilderException {
         Offer offer = new OfferBuilder(12.99f).build();
-        Product product = new ProductBuilder(dummyProduct.name).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
 
         try {
             ProductCard card = new ProductCard(product, offer, dummyProduct.webUrl);
@@ -167,14 +167,12 @@ public class ProductCardTest {
     }
 
     private Product buildExtensiveProduct() throws CardBuilderException {
-        ProductBuilder builder = new ProductBuilder(dummyProduct.name);
+        ProductBuilder builder = new ProductBuilder(dummyProduct.name, dummyProduct.images);
 
         builder.description(dummyProduct.description);
-        builder.image(dummyProduct.imgUrl);
         builder.brand(dummyProduct.brand);
         builder.merchant(dummyProduct.merchant);
         builder.colors(dummyProduct.colors);
-        builder.images(dummyProduct.images);
         builder.rating(dummyProduct.rating);
         builder.ratingScale(dummyProduct.ratingScale);
         builder.ratingCount(dummyProduct.ratingCount);
