@@ -13,14 +13,14 @@ import java.util.Map;
 public class Product {
 
     //required fields
-    protected String name;
+    private String name;
+    private final List<URL> images;
 
     //optional fields
     private final String merchant;
     private final String brand;
     private final String description;
     private final List<ProductColor> colors;
-    private final List<URL> images;
     private final Float rating;
     private final Float ratingScale;
     private final Integer ratingCount;

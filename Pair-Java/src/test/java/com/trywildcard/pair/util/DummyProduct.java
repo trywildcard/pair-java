@@ -60,6 +60,7 @@ public class DummyProduct {
         
         sizes.put("md", "Medium");
 
+        images.add(imgUrl);
         images.add("http://img.examplestore.com/017/fgh/il_57w9.jpg");
         images.add("https://img.examplestore.com/020rjt/24554/il_570d14_3us0.jpg");
         images.add("https://img.examplestore.com/0166f54/il_570xg90_87gc.jpg");

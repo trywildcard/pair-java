@@ -9,10 +9,11 @@ import java.net.URL;
  */
 @JsonDeserialize(builder = ProductSearchResultBuilder.class)
 public final class ProductSearchResult {
+    /* Required fields */
     private final String name;
     private final Price price;
     private final URL productCardUrl;
-    private final String imageUrl;
+    private final URL imageUrl;
 
     /**
      * Construct a product search result using a <code>ProductSearchResultBuilder</code>.
@@ -37,7 +38,7 @@ public final class ProductSearchResult {
         return productCardUrl;
     }
 
-    public String getImageUrl() {
+    public URL getImageUrl() {
         return imageUrl;
     }
 

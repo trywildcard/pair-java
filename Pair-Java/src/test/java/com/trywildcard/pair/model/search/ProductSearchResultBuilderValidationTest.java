@@ -27,27 +27,43 @@ public class ProductSearchResultBuilderValidationTest {
 
     @Test
     public void isValidWithAttributes() throws CardBuilderException {
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price);
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price, dummyProduct.imgUrl);
         assertEquals(dummyProduct.name, builder.build().getName());
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullName() throws CardBuilderException {
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(null, dummyProduct.webUrl, dummyOffer.price);
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(null, dummyProduct.webUrl, dummyOffer.price, dummyProduct.imgUrl);
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyNameString() throws CardBuilderException {
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder("", dummyProduct.webUrl, dummyOffer.price);
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder("", dummyProduct.webUrl, dummyOffer.price, dummyProduct.imgUrl);
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullUrl() throws CardBuilderException {
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, null, dummyOffer.price);
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, null, dummyOffer.price, dummyProduct.imgUrl);
     }
 
     @Test(expected = CardBuilderException.class)
+    public void isInvalidWithEmptyUrl() throws CardBuilderException {
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, "", dummyOffer.price, dummyProduct.imgUrl);
+    }
+
+
+    @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullPrice() throws CardBuilderException {
-        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, null);
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, null, dummyProduct.imgUrl);
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void isInvalidWithNullImageUrl() throws CardBuilderException {
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price, null);
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void isInvalidWithEmptyImageUrl() throws CardBuilderException {
+        ProductSearchResultBuilder builder = new ProductSearchResultBuilder(dummyProduct.name, dummyProduct.webUrl, dummyOffer.price, "");
     }
 }

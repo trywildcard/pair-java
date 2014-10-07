@@ -20,7 +20,7 @@
       <url>dav:http://repo.trywildcard.com/nexus/content/sites/site/</url>
     </site>
   </distributionManagement>
-  <build>
+  <build> 
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
