@@ -12,7 +12,6 @@ import java.util.*;
 @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "")
 public class OfferBuilder implements Builder<Offer> {
 
-
     private ValidationTool v = new ValidationTool();
 
     // required fields
@@ -28,10 +27,8 @@ public class OfferBuilder implements Builder<Offer> {
     protected Date saleEndDate;
     protected Date expirationDate;
     protected List<String> geographicAvailability = new ArrayList<String>();
-    protected Gender gender;
     protected Float weight;
     protected String weightUnits;
-    protected String offerId;
 
     /**
      * Construct an <code>OfferBuilder</code> provided a Price object.
@@ -54,11 +51,6 @@ public class OfferBuilder implements Builder<Offer> {
         if (isValid) {
             this.weightUnits = weightUnits;
         }
-        return this;
-    }
-
-    public OfferBuilder gender(Gender gender) {
-        this.gender = gender;
         return this;
     }
     
@@ -123,10 +115,6 @@ public class OfferBuilder implements Builder<Offer> {
     
     public OfferBuilder originalPrice(Price originalPrice){
         this.originalPrice = originalPrice;
-        return this;
-    }
-    public OfferBuilder offerId(String offerId){
-        this.offerId = offerId;
         return this;
     }
 
