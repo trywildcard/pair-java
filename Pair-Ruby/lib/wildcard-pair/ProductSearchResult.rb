@@ -12,6 +12,7 @@ module WildcardPair
     validates :name, presence: true
     validates :price, presence: true
     validates :product_card_url, presence: true
+    validates :image_url, presence: true
 
     validate :validatePrice
         
