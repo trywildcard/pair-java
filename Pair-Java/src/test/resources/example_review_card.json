@@ -1,0 +1,28 @@
+{
+    "pair_version": "0.2.0",
+    "card_type": "review",
+    "web_url": "https://www.engadget.com/2013/09/09/lg-g2-review/",
+    "review": {
+        "title": "LG G2 Review",
+        "html_content": "<div id=\"body\" score=\"33.75\"> <div class=\"copy post-body\" score=\"21.25\"> <div class=\"article-content\" score=\"82.5\"> <p class=\"image-container\"><img alt=\"LG G2 review\" src=\"http://www.blogcdn.com/www.engadget.com/media/2013/09/g2review-1378739225.jpg\" /></p> <p>There are <a href=\"http://www.engadget.com/tag/smartphone,review/\">a lot of smartphones</a> out there now. You know this. To add to the confusion, many companies are now parading out multiple top-drawer phones: think Samsung's Galaxy S and Note series, or the Xperia Z and Z Ultra from Sony. Even LG, whose new G2 flagship I'm poring over this time around, has both the G and G Pro to tempt buyers. It's getting increasingly difficult to launch a smartphone with some standout feature, something <em>more</em> than just <a href=\"http://www.engadget.com/2013/09/04/samsung-galaxy-note-3-preview/\">bigger screens</a> and faster processors.</p> <p>For the G2, LG's decided to make a major change to the phone's physical layout -- in a bullet-point summary, it has buttons on the back.",
+        "publication_date": "2014-09-22T00:00:00.000+0000",
+        "abstract_content": "There are a lot of smartphones out there now. You know this. To add to the confusion, many companies are now parading out multiple top-drawer phones:",
+        "source": "Engadget",
+        "author": "Jans Koepling, Senior Editor",
+        "updated_date": "2014-09-23T00:00:00.000+0000",
+        "media": {
+            "type": "image",
+            "image_url": "http://www.blogcdn.com/www.engadget.com/media/2013/09/g2review-1378739225.jpg",
+            "image_caption": "LG G2"
+        },
+        "product_name": "LG G2",
+        "rating": {
+            "rating": 87.0,
+            "minimum_rating": 0.0,
+            "maximum_rating": 100.0,
+            "number_of_ratings": 55
+        },
+        "app_link_ios": "ios://applink",
+        "app_link_android": "android://applink"
+    }
+}
