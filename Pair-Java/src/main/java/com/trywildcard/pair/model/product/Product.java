@@ -124,4 +124,57 @@ public class Product {
     public String getName() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (appLinkAndroid != null ? !appLinkAndroid.equals(product.appLinkAndroid) : product.appLinkAndroid != null)
+            return false;
+        if (appLinkIos != null ? !appLinkIos.equals(product.appLinkIos) : product.appLinkIos != null) return false;
+        if (brand != null ? !brand.equals(product.brand) : product.brand != null) return false;
+        if (colors != null ? !colors.equals(product.colors) : product.colors != null) return false;
+        if (description != null ? !description.equals(product.description) : product.description != null) return false;
+        if (gender != product.gender) return false;
+        if (images != null ? !images.equals(product.images) : product.images != null) return false;
+        if (merchant != null ? !merchant.equals(product.merchant) : product.merchant != null) return false;
+        if (model != null ? !model.equals(product.model) : product.model != null) return false;
+        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+        if (options != null ? !options.equals(product.options) : product.options != null) return false;
+        if (rating != null ? !rating.equals(product.rating) : product.rating != null) return false;
+        if (ratingCount != null ? !ratingCount.equals(product.ratingCount) : product.ratingCount != null) return false;
+        if (ratingScale != null ? !ratingScale.equals(product.ratingScale) : product.ratingScale != null) return false;
+        if (referencedItems != null ? !referencedItems.equals(product.referencedItems) : product.referencedItems != null)
+            return false;
+        if (relatedItems != null ? !relatedItems.equals(product.relatedItems) : product.relatedItems != null)
+            return false;
+        if (sizes != null ? !sizes.equals(product.sizes) : product.sizes != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (merchant != null ? merchant.hashCode() : 0);
+        result = 31 * result + (brand != null ? brand.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (colors != null ? colors.hashCode() : 0);
+        result = 31 * result + (images != null ? images.hashCode() : 0);
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        result = 31 * result + (ratingScale != null ? ratingScale.hashCode() : 0);
+        result = 31 * result + (ratingCount != null ? ratingCount.hashCode() : 0);
+        result = 31 * result + (relatedItems != null ? relatedItems.hashCode() : 0);
+        result = 31 * result + (referencedItems != null ? referencedItems.hashCode() : 0);
+        result = 31 * result + (sizes != null ? sizes.hashCode() : 0);
+        result = 31 * result + (options != null ? options.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + (appLinkIos != null ? appLinkIos.hashCode() : 0);
+        result = 31 * result + (appLinkAndroid != null ? appLinkAndroid.hashCode() : 0);
+        return result;
+    }
 }

@@ -94,4 +94,30 @@ public final class ProductColor {
     private void setMappingColor(MappingColor mappingColor){
         this.mappingColor = mappingColor;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductColor that = (ProductColor) o;
+
+        if (displayName != null ? !displayName.equals(that.displayName) : that.displayName != null) return false;
+        if (mappingColor != that.mappingColor) return false;
+        if (swatchUrl != null ? !swatchUrl.equals(that.swatchUrl) : that.swatchUrl != null) return false;
+        if (v != null ? !v.equals(that.v) : that.v != null) return false;
+        if (value != null ? !value.equals(that.value) : that.value != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = v != null ? v.hashCode() : 0;
+        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (swatchUrl != null ? swatchUrl.hashCode() : 0);
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        result = 31 * result + (mappingColor != null ? mappingColor.hashCode() : 0);
+        return result;
+    }
 }
