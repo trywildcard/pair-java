@@ -66,7 +66,7 @@ public class ProductSearchCardTest {
 
         Assert.assertEquals("Product name should match", productSearchResult.getName(), dummyProduct.name);
         Assert.assertEquals("Product price should match", productSearchResult.getPrice(), dummyOffer.price);
-        Assert.assertEquals("Product cardUrl should match", productSearchResult.getProductCardUrl().toString(), dummyProduct.cardUrl);
+        Assert.assertEquals("Product cardUrl should match", productSearchResult.getProductCardAddress().toString(), dummyProduct.cardUrl);
         Assert.assertEquals("Product image should match", productSearchResult.getImageUrl().toString(), dummyProduct.images.get(0));
     }
 
