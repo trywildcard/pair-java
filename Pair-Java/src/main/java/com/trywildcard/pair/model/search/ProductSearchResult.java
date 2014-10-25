@@ -12,7 +12,7 @@ public final class ProductSearchResult {
     /* Required fields */
     private final String name;
     private final Price price;
-    private final URL productCardUrl;
+    private final URL productCardAddress;
     private final URL imageUrl;
 
     /**
@@ -22,7 +22,7 @@ public final class ProductSearchResult {
     public ProductSearchResult(ProductSearchResultBuilder builder){
         this.name = builder.name;
         this.price = builder.price;
-        this.productCardUrl = builder.productCardUrl;
+        this.productCardAddress = builder.productCardAddress;
         this.imageUrl = builder.imageUrl;
     }
 
@@ -34,8 +34,8 @@ public final class ProductSearchResult {
         return price;
     }
 
-    public URL getProductCardUrl(){
-        return productCardUrl;
+    public URL getProductCardAddress(){
+        return productCardAddress;
     }
 
     public URL getImageUrl() {
@@ -52,7 +52,7 @@ public final class ProductSearchResult {
         if (imageUrl != null ? !imageUrl.equals(that.imageUrl) : that.imageUrl != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (productCardUrl != null ? !productCardUrl.equals(that.productCardUrl) : that.productCardUrl != null)
+        if (productCardAddress != null ? !productCardAddress.equals(that.productCardAddress) : that.productCardAddress != null)
             return false;
 
         return true;
@@ -62,7 +62,7 @@ public final class ProductSearchResult {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (productCardUrl != null ? productCardUrl.hashCode() : 0);
+        result = 31 * result + (productCardAddress != null ? productCardAddress.hashCode() : 0);
         result = 31 * result + (imageUrl != null ? imageUrl.hashCode() : 0);
         return result;
     }

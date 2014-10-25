@@ -15,19 +15,19 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
     private ValidationTool v = new ValidationTool();
 
     protected String name;
-    protected URL productCardUrl;
+    protected URL productCardAddress;
     protected Price price;
     protected URL imageUrl;
 
     /**
      * Construct a <code>ProductSearchResultBuilder</code>
      * @param name the name of the product
-     * @param productCardUrl the url to access the product in a web browser
+     * @param productCardAddress the address to access the product card
      * @param price the primary price of this product.
      */
-    public ProductSearchResultBuilder(String name, String productCardUrl, Price price, String imageUrl) throws CardBuilderException {
+    public ProductSearchResultBuilder(String name, String productCardAddress, Price price, String imageUrl) throws CardBuilderException {
         name(name);
-        productCardUrl(productCardUrl);
+        productCardAddress(productCardAddress);
         price(price);
         imageUrl(imageUrl);
     }
@@ -52,10 +52,10 @@ public class ProductSearchResultBuilder implements Builder<ProductSearchResult> 
         this.name = name;
     }
 
-    private void productCardUrl(String productCardUrl) throws CardBuilderException {
-        v.required(v.notNull(productCardUrl), "Must supply a cardUrl.");
+    private void productCardAddress(String productCardAddress) throws CardBuilderException {
+        v.required(v.notNull(productCardAddress), "Must supply a card address.");
         try {
-            this.productCardUrl = new URL(productCardUrl);
+            this.productCardAddress = new URL(productCardAddress);
         } catch (MalformedURLException e) {
             v.required(v.fail(), "Could not parse URL from cardUrl string.");
         }
