@@ -3,4 +3,4 @@ general:
 
 machine:
   java:
-    version: 1.7.0_55
+    version: oraclejdk7
