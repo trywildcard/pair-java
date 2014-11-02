@@ -32,9 +32,9 @@ public class MetaTagExtractor {
             case "twitter:description":
                 return DESCRIPTION_DATA_KEY;
             case "twitter:image":
-                return IMAGE_DATA_KEY;
+                return IMAGE_URL_DATA_KEY;
             case "twitter:image:src":
-                return IMAGE_DATA_KEY;
+                return IMAGE_URL_DATA_KEY;
             default:
                 return null;
         }
