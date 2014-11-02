@@ -52,7 +52,7 @@ public class VideoBuilder implements Builder<Video> {
     }
 
     /**
-     * Construct an ArticleBuilder provided a meta tag model
+     * Construct an VideoBuilder provided a meta tag model
      */
     public VideoBuilder(MetaTagModel metaTagModel) throws CardBuilderException {
 
@@ -63,7 +63,7 @@ public class VideoBuilder implements Builder<Video> {
 
             if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getVideoUrl())
                     || StringUtils.isEmpty(metaTagModel.getVideoHeight()) || StringUtils.isEmpty(metaTagModel.getVideoWidth())) {
-                throw new CardBuilderException("Either video title, url, width , or height is not contained in meta tags" +
+                throw new CardBuilderException("Either video title, url, width, or height is not contained in meta tags" +
                         " - all of which are required to create a VideoBuilder");
             }
 
@@ -79,7 +79,7 @@ public class VideoBuilder implements Builder<Video> {
             appLinkAndroid(metaTagModel.getAppLinkAndroid());
         } catch (NumberFormatException nfe) {
             throw new CardBuilderException("Unable to convert video width or height meta tag value to a valid integer, " +
-                    "which is required for a VideoBuilder", nfe);
+                    "which is required to construct a VideoBuilder", nfe);
         }
     }
 

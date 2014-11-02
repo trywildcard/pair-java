@@ -30,7 +30,9 @@ public class MetaTagModel {
         return null;
     }
 
-    public String getHtmlContent() { return checkAndReturnValue((HTML_DATA_KEY)); }
+    public String getHtmlContent() {
+        return checkAndReturnValue((HTML_DATA_KEY));
+    }
 
     public String getTitle() {
         return checkAndReturnValue(TITLE_DATA_KEY);
@@ -56,10 +58,16 @@ public class MetaTagModel {
         return checkAndReturnValue(APP_LINK_ANDROID);
     }
 
-    public String getVideoUrl() { return checkAndReturnValue(VIDEO_URL_DATA_KEY); }
+    public String getVideoUrl() {
+        return checkAndReturnValue(VIDEO_URL_DATA_KEY);
+    }
 
-    public String getVideoWidth() { return checkAndReturnValue(VIDEO_WIDTH_DATA_KEY); }
+    public String getVideoWidth() {
+        return checkAndReturnValue(VIDEO_WIDTH_DATA_KEY);
+    }
 
-    public String getVideoHeight() { return checkAndReturnValue(VIDEO_HEIGHT_DATA_KEY); }
+    public String getVideoHeight() {
+        return checkAndReturnValue(VIDEO_HEIGHT_DATA_KEY);
+    }
 
 }
