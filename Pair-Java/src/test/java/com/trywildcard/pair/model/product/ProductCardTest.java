@@ -187,4 +187,9 @@ public class ProductCardTest {
 
         return builder.build();
     }
+
+    @Test
+    public void testBuildProductCardWithWebUrl() throws CardBuilderException {
+        ProductCard card = new ProductCard("https://www.etsy.com/listing/128235512/etsy-i-buy-from-real-people-tote-bag");
+    }
 }
