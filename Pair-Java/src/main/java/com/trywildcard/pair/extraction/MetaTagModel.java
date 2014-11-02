@@ -1,5 +1,7 @@
 package com.trywildcard.pair.extraction;
 
+import com.trywildcard.pair.exception.CardBuilderException;
+
 import java.util.Map;
 
 public class MetaTagModel {
@@ -18,7 +20,12 @@ public class MetaTagModel {
     public static final String VIDEO_HEIGHT_DATA_KEY = "videoHeight";
 
 
-    public MetaTagModel(Map<String, String> metaTagsAndValues) {
+    public MetaTagModel(Map<String, String> metaTagsAndValues) throws CardBuilderException {
+
+        if (metaTagsAndValues == null) {
+            throw new CardBuilderException("Input must not be null and must be a valid map");
+        }
+
         this.metaTagsAndValues = metaTagsAndValues;
     }
 
@@ -70,4 +77,7 @@ public class MetaTagModel {
         return checkAndReturnValue(VIDEO_HEIGHT_DATA_KEY);
     }
 
+    Integer getNumberOfMetaTags() {
+        return this.metaTagsAndValues.keySet().size();
+    }
 }

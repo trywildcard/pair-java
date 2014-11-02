@@ -1,6 +1,7 @@
 package com.trywildcard.pair.extraction;
 
 import com.google.common.collect.ImmutableSet;
+import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.util.HtmlParserUtil;
 import com.trywildcard.pair.util.HttpAgent;
 import org.w3c.dom.Document;
@@ -82,7 +83,7 @@ public class MetaTagExtractor {
         }
     }
 
-    public static MetaTagModel getMetaTags(URL webUrl) {
+    public static MetaTagModel getMetaTags(URL webUrl) throws CardBuilderException {
         try {
             Map<String, String> metaTagsAndValues = new HashMap<String, String>();
 
