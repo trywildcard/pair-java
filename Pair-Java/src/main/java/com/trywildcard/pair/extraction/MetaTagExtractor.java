@@ -2,11 +2,14 @@ package com.trywildcard.pair.extraction;
 
 import com.google.common.collect.ImmutableSet;
 import com.trywildcard.pair.util.HtmlParserUtil;
+import com.trywildcard.pair.util.HttpAgent;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
@@ -17,8 +20,17 @@ import static com.trywildcard.pair.extraction.MetaTagModel.*;
  */
 public class MetaTagExtractor {
 
-    private static final Set<String> EXTRACTABLE_META_TAG_ATTRIBUTES
-            = ImmutableSet.of("twitter:title", "twitter:description", "twitter:image", "twitter:image:src");
+    private static final Set<String> EXTRACTABLE_TWITTER_META_TAG_ATTRIBUTES
+            = ImmutableSet.of("twitter:title", "twitter:description", "twitter:image", "twitter:image:src",
+            "twitter:app:url:iphone", "twitter:app:url:googleplay", "twitter:player", "twitter:player:width",
+            "twitter:player:height");
+
+    private static final Set<String> EXTRACTABLE_OG_META_TAG_ATTRIBUTES
+            = ImmutableSet.of("og:title", "og:description", "og:image", "og:price:amount", "product:price:amount",
+            "og:video", "og:video:width", "og:video:height");
+
+    private static final Set<String> EXTRACTABLE_AL_META_TAG_ATTRIBUTES
+            = ImmutableSet.of("al:android:url", "al:ios:url");
 
     private static String getMetaTagKey(String attribute) {
 
@@ -35,36 +47,89 @@ public class MetaTagExtractor {
                 return IMAGE_URL_DATA_KEY;
             case "twitter:image:src":
                 return IMAGE_URL_DATA_KEY;
+            case "og:title":
+                return TITLE_DATA_KEY;
+            case "og:description":
+                return DESCRIPTION_DATA_KEY;
+            case "og:image":
+                return IMAGE_URL_DATA_KEY;
+            case "og:price:amount":
+                return PRICE_DATA_KEY;
+            case "product:price:amount":
+                return PRICE_DATA_KEY;
+            case "twitter:app:url:iphone":
+                return APP_LINK_IOS;
+            case "twitter:app:url:googleplay":
+                return APP_LINK_ANDROID;
+            case "al:ios:url":
+                return APP_LINK_IOS;
+            case "al:android:url":
+                return APP_LINK_ANDROID;
+            case "og:video":
+                return VIDEO_URL_DATA_KEY;
+            case "og:video:width":
+                return VIDEO_WIDTH_DATA_KEY;
+            case "og:video:height":
+                return VIDEO_HEIGHT_DATA_KEY;
+            case "twitter:player":
+                return VIDEO_URL_DATA_KEY;
+            case "twitter:player:width":
+                return VIDEO_WIDTH_DATA_KEY;
+            case "twitter:player:height":
+                return VIDEO_HEIGHT_DATA_KEY;
             default:
                 return null;
         }
     }
 
     public static MetaTagModel getMetaTags(URL webUrl) {
+        try {
+            Map<String, String> metaTagsAndValues = new HashMap<String, String>();
 
-        Map<String, String> metaTagsAndValues = new HashMap<String, String>();
+            HttpAgent httpAgent = new HttpAgent();
+            String htmlContent = httpAgent.get(webUrl.toString());
 
-        Document htmlDocumentModel = HtmlParserUtil.getHtmlDocumentModel(webUrl);
-        NodeList metaTags = htmlDocumentModel.getElementsByTagName("meta");
+            //lets store htmlcontent - may be used for article or review cards
+            metaTagsAndValues.put(HTML_DATA_KEY, htmlContent);
 
-        for (int i = 0; i < metaTags.getLength(); i++) {
-            Node node = metaTags.item(i);
-            NamedNodeMap attributes = node.getAttributes();
+            Document htmlDocumentModel = HtmlParserUtil.getHtmlDocumentModel(htmlContent);
+            NodeList metaTags = htmlDocumentModel.getElementsByTagName("meta");
 
-            String key = getMetaKey(attributes);
-            if (key == null || metaTagsAndValues.containsKey(getMetaTagKey(key))) {
-                continue;
-            }
+            for (int i = 0; i < metaTags.getLength(); i++) {
+                Node node = metaTags.item(i);
+                NamedNodeMap attributes = node.getAttributes();
 
-            if (EXTRACTABLE_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
-                String content = getMetaValue(attributes);
-                if (content != null && !content.isEmpty()) {
-                    metaTagsAndValues.put(getMetaTagKey(key), content);
+                String key = getMetaKey(attributes);
+                if (key == null || metaTagsAndValues.containsKey(getMetaTagKey(key))) {
+                    continue;
+                }
+
+                if (EXTRACTABLE_OG_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
+                    String content = getMetaValue(attributes);
+                    if (content != null && !content.isEmpty()) {
+                        metaTagsAndValues.put(getMetaTagKey(key), content);
+                    }
+                } else if (EXTRACTABLE_TWITTER_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
+                    String content = getMetaValue(attributes);
+                    if (content != null && !content.isEmpty()) {
+                        metaTagsAndValues.put(getMetaTagKey(key), content);
+                    }
+                } else if (EXTRACTABLE_AL_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
+                    String content = getMetaValue(attributes);
+                    if (content != null && !content.isEmpty()) {
+                        metaTagsAndValues.put(getMetaTagKey(key), content);
+                    }
                 }
             }
-        }
 
-        return new MetaTagModel(metaTagsAndValues);
+            return new MetaTagModel(metaTagsAndValues);
+        } catch (URISyntaxException use) {
+            return new MetaTagModel(Collections.EMPTY_MAP);
+        } catch (IOException ioe) {
+            return new MetaTagModel(Collections.EMPTY_MAP);
+        } catch (RuntimeException rte) {
+            return new MetaTagModel(Collections.EMPTY_MAP);
+        }
     }
 
     /**

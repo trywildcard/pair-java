@@ -17,12 +17,9 @@ import java.net.URL;
  */
 public class HtmlParserUtil {
 
-    public static Document getHtmlDocumentModel(URL webUrl) {
+    public static Document getHtmlDocumentModel(String htmlContent) {
 
         try {
-            HttpAgent httpAgent = new HttpAgent();
-            String htmlContent = httpAgent.get(webUrl.toString());
-
             TagNode tagNode = new HtmlCleaner().clean(htmlContent);
             Document doc;
             try {
@@ -31,9 +28,7 @@ public class HtmlParserUtil {
                 throw new RuntimeException(e);
             }
             return doc;
-        } catch (URISyntaxException use) {
-            return null;
-        } catch (IOException ioe) {
+        } catch (RuntimeException rte) {
             return null;
         }
     }

@@ -65,6 +65,10 @@ public class ProductBuilder implements Builder<Product> {
 
     public ProductBuilder(MetaTagModel metaTagModel) throws CardBuilderException {
 
+        if (metaTagModel == null) {
+            throw new CardBuilderException("MetaTagModel is required");
+        }
+
         //try to build product first, it requires a name and image
         if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getImageUrl())) {
             throw new CardBuilderException("Product title and/or product image is not contained in meta tags and is required to create a ProductBuilder");
@@ -72,6 +76,11 @@ public class ProductBuilder implements Builder<Product> {
 
         name(metaTagModel.getTitle());
         image(metaTagModel.getImageUrl());
+
+        /* Trying to set optional fields if found */
+        description(metaTagModel.getDescription());
+        appLinkIos(metaTagModel.getAppLinkIos());
+        appLinkAndroid(metaTagModel.getAppLinkAndroid());
 
     }
 
