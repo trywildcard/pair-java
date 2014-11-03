@@ -54,7 +54,6 @@ public class OfferBuilder implements Builder<Offer> {
             throw new CardBuilderException("MetaTagModel is required");
         }
 
-        //try to build product first, it requires a name and image
         if (StringUtils.isEmpty(metaTagModel.getPrice())) {
             throw new CardBuilderException("Product Price is not contained in meta tags and is required to create a OfferBuilder");
         }

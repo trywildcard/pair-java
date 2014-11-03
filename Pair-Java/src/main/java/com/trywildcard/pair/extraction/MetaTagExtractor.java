@@ -83,47 +83,53 @@ public class MetaTagExtractor {
         }
     }
 
+    protected static MetaTagModel getMetaTags(String htmlContent) throws CardBuilderException {
+        Map<String, String> metaTagsAndValues = new HashMap<String, String>();
+
+        //lets store htmlcontent - may be used for article or review cards
+        metaTagsAndValues.put(HTML_DATA_KEY, htmlContent);
+
+        Document htmlDocumentModel = HtmlParserUtil.getHtmlDocumentModel(htmlContent);
+        NodeList metaTags = htmlDocumentModel.getElementsByTagName("meta");
+
+        for (int i = 0; i < metaTags.getLength(); i++) {
+            Node node = metaTags.item(i);
+            NamedNodeMap attributes = node.getAttributes();
+
+            String key = getMetaKey(attributes);
+            if (key == null || metaTagsAndValues.containsKey(getMetaTagKey(key))) {
+                continue;
+            }
+
+            if (EXTRACTABLE_OG_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
+                String content = getMetaValue(attributes);
+                if (content != null && !content.isEmpty()) {
+                    metaTagsAndValues.put(getMetaTagKey(key), content);
+                }
+            } else if (EXTRACTABLE_AL_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
+                String content = getMetaValue(attributes);
+                if (content != null && !content.isEmpty()) {
+                    metaTagsAndValues.put(getMetaTagKey(key), content);
+                }
+            } else if (EXTRACTABLE_TWITTER_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
+                String content = getMetaValue(attributes);
+                if (content != null && !content.isEmpty()) {
+                    metaTagsAndValues.put(getMetaTagKey(key), content);
+                }
+            }
+        }
+
+        return new MetaTagModel(metaTagsAndValues);
+    }
+
     public static MetaTagModel getMetaTags(URL webUrl) throws CardBuilderException {
+
         try {
-            Map<String, String> metaTagsAndValues = new HashMap<String, String>();
 
             HttpAgent httpAgent = new HttpAgent();
             String htmlContent = httpAgent.get(webUrl.toString());
 
-            //lets store htmlcontent - may be used for article or review cards
-            metaTagsAndValues.put(HTML_DATA_KEY, htmlContent);
-
-            Document htmlDocumentModel = HtmlParserUtil.getHtmlDocumentModel(htmlContent);
-            NodeList metaTags = htmlDocumentModel.getElementsByTagName("meta");
-
-            for (int i = 0; i < metaTags.getLength(); i++) {
-                Node node = metaTags.item(i);
-                NamedNodeMap attributes = node.getAttributes();
-
-                String key = getMetaKey(attributes);
-                if (key == null || metaTagsAndValues.containsKey(getMetaTagKey(key))) {
-                    continue;
-                }
-
-                if (EXTRACTABLE_OG_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
-                    String content = getMetaValue(attributes);
-                    if (content != null && !content.isEmpty()) {
-                        metaTagsAndValues.put(getMetaTagKey(key), content);
-                    }
-                } else if (EXTRACTABLE_TWITTER_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
-                    String content = getMetaValue(attributes);
-                    if (content != null && !content.isEmpty()) {
-                        metaTagsAndValues.put(getMetaTagKey(key), content);
-                    }
-                } else if (EXTRACTABLE_AL_META_TAG_ATTRIBUTES.contains(key.toLowerCase())) {
-                    String content = getMetaValue(attributes);
-                    if (content != null && !content.isEmpty()) {
-                        metaTagsAndValues.put(getMetaTagKey(key), content);
-                    }
-                }
-            }
-
-            return new MetaTagModel(metaTagsAndValues);
+            return getMetaTags(htmlContent);
         } catch (URISyntaxException use) {
             return new MetaTagModel(Collections.EMPTY_MAP);
         } catch (IOException ioe) {
