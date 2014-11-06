@@ -1,6 +1,7 @@
 package com.trywildcard.pair.model.product;
 
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.util.DummyOffer;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by michaelgarate on 7/1/14.
@@ -80,5 +83,37 @@ public class OfferBuilderValidationTest {
         assertEquals("Number of errors should match", 1, builder.getErrors().size());
     }
 
+    @Test(expected = CardBuilderException.class)
+    public void nullMetaTagModel() throws CardBuilderException {
+        MetaTagModel metaTagModel = null;
+        Offer offer = new OfferBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelNull() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getPrice()).thenReturn(null);
+
+        Offer offer = new OfferBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inValidMetaTagPrice() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getPrice()).thenReturn("Not Valid Integer");
+
+        Offer offer = new OfferBuilder(metaTagModel).build();
+    }
+
+    @Test
+    public void validMetaTagPrice() throws CardBuilderException {
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getPrice()).thenReturn("15");
+
+        Offer offer = new OfferBuilder(metaTagModel).build();
+        assertEquals(offer.getPrice().getPrice(), new Float(15f));
+    }
 
 }

@@ -3,6 +3,8 @@ package com.trywildcard.pair.model.article;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagExtractor;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.Card;
 import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.util.CardSerializer;
@@ -24,11 +26,20 @@ public class ArticleCard implements Card {
     protected ValidationTool v = new ValidationTool();
 
     /**
-     * Construct a product card
+     * Construct an article card
      */
     public ArticleCard(Article article, String webUrl) throws CardBuilderException {
         article(article);
         webUrl(webUrl);
+    }
+
+    /*
+    * Constructs an article card by attempting to extract relevant meta tags from input web url
+    */
+    public ArticleCard(String webUrl) throws CardBuilderException {
+        webUrl(webUrl);
+        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
+        article(new ArticleBuilder(metaTagModel).build());
     }
 
     private void webUrl(String webUrl) throws CardBuilderException {

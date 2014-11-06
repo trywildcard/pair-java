@@ -1,21 +1,20 @@
 package com.trywildcard.pair.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Card;
 import com.trywildcard.pair.model.CardType;
 import com.trywildcard.pair.util.CardSerializer;
+import com.trywildcard.pair.extraction.MetaTagExtractor;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.validation.ValidationTool;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Structures a Product Card.
@@ -57,6 +56,32 @@ public final class ProductCard implements Card {
         Offer offer = new OfferBuilder(price).build();
         offer(offer);
         webUrl(webUrl);
+    }
+
+    /**
+     * Construct a product card with just web URL - attempts to do tag extraction
+     * @return
+     */
+    public ProductCard(String webUrl) throws CardBuilderException {
+        webUrl(webUrl);
+
+        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
+        product(new ProductBuilder(metaTagModel).build());
+        offer(new OfferBuilder(metaTagModel).build());
+    }
+
+    /**
+     * Construct a product card with just web URL and price - attempts to do tag extraction
+     * @return
+     */
+    public ProductCard(String webUrl, Float price) throws CardBuilderException {
+        webUrl(webUrl);
+
+        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
+        product(new ProductBuilder(metaTagModel).build());
+
+        Offer offer = new OfferBuilder(price).build();
+        offer(offer);
     }
 
     public String getPairVersion(){

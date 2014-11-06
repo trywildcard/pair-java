@@ -1,2 +1,6 @@
 general:
    build_dir: Pair-Java
+
+machine:
+  java:
+    version: oraclejdk7
