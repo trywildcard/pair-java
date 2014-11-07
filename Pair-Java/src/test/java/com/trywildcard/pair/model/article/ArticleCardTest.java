@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.model.media.Image;
 import com.trywildcard.pair.util.DummyArticle;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.BeforeClass;
@@ -109,4 +110,11 @@ public class ArticleCardTest {
 
         return builder.build();
     }
+
+    @Test
+    public void testBuildArticleCardWithWebUrl() throws CardBuilderException {
+        ArticleCard articleCard = new ArticleCard("http://www.bbc.com/news/business-29424351");
+        assertEquals(articleCard.getArticle().getTitle(), "Wonga sees profits more than halve");
+        assertEquals(((Image) articleCard.getArticle().getMedia()).getImageUrl().toString(), "http://news.bbcimg.co.uk/media/images/77915000/jpg/_77915774_77914640.jpg");
+   }
 }

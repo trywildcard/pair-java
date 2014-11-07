@@ -3,8 +3,10 @@ package com.trywildcard.pair.model.media;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.validation.ValidationTool;
+import org.apache.commons.lang3.StringUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,6 +49,38 @@ public class VideoBuilder implements Builder<Video> {
         embeddedUrl(embeddedUrl);
         embeddedUrlHeight(embeddedUrlHeight);
         embeddedUrlWidth(embeddedUrlWidth);
+    }
+
+    /**
+     * Construct an VideoBuilder provided a meta tag model
+     */
+    public VideoBuilder(MetaTagModel metaTagModel) throws CardBuilderException {
+
+        try {
+            if (metaTagModel == null) {
+                throw new CardBuilderException("MetaTagModel is required");
+            }
+
+            if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getVideoUrl())
+                    || StringUtils.isEmpty(metaTagModel.getVideoHeight()) || StringUtils.isEmpty(metaTagModel.getVideoWidth())) {
+                throw new CardBuilderException("Either video title, url, width, or height is not contained in meta tags" +
+                        " - all of which are required to create a VideoBuilder");
+            }
+
+            title(metaTagModel.getTitle());
+            embeddedUrl(metaTagModel.getVideoUrl());
+            embeddedUrlHeight(Integer.parseInt(metaTagModel.getVideoHeight()));
+            embeddedUrlWidth(Integer.parseInt(metaTagModel.getVideoWidth()));
+
+            /* optional fields to attempt to fill in */
+            description(metaTagModel.getDescription());
+            posterImageUrl(metaTagModel.getImageUrl());
+            appLinkIos(metaTagModel.getAppLinkIos());
+            appLinkAndroid(metaTagModel.getAppLinkAndroid());
+        } catch (NumberFormatException nfe) {
+            throw new CardBuilderException("Unable to convert video width or height meta tag value to a valid integer, " +
+                    "which is required to construct a VideoBuilder", nfe);
+        }
     }
 
     private VideoBuilder title(String title) throws CardBuilderException {

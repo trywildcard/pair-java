@@ -3,9 +3,12 @@ package com.trywildcard.pair.model.article;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.Builder;
+import com.trywildcard.pair.model.media.Image;
 import com.trywildcard.pair.model.media.Media;
 import com.trywildcard.pair.validation.ValidationTool;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -41,6 +44,33 @@ public class ArticleBuilder implements Builder<Article> {
         title(title);
         htmlContent(htmlContent);
         this.isBreaking = Boolean.FALSE;
+    }
+
+    /**
+     * Construct an ArticleBuilder provided a meta tag model
+     */
+    public ArticleBuilder(MetaTagModel metaTagModel) throws CardBuilderException {
+        if (metaTagModel == null) {
+            throw new CardBuilderException("MetaTagModel is required");
+        }
+
+        if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getHtmlContent())) {
+            throw new CardBuilderException("Article title is not contained in meta tags and/or article html content was unable to be captured" +
+                    " - both of which are required to create a ArticleBuilder");
+        }
+
+        title(metaTagModel.getTitle());
+        htmlContent(metaTagModel.getHtmlContent());
+
+        /* Trying to set optional fields if found */
+        try {
+            media(new Image(metaTagModel.getImageUrl()));
+        } catch (CardBuilderException cbe) {
+            //if exception is thrown, let's ignore since media is optional for an article
+        }
+
+        appLinkIos(metaTagModel.getAppLinkIos());
+        appLinkAndroid(metaTagModel.getAppLinkAndroid());
     }
 
     /**

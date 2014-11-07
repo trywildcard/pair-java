@@ -67,5 +67,7 @@ public class OfferBuilderTest {
         Assert.assertEquals("Weight should match", dummyOffer.weight, offer.getWeight(), TestUtil.FLOAT_EXACT_COMPARISON_EPSILON);
         Assert.assertEquals("WeightUnits should match", dummyOffer.weightUnits, offer.getWeightUnits());
     }
+
+
     
 }

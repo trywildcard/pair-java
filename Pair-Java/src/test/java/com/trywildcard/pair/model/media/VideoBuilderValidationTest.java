@@ -1,6 +1,7 @@
 package com.trywildcard.pair.model.media;
 
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.util.DummyVideo;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,9 @@ import org.junit.Test;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by karthiksenthil on 10/5/14.
@@ -134,5 +138,134 @@ public class VideoBuilderValidationTest {
         assertEquals("Errors size should match", 0, builder.getErrors().size());
         builder.appLinkAndroid("");
         assertEquals("Errors size should match", 1, builder.getErrors().size());
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void nullMetaTagModel() throws CardBuilderException {
+        Video video = new VideoBuilder(null).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelNull() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn(null);
+        when(metaTagModel.getVideoUrl()).thenReturn(null);
+        when(metaTagModel.getVideoHeight()).thenReturn(null);
+        when(metaTagModel.getVideoWidth()).thenReturn(null);
+
+        Video video = new VideoBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("");
+        when(metaTagModel.getVideoUrl()).thenReturn("");
+        when(metaTagModel.getVideoHeight()).thenReturn("");
+        when(metaTagModel.getVideoWidth()).thenReturn("");
+
+        Video video = new VideoBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyTitleString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Title");
+        when(metaTagModel.getVideoUrl()).thenReturn("");
+        when(metaTagModel.getVideoHeight()).thenReturn("1280");
+        when(metaTagModel.getVideoWidth()).thenReturn("720");
+
+        Video video = new VideoBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelInvalidWidth() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Title");
+        when(metaTagModel.getVideoUrl()).thenReturn("http://youtube.com");
+        when(metaTagModel.getVideoHeight()).thenReturn("1280");
+        when(metaTagModel.getVideoWidth()).thenReturn("h720");
+
+        Video video = new VideoBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelInvalidHeight() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Title");
+        when(metaTagModel.getVideoUrl()).thenReturn("http://youtube.com");
+        when(metaTagModel.getVideoHeight()).thenReturn("1280h");
+        when(metaTagModel.getVideoWidth()).thenReturn("720");
+
+        Video video = new VideoBuilder(metaTagModel).build();
+    }
+
+    @Test
+    public void validMetaTagModel() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Title");
+        when(metaTagModel.getVideoUrl()).thenReturn("http://youtube.com");
+        when(metaTagModel.getVideoHeight()).thenReturn("1280");
+        when(metaTagModel.getVideoWidth()).thenReturn("720");
+
+        Video video = new VideoBuilder(metaTagModel).build();
+        assertEquals(video.getEmbeddedUrl().toString(), "http://youtube.com");
+        assertEquals(video.getEmbeddedUrlHeight(), new Integer(1280));
+        assertEquals(video.getEmbeddedUrlWidth(), new Integer(720));
+        assertEquals(video.getTitle(), "Title");
+    }
+
+    @Test
+    public void validMetaTagModelInvalidOptional() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Title");
+        when(metaTagModel.getVideoUrl()).thenReturn("http://youtube.com");
+        when(metaTagModel.getVideoHeight()).thenReturn("1280");
+        when(metaTagModel.getVideoWidth()).thenReturn("720");
+        when(metaTagModel.getImageUrl()).thenReturn(null);
+        when(metaTagModel.getDescription()).thenReturn("");
+        when(metaTagModel.getAppLinkAndroid()).thenReturn(null);
+        when(metaTagModel.getAppLinkIos()).thenReturn(null);
+
+        Video video = new VideoBuilder(metaTagModel).build();
+        assertEquals(video.getEmbeddedUrl().toString(), "http://youtube.com");
+        assertEquals(video.getEmbeddedUrlHeight(), new Integer(1280));
+        assertEquals(video.getEmbeddedUrlWidth(), new Integer(720));
+        assertEquals(video.getTitle(), "Title");
+        assertNull(video.getDescription());
+        assertNull(video.getPosterImageUrl());
+        assertNull(video.getAppLinkIos());
+        assertNull(video.getAppLinkAndroid());
+    }
+
+    @Test
+    public void validMetaTagModelValidOptional() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Youtube Video");
+        when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        when(metaTagModel.getVideoUrl()).thenReturn("http://youtube.com");
+        when(metaTagModel.getVideoHeight()).thenReturn("1280");
+        when(metaTagModel.getVideoWidth()).thenReturn("720");
+        when(metaTagModel.getDescription()).thenReturn("Description");
+        when(metaTagModel.getAppLinkAndroid()).thenReturn("android://youtube/1234");
+        when(metaTagModel.getAppLinkIos()).thenReturn("ios://youtube/1234");
+
+        Video video = new VideoBuilder(metaTagModel).build();
+        assertEquals(video.getEmbeddedUrl().toString(), "http://youtube.com");
+        assertEquals(video.getEmbeddedUrlHeight(), new Integer(1280));
+        assertEquals(video.getEmbeddedUrlWidth(), new Integer(720));
+        assertEquals(video.getTitle(), "Youtube Video");
+        assertEquals(video.getPosterImageUrl().toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        assertEquals(video.getDescription(), "Description");
+        assertEquals(video.getAppLinkIos(), "ios://youtube/1234");
+        assertEquals(video.getAppLinkAndroid(), "android://youtube/1234");
     }
 }
