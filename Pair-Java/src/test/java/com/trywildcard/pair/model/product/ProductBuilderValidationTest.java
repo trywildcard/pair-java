@@ -1,6 +1,7 @@
 package com.trywildcard.pair.model.product;
 
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
 import org.junit.Before;
@@ -10,6 +11,9 @@ import java.text.ParseException;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by michaelgarate on 7/1/14.
@@ -230,6 +234,98 @@ public class ProductBuilderValidationTest {
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
+    @Test(expected = CardBuilderException.class)
+    public void nullMetaTagModel() throws CardBuilderException {
+        Product product = new ProductBuilder(null).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelNull() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn(null);
+        when(metaTagModel.getImageUrl()).thenReturn(null);
+
+        Product product = new ProductBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("");
+        when(metaTagModel.getImageUrl()).thenReturn("");
+
+        Product product = new ProductBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyTitleString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("");
+        when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+
+        Product product = new ProductBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyImageUrlString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Etsy Tote Bag");
+        when(metaTagModel.getImageUrl()).thenReturn("");
+
+        Product product = new ProductBuilder(metaTagModel).build();
+    }
+
+    @Test
+    public void validMetaTagModel() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Etsy Tote Bag");
+        when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+
+        Product product = new ProductBuilder(metaTagModel).build();
+        assertEquals(product.getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        assertEquals(product.getName(), "Etsy Tote Bag");
+    }
+
+    @Test
+    public void validMetaTagModelInvalidOptional() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Etsy Tote Bag");
+        when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        when(metaTagModel.getDescription()).thenReturn("");
+        when(metaTagModel.getAppLinkAndroid()).thenReturn(null);
+        when(metaTagModel.getAppLinkIos()).thenReturn(null);
+
+        Product product = new ProductBuilder(metaTagModel).build();
+        assertEquals(product.getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        assertEquals(product.getName(), "Etsy Tote Bag");
+        assertNull(product.getDescription());
+        assertNull(product.getAppLinkIos());
+        assertNull(product.getAppLinkAndroid());
+    }
+
+    @Test
+    public void validMetaTagModelValidOptional() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Etsy Tote Bag");
+        when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        when(metaTagModel.getDescription()).thenReturn("Description");
+        when(metaTagModel.getAppLinkAndroid()).thenReturn("android://etsy/1234");
+        when(metaTagModel.getAppLinkIos()).thenReturn("ios://etsy/1234");
+
+        Product product = new ProductBuilder(metaTagModel).build();
+        assertEquals(product.getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        assertEquals(product.getName(), "Etsy Tote Bag");
+        assertEquals(product.getDescription(), "Description");
+        assertEquals(product.getAppLinkIos(), "ios://etsy/1234");
+        assertEquals(product.getAppLinkAndroid(), "android://etsy/1234");
+    }
 
 }
 

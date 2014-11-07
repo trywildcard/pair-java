@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
 import com.trywildcard.pair.model.Price;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.validation.ValidationTool;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -44,6 +46,23 @@ public class OfferBuilder implements Builder<Offer> {
      */
     public OfferBuilder(Float price) throws CardBuilderException {
         price(new Price(price, Currency.getInstance(Locale.US)));
+    }
+
+    public OfferBuilder(MetaTagModel metaTagModel) throws CardBuilderException {
+
+        if (metaTagModel == null) {
+            throw new CardBuilderException("MetaTagModel is required");
+        }
+
+        if (StringUtils.isEmpty(metaTagModel.getPrice())) {
+            throw new CardBuilderException("Product Price is not contained in meta tags and is required to create a OfferBuilder");
+        }
+
+        try {
+            price(new Price(Float.valueOf(metaTagModel.getPrice()), Currency.getInstance(Locale.US)));
+        } catch (NumberFormatException nfe) {
+            throw new CardBuilderException("The price value captured in the meta tag model is not a valid float object", nfe);
+        }
     }
 
     public OfferBuilder weightUnits(String weightUnits){

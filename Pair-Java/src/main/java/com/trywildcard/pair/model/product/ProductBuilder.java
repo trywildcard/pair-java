@@ -3,8 +3,9 @@ package com.trywildcard.pair.model.product;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
-import com.trywildcard.pair.model.Price;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.validation.ValidationTool;
+import org.apache.commons.lang3.StringUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,17 +33,19 @@ public class ProductBuilder implements Builder<Product> {
     protected Integer ratingCount;
     protected List<URL> relatedItems = new ArrayList<URL>();
     protected List<URL> referencedItems = new ArrayList<URL>();
-    protected Map<String, String> sizes = new HashMap<String,String>();
+    protected Map<String, String> sizes = new HashMap<String, String>();
     protected List<String> options = new ArrayList<String>();
     protected Gender gender;
     protected String model;
     protected String appLinkIos;
     protected String appLinkAndroid;
 
-    private ProductBuilder(){}
+    private ProductBuilder() {
+    }
 
     /**
      * Construct an <code>ProductBuilder</code> provided a name and list of images.
+     *
      * @param name
      */
     public ProductBuilder(String name, String image) throws CardBuilderException {
@@ -52,11 +55,33 @@ public class ProductBuilder implements Builder<Product> {
 
     /**
      * Construct an <code>ProductBuilder</code> provided a name and list of images.
+     *
      * @param name
      */
     public ProductBuilder(String name, List<String> images) throws CardBuilderException {
         name(name);
         images(images);
+    }
+
+    public ProductBuilder(MetaTagModel metaTagModel) throws CardBuilderException {
+
+        if (metaTagModel == null) {
+            throw new CardBuilderException("MetaTagModel is required");
+        }
+
+        //try to build product first, it requires a name and image
+        if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getImageUrl())) {
+            throw new CardBuilderException("Product title and/or product image is not contained in meta tags and is required to create a ProductBuilder");
+        }
+
+        name(metaTagModel.getTitle());
+        image(metaTagModel.getImageUrl());
+
+        /* Trying to set optional fields if found */
+        description(metaTagModel.getDescription());
+        appLinkIos(metaTagModel.getAppLinkIos());
+        appLinkAndroid(metaTagModel.getAppLinkAndroid());
+
     }
 
     public ProductBuilder appLinkAndroid(String appLinkAndroid) {
@@ -72,7 +97,7 @@ public class ProductBuilder implements Builder<Product> {
     public ProductBuilder appLinkIos(String appLinkIos) {
         boolean isValid = v.optional(v.notEmpty(appLinkIos), "Tried to set appLinkIos to an empty string.");
 
-        if (isValid){
+        if (isValid) {
             this.appLinkIos = appLinkIos;
         }
         return this;
@@ -81,7 +106,7 @@ public class ProductBuilder implements Builder<Product> {
     public ProductBuilder model(String model) {
         boolean isValid = v.optional(v.notEmpty(model), "Tried to set model to an empty string.");
 
-        if (isValid){
+        if (isValid) {
             this.model = model;
         }
         return this;
@@ -92,16 +117,16 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder sizes(Map<String, String> sizes){
+    public ProductBuilder sizes(Map<String, String> sizes) {
         boolean isValid = v.optional(v.notNull(sizes), "Sizes must not be null.");
 
-        if (isValid){
-            for (String key : sizes.keySet()){
+        if (isValid) {
+            for (String key : sizes.keySet()) {
                 String value = sizes.get(key);
 
                 boolean isValidSize = v.optional(v.notNullOrEmpty(value), "Tried to set a null or empty size value.");
 
-                if (isValidSize){
+                if (isValidSize) {
                     this.sizes.put(key, value);
                 }
             }
@@ -110,7 +135,7 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder option(String option){
+    public ProductBuilder option(String option) {
         boolean isValid = v.optional(v.notNullOrEmpty(option), "Tried to add an empty option.");
         if (isValid) {
             this.options.add(option);
@@ -121,7 +146,7 @@ public class ProductBuilder implements Builder<Product> {
     public ProductBuilder options(List<String> options) {
         boolean isValid = v.optional(v.notNull(options), "Options must not be null.");
         if (isValid) {
-            for (String option : options){
+            for (String option : options) {
                 boolean isValidOption = v.optional(v.notNullOrEmpty(option), "Tried to add an empty option.");
                 if (isValidOption) {
                     this.options.add(option);
@@ -131,7 +156,7 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder relatedItem(String relatedItem){
+    public ProductBuilder relatedItem(String relatedItem) {
         boolean isValid = v.optional(v.notNull(relatedItem), "Tried to add an empty relatedItem.");
         if (isValid) {
             try {
@@ -146,7 +171,7 @@ public class ProductBuilder implements Builder<Product> {
     public ProductBuilder relatedItems(List<String> relatedItems) {
         boolean isValid = v.optional(v.notNull(relatedItems), "relatedItems must not be null.");
         if (isValid) {
-            for (String relatedItem : relatedItems){
+            for (String relatedItem : relatedItems) {
                 boolean isValidRelatedItem = v.optional(v.notNull(relatedItem), "Tried to add an empty relatedItem.");
                 if (isValidRelatedItem) {
                     try {
@@ -160,7 +185,7 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder referencedItem(String referencedItem){
+    public ProductBuilder referencedItem(String referencedItem) {
         boolean isValid = v.optional(v.notNull(referencedItem), "Tried to add an empty relatedItem.");
         if (isValid) {
             try {
@@ -175,7 +200,7 @@ public class ProductBuilder implements Builder<Product> {
     public ProductBuilder referencedItems(List<String> referencedItems) {
         boolean isValid = v.optional(v.notNull(referencedItems), "relatedItems must not be null.");
         if (isValid) {
-            for (String referencedItem : referencedItems){
+            for (String referencedItem : referencedItems) {
                 boolean isValidReferenceItem = v.optional(v.notNull(referencedItem), "Tried to add an empty relatedItem.");
                 if (isValidReferenceItem) {
                     try {
@@ -223,13 +248,13 @@ public class ProductBuilder implements Builder<Product> {
     private ProductBuilder images(List<String> images) throws CardBuilderException {
         boolean isValid = v.required(v.notNullOrEmpty(images), "images must not be null.");
         if (isValid) {
-            for (String img : images){
+            for (String img : images) {
                 boolean isValidImg = v.required(v.notNull(img), "Tried to add a null image");
                 if (isValidImg) {
                     try {
                         this.images.add(new URL(img));
                     } catch (MalformedURLException e) {
-                        v.required(v.fail(),"Could not parse image URL from string.");
+                        v.required(v.fail(), "Could not parse image URL from string.");
                     }
                 }
             }
@@ -237,7 +262,7 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder color(ProductColor color){
+    public ProductBuilder color(ProductColor color) {
         boolean isValid = v.optional(v.notNull(color), "Tried to add a null color");
         if (isValid) {
             colors.add(color);
@@ -245,10 +270,10 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder colors(List<ProductColor> colors){
+    public ProductBuilder colors(List<ProductColor> colors) {
         boolean isValid = v.optional(v.notNull(colors), "colors must not be null.");
         if (isValid) {
-            for (ProductColor color : colors){
+            for (ProductColor color : colors) {
                 boolean isValidColor = v.optional(v.notNull(color), "Tried to add a null color");
                 if (isValidColor) {
                     this.colors.add(color);
@@ -292,6 +317,7 @@ public class ProductBuilder implements Builder<Product> {
 
     /**
      * Instantiate a <code>ProductCard</code> with the data in this builder.
+     *
      * @return the constructed product card
      */
     public Product build() {
@@ -301,9 +327,10 @@ public class ProductBuilder implements Builder<Product> {
 
     /**
      * Get a list of validation errors.
+     *
      * @return the list of errors.
      */
-    public List<String> getErrors(){
+    public List<String> getErrors() {
         return v.getErrors();
     }
 
