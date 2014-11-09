@@ -69,6 +69,7 @@ public class ArticleBuilder implements Builder<Article> {
             //if exception is thrown, let's ignore since media is optional for an article
         }
 
+        abstractContent(metaTagModel.getDescription());
         appLinkIos(metaTagModel.getAppLinkIos());
         appLinkAndroid(metaTagModel.getAppLinkAndroid());
     }

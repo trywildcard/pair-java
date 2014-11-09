@@ -224,6 +224,7 @@ public class ArticleBuilderValidationTest {
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("BBC News Article");
         when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        when(metaTagModel.getDescription()).thenReturn("description");
         when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
         when(metaTagModel.getAppLinkAndroid()).thenReturn("android://etsy/1234");
         when(metaTagModel.getAppLinkIos()).thenReturn("ios://etsy/1234");
@@ -232,6 +233,7 @@ public class ArticleBuilderValidationTest {
         assertEquals(((Image) article.getMedia()).getImageUrl().toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
         assertEquals(article.getHtmlContent(), "<html><body></body></html>");
         assertEquals(article.getTitle(), "BBC News Article");
+        assertEquals(article.getAbstractContent(), "description");
         assertEquals(article.getAppLinkIos(), "ios://etsy/1234");
         assertEquals(article.getAppLinkAndroid(), "android://etsy/1234");
     }
