@@ -3,9 +3,12 @@ package com.trywildcard.pair.model.review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.Builder;
+import com.trywildcard.pair.model.media.Image;
 import com.trywildcard.pair.model.media.Media;
 import com.trywildcard.pair.validation.ValidationTool;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -38,6 +41,34 @@ public class ReviewBuilder implements Builder<Review> {
     public ReviewBuilder(String title, String htmlContent) throws CardBuilderException {
         title(title);
         htmlContent(htmlContent);
+    }
+
+    /**
+     * Construct an ReviewBuilder provided a meta tag model
+     */
+    public ReviewBuilder(MetaTagModel metaTagModel) throws CardBuilderException {
+        if (metaTagModel == null) {
+            throw new CardBuilderException("MetaTagModel is required");
+        }
+
+        if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getHtmlContent())) {
+            throw new CardBuilderException("Review title is not contained in meta tags and/or review html content was unable to be captured" +
+                    " - both of which are required to create a ReviewBuilder");
+        }
+
+        title(metaTagModel.getTitle());
+        htmlContent(metaTagModel.getHtmlContent());
+
+        /* Trying to set optional fields if found */
+        try {
+            media(new Image(metaTagModel.getImageUrl()));
+        } catch (CardBuilderException cbe) {
+            //if exception is thrown, let's ignore since media is optional for an article
+        }
+
+        abstractContent(metaTagModel.getDescription());
+        appLinkIos(metaTagModel.getAppLinkIos());
+        appLinkAndroid(metaTagModel.getAppLinkAndroid());
     }
 
     /**
