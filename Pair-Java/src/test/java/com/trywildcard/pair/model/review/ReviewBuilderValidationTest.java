@@ -1,6 +1,8 @@
 package com.trywildcard.pair.model.review;
 
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.extraction.MetaTagModel;
+import com.trywildcard.pair.model.media.Image;
 import com.trywildcard.pair.util.DummyReview;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +10,9 @@ import org.junit.Test;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by karthiksenthil on 10/5/14.
@@ -146,6 +151,101 @@ public class ReviewBuilderValidationTest {
         assertEquals("Errors size should match", 0, builder.getErrors().size());
         builder.appLinkAndroid("");
         assertEquals("Errors size should match", 1, builder.getErrors().size());
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void nullMetaTagModel() throws CardBuilderException {
+        Review review = new ReviewBuilder(null).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelNull() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn(null);
+        when(metaTagModel.getHtmlContent()).thenReturn(null);
+
+        Review review = new ReviewBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("");
+        when(metaTagModel.getHtmlContent()).thenReturn("");
+
+        Review review = new ReviewBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyTitleString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("");
+        when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
+
+        Review review = new ReviewBuilder(metaTagModel).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyImageUrlString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("BBC News Article");
+        when(metaTagModel.getHtmlContent()).thenReturn("");
+
+        Review review = new ReviewBuilder(metaTagModel).build();
+    }
+
+    @Test
+    public void validMetaTagModel() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("BBC News Article");
+        when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
+
+        Review review = new ReviewBuilder(metaTagModel).build();
+        assertEquals(review.getHtmlContent(), "<html><body></body></html>");
+        assertEquals(review.getTitle(), "BBC News Article");
+    }
+
+    @Test
+    public void validMetaTagModelInvalidOptional() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("BBC News Article");
+        when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
+        when(metaTagModel.getDescription()).thenReturn("");
+        when(metaTagModel.getAppLinkAndroid()).thenReturn(null);
+        when(metaTagModel.getAppLinkIos()).thenReturn(null);
+
+        Review review = new ReviewBuilder(metaTagModel).build();
+        assertEquals(review.getHtmlContent(), "<html><body></body></html>");
+        assertEquals(review.getTitle(), "BBC News Article");
+        assertNull(review.getAbstractContent());
+        assertNull(review.getAppLinkIos());
+        assertNull(review.getAppLinkAndroid());
+    }
+
+    @Test
+    public void validMetaTagModelValidOptional() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("BBC News Article");
+        when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        when(metaTagModel.getDescription()).thenReturn("description");
+        when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
+        when(metaTagModel.getAppLinkAndroid()).thenReturn("android://etsy/1234");
+        when(metaTagModel.getAppLinkIos()).thenReturn("ios://etsy/1234");
+
+        Review review = new ReviewBuilder(metaTagModel).build();
+        assertEquals(((Image) review.getMedia()).getImageUrl().toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        assertEquals(review.getHtmlContent(), "<html><body></body></html>");
+        assertEquals(review.getTitle(), "BBC News Article");
+        assertEquals(review.getAbstractContent(), "description");
+        assertEquals(review.getAppLinkIos(), "ios://etsy/1234");
+        assertEquals(review.getAppLinkAndroid(), "android://etsy/1234");
     }
 
 

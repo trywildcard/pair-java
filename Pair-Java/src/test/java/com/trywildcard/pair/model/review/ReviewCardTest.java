@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trywildcard.pair.exception.CardBuilderException;
 
+import com.trywildcard.pair.model.media.Image;
 import com.trywildcard.pair.util.DummyReview;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.BeforeClass;
@@ -111,5 +112,13 @@ public class ReviewCardTest {
         builder.appLinkAndroid(dummyReview.appLinkAndroid);
 
         return builder.build();
+    }
+
+    @Test
+    public void testBuildReviewCardWithWebUrl() throws CardBuilderException {
+        ReviewCard reviewCard = new ReviewCard("http://www.engadget.com/2013/09/09/lg-g2-review/");
+        assertEquals(reviewCard.getReview().getTitle(), "LG G2 review");
+        assertEquals(reviewCard.getReview().getAbstractContent(), "There are a lot of smartphones out there now. You know this. To add to the confusion, many companies are now parading out multiple top-drawer phones:");
+        assertEquals(((Image) reviewCard.getReview().getMedia()).getImageUrl().toString(), "http://www.blogcdn.com/www.engadget.com/media/2013/09/g2review-1378739225.jpg");
     }
 }
