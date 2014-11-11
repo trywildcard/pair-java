@@ -29,7 +29,7 @@ public class ProductBuilderValidationTest {
     public void setUp() throws ParseException, CardBuilderException {
         dummyProduct = new DummyProduct();
         dummyOffer = new DummyOffer();
-        builder = new ProductBuilder(dummyProduct.name, dummyProduct.images);
+        builder = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images);
     }
 
     @Test
@@ -39,23 +39,28 @@ public class ProductBuilderValidationTest {
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyNameString() throws CardBuilderException {
-        Product product = new ProductBuilder("", dummyProduct.images).build();
+        Product product = new ProductBuilder("", dummyProduct.description, dummyProduct.images).build();
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullImages() throws CardBuilderException {
         List<String> images = null;
-        Product product = new ProductBuilder(dummyProduct.name, images).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.description, images).build();
     }
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyImages() throws CardBuilderException {
-        Product product = new ProductBuilder(dummyProduct.name, Collections.EMPTY_LIST).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.description, Collections.EMPTY_LIST).build();
+    }
+
+    @Test(expected = CardBuilderException.class)
+    public void isInvalidWithEmptyDescription() throws CardBuilderException {
+        Product product = new ProductBuilder(dummyProduct.name, "", dummyProduct.images).build();
     }
 
     @Test
     public void isValidWithOneImage() throws CardBuilderException {
-        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.imgUrl).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.imgUrl).build();
         assertEquals(product.getName(), dummyProduct.name);
         assertEquals(product.getImages().size(), 1);
         assertEquals(product.getImages().get(0).toString(), dummyProduct.imgUrl);
@@ -63,7 +68,7 @@ public class ProductBuilderValidationTest {
 
     @Test
     public void isValidWithMultipleImages() throws CardBuilderException {
-        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images).build();
         assertEquals(product.getName(), dummyProduct.name);
         assertEquals(product.getImages().size(), 4);
     }
@@ -213,11 +218,10 @@ public class ProductBuilderValidationTest {
     }
 
 
-    @Test
-    public void hasErrorForEmptyDescriptionString(){
+    @Test(expected = CardBuilderException.class)
+    public void hasErrorForEmptyDescriptionString() throws CardBuilderException {
         assertEquals("Errors size should match", 0, builder.getErrors().size());
         builder.description("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
     @Test
@@ -279,15 +283,28 @@ public class ProductBuilderValidationTest {
         Product product = new ProductBuilder(metaTagModel).build();
     }
 
+    @Test(expected = CardBuilderException.class)
+    public void inCompleteMetaTagModelEmptyDescriptionString() throws CardBuilderException {
+
+        MetaTagModel metaTagModel = mock(MetaTagModel.class);
+        when(metaTagModel.getTitle()).thenReturn("Etsy Tote Bag");
+        when(metaTagModel.getDescription()).thenReturn("");
+        when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+
+        Product product = new ProductBuilder(metaTagModel).build();
+    }
+
     @Test
     public void validMetaTagModel() throws CardBuilderException {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("Etsy Tote Bag");
+        when(metaTagModel.getDescription()).thenReturn("Etsy Tote Bag Description");
         when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
 
         Product product = new ProductBuilder(metaTagModel).build();
         assertEquals(product.getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
+        assertEquals(product.getDescription(), "Etsy Tote Bag Description");
         assertEquals(product.getName(), "Etsy Tote Bag");
     }
 
@@ -296,15 +313,15 @@ public class ProductBuilderValidationTest {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("Etsy Tote Bag");
+        when(metaTagModel.getDescription()).thenReturn("Etsy Tote Bag Description");
         when(metaTagModel.getImageUrl()).thenReturn("https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
-        when(metaTagModel.getDescription()).thenReturn("");
-        when(metaTagModel.getAppLinkAndroid()).thenReturn(null);
+        when(metaTagModel.getAppLinkAndroid()).thenReturn("");
         when(metaTagModel.getAppLinkIos()).thenReturn(null);
 
         Product product = new ProductBuilder(metaTagModel).build();
         assertEquals(product.getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
         assertEquals(product.getName(), "Etsy Tote Bag");
-        assertNull(product.getDescription());
+        assertEquals(product.getDescription(), "Etsy Tote Bag Description");
         assertNull(product.getAppLinkIos());
         assertNull(product.getAppLinkAndroid());
     }

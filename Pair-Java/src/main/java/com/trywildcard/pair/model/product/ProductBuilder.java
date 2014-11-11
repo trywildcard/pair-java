@@ -21,12 +21,12 @@ public class ProductBuilder implements Builder<Product> {
 
     //required fields
     protected String name;
+    protected String description;
     protected List<URL> images = new ArrayList<URL>();
 
     //optional fields
     protected String merchant;
     protected String brand;
-    protected String description;
     protected List<ProductColor> colors = new ArrayList<ProductColor>();
     protected Float rating;
     protected Float ratingScale;
@@ -44,22 +44,24 @@ public class ProductBuilder implements Builder<Product> {
     }
 
     /**
-     * Construct an <code>ProductBuilder</code> provided a name and list of images.
+     * Construct an <code>ProductBuilder</code> provided a name, description and list of images.
      *
      * @param name
      */
-    public ProductBuilder(String name, String image) throws CardBuilderException {
+    public ProductBuilder(String name, String description, String image) throws CardBuilderException {
         name(name);
+        description(description);
         image(image);
     }
 
     /**
-     * Construct an <code>ProductBuilder</code> provided a name and list of images.
+     * Construct an <code>ProductBuilder</code> provided a name, description and list of images.
      *
      * @param name
      */
-    public ProductBuilder(String name, List<String> images) throws CardBuilderException {
+    public ProductBuilder(String name, String description, List<String> images) throws CardBuilderException {
         name(name);
+        description(description);
         images(images);
     }
 
@@ -69,16 +71,16 @@ public class ProductBuilder implements Builder<Product> {
             throw new CardBuilderException("MetaTagModel is required");
         }
 
-        //try to build product first, it requires a name and image
-        if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getImageUrl())) {
-            throw new CardBuilderException("Product title and/or product image is not contained in meta tags and is required to create a ProductBuilder");
+        //try to build product first, it requires a name, description and image
+        if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getDescription()) || StringUtils.isEmpty(metaTagModel.getImageUrl())) {
+            throw new CardBuilderException("Product title and/or product description and/or product image is not contained in meta tags and is required to create a ProductBuilder");
         }
 
         name(metaTagModel.getTitle());
+        description(metaTagModel.getDescription());
         image(metaTagModel.getImageUrl());
 
         /* Trying to set optional fields if found */
-        description(metaTagModel.getDescription());
         appLinkIos(metaTagModel.getAppLinkIos());
         appLinkAndroid(metaTagModel.getAppLinkAndroid());
 
@@ -283,8 +285,8 @@ public class ProductBuilder implements Builder<Product> {
         return this;
     }
 
-    public ProductBuilder description(String description) {
-        boolean isValid = v.optional(v.notEmpty(description), "Tried to set description to an empty string.");
+    public ProductBuilder description(String description) throws CardBuilderException {
+        boolean isValid = v.required(v.notNullOrEmpty(description), "Product Description cannot be blank");
         if (isValid) {
             this.description = description;
         }
