@@ -40,7 +40,7 @@ public class ProductBuilderTest {
 
     private Product buildMinimalProduct() throws CardBuilderException {
 
-        ProductBuilder cardBuilder = new ProductBuilder(dummyProduct.name, dummyProduct.images);
+        ProductBuilder cardBuilder = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images);
 
         return cardBuilder.build();
     }
@@ -54,7 +54,7 @@ public class ProductBuilderTest {
 
     @Test
     public void testMinimalProductWithMinimalConstructor() throws CardBuilderException {
-        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.images).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images).build();
         testMinimalProductAttributes(product);
     }
     
@@ -93,9 +93,8 @@ public class ProductBuilderTest {
 
 
      private Product buildExtensiveProduct() throws CardBuilderException {
-        ProductBuilder builder = new ProductBuilder(dummyProduct.name, dummyProduct.images);
+        ProductBuilder builder = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images);
 
-        builder.description(dummyProduct.description);
         builder.brand(dummyProduct.brand);
         builder.merchant(dummyProduct.merchant);
         builder.colors(dummyProduct.colors);
