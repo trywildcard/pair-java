@@ -20,7 +20,7 @@ Add this to your application's pom.xml file:
 </dependency>
 ```
 
-# Contributing
+# Contributing  
 
 1. Fork it ( https://github.com/[my-github-username]/pair-java/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
