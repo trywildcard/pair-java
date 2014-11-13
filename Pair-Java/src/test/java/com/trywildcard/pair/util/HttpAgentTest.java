@@ -27,6 +27,6 @@ public class HttpAgentTest {
     @Test(expected = UnknownHostException.class)
     public void getHTTPTestBadUrl() throws IOException, URISyntaxException {
         HttpAgent httpAgent = new HttpAgent();
-        httpAgent.get("http://www.trywildcard232424.com");
+        httpAgent.get("http://dns.trywildcard232424.com");
     }
 }
