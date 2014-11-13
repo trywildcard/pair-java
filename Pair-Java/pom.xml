@@ -3,6 +3,28 @@
   <groupId>com.trywildcard.pair</groupId>
   <artifactId>wildcard-pair</artifactId>
   <version>0.3.1</version>
+  <name>Wildcard Pair Java SDK</name>
+  <description>SDK for brands, merchants, and publishers to create cards for their content</description>
+  <url>http://trywildcard.com/dev</url>
+  <scm>
+    <connection>scm:git:git@github.com:trywildcard.com/pair-java.git</connection>
+    <developerConnection>scm:git:git@github.com:trywildcard/pair-java.git</developerConnection>
+    <url>git@github.com:trywildcard/pair-java.git</url>
+  </scm>
+  <developers>
+    <developer>
+      <name>Karthik Senthil</name>
+      <email>karthik@trywildcard.com</email>
+      <organization>Wildcard</organization>
+      <organizationUrl>http://trywildcard.com/dev</organizationUrl>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
   <distributionManagement>
     <repository>
       <id>repo-trywildcard</id>
@@ -19,6 +41,15 @@
       <name>Pair Sites</name>
       <url>dav:http://repo.trywildcard.com/nexus/content/sites/site/</url>
     </site>
+    <!-- the above needs to be commented out and the below neesd to be uncommented to deploy to maven central -->
+<!--    <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+  <repository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  </repository> -->
   </distributionManagement>
   <build> 
     <plugins>
@@ -30,6 +61,73 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      <plugin>
+      <groupId>org.sonatype.plugins</groupId>
+      <artifactId>nexus-staging-maven-plugin</artifactId>
+      <version>1.6.5</version>
+      <executions>
+        <execution>
+          <id>default-deploy</id>
+          <phase>deploy</phase>
+          <goals>
+            <goal>deploy</goal>
+          </goals>
+        </execution>
+      </executions>
+      <extensions>true</extensions>
+      <configuration>
+        <serverId>ossrh</serverId>
+        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+        <autoReleaseAfterClose>false</autoReleaseAfterClose>
+      </configuration>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+      <version>2.2.1</version>
+      <executions>
+        <execution>
+          <id>attach-sources</id>
+          <goals>
+            <goal>jar-no-fork</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>2.9.1</version>
+      <executions>
+        <execution>
+          <id>attach-javadocs</id>
+          <goals>
+            <goal>jar</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.5</version>
+      <executions>
+        <execution>
+          <id>sign-artifacts</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>sign</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-deploy-plugin</artifactId>
+      <configuration>
+        <skip>true</skip>
+      </configuration>
+    </plugin>
     </plugins>
   </build>
   <dependencies>
