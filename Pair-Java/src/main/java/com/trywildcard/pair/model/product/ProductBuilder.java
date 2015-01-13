@@ -39,6 +39,7 @@ public class ProductBuilder implements Builder<Product> {
     protected String model;
     protected String appLinkIos;
     protected String appLinkAndroid;
+    protected List<String> keywords;
 
     private ProductBuilder() {
     }
@@ -313,6 +314,14 @@ public class ProductBuilder implements Builder<Product> {
         boolean isValid = v.required(v.notNullOrEmpty(name), "Product name cannot be blank.");
         if (isValid) {
             this.name = name;
+        }
+        return this;
+    }
+
+    public ProductBuilder keywords(List<String> keywords) {
+        boolean isValid = v.optional(v.notNull(keywords), "Keywords cannot be null.");
+        if (isValid) {
+            this.keywords = keywords;
         }
         return this;
     }
