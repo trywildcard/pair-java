@@ -107,6 +107,7 @@ public class ArticleCardTest {
         builder.source(dummyArticle.source);
         builder.appLinkAndroid(dummyArticle.appLinkAndroid);
         builder.appLinkIos(dummyArticle.appLinkIos);
+        builder.keywords(dummyArticle.keywords);
 
         return builder.build();
     }

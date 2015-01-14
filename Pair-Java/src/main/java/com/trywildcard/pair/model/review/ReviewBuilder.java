@@ -34,6 +34,7 @@ public class ReviewBuilder implements Builder<Review> {
     protected Rating rating;
     protected String appLinkIos;
     protected String appLinkAndroid;
+    protected List<String> keywords;
 
     /**
      * Construct an <code>ReviewBuilder</code> provided a title and htmlContent.
@@ -172,6 +173,14 @@ public class ReviewBuilder implements Builder<Review> {
         boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
         if (isValid) {
             this.appLinkAndroid = appLinkAndroid;
+        }
+        return this;
+    }
+
+    public ReviewBuilder keywords(List<String> keywords) {
+        boolean isValid = v.optional(v.notNull(keywords), "Keywords cannot be null.");
+        if (isValid) {
+            this.keywords = keywords;
         }
         return this;
     }

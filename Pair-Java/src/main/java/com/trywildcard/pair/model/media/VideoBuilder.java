@@ -37,6 +37,7 @@ public class VideoBuilder implements Builder<Video> {
     protected String source;
     protected String appLinkIos;
     protected String appLinkAndroid;
+    protected List<String> keywords;
 
     /** Private Constructor **/
     private VideoBuilder() { }
@@ -204,6 +205,14 @@ public class VideoBuilder implements Builder<Video> {
         boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
         if (isValid) {
             this.appLinkAndroid = appLinkAndroid;
+        }
+        return this;
+    }
+
+    public VideoBuilder keywords(List<String> keywords) {
+        boolean isValid = v.optional(v.notNull(keywords), "Keywords cannot be null.");
+        if (isValid) {
+            this.keywords = keywords;
         }
         return this;
     }

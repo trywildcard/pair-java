@@ -1,5 +1,5 @@
 {
-    "pair_version": "0.3.1",
+    "pair_version": "0.4.0",
     "card_type": "review",
     "web_url": "https://www.engadget.com/2013/09/09/lg-g2-review/",
     "review": {
@@ -23,6 +23,7 @@
             "number_of_ratings": 55
         },
         "app_link_ios": "ios://applink",
-        "app_link_android": "android://applink"
+        "app_link_android": "android://applink",
+        "keywords": ["keyword1", "keyword2"]
     }
 }

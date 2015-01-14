@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class MetaTagExtractorTest {
     @Test
     public void testBadUrl() throws MalformedURLException, CardBuilderException{
-        assertEquals(MetaTagExtractor.getMetaTags(new URL("http://trywildcard23030203.com")).getNumberOfMetaTags().intValue(), 0);
+        assertEquals(MetaTagExtractor.getMetaTags(new URL("http://dns.trywildcard23030203.com")).getNumberOfMetaTags().intValue(), 0);
     }
 
     @Test

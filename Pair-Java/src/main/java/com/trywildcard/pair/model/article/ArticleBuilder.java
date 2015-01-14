@@ -33,6 +33,7 @@ public class ArticleBuilder implements Builder<Article> {
     protected Boolean isBreaking;
     protected String appLinkIos;
     protected String appLinkAndroid;
+    protected List<String> keywords;
 
     /** Private Constructor **/
     private ArticleBuilder() { }
@@ -168,6 +169,14 @@ public class ArticleBuilder implements Builder<Article> {
         boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
         if (isValid) {
             this.appLinkAndroid = appLinkAndroid;
+        }
+        return this;
+    }
+
+    public ArticleBuilder keywords(List<String> keywords) {
+        boolean isValid = v.optional(v.notNull(keywords), "Keywords cannot be null.");
+        if (isValid) {
+            this.keywords = keywords;
         }
         return this;
     }
