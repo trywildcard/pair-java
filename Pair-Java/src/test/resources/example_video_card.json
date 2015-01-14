@@ -16,6 +16,7 @@
         "creator": "NBA",
         "source": "Youtube",
         "app_link_ios": "ios://applink",
-        "app_link_android": "android://applink"
+        "app_link_android": "android://applink",
+        "keywords": ["keyword1", "keyword2"]
     }
 }

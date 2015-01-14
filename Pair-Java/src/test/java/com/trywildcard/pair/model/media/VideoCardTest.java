@@ -107,6 +107,7 @@ public class VideoCardTest {
         builder.source(dummyVideo.source);
         builder.appLinkIos(dummyVideo.appLinkIos);
         builder.appLinkAndroid(dummyVideo.appLinkAndroid);
+        builder.keywords(dummyVideo.keywords);
 
         return builder.build();
     }
