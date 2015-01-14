@@ -16,7 +16,7 @@ Add this to your application's pom.xml file:
 <dependency>
   <groupId>com.trywildcard.pair</groupId>
   <artifactId>wildcard-pair</artifactId>
-  <version>0.3.1</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
