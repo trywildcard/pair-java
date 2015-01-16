@@ -109,6 +109,7 @@ public class ProductBuilderTest {
         builder.model(dummyProduct.model);
         builder.appLinkIos(dummyProduct.appLinkIos);
         builder.appLinkAndroid(dummyProduct.appLinkAndroid);
+        builder.keywords(dummyProduct.keywords);
 
         return builder.build();
     }

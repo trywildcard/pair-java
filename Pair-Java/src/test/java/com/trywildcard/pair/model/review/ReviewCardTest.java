@@ -110,6 +110,7 @@ public class ReviewCardTest {
         builder.source(dummyReview.source);
         builder.appLinkIos(dummyReview.appLinkIos);
         builder.appLinkAndroid(dummyReview.appLinkAndroid);
+        builder.keywords(dummyReview.keywords);
 
         return builder.build();
     }
@@ -118,7 +119,7 @@ public class ReviewCardTest {
     public void testBuildReviewCardWithWebUrl() throws CardBuilderException {
         ReviewCard reviewCard = new ReviewCard("http://www.engadget.com/2013/09/09/lg-g2-review/");
         assertEquals(reviewCard.getReview().getTitle(), "LG G2 review");
-        assertEquals(reviewCard.getReview().getAbstractContent(), "There are a lot of smartphones out there now. You know this. To add to the confusion, many companies are now parading out multiple top-drawer phones:");
+        assertEquals(reviewCard.getReview().getAbstractContent(), "There are a lot of smartphones out there now. You know this. To add to the confusion, many companies are now parading out multiple top-drawer phones: thi");
         assertEquals(((Image) reviewCard.getReview().getMedia()).getImageUrl().toString(), "http://www.blogcdn.com/www.engadget.com/media/2013/09/g2review-1378739225.jpg");
     }
 }

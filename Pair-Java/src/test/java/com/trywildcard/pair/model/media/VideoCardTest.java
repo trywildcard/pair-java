@@ -107,6 +107,7 @@ public class VideoCardTest {
         builder.source(dummyVideo.source);
         builder.appLinkIos(dummyVideo.appLinkIos);
         builder.appLinkAndroid(dummyVideo.appLinkAndroid);
+        builder.keywords(dummyVideo.keywords);
 
         return builder.build();
     }
@@ -120,8 +121,8 @@ public class VideoCardTest {
         assertEquals(videoCard.getMedia().getEmbeddedUrlWidth(), new Integer(1280));
         assertEquals(videoCard.getMedia().getDescription(), "Take a look at the new-look Cleveland Cavaliers through the lens of the Phantom camera during a practice session. Visit nba.com/video for more highlights. Ab...");
         assertEquals(videoCard.getMedia().getPosterImageUrl().toString(), "https://i.ytimg.com/vi/0RFfrsABtQo/maxresdefault.jpg");
-        assertEquals(videoCard.getMedia().getAppLinkAndroid(), "http://www.youtube.com/watch?v=0RFfrsABtQo&amp;feature=applinks");
-        assertEquals(videoCard.getMedia().getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=0RFfrsABtQo&amp;feature=applinks");
+        assertEquals(videoCard.getMedia().getAppLinkAndroid(), "http://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
+        assertEquals(videoCard.getMedia().getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
     }
 
 }

@@ -3,6 +3,7 @@ package com.trywildcard.pair.model.media;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by karthiksenthil on 10/5/14.
@@ -26,6 +27,7 @@ public class Video extends Media {
     private String source;
     private String appLinkIos;
     private String appLinkAndroid;
+    private List<String> keywords;
 
     /** Needed for Jackson deserialization **/
     private Video() {
@@ -47,6 +49,7 @@ public class Video extends Media {
         this.source = builder.source;
         this.appLinkAndroid = builder.appLinkAndroid;
         this.appLinkIos = builder.appLinkIos;
+        this.keywords = builder.keywords;
     }
 
     public MediaType getType() {
@@ -104,6 +107,8 @@ public class Video extends Media {
     public String getStreamContentType() {
         return streamContentType;
     }
+
+    public List<String> getKeywords() { return keywords; }
 
     @Override
     public boolean equals(Object o) {
