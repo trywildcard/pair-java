@@ -1,6 +1,7 @@
 package com.trywildcard.pair.extraction;
 
 import com.trywildcard.pair.exception.CardBuilderException;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class MetaTagModel {
 
     private String checkAndReturnValue(String dataKey) {
         if (metaTagsAndValues.containsKey(dataKey)) {
-            return metaTagsAndValues.get(dataKey);
+            return StringEscapeUtils.unescapeHtml4(metaTagsAndValues.get(dataKey));
         }
 
         return null;
