@@ -48,8 +48,8 @@ public class MetaTagExtractorTest {
         assertEquals(metaTagModel.getDescription(), "Join Chef and Co-Founder of The Meatball Shop, Dan Holzman, to learn how he makes meatballs");
         assertEquals(metaTagModel.getImageUrl(), "https://i.ytimg.com/vi/a5A_nVQYDfc/maxresdefault.jpg");
         assertEquals(metaTagModel.getAppLinkAndroid(), "http://www.youtube.com/watch?v=a5A_nVQYDfc");
-        assertEquals(metaTagModel.getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=a5A_nVQYDfc&amp;feature=applinks");
-        assertEquals(metaTagModel.getVideoUrl(), "http://www.youtube.com/v/a5A_nVQYDfc?autohide=1&amp;version=3");
+        assertEquals(metaTagModel.getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=a5A_nVQYDfc&feature=applinks");
+        assertEquals(metaTagModel.getVideoUrl(), "http://www.youtube.com/v/a5A_nVQYDfc?autohide=1&version=3");
         assertEquals(metaTagModel.getVideoWidth(), "1280");
         assertEquals(metaTagModel.getVideoHeight(), "720");
     }

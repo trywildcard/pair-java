@@ -201,7 +201,7 @@ public class ProductCardTest {
         assertEquals(productCard.getProduct().getAppLinkAndroid(), "etsy://listing/128235512?ref=applinks_android");
         assertEquals(productCard.getProduct().getAppLinkIos(), "etsy://listing/128235512?ref=applinks_ios");
         assertEquals(productCard.getProduct().getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
-        assertEquals(productCard.getProduct().getName(), "Etsy &quot;I Buy from Real People&quot; Tote Bag");
+        assertEquals(productCard.getProduct().getName(), "Etsy \"I Buy from Real People\" Tote Bag");
         assertEquals(productCard.getProduct().getDescription(), "Keep it real with an Etsy limited edition I Buy from Real People Tote Bag. Made of sturdy cotton canvas, this bag is a great carry-all for work and");
     }
 }
