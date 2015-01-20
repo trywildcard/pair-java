@@ -1,5 +1,5 @@
 {
-  "pair_version": "0.4.0",
+  "pair_version": "0.4.1",
   "card_type": "product",
   "web_url": "http://www.examplestore.com/listing/36226783/green-leather-shoes",
   "offers": [
@@ -71,7 +71,7 @@
     "model": "KICKN-GRL-17",
     "gender": "unisex",
     "app_link_ios": "jump://VerticalA/x123",
-    "app_link_android": "market://search?q=pub:examplestore",
-    "keywords": ["keyword1", "keyword2"]
-  }
+    "app_link_android": "market://search?q=pub:examplestore"
+  },
+  "keywords": ["keyword1", "keyword2"]
 }

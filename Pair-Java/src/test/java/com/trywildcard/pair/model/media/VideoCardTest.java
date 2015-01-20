@@ -52,6 +52,12 @@ public class VideoCardTest {
         testMinimalVideoCardAttributes(card);
     }
 
+    @Test(expected = CardBuilderException.class)
+    public void testNullKeywords() throws CardBuilderException {
+        VideoCard card = buildMinimalVideoCard();
+        card.setKeywords(null);
+    }
+
 
     @Test
     public void testMinimalVideoCardWithMinimalConstructor() throws CardBuilderException {
@@ -66,6 +72,7 @@ public class VideoCardTest {
         VideoCard fixtureCard = mapper.readValue(inputString,  VideoCard.class);
         Video generatedVideo = buildExtensiveVideo();
         VideoCard generatedCard = new VideoCard(generatedVideo, dummyVideo.webUrl);
+        generatedCard.setKeywords(dummyVideo.keywords);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -107,7 +114,6 @@ public class VideoCardTest {
         builder.source(dummyVideo.source);
         builder.appLinkIos(dummyVideo.appLinkIos);
         builder.appLinkAndroid(dummyVideo.appLinkAndroid);
-        builder.keywords(dummyVideo.keywords);
 
         return builder.build();
     }

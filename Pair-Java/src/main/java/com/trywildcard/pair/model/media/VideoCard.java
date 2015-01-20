@@ -13,6 +13,7 @@ import com.trywildcard.pair.validation.ValidationTool;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Created by karthiksenthil on 10/5/14.
@@ -24,6 +25,7 @@ public class VideoCard implements Card {
 
     private URL webUrl;
     private Video media;
+    private List<String> keywords;
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -62,6 +64,12 @@ public class VideoCard implements Card {
         this.media = media;
     }
 
+    public void setKeywords(List<String> keywords) throws CardBuilderException {
+        v.required(v.notNull(keywords), "Keywords cannot be null.");
+
+        this.keywords = keywords;
+    }
+
     public String getPairVersion() {
         return pairVersion;
     }
@@ -77,6 +85,8 @@ public class VideoCard implements Card {
     public Video getMedia() {
         return media;
     }
+
+    public List<String> getKeywords() { return keywords; }
 
     /**
      * Private constructor to allow for Jackson deserialization.

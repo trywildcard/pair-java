@@ -32,7 +32,6 @@ public class Product {
     private final String model;
     private final String appLinkIos;
     private final String appLinkAndroid;
-    private final List<String> keywords;
 
     /**
      * Construct a product card using a <code>ProductBuilder</code>, which is responsible for validations.
@@ -56,7 +55,6 @@ public class Product {
         this.model = builder.model;
         this.appLinkIos = builder.appLinkIos;
         this.appLinkAndroid = builder.appLinkAndroid;
-        this.keywords = builder.keywords;
     }
 
     public String getAppLinkAndroid() {
@@ -126,8 +124,6 @@ public class Product {
     public String getName() {
         return name;
     }
-
-    public List<String> getKeywords() { return keywords; }
 
     @Override
     public boolean equals(Object o) {

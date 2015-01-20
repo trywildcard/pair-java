@@ -153,13 +153,6 @@ public class ReviewBuilderValidationTest {
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
-    @Test
-    public void hasErrorForNullKeywords(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.keywords(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
     @Test(expected = CardBuilderException.class)
     public void nullMetaTagModel() throws CardBuilderException {
         Review review = new ReviewBuilder(null).build();

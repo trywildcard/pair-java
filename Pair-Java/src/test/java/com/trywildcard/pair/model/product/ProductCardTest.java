@@ -90,6 +90,7 @@ public class ProductCardTest {
         Offer generatedOffer = buildExtensiveOffer();
 
         ProductCard generatedCard = new ProductCard(generatedProduct, generatedOffer, dummyProduct.webUrl);
+        generatedCard.setKeywords(dummyProduct.keywords);
 
         Assert.assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -166,6 +167,15 @@ public class ProductCardTest {
         }
     }
 
+    @Test(expected = CardBuilderException.class)
+    public void isInvalidNullKeywords() throws CardBuilderException {
+        Offer offer = new OfferBuilder(12.99f).build();
+        Product product = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images).build();
+
+        ProductCard card = new ProductCard(product, offer, dummyProduct.webUrl);
+        card.setKeywords(null);
+    }
+
     private Product buildExtensiveProduct() throws CardBuilderException {
         ProductBuilder builder = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images);
 
@@ -183,7 +193,6 @@ public class ProductCardTest {
         builder.model(dummyProduct.model);
         builder.appLinkIos(dummyProduct.appLinkIos);
         builder.appLinkAndroid(dummyProduct.appLinkAndroid);
-        builder.keywords(dummyProduct.keywords);
 
         return builder.build();
     }

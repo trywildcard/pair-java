@@ -23,7 +23,6 @@ public class Article {
     private Boolean isBreaking;
     private final String appLinkIos;
     private final String appLinkAndroid;
-    private final List<String> keywords;
 
     /**
      * Construct a article using a <code>ArticleBuilder</code>, which is responsible for validations.
@@ -41,7 +40,6 @@ public class Article {
         this.isBreaking = builder.isBreaking;
         this.appLinkAndroid = builder.appLinkAndroid;
         this.appLinkIos = builder.appLinkIos;
-        this.keywords = builder.keywords;
     }
 
     public String getTitle() {
@@ -87,8 +85,6 @@ public class Article {
     public String getAppLinkAndroid() {
         return appLinkAndroid;
     }
-
-    public List<String> getKeywords() { return keywords; }
 
     @Override
     public boolean equals(Object o) {

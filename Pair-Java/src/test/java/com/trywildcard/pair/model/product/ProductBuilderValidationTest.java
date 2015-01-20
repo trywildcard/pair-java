@@ -238,13 +238,6 @@ public class ProductBuilderValidationTest {
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
-    @Test
-    public void hasErrorForNullKeywords(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.keywords(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
     @Test(expected = CardBuilderException.class)
     public void nullMetaTagModel() throws CardBuilderException {
         Product product = new ProductBuilder(null).build();

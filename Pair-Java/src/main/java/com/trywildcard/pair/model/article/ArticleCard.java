@@ -13,6 +13,7 @@ import com.trywildcard.pair.validation.ValidationTool;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 public class ArticleCard implements Card {
 
@@ -21,6 +22,7 @@ public class ArticleCard implements Card {
 
     private URL webUrl;
     private Article article;
+    private List<String> keywords;
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -59,6 +61,12 @@ public class ArticleCard implements Card {
         this.article = article;
     }
 
+    public void setKeywords(List<String> keywords) throws CardBuilderException {
+        v.required(v.notNull(keywords), "Keywords cannot be null.");
+
+        this.keywords = keywords;
+    }
+
     public String getPairVersion() {
         return pairVersion;
     }
@@ -74,6 +82,8 @@ public class ArticleCard implements Card {
     public Article getArticle() {
         return article;
     }
+
+    public List<String> getKeywords() { return keywords; }
 
     /**
      * Private constructor to allow for Jackson deserialization.
