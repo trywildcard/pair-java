@@ -79,7 +79,6 @@ public class ReviewBuilderTest {
         builder.source(dummyReview.source);
         builder.appLinkIos(dummyReview.appLinkIos);
         builder.appLinkAndroid(dummyReview.appLinkAndroid);
-        builder.keywords(dummyReview.keywords);
 
         return builder.build();
     }

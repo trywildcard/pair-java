@@ -26,6 +26,7 @@ public final class ProductCard implements Card {
     private URL webUrl;
     private List<Offer> offers = new ArrayList<Offer>();
     private Product product;
+    private List<String> keywords;
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -132,6 +133,12 @@ public final class ProductCard implements Card {
         this.product = product;
     }
 
+    public void setKeywords(List<String> keywords) throws CardBuilderException {
+        v.required(v.notNull(keywords), "Keywords cannot be null.");
+
+        this.keywords = keywords;
+    }
+
     public URL getWebUrl() {
         return webUrl;
     }
@@ -143,6 +150,8 @@ public final class ProductCard implements Card {
     public Product getProduct() {
         return product;
     }
+
+    public List<String> getKeywords() { return keywords; }
 
     /**
      * Private constructor to allow for Jackson deserialization.

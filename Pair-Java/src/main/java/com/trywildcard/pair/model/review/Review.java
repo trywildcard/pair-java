@@ -25,7 +25,6 @@ public class Review {
     private Rating rating;
     private String appLinkIos;
     private String appLinkAndroid;
-    private List<String> keywords;
 
     public Review(ReviewBuilder builder) {
         this.title = builder.title;
@@ -40,7 +39,6 @@ public class Review {
         this.rating = builder.rating;
         this.appLinkAndroid = builder.appLinkAndroid;
         this.appLinkIos = builder.appLinkIos;
-        this.keywords = builder.keywords;
     }
 
     public String getTitle() {
@@ -90,8 +88,6 @@ public class Review {
     public String getAppLinkAndroid() {
         return appLinkAndroid;
     }
-
-    public List<String> getKeywords() { return keywords; }
 
     @Override
     public boolean equals(Object o) {

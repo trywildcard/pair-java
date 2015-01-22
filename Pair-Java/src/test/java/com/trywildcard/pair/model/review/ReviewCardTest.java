@@ -52,6 +52,11 @@ public class ReviewCardTest {
         testMinimalCardAttributes(card);
     }
 
+    @Test(expected = CardBuilderException.class)
+    public void testNullKeywordsReviewCard() throws JsonProcessingException, CardBuilderException {
+        ReviewCard card = buildMinimalReviewCard();
+        card.setKeywords(null);
+    }
 
     @Test
     public void testMinimalReviewWithMinimalConstructor() throws CardBuilderException {
@@ -68,6 +73,7 @@ public class ReviewCardTest {
 
         Review generatedReview = buildExtensiveReview();
         ReviewCard generatedCard = new ReviewCard(generatedReview, dummyReview.webUrl);
+        generatedCard.setKeywords(dummyReview.keywords);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -110,7 +116,6 @@ public class ReviewCardTest {
         builder.source(dummyReview.source);
         builder.appLinkIos(dummyReview.appLinkIos);
         builder.appLinkAndroid(dummyReview.appLinkAndroid);
-        builder.keywords(dummyReview.keywords);
 
         return builder.build();
     }

@@ -59,6 +59,13 @@ public class ArticleCardTest {
         testMinimalCardAttributes(articleCard);
     }
 
+    @Test(expected = CardBuilderException.class)
+    public void testNullKeywords() throws CardBuilderException {
+        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent).build();
+        ArticleCard articleCard = new ArticleCard(article, dummyArticle.webUrl);
+        articleCard.setKeywords(null);
+    }
+
     @Test
     public void testExtensiveWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException, CardBuilderException {
         String inputString = TestUtil.readResourceAsString("example_article_card.json");
@@ -66,6 +73,7 @@ public class ArticleCardTest {
 
         Article generatedArticle = buildExtensiveArticle();
         ArticleCard generatedCard = new ArticleCard(generatedArticle, dummyArticle.webUrl);
+        generatedCard.setKeywords(dummyArticle.keywords);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -107,7 +115,6 @@ public class ArticleCardTest {
         builder.source(dummyArticle.source);
         builder.appLinkAndroid(dummyArticle.appLinkAndroid);
         builder.appLinkIos(dummyArticle.appLinkIos);
-        builder.keywords(dummyArticle.keywords);
 
         return builder.build();
     }
