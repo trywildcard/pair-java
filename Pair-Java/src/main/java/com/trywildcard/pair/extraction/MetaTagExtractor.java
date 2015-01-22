@@ -27,7 +27,7 @@ public class MetaTagExtractor {
             "twitter:player:height");
 
     private static final Set<String> EXTRACTABLE_OG_META_TAG_ATTRIBUTES
-            = ImmutableSet.of("og:title", "og:description", "og:image", "og:price:amount", "product:price:amount",
+            = ImmutableSet.of("og:title", "og:description", "og:image", "og:image:width", "og:image:height", "og:price:amount", "product:price:amount",
             "og:video", "og:video:width", "og:video:height");
 
     private static final Set<String> EXTRACTABLE_AL_META_TAG_ATTRIBUTES
@@ -54,6 +54,10 @@ public class MetaTagExtractor {
                 return DESCRIPTION_DATA_KEY;
             case "og:image":
                 return IMAGE_URL_DATA_KEY;
+            case "og:image:height":
+                return IMAGE_HEIGHT_DATA_KEY;
+            case "og:image:width":
+                return IMAGE_WIDTH_DATA_KEY;
             case "og:price:amount":
                 return PRICE_DATA_KEY;
             case "product:price:amount":

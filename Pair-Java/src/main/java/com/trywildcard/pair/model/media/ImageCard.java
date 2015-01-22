@@ -96,6 +96,11 @@ public class ImageCard implements Card {
      * @return the string representation of this card.
      * @throws java.io.IOException
      */
+
+    public List<String> getErrors(){
+        return v.getErrors();
+    }
+
     public String writeAsJsonString() throws IOException {
         return new CardSerializer().writeCard(this);
     }

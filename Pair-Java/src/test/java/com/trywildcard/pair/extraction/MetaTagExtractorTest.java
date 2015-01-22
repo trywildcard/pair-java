@@ -37,6 +37,8 @@ public class MetaTagExtractorTest {
         assertEquals(metaTagModel.getTitle(), "Friend Smash Coin");
         assertEquals(metaTagModel.getDescription(), "Friend Smash Coins to purchase upgrades and items!");
         assertEquals(metaTagModel.getImageUrl(), "http://www.friendsmash.com/images/coin_600.png");
+        assertEquals(metaTagModel.getImageHeight(), "369");
+        assertEquals(metaTagModel.getImageWidth(), "553");
         assertEquals(metaTagModel.getPrice(), "0.30");
     }
 

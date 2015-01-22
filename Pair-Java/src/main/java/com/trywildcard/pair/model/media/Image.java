@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 public class Image extends Media {
 
@@ -62,6 +63,13 @@ public class Image extends Media {
         setImageCaption(metaTagModel.getDescription());
         setAppLinkIos(metaTagModel.getAppLinkIos());
         setAppLinkAndroid(metaTagModel.getAppLinkAndroid());
+
+        try {
+            setWidth(Integer.parseInt(metaTagModel.getImageWidth()));
+            setHeight(Integer.parseInt(metaTagModel.getImageHeight()));
+        } catch (NumberFormatException nfe) {
+            //do nothing since these are not required
+        }
     }
 
     private void setImageUrl(String imageUrl) throws CardBuilderException {
@@ -173,6 +181,14 @@ public class Image extends Media {
 
     public MediaType getType() {
         return type;
+    }
+
+    /**
+     * Get a list of validation errors.
+     * @return the list of errors.
+     */
+    public List<String> getErrors(){
+        return v.getErrors();
     }
 
     @Override

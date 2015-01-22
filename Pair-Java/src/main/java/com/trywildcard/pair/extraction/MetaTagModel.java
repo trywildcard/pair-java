@@ -13,6 +13,8 @@ public class MetaTagModel {
     public static final String TITLE_DATA_KEY = "title";
     public static final String DESCRIPTION_DATA_KEY = "description";
     public static final String IMAGE_URL_DATA_KEY = "imageUrl";
+    public static final String IMAGE_WIDTH_DATA_KEY = "imageWidth";
+    public static final String IMAGE_HEIGHT_DATA_KEY = "imageHeight";
     public static final String PRICE_DATA_KEY = "price";
     public static final String APP_LINK_IOS = "appLinkIos";
     public static final String APP_LINK_ANDROID = "appLinkAndroid";
@@ -49,6 +51,10 @@ public class MetaTagModel {
     public String getImageUrl() {
         return checkAndReturnValue(IMAGE_URL_DATA_KEY);
     }
+
+    public String getImageWidth() { return checkAndReturnValue(IMAGE_WIDTH_DATA_KEY); }
+
+    public String getImageHeight() { return checkAndReturnValue(IMAGE_HEIGHT_DATA_KEY); }
 
     public String getDescription() {
         return checkAndReturnValue(DESCRIPTION_DATA_KEY);
