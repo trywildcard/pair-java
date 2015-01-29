@@ -102,7 +102,7 @@ public class ImageCard implements Card {
     }
 
     public void setAppLinkAndroid(String appLinkAndroid) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Ios cannot be blank.");
+        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
         if (isValid) {
             this.appLinkAndroid = appLinkAndroid;
         }
