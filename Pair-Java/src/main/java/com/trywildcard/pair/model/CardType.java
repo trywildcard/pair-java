@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * The type of card.
  */
 public enum CardType {
-    PRODUCT, PRODUCT_SEARCH, ARTICLE, REVIEW, VIDEO, IMAGE;
+    PRODUCT, PRODUCT_SEARCH, ARTICLE, REVIEW, VIDEO, IMAGE, SUMMARY;
 
     /**
      * Get the value name as a lowercase string.
