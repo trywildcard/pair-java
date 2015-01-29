@@ -23,8 +23,6 @@ public class Image extends Media {
     private Integer width;
     private Integer height;
     private Date publicationDate;
-    private String appLinkIos;
-    private String appLinkAndroid;
 
     /**
      * Needed for Jackson deserialization *
@@ -61,8 +59,6 @@ public class Image extends Media {
         /* optional fields to attempt to fill in */
         setTitle(metaTagModel.getTitle());
         setImageCaption(metaTagModel.getDescription());
-        setAppLinkIos(metaTagModel.getAppLinkIos());
-        setAppLinkAndroid(metaTagModel.getAppLinkAndroid());
 
         try {
             setWidth(Integer.parseInt(metaTagModel.getImageWidth()));
@@ -96,28 +92,6 @@ public class Image extends Media {
 
     public URL getImageUrl() {
         return imageUrl;
-    }
-
-    public String getAppLinkAndroid() {
-        return appLinkAndroid;
-    }
-
-    public void setAppLinkAndroid(String appLinkAndroid) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
-        if (isValid) {
-            this.appLinkAndroid = appLinkAndroid;
-        }
-    }
-
-    public String getAppLinkIos() {
-        return appLinkIos;
-    }
-
-    public void setAppLinkIos(String appLinkIos) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkIos), "App Link iOS cannot be blank.");
-        if (isValid) {
-            this.appLinkIos = appLinkIos;
-        }
     }
 
     public Date getPublicationDate() {
