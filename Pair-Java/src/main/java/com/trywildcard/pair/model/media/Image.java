@@ -161,6 +161,7 @@ public class Image extends Media {
      * Get a list of validation errors.
      * @return the list of errors.
      */
+    @JsonIgnore
     public List<String> getErrors(){
         return v.getErrors();
     }

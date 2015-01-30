@@ -123,6 +123,7 @@ public class ImageCard implements Card {
      * @throws java.io.IOException
      */
 
+    @JsonIgnore
     public List<String> getErrors(){
         return v.getErrors();
     }

@@ -81,8 +81,32 @@ public class Summary {
      * Get a list of validation errors.
      * @return the list of errors.
      */
+    @JsonIgnore
     public List<String> getErrors(){
         return v.getErrors();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Summary summary = (Summary) o;
+
+        if (description != null ? !description.equals(summary.description) : summary.description != null) return false;
+        if (media != null ? !media.equals(summary.media) : summary.media != null) return false;
+        if (title != null ? !title.equals(summary.title) : summary.title != null) return false;
+        if (v != null ? !v.equals(summary.v) : summary.v != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = v != null ? v.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (media != null ? media.hashCode() : 0);
+        return result;
+    }
 }
