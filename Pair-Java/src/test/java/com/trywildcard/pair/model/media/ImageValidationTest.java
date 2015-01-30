@@ -107,34 +107,6 @@ public class ImageValidationTest {
         assertEquals("Errors size should match", 1, imageToTest.getErrors().size());
     }
 
-    @Test
-    public void hasErrorForNullAppLinkIosString(){
-        assertEquals("Errors size should match", 0, imageToTest.getErrors().size());
-        imageToTest.setAppLinkIos(null);
-        assertEquals("Errors size should match", 1, imageToTest.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkIosString(){
-        assertEquals("Errors size should match", 0, imageToTest.getErrors().size());
-        imageToTest.setAppLinkIos("");
-        assertEquals("Errors size should match", 1, imageToTest.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, imageToTest.getErrors().size());
-        imageToTest.setAppLinkAndroid(null);
-        assertEquals("Errors size should match", 1, imageToTest.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, imageToTest.getErrors().size());
-        imageToTest.setAppLinkAndroid("");
-        assertEquals("Errors size should match", 1, imageToTest.getErrors().size());
-    }
-
     @Test(expected = CardBuilderException.class)
     public void nullMetaTagModel() throws CardBuilderException {
         MetaTagModel metaTagModel = null;
@@ -203,8 +175,6 @@ public class ImageValidationTest {
         assertEquals(image.getWidth(), new Integer(720));
         assertEquals(image.getTitle(), "Title");
         assertNull(image.getImageCaption());
-        assertNull(image.getAppLinkIos());
-        assertNull(image.getAppLinkAndroid());
     }
 
     @Test
@@ -225,8 +195,6 @@ public class ImageValidationTest {
         assertEquals(image.getWidth(), new Integer(720));
         assertEquals(image.getTitle(), "Flickr Image");
         assertEquals(image.getImageCaption(), "Description");
-        assertEquals(image.getAppLinkIos(), "ios://youtube/1234");
-        assertEquals(image.getAppLinkAndroid(), "android://youtube/1234");
     }
 
 

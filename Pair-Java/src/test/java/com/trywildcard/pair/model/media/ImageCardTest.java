@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by karthiksenthil on 1/22/15.
@@ -55,6 +55,17 @@ public class ImageCardTest {
         card.setKeywords(null);
     }
 
+    public void testNullAppLinkIos() throws CardBuilderException {
+        ImageCard card = buildMinimalImageCard();
+        card.setAppLinkIos(null);
+        assertNull(card.getAppLinkIos());
+    }
+
+    public void testNullAppLinkAndroid() throws CardBuilderException {
+        ImageCard card = buildMinimalImageCard();
+        card.setAppLinkAndroid(null);
+        assertNull(card.getAppLinkAndroid());
+    }
 
     @Test
     public void testMinimalImageCardWithMinimalConstructor() throws CardBuilderException {
@@ -70,6 +81,8 @@ public class ImageCardTest {
         Image generatedImage = buildExtensiveImage();
         ImageCard generatedCard = new ImageCard(generatedImage, dummyImage.webUrl);
         generatedCard.setKeywords(dummyImage.keywords);
+        generatedCard.setAppLinkIos(dummyImage.appLinkIos);
+        generatedCard.setAppLinkAndroid(dummyImage.appLinkAndroid);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -108,8 +121,6 @@ public class ImageCardTest {
         image.setPublicationDate(dummyImage.publicationDate);
         image.setAuthor(dummyImage.author);
         image.setTitle(dummyImage.title);
-        image.setAppLinkIos(dummyImage.appLinkIos);
-        image.setAppLinkAndroid(dummyImage.appLinkAndroid);
 
         return image;
     }

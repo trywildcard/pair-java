@@ -23,6 +23,8 @@ public class ImageCard implements Card {
     private URL webUrl;
     private Image media;
     private List<String> keywords;
+    private String appLinkIos;
+    private String appLinkAndroid;
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -43,6 +45,8 @@ public class ImageCard implements Card {
         webUrl(webUrl);
         MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
         media(new Image(metaTagModel));
+        setAppLinkIos(metaTagModel.getAppLinkIos());
+        setAppLinkAndroid(metaTagModel.getAppLinkAndroid());
     }
 
     private void webUrl(String webUrl) throws CardBuilderException {
@@ -86,6 +90,28 @@ public class ImageCard implements Card {
 
     public List<String> getKeywords() { return keywords; }
 
+    public void setAppLinkIos(String appLinkIos) {
+        boolean isValid = v.optional(v.notNullOrEmpty(appLinkIos), "App Link Ios cannot be blank.");
+        if (isValid) {
+            this.appLinkIos = appLinkIos;
+        }
+    }
+
+    public String getAppLinkIos() {
+        return appLinkIos;
+    }
+
+    public void setAppLinkAndroid(String appLinkAndroid) {
+        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
+        if (isValid) {
+            this.appLinkAndroid = appLinkAndroid;
+        }
+    }
+
+    public String getAppLinkAndroid() {
+        return appLinkAndroid;
+    }
+
     /**
      * Private constructor to allow for Jackson deserialization.
      */
@@ -97,6 +123,7 @@ public class ImageCard implements Card {
      * @throws java.io.IOException
      */
 
+    @JsonIgnore
     public List<String> getErrors(){
         return v.getErrors();
     }
