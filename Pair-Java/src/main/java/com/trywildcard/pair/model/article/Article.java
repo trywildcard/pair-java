@@ -10,11 +10,11 @@ public class Article {
 
     //required fields
     private String title;
-    private String htmlContent;
+    private String abstractContent;
 
     //optional fields
+    private String htmlContent;
     private Date publicationDate;
-    private String abstractContent;
     private String source;
     private String author;
     private Date updatedDate;
@@ -80,8 +80,7 @@ public class Article {
 
         Article article = (Article) o;
 
-        if (abstractContent != null ? !abstractContent.equals(article.abstractContent) : article.abstractContent != null)
-            return false;
+        if (!abstractContent.equals(article.abstractContent)) return false;
         if (author != null ? !author.equals(article.author) : article.author != null) return false;
         if (htmlContent != null ? !htmlContent.equals(article.htmlContent) : article.htmlContent != null) return false;
         if (isBreaking != null ? !isBreaking.equals(article.isBreaking) : article.isBreaking != null) return false;
@@ -89,7 +88,7 @@ public class Article {
         if (publicationDate != null ? !publicationDate.equals(article.publicationDate) : article.publicationDate != null)
             return false;
         if (source != null ? !source.equals(article.source) : article.source != null) return false;
-        if (title != null ? !title.equals(article.title) : article.title != null) return false;
+        if (!title.equals(article.title)) return false;
         if (updatedDate != null ? !updatedDate.equals(article.updatedDate) : article.updatedDate != null) return false;
 
         return true;
@@ -97,10 +96,10 @@ public class Article {
 
     @Override
     public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
+        int result = title.hashCode();
+        result = 31 * result + abstractContent.hashCode();
         result = 31 * result + (htmlContent != null ? htmlContent.hashCode() : 0);
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
-        result = 31 * result + (abstractContent != null ? abstractContent.hashCode() : 0);
         result = 31 * result + (source != null ? source.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (updatedDate != null ? updatedDate.hashCode() : 0);

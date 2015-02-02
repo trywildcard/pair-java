@@ -22,7 +22,7 @@ public class ArticleBuilderValidationTest {
     @Before
     public void setUp() throws ParseException, CardBuilderException {
         dummyArticle = new DummyArticle();
-        builder = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent);
+        builder = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent);
     }
 
     @Test
@@ -32,16 +32,16 @@ public class ArticleBuilderValidationTest {
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithEmptyTitleString() throws CardBuilderException {
-        Article article = new ArticleBuilder("", dummyArticle.htmlContent).build();
+        Article article = new ArticleBuilder("", dummyArticle.abstractContent).build();
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithEmptyHtmlContent() throws CardBuilderException {
+    public void isInvalidWithEmptyAbstractContent() throws CardBuilderException {
         Article article = new ArticleBuilder(dummyArticle.title, "").build();
     }
 
     @Test(expected = CardBuilderException.class)
-    public void isInvalidWithEmptyTitleAndHtmlContent() throws CardBuilderException {
+    public void isInvalidWithEmptyTitleAndAbstractContent() throws CardBuilderException {
         Article article = new ArticleBuilder("", "").build();
     }
 
@@ -60,16 +60,16 @@ public class ArticleBuilderValidationTest {
     }
 
     @Test
-    public void hasErrorForNullAbstractString(){
+    public void hasErrorForNullHtmlString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.abstractContent(null);
+        builder.htmlContent(null);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
     @Test
-    public void hasErrorForEmptyAbtractString(){
+    public void hasErrorForEmptyHtmlString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.abstractContent("");
+        builder.htmlContent("");
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
@@ -125,7 +125,7 @@ public class ArticleBuilderValidationTest {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn(null);
-        when(metaTagModel.getHtmlContent()).thenReturn(null);
+        when(metaTagModel.getDescription()).thenReturn(null);
 
         Article article = new ArticleBuilder(metaTagModel).build();
     }
@@ -135,7 +135,7 @@ public class ArticleBuilderValidationTest {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("");
-        when(metaTagModel.getHtmlContent()).thenReturn("");
+        when(metaTagModel.getDescription()).thenReturn("");
 
         Article article = new ArticleBuilder(metaTagModel).build();
     }
@@ -145,7 +145,7 @@ public class ArticleBuilderValidationTest {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("");
-        when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
+        when(metaTagModel.getDescription()).thenReturn("<html><body></body></html>");
 
         Article article = new ArticleBuilder(metaTagModel).build();
     }
@@ -155,7 +155,7 @@ public class ArticleBuilderValidationTest {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("BBC News Article");
-        when(metaTagModel.getHtmlContent()).thenReturn("");
+        when(metaTagModel.getDescription()).thenReturn("");
 
         Article article = new ArticleBuilder(metaTagModel).build();
     }
@@ -165,10 +165,10 @@ public class ArticleBuilderValidationTest {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("BBC News Article");
-        when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
+        when(metaTagModel.getDescription()).thenReturn("<html><body></body></html>");
 
         Article article = new ArticleBuilder(metaTagModel).build();
-        assertEquals(article.getHtmlContent(), "<html><body></body></html>");
+        assertEquals(article.getAbstractContent(), "<html><body></body></html>");
         assertEquals(article.getTitle(), "BBC News Article");
     }
 
@@ -177,13 +177,13 @@ public class ArticleBuilderValidationTest {
 
         MetaTagModel metaTagModel = mock(MetaTagModel.class);
         when(metaTagModel.getTitle()).thenReturn("BBC News Article");
-        when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
-        when(metaTagModel.getDescription()).thenReturn("");
+        when(metaTagModel.getDescription()).thenReturn("<html><body></body></html>");
+        when(metaTagModel.getHtmlContent()).thenReturn("");
         when(metaTagModel.getAppLinkAndroid()).thenReturn(null);
         when(metaTagModel.getAppLinkIos()).thenReturn(null);
 
         Article article = new ArticleBuilder(metaTagModel).build();
-        assertEquals(article.getHtmlContent(), "<html><body></body></html>");
+        assertEquals(article.getAbstractContent(), "<html><body></body></html>");
         assertEquals(article.getTitle(), "BBC News Article");
         assertNull(article.getMedia());
     }

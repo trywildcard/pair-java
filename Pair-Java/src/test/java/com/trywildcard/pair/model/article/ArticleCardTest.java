@@ -36,14 +36,14 @@ public class ArticleCardTest {
 
     private void testMinimalCardAttributes(ArticleCard card){
         assertEquals("Article Title should match", dummyArticle.title, card.getArticle().getTitle());
-        assertEquals("Article HtmlContent should match", dummyArticle.htmlContent, card.getArticle().getHtmlContent());
+        assertEquals("Article AbstractContent should match", dummyArticle.abstractContent, card.getArticle().getAbstractContent());
 
         assertEquals("Web url should match", dummyArticle.webUrl, card.getWebUrl().toString());
     }
 
     private ArticleCard buildMinimalArticleCard() throws CardBuilderException {
 
-        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent).build();
+        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent).build();
 
         ArticleCard articleCard = new ArticleCard(article, dummyArticle.webUrl);
 
@@ -59,14 +59,14 @@ public class ArticleCardTest {
 
     @Test
     public void testMinimalArticleCardWithMinimalConstructor() throws CardBuilderException {
-        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent).build();
+        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent).build();
         ArticleCard articleCard = new ArticleCard(article, dummyArticle.webUrl);
         testMinimalCardAttributes(articleCard);
     }
 
     @Test(expected = CardBuilderException.class)
     public void testNullKeywords() throws CardBuilderException {
-        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent).build();
+        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent).build();
         ArticleCard articleCard = new ArticleCard(article, dummyArticle.webUrl);
         articleCard.setKeywords(null);
     }
@@ -112,15 +112,15 @@ public class ArticleCardTest {
 
     @Test(expected = CardBuilderException.class)
     public void isInvalidWithNullWebUrl() throws CardBuilderException {
-        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent).build();
+        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent).build();
         ArticleCard card = new ArticleCard(article, null);
     }
 
     private Article buildExtensiveArticle() throws CardBuilderException {
-        ArticleBuilder builder = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent);
+        ArticleBuilder builder = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent);
 
         builder.isBreaking(dummyArticle.isBreaking);
-        builder.abstractContent(dummyArticle.abstractContent);
+        builder.htmlContent(dummyArticle.htmlContent);
         builder.author(dummyArticle.author);
         builder.media(dummyArticle.image);
         builder.publicationDate(dummyArticle.publicationDate);
@@ -132,8 +132,8 @@ public class ArticleCardTest {
 
     @Test
     public void testBuildArticleCardWithWebUrl() throws CardBuilderException {
-        ArticleCard articleCard = new ArticleCard("http://www.bbc.com/news/business-29424351");
-        assertEquals(articleCard.getArticle().getTitle(), "Wonga sees profits more than halve");
-        assertEquals(((Image) articleCard.getArticle().getMedia()).getImageUrl().toString(), "http://news.bbcimg.co.uk/media/images/77915000/jpg/_77915774_77914640.jpg");
+        ArticleCard articleCard = new ArticleCard("http://grantland.com/the-triangle/j-r-in-cleveland-an-ohio-nightlife-guide-for-the-famous-nyc-party-animal/");
+        assertEquals(articleCard.getArticle().getTitle(), "J.R. in Cleveland: An Ohio Nightlife Guide for the Famous NYC Party Animal");
+        assertEquals(((Image) articleCard.getArticle().getMedia()).getImageUrl().toString(), "https://espngrantland.files.wordpress.com/2015/01/jr-smith.jpg?w=1200 ");
    }
 }

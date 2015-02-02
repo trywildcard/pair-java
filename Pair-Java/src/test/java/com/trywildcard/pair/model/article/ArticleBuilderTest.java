@@ -26,12 +26,12 @@ public class ArticleBuilderTest {
 
     private void testMinimalArticleAttributes(Article article){
         Assert.assertEquals("Name should match", dummyArticle.title, article.getTitle());
-        Assert.assertEquals("HtmlContent should match", dummyArticle.htmlContent, article.getHtmlContent());
+        Assert.assertEquals("AbstractContent should match", dummyArticle.abstractContent, article.getAbstractContent());
     }
 
     private Article buildMinimalArticle() throws CardBuilderException {
 
-        ArticleBuilder articleBuilder = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent);
+        ArticleBuilder articleBuilder = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent);
 
         return articleBuilder.build();
     }
@@ -44,7 +44,7 @@ public class ArticleBuilderTest {
 
     @Test
     public void testMinimalArticleWithMinimalConstructor() throws CardBuilderException {
-        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent).build();
+        Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent).build();
         testMinimalArticleAttributes(article);
     }
 
@@ -52,7 +52,7 @@ public class ArticleBuilderTest {
         testMinimalArticleAttributes(article);
 
         Assert.assertEquals("isBreaking should match", dummyArticle.isBreaking, article.getIsBreaking());
-        Assert.assertEquals("Abstract should match", dummyArticle.abstractContent, article.getAbstractContent());
+        Assert.assertEquals("HTML Content should match", dummyArticle.htmlContent, article.getHtmlContent());
         Assert.assertEquals("Publication Date should match", dummyArticle.publicationDate, article.getPublicationDate());
         Assert.assertEquals("Updated Date should match", dummyArticle.updatedDate, article.getUpdatedDate());
         Assert.assertEquals("By-Line should match", dummyArticle.author, article.getAuthor());
@@ -62,10 +62,10 @@ public class ArticleBuilderTest {
 
 
     private Article buildExtensiveArticle() throws CardBuilderException {
-        ArticleBuilder builder = new ArticleBuilder(dummyArticle.title, dummyArticle.htmlContent);
+        ArticleBuilder builder = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent);
 
         builder.isBreaking(dummyArticle.isBreaking);
-        builder.abstractContent(dummyArticle.abstractContent);
+        builder.htmlContent(dummyArticle.htmlContent);
         builder.author(dummyArticle.author);
         builder.media(dummyArticle.image);
         builder.publicationDate(dummyArticle.publicationDate);
