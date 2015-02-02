@@ -1,15 +1,15 @@
 package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.trywildcard.pair.Pair;
-import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.model.CardType;
-import com.trywildcard.pair.validation.ValidationTool;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.trywildcard.pair.Pair;
+import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.model.Card;
+import com.trywildcard.pair.model.CardType;
+import com.trywildcard.pair.validation.ValidationTool;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -19,7 +19,7 @@ import java.util.List;
  * Structures a Product Search Results AbstractCard, which embeds many ProductSearchResults.
  */
 
-public final class ProductSearchCard {
+public final class ProductSearchCard implements Card {
 
     @JsonIgnore
     private ValidationTool v = new ValidationTool();

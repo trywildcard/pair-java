@@ -134,6 +134,6 @@ public class ArticleCardTest {
     public void testBuildArticleCardWithWebUrl() throws CardBuilderException {
         ArticleCard articleCard = new ArticleCard("http://grantland.com/the-triangle/j-r-in-cleveland-an-ohio-nightlife-guide-for-the-famous-nyc-party-animal/");
         assertEquals(articleCard.getArticle().getTitle(), "J.R. in Cleveland: An Ohio Nightlife Guide for the Famous NYC Party Animal");
-        assertEquals(((Image) articleCard.getArticle().getMedia()).getImageUrl().toString(), "https://espngrantland.files.wordpress.com/2015/01/jr-smith.jpg?w=1200 ");
+        assertEquals(((Image) articleCard.getArticle().getMedia()).getImageUrl().toString(), "https://espngrantland.files.wordpress.com/2015/01/jr-smith.jpg?w=1200");
    }
 }
