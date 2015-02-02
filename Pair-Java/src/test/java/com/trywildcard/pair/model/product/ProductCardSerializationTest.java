@@ -3,7 +3,6 @@ package com.trywildcard.pair.model.product;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -12,8 +11,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Test serializing and deserializing a product card from data in a json file.

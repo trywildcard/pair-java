@@ -2,7 +2,6 @@ package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.util.TestUtil;
 import junit.framework.TestCase;
 import org.junit.Assert;
@@ -11,8 +10,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Iterator;
-
-import static junit.framework.TestCase.assertEquals;
 
 /**
  * Test serializing and deserializing a product search results card from data in a json file.

@@ -1,7 +1,17 @@
 {
-  "pair_version": "0.4.4",
+  "pair_version": "0.4.5",
   "card_type": "product",
   "web_url": "http://www.examplestore.com/listing/36226783/green-leather-shoes",
+  "keywords": ["keyword1", "keyword2"],
+  "app_link_ios": "ios://applink",
+  "app_link_android": "android://applink",
+  "creator": {
+      "name":"Wildcard",
+      "favicon":"http://www.trywildcard.com/images/favicon.ico",
+      "ios_app_store_url":"https://itunes.apple.com/us/app/wildcard-browse-better-mobile/id930047790",
+      "android_app_store_url":"https://play.google.com/store/apps/details?id=com.trywildcard.android",
+      "url":"http://www.trywildcard.com"
+  },
   "offers": [
     {
       "price": {
@@ -69,9 +79,6 @@
       "example option c"
     ],
     "model": "KICKN-GRL-17",
-    "gender": "unisex",
-    "app_link_ios": "jump://VerticalA/x123",
-    "app_link_android": "market://search?q=pub:examplestore"
-  },
-  "keywords": ["keyword1", "keyword2"]
+    "gender": "unisex"
+  }
 }

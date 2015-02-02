@@ -30,8 +30,6 @@ public class Product {
     private final List<String> options;
     private final Gender gender;
     private final String model;
-    private final String appLinkIos;
-    private final String appLinkAndroid;
 
     /**
      * Construct a product card using a <code>ProductBuilder</code>, which is responsible for validations.
@@ -53,16 +51,6 @@ public class Product {
         this.options = Collections.unmodifiableList(builder.options);
         this.gender = builder.gender;
         this.model = builder.model;
-        this.appLinkIos = builder.appLinkIos;
-        this.appLinkAndroid = builder.appLinkAndroid;
-    }
-
-    public String getAppLinkAndroid() {
-        return appLinkAndroid;
-    }
-
-    public String getAppLinkIos() {
-        return appLinkIos;
     }
 
     public String getModel() {
@@ -132,9 +120,6 @@ public class Product {
 
         Product product = (Product) o;
 
-        if (appLinkAndroid != null ? !appLinkAndroid.equals(product.appLinkAndroid) : product.appLinkAndroid != null)
-            return false;
-        if (appLinkIos != null ? !appLinkIos.equals(product.appLinkIos) : product.appLinkIos != null) return false;
         if (brand != null ? !brand.equals(product.brand) : product.brand != null) return false;
         if (colors != null ? !colors.equals(product.colors) : product.colors != null) return false;
         if (description != null ? !description.equals(product.description) : product.description != null) return false;
@@ -173,8 +158,6 @@ public class Product {
         result = 31 * result + (options != null ? options.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (model != null ? model.hashCode() : 0);
-        result = 31 * result + (appLinkIos != null ? appLinkIos.hashCode() : 0);
-        result = 31 * result + (appLinkAndroid != null ? appLinkAndroid.hashCode() : 0);
         return result;
     }
 }

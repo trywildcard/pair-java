@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
-import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.validation.ValidationTool;
 import org.apache.commons.lang3.StringUtils;

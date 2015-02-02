@@ -2,10 +2,7 @@ package com.trywildcard.pair.model.media;
 
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.extraction.MetaTagModel;
-import com.trywildcard.pair.model.article.Article;
-import com.trywildcard.pair.model.article.ArticleBuilder;
 import com.trywildcard.pair.util.DummyImage;
-import com.trywildcard.pair.util.DummyVideo;
 import org.junit.Before;
 import org.junit.Test;
 

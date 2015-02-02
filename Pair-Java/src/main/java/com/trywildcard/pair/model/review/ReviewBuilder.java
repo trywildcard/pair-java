@@ -32,8 +32,6 @@ public class ReviewBuilder implements Builder<Review> {
     protected Media media;
     protected String productName;
     protected Rating rating;
-    protected String appLinkIos;
-    protected String appLinkAndroid;
 
     /**
      * Construct an <code>ReviewBuilder</code> provided a title and htmlContent.
@@ -67,8 +65,6 @@ public class ReviewBuilder implements Builder<Review> {
         }
 
         abstractContent(metaTagModel.getDescription());
-        appLinkIos(metaTagModel.getAppLinkIos());
-        appLinkAndroid(metaTagModel.getAppLinkAndroid());
     }
 
     /**
@@ -156,22 +152,6 @@ public class ReviewBuilder implements Builder<Review> {
         boolean isValid = v.optional(v.notNull(rating), "Review Rating cannot be null.");
         if (isValid) {
             this.rating = rating;
-        }
-        return this;
-    }
-
-    public ReviewBuilder appLinkIos(String appLinkIos) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkIos), "App Link Ios cannot be blank.");
-        if (isValid) {
-            this.appLinkIos = appLinkIos;
-        }
-        return this;
-    }
-
-    public ReviewBuilder appLinkAndroid(String appLinkAndroid) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
-        if (isValid) {
-            this.appLinkAndroid = appLinkAndroid;
         }
         return this;
     }

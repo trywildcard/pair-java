@@ -1,4 +1,4 @@
-package com.trywildcard.pair.model;
+package com.trywildcard.pair.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trywildcard.pair.exception.CardBuilderException;

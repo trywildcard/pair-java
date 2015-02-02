@@ -112,34 +112,6 @@ public class VideoBuilderValidationTest {
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
-    @Test
-    public void hasErrorForNullAppLinkIosString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkIos(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkIosString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkIos("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkAndroid(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkAndroid("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
     @Test(expected = CardBuilderException.class)
     public void nullMetaTagModel() throws CardBuilderException {
         Video video = new VideoBuilder(null).build();
@@ -241,8 +213,6 @@ public class VideoBuilderValidationTest {
         assertEquals(video.getTitle(), "Title");
         assertNull(video.getDescription());
         assertNull(video.getPosterImageUrl());
-        assertNull(video.getAppLinkIos());
-        assertNull(video.getAppLinkAndroid());
     }
 
     @Test
@@ -265,7 +235,5 @@ public class VideoBuilderValidationTest {
         assertEquals(video.getTitle(), "Youtube Video");
         assertEquals(video.getPosterImageUrl().toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
         assertEquals(video.getDescription(), "Description");
-        assertEquals(video.getAppLinkIos(), "ios://youtube/1234");
-        assertEquals(video.getAppLinkAndroid(), "android://youtube/1234");
     }
 }

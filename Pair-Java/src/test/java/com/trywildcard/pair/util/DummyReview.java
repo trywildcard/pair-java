@@ -38,8 +38,6 @@ public class DummyReview {
     public Image image;
     public final String productName = "LG G2";
     public final Rating rating = new Rating(87f, 0f, 100f, 55);
-    public final String appLinkIos = "ios://applink";
-    public final String appLinkAndroid = "android://applink";
     public final List<String> keywords = Lists.newArrayList("keyword1", "keyword2");
 
     public DummyReview() throws ParseException, CardBuilderException {

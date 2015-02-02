@@ -1,15 +1,12 @@
 package com.trywildcard.pair.util;
 
-import com.google.common.collect.Lists;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.media.Image;
-import com.trywildcard.pair.model.media.Media;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -31,9 +28,6 @@ public class DummyArticle {
     public final Date updatedDate;
     public Image image;
     public final Boolean isBreaking = Boolean.TRUE;
-    public final String appLinkIos = "ios://applink";
-    public final String appLinkAndroid = "android://applink";
-    public final List<String> keywords = Lists.newArrayList("keyword1", "keyword2" );
 
     public DummyArticle() throws ParseException, CardBuilderException {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.util.DummyAbstractCard;
 import com.trywildcard.pair.util.DummyVideo;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
@@ -23,10 +24,12 @@ import static org.junit.Assert.assertTrue;
 public class VideoCardTest {
     ObjectMapper mapper = TestUtil.getObjectMapper();
     private static DummyVideo dummyVideo;
+    private static DummyAbstractCard dummyAbstractCard;
 
     @BeforeClass
     public static void prepare() throws ParseException, CardBuilderException {
         dummyVideo = new DummyVideo();
+        dummyAbstractCard = new DummyAbstractCard();
     }
 
     private void testMinimalVideoCardAttributes(VideoCard videoCard){
@@ -72,7 +75,9 @@ public class VideoCardTest {
         VideoCard fixtureCard = mapper.readValue(inputString,  VideoCard.class);
         Video generatedVideo = buildExtensiveVideo();
         VideoCard generatedCard = new VideoCard(generatedVideo, dummyVideo.webUrl);
-        generatedCard.setKeywords(dummyVideo.keywords);
+        generatedCard.setKeywords(dummyAbstractCard.keywords);
+        generatedCard.setAppLinkIos(dummyAbstractCard.appLinkIos);
+        generatedCard.setAppLinkAndroid(dummyAbstractCard.appLinkAndroid);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -112,8 +117,6 @@ public class VideoCardTest {
         builder.creator(dummyVideo.creator);
         builder.publicationDate(dummyVideo.publicationDate);
         builder.source(dummyVideo.source);
-        builder.appLinkIos(dummyVideo.appLinkIos);
-        builder.appLinkAndroid(dummyVideo.appLinkAndroid);
 
         return builder.build();
     }
@@ -127,8 +130,8 @@ public class VideoCardTest {
         assertEquals(videoCard.getMedia().getEmbeddedUrlWidth(), new Integer(1280));
         assertEquals(videoCard.getMedia().getDescription(), "Take a look at the new-look Cleveland Cavaliers through the lens of the Phantom camera during a practice session. Visit nba.com/video for more highlights. Ab...");
         assertEquals(videoCard.getMedia().getPosterImageUrl().toString(), "https://i.ytimg.com/vi/0RFfrsABtQo/maxresdefault.jpg");
-        assertEquals(videoCard.getMedia().getAppLinkAndroid(), "http://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
-        assertEquals(videoCard.getMedia().getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
+        assertEquals(videoCard.getAppLinkAndroid(), "http://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
+        assertEquals(videoCard.getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
     }
 
 }

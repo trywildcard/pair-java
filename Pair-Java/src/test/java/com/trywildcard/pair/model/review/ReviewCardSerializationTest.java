@@ -3,7 +3,6 @@ package com.trywildcard.pair.model.review;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trywildcard.pair.model.article.ArticleCard;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;

@@ -3,7 +3,7 @@ package com.trywildcard.pair.model.search;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Builder;
-import com.trywildcard.pair.model.Price;
+import com.trywildcard.pair.model.product.Price;
 import com.trywildcard.pair.validation.ValidationTool;
 
 import java.net.MalformedURLException;

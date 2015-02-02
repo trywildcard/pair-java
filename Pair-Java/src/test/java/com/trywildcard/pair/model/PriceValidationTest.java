@@ -1,6 +1,7 @@
 package com.trywildcard.pair.model;
 
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.model.product.Price;
 import org.junit.Test;
 
 import java.util.Currency;

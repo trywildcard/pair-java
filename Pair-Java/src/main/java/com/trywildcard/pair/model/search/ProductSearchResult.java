@@ -1,7 +1,7 @@
 package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.trywildcard.pair.model.Price;
+import com.trywildcard.pair.model.product.Price;
 import java.net.URL;
 
 /**

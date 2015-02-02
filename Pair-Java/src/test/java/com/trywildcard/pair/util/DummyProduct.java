@@ -1,16 +1,12 @@
 package com.trywildcard.pair.util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.product.Gender;
 import com.trywildcard.pair.model.product.MappingColor;
 import com.trywildcard.pair.model.product.ProductColor;
+
+import java.util.*;
 
 /**
  * Product stub with data supporting Junit tests.
@@ -40,8 +36,6 @@ public class DummyProduct {
                     "example option b",
                     "example option c");
     public final String model = "KICKN-GRL-17";
-    public final String appLinkIos = "jump://VerticalA/x123";
-    public final String appLinkAndroid = "market://search?q=pub:examplestore";
     public final List<String> keywords = Lists.newArrayList("keyword1", "keyword2");
 
     public final String productId = "36226783";
