@@ -2,8 +2,6 @@ package com.trywildcard.pair.model.media;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.extraction.MetaTagExtractor;
-import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.AbstractCard;
 import com.trywildcard.pair.model.CardType;
 
@@ -27,10 +25,9 @@ public class ImageCard extends AbstractCard {
     * Constructs a image card by attempting to extract relevant meta tags from input web url
     */
     public ImageCard(String webUrl) throws CardBuilderException {
+        super(webUrl);
         this.cardType = CardType.IMAGE;
-        webUrl(webUrl);
-        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
-        media(new Image(metaTagModel));
+        media(new Image(this.getMetaTagModel()));
     }
 
     private void media(Image media) throws CardBuilderException {

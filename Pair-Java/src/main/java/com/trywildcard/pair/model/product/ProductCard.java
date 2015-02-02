@@ -1,11 +1,8 @@
 package com.trywildcard.pair.model.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.AbstractCard;
 import com.trywildcard.pair.model.CardType;
-import com.trywildcard.pair.extraction.MetaTagExtractor;
-import com.trywildcard.pair.extraction.MetaTagModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +50,9 @@ public final class ProductCard extends AbstractCard {
      * @return
      */
     public ProductCard(String webUrl) throws CardBuilderException {
-        webUrl(webUrl);
-
-        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
-        product(new ProductBuilder(metaTagModel).build());
-        offer(new OfferBuilder(metaTagModel).build());
+        super(webUrl);
+        product(new ProductBuilder(this.getMetaTagModel()).build());
+        offer(new OfferBuilder(this.getMetaTagModel()).build());
     }
 
     /**
@@ -65,10 +60,8 @@ public final class ProductCard extends AbstractCard {
      * @return
      */
     public ProductCard(String webUrl, Float price) throws CardBuilderException {
-        webUrl(webUrl);
-
-        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
-        product(new ProductBuilder(metaTagModel).build());
+        super(webUrl);
+        product(new ProductBuilder(this.getMetaTagModel()).build());
 
         Offer offer = new OfferBuilder(price).build();
         offer(offer);

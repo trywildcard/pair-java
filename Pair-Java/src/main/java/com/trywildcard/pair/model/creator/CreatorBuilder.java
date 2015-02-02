@@ -77,7 +77,7 @@ public class CreatorBuilder implements Builder<Creator> {
     }
 
     public CreatorBuilder url(String url) throws CardBuilderException {
-        boolean isValid = v.optional(v.notNullOrEmpty(url), "App store URL cannot be blank.");
+        boolean isValid = v.optional(v.notNullOrEmpty(url), "Creator URL cannot be blank.");
         if (isValid) {
             try {
                 this.url = new URL(url);

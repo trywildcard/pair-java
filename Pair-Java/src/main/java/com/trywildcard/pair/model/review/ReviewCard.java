@@ -1,9 +1,6 @@
 package com.trywildcard.pair.model.review;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.extraction.MetaTagExtractor;
-import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.AbstractCard;
 import com.trywildcard.pair.model.CardType;
 
@@ -24,10 +21,9 @@ public class ReviewCard extends AbstractCard {
     * Constructs an review card by attempting to extract relevant meta tags from input web url
     */
     public ReviewCard(String webUrl) throws CardBuilderException {
+        super(webUrl);
         this.cardType = CardType.REVIEW;
-        webUrl(webUrl);
-        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
-        review(new ReviewBuilder(metaTagModel).build());
+        review(new ReviewBuilder(this.getMetaTagModel()).build());
     }
 
     private void review(Review review) throws CardBuilderException {

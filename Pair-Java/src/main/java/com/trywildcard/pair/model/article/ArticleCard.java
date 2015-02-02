@@ -1,8 +1,6 @@
 package com.trywildcard.pair.model.article;
 
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.extraction.MetaTagExtractor;
-import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.AbstractCard;
 import com.trywildcard.pair.model.CardType;
 
@@ -22,10 +20,9 @@ public class ArticleCard extends AbstractCard {
     * Constructs an article card by attempting to extract relevant meta tags from input web url
     */
     public ArticleCard(String webUrl) throws CardBuilderException {
+        super(webUrl);
         this.cardType = CardType.ARTICLE;
-        webUrl(webUrl);
-        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
-        article(new ArticleBuilder(metaTagModel).build());
+        article(new ArticleBuilder(this.getMetaTagModel()).build());
     }
 
     private void article(Article article) throws CardBuilderException {

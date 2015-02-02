@@ -25,9 +25,12 @@ public abstract class AbstractCard implements Card {
     protected List<String> keywords;
     protected String appLinkIos;
     protected String appLinkAndroid;
-    protected MetaTagModel metaTagModel;
 
     private Creator creator;
+
+    @JsonIgnore
+    protected MetaTagModel metaTagModel;
+
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -36,7 +39,7 @@ public abstract class AbstractCard implements Card {
         webUrl(webUrl);
         MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
         setAppLinkIos(metaTagModel.getAppLinkIos());
-        setAppLinkIos(metaTagModel.getAppLinkAndroid());
+        setAppLinkAndroid(metaTagModel.getAppLinkAndroid());
         setMetaTagModel(metaTagModel);
     }
 
@@ -83,6 +86,7 @@ public abstract class AbstractCard implements Card {
         this.metaTagModel = metaTagModel;
     }
 
+    @JsonIgnore
     protected MetaTagModel getMetaTagModel() {
         return metaTagModel;
     }

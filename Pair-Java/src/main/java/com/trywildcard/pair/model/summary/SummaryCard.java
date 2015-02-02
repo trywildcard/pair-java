@@ -1,8 +1,6 @@
 package com.trywildcard.pair.model.summary;
 
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.extraction.MetaTagExtractor;
-import com.trywildcard.pair.extraction.MetaTagModel;
 import com.trywildcard.pair.model.AbstractCard;
 import com.trywildcard.pair.model.CardType;
 
@@ -26,12 +24,9 @@ public class SummaryCard extends AbstractCard {
     * Constructs an article card by attempting to extract relevant meta tags from input web url
     */
     public SummaryCard(String webUrl) throws CardBuilderException {
+        super(webUrl);
         this.cardType = CardType.SUMMARY;
-        webUrl(webUrl);
-        MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
-        summary(new Summary(metaTagModel));
-        setAppLinkIos(metaTagModel.getAppLinkIos());
-        setAppLinkAndroid(metaTagModel.getAppLinkAndroid());
+        summary(new Summary(this.getMetaTagModel()));
     }
 
     private void summary(Summary summary) throws CardBuilderException {
