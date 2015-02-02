@@ -74,7 +74,7 @@ public class ArticleBuilder implements Builder<Article> {
     /**
      * Construct an <code>ArticleBuilder</code> provided a title, htmlContent, and publicationDate.
      */
-    public ArticleBuilder(String title, String htmlContent, Date publicationDate) throws CardBuilderException {
+    public ArticleBuilder(String title, String abstractContent, Date publicationDate) throws CardBuilderException {
         title(title);
         abstractContent(abstractContent);
         publicationDate(publicationDate);
