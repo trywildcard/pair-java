@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.model.media.Media;
 
 import java.util.Date;
-import java.util.List;
 
 @JsonDeserialize(builder = ReviewBuilder.class)
 public class Review {
@@ -23,8 +22,6 @@ public class Review {
     private String productName;
     //todo: should rating be required?
     private Rating rating;
-    private String appLinkIos;
-    private String appLinkAndroid;
 
     public Review(ReviewBuilder builder) {
         this.title = builder.title;
@@ -37,8 +34,6 @@ public class Review {
         this.media = builder.media;
         this.productName = builder.productName;
         this.rating = builder.rating;
-        this.appLinkAndroid = builder.appLinkAndroid;
-        this.appLinkIos = builder.appLinkIos;
     }
 
     public String getTitle() {
@@ -81,14 +76,6 @@ public class Review {
         return rating;
     }
 
-    public String getAppLinkIos() {
-        return appLinkIos;
-    }
-
-    public String getAppLinkAndroid() {
-        return appLinkAndroid;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,9 +85,6 @@ public class Review {
 
         if (abstractContent != null ? !abstractContent.equals(review.abstractContent) : review.abstractContent != null)
             return false;
-        if (appLinkAndroid != null ? !appLinkAndroid.equals(review.appLinkAndroid) : review.appLinkAndroid != null)
-            return false;
-        if (appLinkIos != null ? !appLinkIos.equals(review.appLinkIos) : review.appLinkIos != null) return false;
         if (author != null ? !author.equals(review.author) : review.author != null) return false;
         if (htmlContent != null ? !htmlContent.equals(review.htmlContent) : review.htmlContent != null) return false;
         if (media != null ? !media.equals(review.media) : review.media != null) return false;
@@ -127,8 +111,6 @@ public class Review {
         result = 31 * result + (media != null ? media.hashCode() : 0);
         result = 31 * result + (productName != null ? productName.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
-        result = 31 * result + (appLinkIos != null ? appLinkIos.hashCode() : 0);
-        result = 31 * result + (appLinkAndroid != null ? appLinkAndroid.hashCode() : 0);
         return result;
     }
 }

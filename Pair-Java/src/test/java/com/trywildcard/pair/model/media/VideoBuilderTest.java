@@ -63,8 +63,6 @@ public class VideoBuilderTest {
         Assert.assertEquals("Publication Date should match", dummyVideo.publicationDate, video.getPublicationDate());
         Assert.assertEquals("Contributor should match", dummyVideo.creator, video.getCreator());
         Assert.assertEquals("Source should match", dummyVideo.source, video.getSource());
-        Assert.assertEquals("Source should match", dummyVideo.appLinkAndroid, video.getAppLinkAndroid());
-        Assert.assertEquals("Source should match", dummyVideo.appLinkIos, video.getAppLinkIos());
     }
 
 
@@ -78,8 +76,6 @@ public class VideoBuilderTest {
         builder.creator(dummyVideo.creator);
         builder.publicationDate(dummyVideo.publicationDate);
         builder.source(dummyVideo.source);
-        builder.appLinkIos(dummyVideo.appLinkIos);
-        builder.appLinkAndroid(dummyVideo.appLinkAndroid);
 
         return builder.build();
     }

@@ -61,8 +61,6 @@ public class ReviewBuilderTest {
         Assert.assertEquals("Author should match", dummyReview.author, review.getAuthor());
         Assert.assertEquals("Media should match", dummyReview.image, review.getMedia());
         Assert.assertEquals("Source should match", dummyReview.source, review.getSource());
-        Assert.assertEquals("Source should match", dummyReview.appLinkAndroid, review.getAppLinkAndroid());
-        Assert.assertEquals("Source should match", dummyReview.appLinkIos, review.getAppLinkIos());
     }
 
 
@@ -77,8 +75,6 @@ public class ReviewBuilderTest {
         builder.publicationDate(dummyReview.publicationDate);
         builder.updatedDate(dummyReview.updatedDate);
         builder.source(dummyReview.source);
-        builder.appLinkIos(dummyReview.appLinkIos);
-        builder.appLinkAndroid(dummyReview.appLinkAndroid);
 
         return builder.build();
     }

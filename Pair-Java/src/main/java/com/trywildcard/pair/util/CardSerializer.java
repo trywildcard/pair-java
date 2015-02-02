@@ -5,11 +5,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.trywildcard.pair.model.AbstractCard;
 import com.trywildcard.pair.model.Card;
 
 /**
  * Contains a configured Jackson ObjectMapper instance in order to support JSON serialization.
- * Classes implementing the <code>Card</code> interface will reference this serializer in the writeAsJsonString() method.
+ * Classes implementing the <code>AbstractCard</code> interface will reference this serializer in the writeAsJsonString() method.
  */
 public class CardSerializer {
     private final ObjectMapper mapper = new ObjectMapper();

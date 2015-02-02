@@ -58,8 +58,6 @@ public class ArticleBuilderTest {
         Assert.assertEquals("By-Line should match", dummyArticle.author, article.getAuthor());
         Assert.assertEquals("Media should match", dummyArticle.image, article.getMedia());
         Assert.assertEquals("Source should match", dummyArticle.source, article.getSource());
-        Assert.assertEquals("Source should match", dummyArticle.appLinkAndroid, article.getAppLinkAndroid());
-        Assert.assertEquals("Source should match", dummyArticle.appLinkIos, article.getAppLinkIos());
     }
 
 
@@ -73,8 +71,6 @@ public class ArticleBuilderTest {
         builder.publicationDate(dummyArticle.publicationDate);
         builder.updatedDate(dummyArticle.updatedDate);
         builder.source(dummyArticle.source);
-        builder.appLinkIos(dummyArticle.appLinkIos);
-        builder.appLinkAndroid(dummyArticle.appLinkAndroid);
 
         return builder.build();
     }

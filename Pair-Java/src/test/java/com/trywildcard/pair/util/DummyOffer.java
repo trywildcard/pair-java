@@ -1,19 +1,13 @@
 package com.trywildcard.pair.util;
 
+import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.model.product.Price;
+import com.trywildcard.pair.model.product.Availability;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.model.Price;
-import com.trywildcard.pair.model.product.Availability;
-import com.trywildcard.pair.model.product.Gender;
+import java.util.*;
 
 /**
  * Offer stub with data supporting Junit tests.

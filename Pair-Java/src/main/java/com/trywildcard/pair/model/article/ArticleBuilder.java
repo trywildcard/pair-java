@@ -70,8 +70,6 @@ public class ArticleBuilder implements Builder<Article> {
         }
 
         abstractContent(metaTagModel.getDescription());
-        appLinkIos(metaTagModel.getAppLinkIos());
-        appLinkAndroid(metaTagModel.getAppLinkAndroid());
     }
 
     /**
@@ -156,21 +154,7 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    public ArticleBuilder appLinkIos(String appLinkIos) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkIos), "App Link Ios cannot be blank.");
-        if (isValid) {
-            this.appLinkIos = appLinkIos;
-        }
-        return this;
-    }
 
-    public ArticleBuilder appLinkAndroid(String appLinkAndroid) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
-        if (isValid) {
-            this.appLinkAndroid = appLinkAndroid;
-        }
-        return this;
-    }
 
     /**
      * Instantiate a <code>Article</code> with the data in this builder.

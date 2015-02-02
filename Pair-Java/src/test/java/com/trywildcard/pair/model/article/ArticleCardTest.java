@@ -5,7 +5,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.model.creator.Creator;
+import com.trywildcard.pair.model.creator.CreatorBuilderTest;
 import com.trywildcard.pair.model.media.Image;
+import com.trywildcard.pair.util.DummyAbstractCard;
 import com.trywildcard.pair.util.DummyArticle;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.BeforeClass;
@@ -23,10 +26,12 @@ public class ArticleCardTest {
 
     ObjectMapper mapper = TestUtil.getObjectMapper();
     private static DummyArticle dummyArticle;
+    private static DummyAbstractCard dummyAbstractCard;
 
     @BeforeClass
     public static void prepare() throws ParseException, CardBuilderException {
         dummyArticle = new DummyArticle();
+        dummyAbstractCard = new DummyAbstractCard();
     }
 
     private void testMinimalCardAttributes(ArticleCard card){
@@ -67,13 +72,21 @@ public class ArticleCardTest {
     }
 
     @Test
-    public void testExtensiveWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException, CardBuilderException {
+    public void testExtensiveWriteAsJsonMethod() throws JsonParseException, JsonMappingException, IOException, CardBuilderException, ParseException {
         String inputString = TestUtil.readResourceAsString("example_article_card.json");
         ArticleCard fixtureCard = mapper.readValue(inputString,  ArticleCard.class);
 
         Article generatedArticle = buildExtensiveArticle();
         ArticleCard generatedCard = new ArticleCard(generatedArticle, dummyArticle.webUrl);
-        generatedCard.setKeywords(dummyArticle.keywords);
+
+        generatedCard.setKeywords(dummyAbstractCard.keywords);
+        generatedCard.setAppLinkIos(dummyAbstractCard.appLinkIos);
+        generatedCard.setAppLinkAndroid(dummyAbstractCard.appLinkAndroid);
+
+        CreatorBuilderTest creatorTest = new CreatorBuilderTest();
+        creatorTest.prepare();
+        Creator generatedCreator = creatorTest.buildExtensiveCreator();
+        generatedCard.setCreator(generatedCreator);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -113,8 +126,6 @@ public class ArticleCardTest {
         builder.publicationDate(dummyArticle.publicationDate);
         builder.updatedDate(dummyArticle.updatedDate);
         builder.source(dummyArticle.source);
-        builder.appLinkAndroid(dummyArticle.appLinkAndroid);
-        builder.appLinkIos(dummyArticle.appLinkIos);
 
         return builder.build();
     }

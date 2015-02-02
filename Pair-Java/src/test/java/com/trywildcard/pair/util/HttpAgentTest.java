@@ -1,13 +1,11 @@
 package com.trywildcard.pair.util;
 
-import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 

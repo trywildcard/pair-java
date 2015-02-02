@@ -1,7 +1,6 @@
 package com.trywildcard.pair.model.review;
 
 import com.trywildcard.pair.exception.CardBuilderException;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

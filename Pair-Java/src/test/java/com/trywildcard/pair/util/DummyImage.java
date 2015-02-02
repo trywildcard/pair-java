@@ -23,7 +23,7 @@ public class DummyImage {
     public final String webUrl = "https://www.flickr.com/photos/pware/15707309794/in/explore-2015-01-21";
 
     // extensive attributes
-    public final String imageCaption = "Hermit thrush Catharus guttatus  A very minor crop  Member of the Nature’s Spirit  Good Stewards of Nature  © 2014 Patricia Ware - All Rights Reserved";
+    public final String imageCaption = "Hermit thrush Catharus guttatus";
     public final String title = "A Happy Thrush";
     public final Date publicationDate;
     public final String author = "Karthik S";

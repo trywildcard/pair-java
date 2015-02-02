@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.trywildcard.pair.model.media.Media;
 
 import java.util.Date;
-import java.util.List;
 
 @JsonDeserialize(builder = ArticleBuilder.class)
 public class Article {
@@ -21,8 +20,6 @@ public class Article {
     private Date updatedDate;
     private Media media;
     private Boolean isBreaking;
-    private final String appLinkIos;
-    private final String appLinkAndroid;
 
     /**
      * Construct a article using a <code>ArticleBuilder</code>, which is responsible for validations.
@@ -38,8 +35,6 @@ public class Article {
         this.updatedDate = builder.updatedDate;
         this.media = builder.media;
         this.isBreaking = builder.isBreaking;
-        this.appLinkAndroid = builder.appLinkAndroid;
-        this.appLinkIos = builder.appLinkIos;
     }
 
     public String getTitle() {
@@ -78,14 +73,6 @@ public class Article {
         return isBreaking;
     }
 
-    public String getAppLinkIos() {
-        return appLinkIos;
-    }
-
-    public String getAppLinkAndroid() {
-        return appLinkAndroid;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,9 +82,6 @@ public class Article {
 
         if (abstractContent != null ? !abstractContent.equals(article.abstractContent) : article.abstractContent != null)
             return false;
-        if (appLinkAndroid != null ? !appLinkAndroid.equals(article.appLinkAndroid) : article.appLinkAndroid != null)
-            return false;
-        if (appLinkIos != null ? !appLinkIos.equals(article.appLinkIos) : article.appLinkIos != null) return false;
         if (author != null ? !author.equals(article.author) : article.author != null) return false;
         if (htmlContent != null ? !htmlContent.equals(article.htmlContent) : article.htmlContent != null) return false;
         if (isBreaking != null ? !isBreaking.equals(article.isBreaking) : article.isBreaking != null) return false;
@@ -122,8 +106,6 @@ public class Article {
         result = 31 * result + (updatedDate != null ? updatedDate.hashCode() : 0);
         result = 31 * result + (media != null ? media.hashCode() : 0);
         result = 31 * result + (isBreaking != null ? isBreaking.hashCode() : 0);
-        result = 31 * result + (appLinkIos != null ? appLinkIos.hashCode() : 0);
-        result = 31 * result + (appLinkAndroid != null ? appLinkAndroid.hashCode() : 0);
         return result;
     }
 }

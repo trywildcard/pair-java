@@ -1,36 +1,19 @@
 package com.trywildcard.pair.model.article;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.extraction.MetaTagExtractor;
 import com.trywildcard.pair.extraction.MetaTagModel;
-import com.trywildcard.pair.model.Card;
+import com.trywildcard.pair.model.AbstractCard;
 import com.trywildcard.pair.model.CardType;
-import com.trywildcard.pair.util.CardSerializer;
-import com.trywildcard.pair.validation.ValidationTool;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-
-public class ArticleCard implements Card {
-
-    private final String pairVersion = Pair.getInstance().getVersion();
-    private final CardType cardType = CardType.ARTICLE;
-
-    private URL webUrl;
+public class ArticleCard extends AbstractCard {
     private Article article;
-    private List<String> keywords;
-
-    @JsonIgnore
-    protected ValidationTool v = new ValidationTool();
 
     /**
      * Construct an article card
      */
     public ArticleCard(Article article, String webUrl) throws CardBuilderException {
+        this.cardType = CardType.ARTICLE;
         article(article);
         webUrl(webUrl);
     }
@@ -39,20 +22,10 @@ public class ArticleCard implements Card {
     * Constructs an article card by attempting to extract relevant meta tags from input web url
     */
     public ArticleCard(String webUrl) throws CardBuilderException {
+        this.cardType = CardType.ARTICLE;
         webUrl(webUrl);
         MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(this.webUrl);
         article(new ArticleBuilder(metaTagModel).build());
-    }
-
-    private void webUrl(String webUrl) throws CardBuilderException {
-        boolean isValid = v.required(v.notNullOrEmpty(webUrl), "Must specify a article webUrl.");
-        if (isValid) {
-            try {
-                this.webUrl = new URL(webUrl);
-            } catch (MalformedURLException e) {
-                v.required(v.fail(), "Could not parse URL from webUrl string.");
-            }
-        }
     }
 
     private void article(Article article) throws CardBuilderException {
@@ -61,41 +34,12 @@ public class ArticleCard implements Card {
         this.article = article;
     }
 
-    public void setKeywords(List<String> keywords) throws CardBuilderException {
-        v.required(v.notNull(keywords), "Keywords cannot be null.");
-
-        this.keywords = keywords;
-    }
-
-    public String getPairVersion() {
-        return pairVersion;
-    }
-
-    public CardType getCardType() {
-        return cardType;
-    }
-
-    public URL getWebUrl() {
-        return webUrl;
-    }
-
     public Article getArticle() {
         return article;
     }
-
-    public List<String> getKeywords() { return keywords; }
 
     /**
      * Private constructor to allow for Jackson deserialization.
      */
     private ArticleCard(){}
-
-    /**
-     * Serialize fields in the Wildcard product card format.
-     * @return the string representation of this card.
-     * @throws java.io.IOException
-     */
-    public String writeAsJsonString() throws IOException {
-        return new CardSerializer().writeCard(this);
-    }
 }

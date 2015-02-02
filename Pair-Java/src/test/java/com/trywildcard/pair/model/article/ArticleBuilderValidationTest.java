@@ -115,34 +115,6 @@ public class ArticleBuilderValidationTest {
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
-    @Test
-    public void hasErrorForNullAppLinkIosString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkIos(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkIosString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkIos("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkAndroid(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkAndroid("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
     @Test(expected = CardBuilderException.class)
     public void nullMetaTagModel() throws CardBuilderException {
         Article article = new ArticleBuilder(null).build();
@@ -214,8 +186,6 @@ public class ArticleBuilderValidationTest {
         assertEquals(article.getHtmlContent(), "<html><body></body></html>");
         assertEquals(article.getTitle(), "BBC News Article");
         assertNull(article.getMedia());
-        assertNull(article.getAppLinkIos());
-        assertNull(article.getAppLinkAndroid());
     }
 
     @Test
@@ -234,8 +204,6 @@ public class ArticleBuilderValidationTest {
         assertEquals(article.getHtmlContent(), "<html><body></body></html>");
         assertEquals(article.getTitle(), "BBC News Article");
         assertEquals(article.getAbstractContent(), "description");
-        assertEquals(article.getAppLinkIos(), "ios://etsy/1234");
-        assertEquals(article.getAppLinkAndroid(), "android://etsy/1234");
     }
 
 }

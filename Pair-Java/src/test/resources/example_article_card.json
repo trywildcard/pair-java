@@ -2,6 +2,16 @@
     "pair_version": "0.4.4",
     "card_type": "article",
     "web_url": "http://www.huffingtonpost.com/2014/09/23/leonardo-dicaprio-un_n_5868718.html",
+    "keywords": ["keyword1", "keyword2"],
+    "app_link_ios": "ios://applink",
+    "app_link_android": "android://applink",
+    "creator": {
+        "name":"Wildcard",
+        "favicon":"http://www.trywildcard.com/images/favicon.ico",
+        "ios_app_store_url":"https://itunes.apple.com/us/app/wildcard-browse-better-mobile/id930047790",
+        "android_app_store_url":"https://play.google.com/store/apps/details?id=com.trywildcard.android",
+        "url":"http://www.trywildcard.com"
+    },
     "article": {
         "title": "U.N. hosts Global Warming Summit",
         "html_content": "<p>Leonardo DiCaprio addressed world leaders assembled for the <a href=\"http://www.un.org/climatechange/summit/\" target=\"_hplink\">United Nations Climate Summit</a> early Tuesday morning, urging them to take action to address \"the greatest challenge of our existence on this planet.\"</p>",
@@ -15,9 +25,6 @@
             "image_url": "http://www.un.org/climatechange/summit/wp-content/uploads/sites/2/2013/09/climate_summit_2014.jpg",
             "image_caption": "Climate Summit 2014"
         },
-        "is_breaking": true,
-        "app_link_android": "android://applink",
-        "app_link_ios": "ios://applink"
-    },
-    "keywords": ["keyword1", "keyword2"]
+        "is_breaking": true
+    }
 }

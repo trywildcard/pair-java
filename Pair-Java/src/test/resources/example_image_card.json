@@ -2,20 +2,20 @@
     "pair_version": "0.4.4",
     "card_type": "image",
     "web_url": "https://www.flickr.com/photos/pware/15707309794/in/explore-2015-01-21",
-    "media": {
-        "type": "image",
-        "image_url": "http://farm8.staticflickr.com/7555/15707309794_efd50ed163_z.jpg",
-        "image_caption": "Hermit thrush Catharus guttatus  A very minor crop  Member of the Nature’s Spirit  Good Stewards of Nature  © 2014 Patricia Ware - All Rights Reserved",
-        "title": "A Happy Thrush",
-        "author": "Karthik S",
-        "width": 640,
-        "height": 426,
-        "publication_date": "2014-09-22T00:00:00.000+0000"
-    },
     "keywords": [
         "keyword1",
         "keyword2"
     ],
     "app_link_ios": "ios://applink",
-    "app_link_android": "android://applink"
+    "app_link_android": "android://applink",
+    "media": {
+        "type": "image",
+        "image_url": "http://farm8.staticflickr.com/7555/15707309794_efd50ed163_z.jpg",
+        "image_caption": "Hermit thrush Catharus guttatus",
+        "title": "A Happy Thrush",
+        "author": "Karthik S",
+        "width": 640,
+        "height": 426,
+        "publication_date": "2014-09-22T00:00:00.000+0000"
+    }
 }

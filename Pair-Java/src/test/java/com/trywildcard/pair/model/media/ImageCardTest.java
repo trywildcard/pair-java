@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.util.DummyAbstractCard;
 import com.trywildcard.pair.util.DummyImage;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
@@ -24,10 +25,12 @@ public class ImageCardTest {
 
     ObjectMapper mapper = TestUtil.getObjectMapper();
     private static DummyImage dummyImage;
+    private static DummyAbstractCard dummyAbstractCard;
 
     @BeforeClass
     public static void prepare() throws ParseException, CardBuilderException {
         dummyImage = new DummyImage();
+        dummyAbstractCard = new DummyAbstractCard();
     }
 
     private void testMinimalImageCardAttributes(ImageCard imageCard) {
@@ -80,9 +83,9 @@ public class ImageCardTest {
         ImageCard fixtureCard = mapper.readValue(inputString, ImageCard.class);
         Image generatedImage = buildExtensiveImage();
         ImageCard generatedCard = new ImageCard(generatedImage, dummyImage.webUrl);
-        generatedCard.setKeywords(dummyImage.keywords);
-        generatedCard.setAppLinkIos(dummyImage.appLinkIos);
-        generatedCard.setAppLinkAndroid(dummyImage.appLinkAndroid);
+        generatedCard.setKeywords(dummyAbstractCard.keywords);
+        generatedCard.setAppLinkIos(dummyAbstractCard.appLinkIos);
+        generatedCard.setAppLinkAndroid(dummyAbstractCard.appLinkAndroid);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
