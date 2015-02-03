@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by karthiksenthil on 1/28/15.
@@ -57,11 +58,12 @@ public class SummaryCardTest {
         testMinimalCardAttributes(summaryCard);
     }
 
-    @Test(expected = CardBuilderException.class)
+    @Test
     public void testNullKeywords() throws CardBuilderException {
         Summary summary = new Summary(dummySummary.title, dummySummary.description);
         SummaryCard summaryCard = new SummaryCard(summary, dummySummary.webUrl);
         summaryCard.setKeywords(null);
+        assertNull(summaryCard.getKeywords());
     }
 
     @Test

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -55,10 +56,11 @@ public class VideoCardTest {
         testMinimalVideoCardAttributes(card);
     }
 
-    @Test(expected = CardBuilderException.class)
+    @Test
     public void testNullKeywords() throws CardBuilderException {
         VideoCard card = buildMinimalVideoCard();
         card.setKeywords(null);
+        assertNull(card.getKeywords());
     }
 
 

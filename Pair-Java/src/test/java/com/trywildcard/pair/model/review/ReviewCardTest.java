@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by karthiksenthil on 10/5/14.
@@ -54,10 +55,11 @@ public class ReviewCardTest {
         testMinimalCardAttributes(card);
     }
 
-    @Test(expected = CardBuilderException.class)
+    @Test
     public void testNullKeywordsReviewCard() throws JsonProcessingException, CardBuilderException {
         ReviewCard card = buildMinimalReviewCard();
         card.setKeywords(null);
+        assertNull(card.getKeywords());
     }
 
     @Test

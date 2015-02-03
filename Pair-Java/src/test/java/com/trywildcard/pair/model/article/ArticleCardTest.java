@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by karthiksenthil on 10/4/14.
@@ -64,11 +65,12 @@ public class ArticleCardTest {
         testMinimalCardAttributes(articleCard);
     }
 
-    @Test(expected = CardBuilderException.class)
+    @Test
     public void testNullKeywords() throws CardBuilderException {
         Article article = new ArticleBuilder(dummyArticle.title, dummyArticle.abstractContent).build();
         ArticleCard articleCard = new ArticleCard(article, dummyArticle.webUrl);
         articleCard.setKeywords(null);
+        assertNull(articleCard.getKeywords());
     }
 
     @Test

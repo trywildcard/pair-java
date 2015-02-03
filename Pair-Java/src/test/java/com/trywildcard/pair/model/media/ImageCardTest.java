@@ -52,10 +52,11 @@ public class ImageCardTest {
         testMinimalImageCardAttributes(card);
     }
 
-    @Test(expected = CardBuilderException.class)
+    @Test
     public void testNullKeywords() throws CardBuilderException {
         ImageCard card = buildMinimalImageCard();
         card.setKeywords(null);
+        assertNull(card.getKeywords());
     }
 
     public void testNullAppLinkIos() throws CardBuilderException {

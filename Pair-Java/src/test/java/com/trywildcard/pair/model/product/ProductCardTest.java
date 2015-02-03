@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertNull;
 
 public class ProductCardTest {
 
@@ -178,13 +178,14 @@ public class ProductCardTest {
         }
     }
 
-    @Test(expected = CardBuilderException.class)
+    @Test
     public void isInvalidNullKeywords() throws CardBuilderException {
         Offer offer = new OfferBuilder(12.99f).build();
         Product product = new ProductBuilder(dummyProduct.name, dummyProduct.description, dummyProduct.images).build();
 
         ProductCard card = new ProductCard(product, offer, dummyProduct.webUrl);
         card.setKeywords(null);
+        assertNull(card.getKeywords());
     }
 
     private Product buildExtensiveProduct() throws CardBuilderException {
