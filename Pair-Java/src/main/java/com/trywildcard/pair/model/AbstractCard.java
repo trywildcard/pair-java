@@ -47,9 +47,10 @@ public abstract class AbstractCard implements Card {
     }
 
     public void setKeywords(List<String> keywords) throws CardBuilderException {
-        v.required(v.notNull(keywords), "Keywords cannot be null.");
-
-        this.keywords = keywords;
+        boolean isValid =  v.optional(v.notNull(keywords), "Keywords cannot be null.");
+        if (isValid) {
+            this.keywords = keywords;
+        }
     }
 
     protected void webUrl(String webUrl) throws CardBuilderException {
@@ -78,8 +79,11 @@ public abstract class AbstractCard implements Card {
     }
 
     public void setCreator(Creator creator) throws CardBuilderException {
-        v.required(v.notNull(creator), "creator cannot be null");
-        this.creator = creator;
+        boolean isValid = v.optional(v.notNull(creator), "creator cannot be null");
+
+        if (isValid) {
+            this.creator = creator;
+        }
     }
 
     private void setMetaTagModel(MetaTagModel metaTagModel) {

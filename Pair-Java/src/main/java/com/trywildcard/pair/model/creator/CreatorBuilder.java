@@ -82,7 +82,7 @@ public class CreatorBuilder implements Builder<Creator> {
             try {
                 this.url = new URL(url);
             } catch (MalformedURLException e) {
-                v.required(v.fail(), "Could not parse URL from url string.");
+                v.optional(v.fail(), "Could not parse URL from url string.");
             }
         }
         return this;
