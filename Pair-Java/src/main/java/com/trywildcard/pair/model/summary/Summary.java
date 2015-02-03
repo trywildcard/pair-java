@@ -68,9 +68,11 @@ public class Summary {
     }
 
     public void setMedia(Image media) throws CardBuilderException {
-        v.required(v.notNull(media), "Must specify a image.");
+        boolean isValid = v.optional(v.notNull(media), "Must specify a image.");
 
-        this.media = media;
+        if (isValid) {
+            this.media = media;
+        }
     }
 
     public Media getMedia() {
