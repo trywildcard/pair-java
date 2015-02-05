@@ -48,11 +48,10 @@ public class SummaryValidationTest {
         Summary summary = new Summary("", "");
     }
 
-
-
-    @Test(expected = CardBuilderException.class)
+    @Test
     public void hasErrorForNullMedia () throws CardBuilderException {
         summary.setMedia(null);
+        assertNull(summary.getMedia());
     }
 
     @Test(expected = CardBuilderException.class)
