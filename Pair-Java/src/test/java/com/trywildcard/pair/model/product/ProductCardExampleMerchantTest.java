@@ -1,8 +1,6 @@
 package com.trywildcard.pair.model.product;
 
-import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.model.Price;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
 import org.junit.BeforeClass;

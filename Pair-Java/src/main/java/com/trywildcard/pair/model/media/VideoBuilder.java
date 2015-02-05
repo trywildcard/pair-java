@@ -35,9 +35,6 @@ public class VideoBuilder implements Builder<Video> {
     protected URL posterImageUrl;
     protected String creator;
     protected String source;
-    protected String appLinkIos;
-    protected String appLinkAndroid;
-    protected List<String> keywords;
 
     /** Private Constructor **/
     private VideoBuilder() { }
@@ -76,8 +73,6 @@ public class VideoBuilder implements Builder<Video> {
             /* optional fields to attempt to fill in */
             description(metaTagModel.getDescription());
             posterImageUrl(metaTagModel.getImageUrl());
-            appLinkIos(metaTagModel.getAppLinkIos());
-            appLinkAndroid(metaTagModel.getAppLinkAndroid());
         } catch (NumberFormatException nfe) {
             throw new CardBuilderException("Unable to convert video width or height meta tag value to a valid integer, " +
                     "which is required to construct a VideoBuilder", nfe);
@@ -177,7 +172,7 @@ public class VideoBuilder implements Builder<Video> {
     }
 
     public VideoBuilder creator(String creator) {
-        boolean isValid = v.optional(v.notNullOrEmpty(creator), "Video Creator cannot be blank.");
+        boolean isValid = v.optional(v.notNullOrEmpty(creator), "Video creator cannot be blank.");
         if (isValid) {
             this.creator = creator;
         }
@@ -188,31 +183,6 @@ public class VideoBuilder implements Builder<Video> {
         boolean isValid = v.optional(v.notNullOrEmpty(source), "Vdieo Source cannot be blank.");
         if (isValid) {
             this.source = source;
-        }
-        return this;
-    }
-
-
-    public VideoBuilder appLinkIos(String appLinkIos) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkIos), "App Link Ios cannot be blank.");
-        if (isValid) {
-            this.appLinkIos = appLinkIos;
-        }
-        return this;
-    }
-
-    public VideoBuilder appLinkAndroid(String appLinkAndroid) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
-        if (isValid) {
-            this.appLinkAndroid = appLinkAndroid;
-        }
-        return this;
-    }
-
-    public VideoBuilder keywords(List<String> keywords) {
-        boolean isValid = v.optional(v.notNull(keywords), "Keywords cannot be null.");
-        if (isValid) {
-            this.keywords = keywords;
         }
         return this;
     }

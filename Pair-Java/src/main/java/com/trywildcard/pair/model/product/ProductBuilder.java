@@ -37,9 +37,6 @@ public class ProductBuilder implements Builder<Product> {
     protected List<String> options = new ArrayList<String>();
     protected Gender gender;
     protected String model;
-    protected String appLinkIos;
-    protected String appLinkAndroid;
-    protected List<String> keywords;
 
     private ProductBuilder() {
     }
@@ -80,30 +77,6 @@ public class ProductBuilder implements Builder<Product> {
         name(metaTagModel.getTitle());
         description(metaTagModel.getDescription());
         image(metaTagModel.getImageUrl());
-
-        /* Trying to set optional fields if found */
-        appLinkIos(metaTagModel.getAppLinkIos());
-        appLinkAndroid(metaTagModel.getAppLinkAndroid());
-
-    }
-
-    public ProductBuilder appLinkAndroid(String appLinkAndroid) {
-        boolean isValid = v.optional(v.notEmpty(appLinkAndroid), "Tried to set appLinkAndroid to an empty string.");
-
-        if (isValid) {
-            this.appLinkAndroid = appLinkAndroid;
-        }
-
-        return this;
-    }
-
-    public ProductBuilder appLinkIos(String appLinkIos) {
-        boolean isValid = v.optional(v.notEmpty(appLinkIos), "Tried to set appLinkIos to an empty string.");
-
-        if (isValid) {
-            this.appLinkIos = appLinkIos;
-        }
-        return this;
     }
 
     public ProductBuilder model(String model) {
@@ -314,14 +287,6 @@ public class ProductBuilder implements Builder<Product> {
         boolean isValid = v.required(v.notNullOrEmpty(name), "Product name cannot be blank.");
         if (isValid) {
             this.name = name;
-        }
-        return this;
-    }
-
-    public ProductBuilder keywords(List<String> keywords) {
-        boolean isValid = v.optional(v.notNull(keywords), "Keywords cannot be null.");
-        if (isValid) {
-            this.keywords = keywords;
         }
         return this;
     }

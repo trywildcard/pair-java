@@ -1,12 +1,8 @@
 package com.trywildcard.pair.model.product;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
@@ -87,8 +83,6 @@ public class ProductBuilderTest {
         Assert.assertEquals("Sizes should match", dummyProduct.sizes, product.getSizes());
         Assert.assertEquals("Options should match", dummyProduct.options, product.getOptions());
         Assert.assertEquals("Model should match", dummyProduct.model, product.getModel());
-        Assert.assertEquals("App link ios should match", dummyProduct.appLinkIos, product.getAppLinkIos());
-        Assert.assertEquals("App link Android should match", dummyProduct.appLinkAndroid, product.getAppLinkAndroid());
     }
 
 
@@ -107,9 +101,6 @@ public class ProductBuilderTest {
         builder.sizes(dummyProduct.sizes);
         builder.options(dummyProduct.options);
         builder.model(dummyProduct.model);
-        builder.appLinkIos(dummyProduct.appLinkIos);
-        builder.appLinkAndroid(dummyProduct.appLinkAndroid);
-        builder.keywords(dummyProduct.keywords);
 
         return builder.build();
     }

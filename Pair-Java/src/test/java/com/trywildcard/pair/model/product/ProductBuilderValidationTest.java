@@ -11,7 +11,6 @@ import java.text.ParseException;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -74,20 +73,6 @@ public class ProductBuilderValidationTest {
     }
 
     @Test
-    public void hasErrorForEmptyAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkAndroid("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkIosString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkIos("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
     public void hasErrorForEmptyModelString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
         builder.model("");
@@ -100,7 +85,6 @@ public class ProductBuilderValidationTest {
         builder.sizes(null);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
-
 
     @Test
     public void hasErrorForNullSizesMapValue(){
@@ -238,13 +222,6 @@ public class ProductBuilderValidationTest {
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
-    @Test
-    public void hasErrorForNullKeywords(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.keywords(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
     @Test(expected = CardBuilderException.class)
     public void nullMetaTagModel() throws CardBuilderException {
         Product product = new ProductBuilder(null).build();
@@ -329,8 +306,6 @@ public class ProductBuilderValidationTest {
         assertEquals(product.getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
         assertEquals(product.getName(), "Etsy Tote Bag");
         assertEquals(product.getDescription(), "Etsy Tote Bag Description");
-        assertNull(product.getAppLinkIos());
-        assertNull(product.getAppLinkAndroid());
     }
 
     @Test
@@ -347,8 +322,6 @@ public class ProductBuilderValidationTest {
         assertEquals(product.getImages().get(0).toString(), "https://img0.etsystatic.com/011/0/5147325/il_570xN.444675668_1tp8.jpg");
         assertEquals(product.getName(), "Etsy Tote Bag");
         assertEquals(product.getDescription(), "Description");
-        assertEquals(product.getAppLinkIos(), "ios://etsy/1234");
-        assertEquals(product.getAppLinkAndroid(), "android://etsy/1234");
     }
 
 }

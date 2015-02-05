@@ -1,7 +1,6 @@
 package com.trywildcard.pair.model.product;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.trywildcard.pair.model.Price;
 
 import java.util.Collections;
 import java.util.Date;

@@ -5,8 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trywildcard.pair.exception.CardBuilderException;
-
 import com.trywildcard.pair.model.media.Image;
+import com.trywildcard.pair.util.DummyAbstractCard;
 import com.trywildcard.pair.util.DummyReview;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.BeforeClass;
@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by karthiksenthil on 10/5/14.
@@ -24,10 +25,12 @@ public class ReviewCardTest {
 
     ObjectMapper mapper = TestUtil.getObjectMapper();
     private static DummyReview dummyReview;
+    private static DummyAbstractCard dummyAbstractCard;
 
     @BeforeClass
     public static void prepare() throws ParseException, CardBuilderException {
         dummyReview = new DummyReview();
+        dummyAbstractCard = new DummyAbstractCard();
     }
 
     private void testMinimalCardAttributes(ReviewCard card){
@@ -52,6 +55,12 @@ public class ReviewCardTest {
         testMinimalCardAttributes(card);
     }
 
+    @Test
+    public void testNullKeywordsReviewCard() throws JsonProcessingException, CardBuilderException {
+        ReviewCard card = buildMinimalReviewCard();
+        card.setKeywords(null);
+        assertNull(card.getKeywords());
+    }
 
     @Test
     public void testMinimalReviewWithMinimalConstructor() throws CardBuilderException {
@@ -68,6 +77,9 @@ public class ReviewCardTest {
 
         Review generatedReview = buildExtensiveReview();
         ReviewCard generatedCard = new ReviewCard(generatedReview, dummyReview.webUrl);
+        generatedCard.setKeywords(dummyAbstractCard.keywords);
+        generatedCard.setAppLinkIos(dummyAbstractCard.appLinkIos);
+        generatedCard.setAppLinkAndroid(dummyAbstractCard.appLinkAndroid);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -108,9 +120,6 @@ public class ReviewCardTest {
         builder.publicationDate(dummyReview.publicationDate);
         builder.updatedDate(dummyReview.updatedDate);
         builder.source(dummyReview.source);
-        builder.appLinkIos(dummyReview.appLinkIos);
-        builder.appLinkAndroid(dummyReview.appLinkAndroid);
-        builder.keywords(dummyReview.keywords);
 
         return builder.build();
     }

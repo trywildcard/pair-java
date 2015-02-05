@@ -1,11 +1,14 @@
 package com.trywildcard.pair.model.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.Card;
 import com.trywildcard.pair.model.CardType;
-import com.trywildcard.pair.util.CardSerializer;
 import com.trywildcard.pair.validation.ValidationTool;
 
 import java.io.IOException;
@@ -13,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Structures a Product Search Results Card, which embeds many ProductSearchResults.
+ * Structures a Product Search Results AbstractCard, which embeds many ProductSearchResults.
  */
 
 public final class ProductSearchCard implements Card {
@@ -57,7 +60,13 @@ public final class ProductSearchCard implements Card {
      * @throws IOException
      */
     public String writeAsJsonString() throws IOException {
-        return new CardSerializer().writeCard(this);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.PropertyNamingStrategyBase.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+        return mapper.writeValueAsString(this);
     }
 
     public CardType getCardType() {

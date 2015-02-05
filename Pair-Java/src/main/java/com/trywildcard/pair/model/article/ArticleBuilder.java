@@ -21,11 +21,11 @@ public class ArticleBuilder implements Builder<Article> {
 
     //required fields
     protected String title;
-    protected String htmlContent;
+    protected String abstractContent;
 
     //optional fields
+    protected String htmlContent;
     protected Date publicationDate;
-    protected String abstractContent;
     protected String source;
     protected String author;
     protected Date updatedDate;
@@ -33,7 +33,6 @@ public class ArticleBuilder implements Builder<Article> {
     protected Boolean isBreaking;
     protected String appLinkIos;
     protected String appLinkAndroid;
-    protected List<String> keywords;
 
     /** Private Constructor **/
     private ArticleBuilder() { }
@@ -41,9 +40,9 @@ public class ArticleBuilder implements Builder<Article> {
     /**
      * Construct an <code>ArticleBuilder</code> provided a title and htmlContent.
      */
-    public ArticleBuilder(String title, String htmlContent) throws CardBuilderException {
+    public ArticleBuilder(String title, String abstractContent) throws CardBuilderException {
         title(title);
-        htmlContent(htmlContent);
+        abstractContent(abstractContent);
         this.isBreaking = Boolean.FALSE;
     }
 
@@ -55,13 +54,13 @@ public class ArticleBuilder implements Builder<Article> {
             throw new CardBuilderException("MetaTagModel is required");
         }
 
-        if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getHtmlContent())) {
+        if (StringUtils.isEmpty(metaTagModel.getTitle()) || StringUtils.isEmpty(metaTagModel.getDescription())) {
             throw new CardBuilderException("Article title is not contained in meta tags and/or article html content was unable to be captured" +
                     " - both of which are required to create a ArticleBuilder");
         }
 
         title(metaTagModel.getTitle());
-        htmlContent(metaTagModel.getHtmlContent());
+        abstractContent(metaTagModel.getDescription());
 
         /* Trying to set optional fields if found */
         try {
@@ -69,18 +68,15 @@ public class ArticleBuilder implements Builder<Article> {
         } catch (CardBuilderException cbe) {
             //if exception is thrown, let's ignore since media is optional for an article
         }
-
-        abstractContent(metaTagModel.getDescription());
-        appLinkIos(metaTagModel.getAppLinkIos());
-        appLinkAndroid(metaTagModel.getAppLinkAndroid());
+        htmlContent(metaTagModel.getHtmlContent());
     }
 
     /**
      * Construct an <code>ArticleBuilder</code> provided a title, htmlContent, and publicationDate.
      */
-    public ArticleBuilder(String title, String htmlContent, Date publicationDate) throws CardBuilderException {
+    public ArticleBuilder(String title, String abstractContent, Date publicationDate) throws CardBuilderException {
         title(title);
-        htmlContent(htmlContent);
+        abstractContent(abstractContent);
         publicationDate(publicationDate);
         this.isBreaking = Boolean.FALSE;
     }
@@ -93,13 +89,14 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    private ArticleBuilder htmlContent(String htmlContent) throws CardBuilderException {
-        boolean isValid = v.required(v.notNullOrEmpty(htmlContent), "Article Html Content cannot be blank.");
+    private ArticleBuilder abstractContent(String abstractContent) throws CardBuilderException{
+        boolean isValid = v.required(v.notNullOrEmpty(abstractContent), "Article Abstract cannot be blank.");
         if (isValid) {
-            this.htmlContent = htmlContent;
+            this.abstractContent = abstractContent;
         }
         return this;
     }
+
 
     public ArticleBuilder publicationDate(Date publicationDate) {
         boolean isValid = v.optional(v.notNull(publicationDate), "Article Publication Date cannot be null.");
@@ -109,10 +106,10 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    public ArticleBuilder abstractContent(String abstractContent) {
-        boolean isValid = v.optional(v.notNullOrEmpty(abstractContent), "Article Abstract cannot be blank.");
+    public ArticleBuilder htmlContent(String htmlContent) {
+        boolean isValid = v.optional(v.notNullOrEmpty(htmlContent), "Article Html Content cannot be blank.");
         if (isValid) {
-            this.abstractContent = abstractContent;
+            this.htmlContent = htmlContent;
         }
         return this;
     }
@@ -157,29 +154,7 @@ public class ArticleBuilder implements Builder<Article> {
         return this;
     }
 
-    public ArticleBuilder appLinkIos(String appLinkIos) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkIos), "App Link Ios cannot be blank.");
-        if (isValid) {
-            this.appLinkIos = appLinkIos;
-        }
-        return this;
-    }
 
-    public ArticleBuilder appLinkAndroid(String appLinkAndroid) {
-        boolean isValid = v.optional(v.notNullOrEmpty(appLinkAndroid), "App Link Android cannot be blank.");
-        if (isValid) {
-            this.appLinkAndroid = appLinkAndroid;
-        }
-        return this;
-    }
-
-    public ArticleBuilder keywords(List<String> keywords) {
-        boolean isValid = v.optional(v.notNull(keywords), "Keywords cannot be null.");
-        if (isValid) {
-            this.keywords = keywords;
-        }
-        return this;
-    }
 
     /**
      * Instantiate a <code>Article</code> with the data in this builder.

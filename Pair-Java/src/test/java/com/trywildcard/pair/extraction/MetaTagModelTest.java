@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.trywildcard.pair.extraction.MetaTagModel.*;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 
 /**

@@ -125,41 +125,6 @@ public class ReviewBuilderValidationTest {
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 
-    @Test
-    public void hasErrorForNullAppLinkIosString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkIos(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkIosString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkIos("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkAndroid(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForEmptyAppLinkAndroidString(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.appLinkAndroid("");
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
-    @Test
-    public void hasErrorForNullKeywords(){
-        assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.keywords(null);
-        assertEquals("Errors size should match", 1, builder.getErrors().size());
-    }
-
     @Test(expected = CardBuilderException.class)
     public void nullMetaTagModel() throws CardBuilderException {
         Review review = new ReviewBuilder(null).build();
@@ -224,15 +189,11 @@ public class ReviewBuilderValidationTest {
         when(metaTagModel.getTitle()).thenReturn("BBC News Article");
         when(metaTagModel.getHtmlContent()).thenReturn("<html><body></body></html>");
         when(metaTagModel.getDescription()).thenReturn("");
-        when(metaTagModel.getAppLinkAndroid()).thenReturn(null);
-        when(metaTagModel.getAppLinkIos()).thenReturn(null);
 
         Review review = new ReviewBuilder(metaTagModel).build();
         assertEquals(review.getHtmlContent(), "<html><body></body></html>");
         assertEquals(review.getTitle(), "BBC News Article");
         assertNull(review.getAbstractContent());
-        assertNull(review.getAppLinkIos());
-        assertNull(review.getAppLinkAndroid());
     }
 
     @Test
@@ -251,8 +212,6 @@ public class ReviewBuilderValidationTest {
         assertEquals(review.getHtmlContent(), "<html><body></body></html>");
         assertEquals(review.getTitle(), "BBC News Article");
         assertEquals(review.getAbstractContent(), "description");
-        assertEquals(review.getAppLinkIos(), "ios://etsy/1234");
-        assertEquals(review.getAppLinkAndroid(), "android://etsy/1234");
     }
 
 
