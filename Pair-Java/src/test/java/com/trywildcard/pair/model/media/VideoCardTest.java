@@ -127,7 +127,7 @@ public class VideoCardTest {
     public void testBuildVideoCardWithWebUrl() throws CardBuilderException {
         VideoCard videoCard = new VideoCard("https://www.youtube.com/watch?v=0RFfrsABtQo");
         assertEquals(videoCard.getMedia().getTitle(), "Best of Phantom: Cavaliers Practice");
-        assertTrue(videoCard.getMedia().getEmbeddedUrl().toString().startsWith("http://www.youtube.com/v/0RFfrsABtQo"));
+        assertTrue(videoCard.getMedia().getEmbeddedUrl().toString().startsWith("https://www.youtube.com/embed/0RFfrsABtQo"));
         assertEquals(videoCard.getMedia().getEmbeddedUrlHeight(), new Integer(720));
         assertEquals(videoCard.getMedia().getEmbeddedUrlWidth(), new Integer(1280));
         assertEquals(videoCard.getMedia().getDescription(), "Take a look at the new-look Cleveland Cavaliers through the lens of the Phantom camera during a practice session. Visit nba.com/video for more highlights. Ab...");
