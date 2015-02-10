@@ -139,6 +139,22 @@ public class MetaTagExtractor {
         }
     }
 
+    public static String getHtmlTitle(URL webUrl) {
+        try {
+
+            HttpAgent httpAgent = new HttpAgent();
+            String htmlContent = httpAgent.get(webUrl.toString());
+
+            return getHtmlTitleTag(htmlContent);
+        } catch (URISyntaxException use) {
+            return null;
+        } catch (IOException ioe) {
+            return null;
+        } catch (RuntimeException rte) {
+            return null;
+        }
+    }
+
     public static MetaTagModel getMetaTags(URL webUrl) throws CardBuilderException {
 
         try {
