@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by karthiksenthil on 11/2/14.
@@ -62,6 +63,20 @@ public class MetaTagExtractorTest {
         MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(html);
         assertEquals(metaTagModel.getAppLinkAndroid(), "etsy://listing/128235512?ref=TwitterProductCard");
         assertEquals(metaTagModel.getAppLinkIos(), "etsy://listing/128235512?ref=applinks_ios");
+    }
+
+    @Test
+    public void testNoTitle() throws CardBuilderException, IOException {
+        String html = TestUtil.readResourceAsString("metatags_twitter.html");
+        String title = MetaTagExtractor.getHtmlTitleTag(html);
+        assertNull(title);
+    }
+
+    @Test
+    public void testTitle() throws CardBuilderException, IOException {
+        String html = TestUtil.readResourceAsString("metatags_video.html");
+        String title = MetaTagExtractor.getHtmlTitleTag(html);
+        assertEquals(title, "This is a tasty video");
     }
 
 }
