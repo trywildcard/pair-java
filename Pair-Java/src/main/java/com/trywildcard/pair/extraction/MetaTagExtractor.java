@@ -126,6 +126,35 @@ public class MetaTagExtractor {
         return new MetaTagModel(metaTagsAndValues);
     }
 
+    protected static String getHtmlTitleTag(String htmlContent) {
+        Document htmlDocumentModel = HtmlParserUtil.getHtmlDocumentModel(htmlContent);
+        NodeList titleTags = htmlDocumentModel.getElementsByTagName("title");
+
+        if (titleTags.getLength() == 0) {
+            return null;
+        } else {
+            //get first one
+            Node titleNode = titleTags.item(0);
+            return titleNode.getTextContent();
+        }
+    }
+
+    public static String getHtmlTitle(URL webUrl) {
+        try {
+
+            HttpAgent httpAgent = new HttpAgent();
+            String htmlContent = httpAgent.get(webUrl.toString());
+
+            return getHtmlTitleTag(htmlContent);
+        } catch (URISyntaxException use) {
+            return null;
+        } catch (IOException ioe) {
+            return null;
+        } catch (RuntimeException rte) {
+            return null;
+        }
+    }
+
     public static MetaTagModel getMetaTags(URL webUrl) throws CardBuilderException {
 
         try {
