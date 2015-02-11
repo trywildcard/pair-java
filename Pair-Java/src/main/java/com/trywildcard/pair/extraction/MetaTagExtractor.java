@@ -27,7 +27,7 @@ public class MetaTagExtractor {
             "twitter:player:height");
 
     private static final Set<String> EXTRACTABLE_OG_META_TAG_ATTRIBUTES
-            = ImmutableSet.of("og:title", "og:description", "og:image", "og:price:amount", "product:price:amount",
+            = ImmutableSet.of("og:title", "og:description", "og:image", "og:image:width", "og:image:height", "og:price:amount", "product:price:amount",
             "og:video", "og:video:width", "og:video:height");
 
     private static final Set<String> EXTRACTABLE_AL_META_TAG_ATTRIBUTES
@@ -54,6 +54,10 @@ public class MetaTagExtractor {
                 return DESCRIPTION_DATA_KEY;
             case "og:image":
                 return IMAGE_URL_DATA_KEY;
+            case "og:image:height":
+                return IMAGE_HEIGHT_DATA_KEY;
+            case "og:image:width":
+                return IMAGE_WIDTH_DATA_KEY;
             case "og:price:amount":
                 return PRICE_DATA_KEY;
             case "product:price:amount":
@@ -120,6 +124,35 @@ public class MetaTagExtractor {
         }
 
         return new MetaTagModel(metaTagsAndValues);
+    }
+
+    protected static String getHtmlTitleTag(String htmlContent) {
+        Document htmlDocumentModel = HtmlParserUtil.getHtmlDocumentModel(htmlContent);
+        NodeList titleTags = htmlDocumentModel.getElementsByTagName("title");
+
+        if (titleTags.getLength() == 0) {
+            return null;
+        } else {
+            //get first one
+            Node titleNode = titleTags.item(0);
+            return titleNode.getTextContent();
+        }
+    }
+
+    public static String getHtmlTitle(URL webUrl) {
+        try {
+
+            HttpAgent httpAgent = new HttpAgent();
+            String htmlContent = httpAgent.get(webUrl.toString());
+
+            return getHtmlTitleTag(htmlContent);
+        } catch (URISyntaxException use) {
+            return null;
+        } catch (IOException ioe) {
+            return null;
+        } catch (RuntimeException rte) {
+            return null;
+        }
     }
 
     public static MetaTagModel getMetaTags(URL webUrl) throws CardBuilderException {

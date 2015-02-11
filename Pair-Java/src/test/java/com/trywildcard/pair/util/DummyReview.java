@@ -1,5 +1,6 @@
 package com.trywildcard.pair.util;
 
+import com.google.common.collect.Lists;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.media.Image;
 import com.trywildcard.pair.model.review.Rating;
@@ -8,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -36,8 +38,7 @@ public class DummyReview {
     public Image image;
     public final String productName = "LG G2";
     public final Rating rating = new Rating(87f, 0f, 100f, 55);
-    public final String appLinkIos = "ios://applink";
-    public final String appLinkAndroid = "android://applink";
+    public final List<String> keywords = Lists.newArrayList("keyword1", "keyword2");
 
     public DummyReview() throws ParseException, CardBuilderException {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));

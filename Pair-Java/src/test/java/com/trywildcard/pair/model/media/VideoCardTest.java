@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trywildcard.pair.exception.CardBuilderException;
+import com.trywildcard.pair.util.DummyAbstractCard;
 import com.trywildcard.pair.util.DummyVideo;
 import com.trywildcard.pair.util.TestUtil;
 import org.junit.Assert;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -23,10 +25,12 @@ import static org.junit.Assert.assertTrue;
 public class VideoCardTest {
     ObjectMapper mapper = TestUtil.getObjectMapper();
     private static DummyVideo dummyVideo;
+    private static DummyAbstractCard dummyAbstractCard;
 
     @BeforeClass
     public static void prepare() throws ParseException, CardBuilderException {
         dummyVideo = new DummyVideo();
+        dummyAbstractCard = new DummyAbstractCard();
     }
 
     private void testMinimalVideoCardAttributes(VideoCard videoCard){
@@ -52,6 +56,13 @@ public class VideoCardTest {
         testMinimalVideoCardAttributes(card);
     }
 
+    @Test
+    public void testNullKeywords() throws CardBuilderException {
+        VideoCard card = buildMinimalVideoCard();
+        card.setKeywords(null);
+        assertNull(card.getKeywords());
+    }
+
 
     @Test
     public void testMinimalVideoCardWithMinimalConstructor() throws CardBuilderException {
@@ -66,6 +77,9 @@ public class VideoCardTest {
         VideoCard fixtureCard = mapper.readValue(inputString,  VideoCard.class);
         Video generatedVideo = buildExtensiveVideo();
         VideoCard generatedCard = new VideoCard(generatedVideo, dummyVideo.webUrl);
+        generatedCard.setKeywords(dummyAbstractCard.keywords);
+        generatedCard.setAppLinkIos(dummyAbstractCard.appLinkIos);
+        generatedCard.setAppLinkAndroid(dummyAbstractCard.appLinkAndroid);
 
         assertEquals(mapper.writeValueAsString(fixtureCard), generatedCard.writeAsJsonString());
     }
@@ -105,8 +119,6 @@ public class VideoCardTest {
         builder.creator(dummyVideo.creator);
         builder.publicationDate(dummyVideo.publicationDate);
         builder.source(dummyVideo.source);
-        builder.appLinkIos(dummyVideo.appLinkIos);
-        builder.appLinkAndroid(dummyVideo.appLinkAndroid);
 
         return builder.build();
     }
@@ -115,13 +127,13 @@ public class VideoCardTest {
     public void testBuildVideoCardWithWebUrl() throws CardBuilderException {
         VideoCard videoCard = new VideoCard("https://www.youtube.com/watch?v=0RFfrsABtQo");
         assertEquals(videoCard.getMedia().getTitle(), "Best of Phantom: Cavaliers Practice");
-        assertTrue(videoCard.getMedia().getEmbeddedUrl().toString().startsWith("http://www.youtube.com/v/0RFfrsABtQo"));
+        assertTrue(videoCard.getMedia().getEmbeddedUrl().toString().startsWith("https://www.youtube.com/embed/0RFfrsABtQo"));
         assertEquals(videoCard.getMedia().getEmbeddedUrlHeight(), new Integer(720));
         assertEquals(videoCard.getMedia().getEmbeddedUrlWidth(), new Integer(1280));
         assertEquals(videoCard.getMedia().getDescription(), "Take a look at the new-look Cleveland Cavaliers through the lens of the Phantom camera during a practice session. Visit nba.com/video for more highlights. Ab...");
         assertEquals(videoCard.getMedia().getPosterImageUrl().toString(), "https://i.ytimg.com/vi/0RFfrsABtQo/maxresdefault.jpg");
-        assertEquals(videoCard.getMedia().getAppLinkAndroid(), "http://www.youtube.com/watch?v=0RFfrsABtQo&amp;feature=applinks");
-        assertEquals(videoCard.getMedia().getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=0RFfrsABtQo&amp;feature=applinks");
+        assertEquals(videoCard.getAppLinkAndroid(), "http://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
+        assertEquals(videoCard.getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=0RFfrsABtQo&feature=applinks");
     }
 
 }

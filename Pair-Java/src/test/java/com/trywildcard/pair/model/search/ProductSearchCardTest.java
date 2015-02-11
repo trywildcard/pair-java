@@ -2,7 +2,7 @@ package com.trywildcard.pair.model.search;
 
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.CardType;
-import com.trywildcard.pair.model.Price;
+import com.trywildcard.pair.model.product.Price;
 import com.trywildcard.pair.util.DummyOffer;
 import com.trywildcard.pair.util.DummyProduct;
 import org.junit.Assert;
@@ -48,7 +48,7 @@ public class ProductSearchCardTest {
         this.totalResults = 0;
 
         ProductSearchCard card = new ProductSearchCard(products, totalResults);
-        Assert.assertEquals("Card should have zero products.", 0, card.getProducts().size());
+        Assert.assertEquals("AbstractCard should have zero products.", 0, card.getProducts().size());
         testMinimalCardAttributes(card);
     }
 

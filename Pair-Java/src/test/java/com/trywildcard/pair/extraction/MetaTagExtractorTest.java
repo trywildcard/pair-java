@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by karthiksenthil on 11/2/14.
@@ -37,6 +38,8 @@ public class MetaTagExtractorTest {
         assertEquals(metaTagModel.getTitle(), "Friend Smash Coin");
         assertEquals(metaTagModel.getDescription(), "Friend Smash Coins to purchase upgrades and items!");
         assertEquals(metaTagModel.getImageUrl(), "http://www.friendsmash.com/images/coin_600.png");
+        assertEquals(metaTagModel.getImageHeight(), "369");
+        assertEquals(metaTagModel.getImageWidth(), "553");
         assertEquals(metaTagModel.getPrice(), "0.30");
     }
 
@@ -48,8 +51,8 @@ public class MetaTagExtractorTest {
         assertEquals(metaTagModel.getDescription(), "Join Chef and Co-Founder of The Meatball Shop, Dan Holzman, to learn how he makes meatballs");
         assertEquals(metaTagModel.getImageUrl(), "https://i.ytimg.com/vi/a5A_nVQYDfc/maxresdefault.jpg");
         assertEquals(metaTagModel.getAppLinkAndroid(), "http://www.youtube.com/watch?v=a5A_nVQYDfc");
-        assertEquals(metaTagModel.getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=a5A_nVQYDfc&amp;feature=applinks");
-        assertEquals(metaTagModel.getVideoUrl(), "http://www.youtube.com/v/a5A_nVQYDfc?autohide=1&amp;version=3");
+        assertEquals(metaTagModel.getAppLinkIos(), "vnd.youtube://www.youtube.com/watch?v=a5A_nVQYDfc&feature=applinks");
+        assertEquals(metaTagModel.getVideoUrl(), "http://www.youtube.com/v/a5A_nVQYDfc?autohide=1&version=3");
         assertEquals(metaTagModel.getVideoWidth(), "1280");
         assertEquals(metaTagModel.getVideoHeight(), "720");
     }
@@ -60,6 +63,20 @@ public class MetaTagExtractorTest {
         MetaTagModel metaTagModel = MetaTagExtractor.getMetaTags(html);
         assertEquals(metaTagModel.getAppLinkAndroid(), "etsy://listing/128235512?ref=TwitterProductCard");
         assertEquals(metaTagModel.getAppLinkIos(), "etsy://listing/128235512?ref=applinks_ios");
+    }
+
+    @Test
+    public void testNoTitle() throws CardBuilderException, IOException {
+        String html = TestUtil.readResourceAsString("metatags_twitter.html");
+        String title = MetaTagExtractor.getHtmlTitleTag(html);
+        assertNull(title);
+    }
+
+    @Test
+    public void testTitle() throws CardBuilderException, IOException {
+        String html = TestUtil.readResourceAsString("metatags_video.html");
+        String title = MetaTagExtractor.getHtmlTitleTag(html);
+        assertEquals(title, "This is a tasty video");
     }
 
 }

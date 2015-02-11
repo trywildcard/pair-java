@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.trywildcard.pair.extraction.MetaTagModel.*;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 
 /**
@@ -28,13 +28,13 @@ public class MetaTagModelTest {
         metaTags.put(DESCRIPTION_DATA_KEY, "description");
         metaTags.put(HTML_DATA_KEY, "html");
         metaTags.put(TITLE_DATA_KEY, "title");
-        metaTags.put(VIDEO_URL_DATA_KEY, "youtube.com");
+        metaTags.put(VIDEO_URL_DATA_KEY, "https://www.youtube.com/v/e-ORhEE9VVg&amp;rel=0&amp;egm=0&amp;showinfo=0&amp;fs=1&amp;wmode=opaque");
         metaTags.put(VIDEO_HEIGHT_DATA_KEY, "240");
         metaTags.put(VIDEO_WIDTH_DATA_KEY, "240");
         metaTags.put(PRICE_DATA_KEY, "10");
         metaTags.put(IMAGE_URL_DATA_KEY, "image");
-        metaTags.put(APP_LINK_ANDROID, "android");
-        metaTags.put(APP_LINK_IOS, "ios");
+        metaTags.put(APP_LINK_ANDROID, "android://x-callback-url/blog?blogName=karthiksenthil&amp;postID=108230320285");
+        metaTags.put(APP_LINK_IOS, "ios://x-callback-url/blog?blogName=karthiksenthil&amp;postID=108230320285");
 
         metaTagModel = new MetaTagModel(metaTags);
     }
@@ -56,13 +56,13 @@ public class MetaTagModelTest {
         assertEquals(metaTagModel.getTitle(), "title");
         assertEquals(metaTagModel.getPrice(), "10");
         assertEquals(metaTagModel.getDescription(), "description");
-        assertEquals(metaTagModel.getAppLinkAndroid(), "android");
-        assertEquals(metaTagModel.getAppLinkIos(), "ios");
+        assertEquals(metaTagModel.getAppLinkAndroid(), "android://x-callback-url/blog?blogName=karthiksenthil&postID=108230320285");
+        assertEquals(metaTagModel.getAppLinkIos(), "ios://x-callback-url/blog?blogName=karthiksenthil&postID=108230320285");
         assertEquals(metaTagModel.getHtmlContent(), "html");
         assertEquals(metaTagModel.getImageUrl(), "image");
         assertEquals(metaTagModel.getVideoHeight(), "240");
         assertEquals(metaTagModel.getVideoWidth(), "240");
-        assertEquals(metaTagModel.getVideoUrl(), "youtube.com");
+        assertEquals(metaTagModel.getVideoUrl(), "https://www.youtube.com/v/e-ORhEE9VVg&rel=0&egm=0&showinfo=0&fs=1&wmode=opaque");
         assertEquals(metaTagModel.getNumberOfMetaTags().intValue(), 10);
     }
 

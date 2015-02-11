@@ -2,7 +2,6 @@ package com.trywildcard.pair.util;
 
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.model.media.Image;
-import com.trywildcard.pair.model.media.Media;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -29,8 +28,6 @@ public class DummyArticle {
     public final Date updatedDate;
     public Image image;
     public final Boolean isBreaking = Boolean.TRUE;
-    public final String appLinkIos = "ios://applink";
-    public final String appLinkAndroid = "android://applink";
 
     public DummyArticle() throws ParseException, CardBuilderException {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));

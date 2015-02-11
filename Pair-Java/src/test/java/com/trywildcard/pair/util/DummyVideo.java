@@ -1,12 +1,13 @@
 package com.trywildcard.pair.util;
 
+import com.google.common.collect.Lists;
 import com.trywildcard.pair.exception.CardBuilderException;
-import com.trywildcard.pair.model.media.Image;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -35,8 +36,7 @@ public class DummyVideo {
     public final Integer embeddedURLHeight = 400;
 
     public final String posterImageUrl = "https://wildcard-branddata.s3.amazonaws.com/staging/youtube/bg_img.jpg";
-    public final String appLinkIos = "ios://applink";
-    public final String appLinkAndroid = "android://applink";
+    public final List<String> keywords = Lists.newArrayList("keyword1", "keyword2");
 
     public DummyVideo() throws ParseException, CardBuilderException {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
