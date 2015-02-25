@@ -5,6 +5,7 @@ import com.trywildcard.pair.Pair;
 import com.trywildcard.pair.exception.CardBuilderException;
 import com.trywildcard.pair.extraction.MetaTagExtractor;
 import com.trywildcard.pair.extraction.MetaTagModel;
+import com.trywildcard.pair.model.action.Action;
 import com.trywildcard.pair.model.creator.Creator;
 import com.trywildcard.pair.util.CardSerializer;
 import com.trywildcard.pair.validation.ValidationTool;
@@ -28,9 +29,11 @@ public abstract class AbstractCard implements Card {
 
     private Creator creator;
 
+    /* List of definable actions that are available for this card */
+    private List<Action> actions;
+
     @JsonIgnore
     protected MetaTagModel metaTagModel;
-
 
     @JsonIgnore
     protected ValidationTool v = new ValidationTool();
@@ -50,6 +53,13 @@ public abstract class AbstractCard implements Card {
         boolean isValid =  v.optional(v.notNull(keywords), "Keywords cannot be null.");
         if (isValid) {
             this.keywords = keywords;
+        }
+    }
+
+    public void setActions(List<Action> actions) throws CardBuilderException {
+        boolean isValid =  v.optional(v.notNullOrEmpty(actions), "Actions cannot be null.");
+        if (isValid) {
+            this.actions = actions;
         }
     }
 
@@ -118,6 +128,8 @@ public abstract class AbstractCard implements Card {
     }
 
     public Creator getCreator() { return creator; }
+
+    public List<Action> getActions() { return actions; }
 
     /**
      * Serialize fields in the Wildcard card format.
