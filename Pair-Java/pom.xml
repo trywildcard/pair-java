@@ -2,7 +2,29 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.trywildcard.pair</groupId>
   <artifactId>wildcard-pair</artifactId>
-  <version>0.4.6</version>
+  <version>0.4.7</version>
+  <name>Wildcard Pair Java SDK</name>
+  <description>SDK for brands, merchants, and publishers to create cards for their content</description>
+  <url>http://trywildcard.com/dev</url>
+  <scm>
+    <connection>scm:git:git@github.com:trywildcard.com/pair-java.git</connection>
+    <developerConnection>scm:git:git@github.com:trywildcard/pair-java.git</developerConnection>
+    <url>git@github.com:trywildcard/pair-java.git</url>
+  </scm>
+  <developers>
+    <developer>
+      <name>Karthik Senthil</name>
+      <email>karthik@trywildcard.com</email>
+      <organization>Wildcard</organization>
+      <organizationUrl>http://trywildcard.com/dev</organizationUrl>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
   <distributionManagement>
     <repository>
       <id>repo-trywildcard</id>
@@ -42,17 +64,17 @@
   	<dependency>
   		<groupId>com.fasterxml.jackson.core</groupId>
   		<artifactId>jackson-annotations</artifactId>
-  		<version>2.4.0</version>
+  		<version>2.5.1</version>
   	</dependency>
   	<dependency>
   		<groupId>com.fasterxml.jackson.core</groupId>
   		<artifactId>jackson-core</artifactId>
-        <version>2.4.0</version>
+        <version>2.5.1</version>
   	</dependency>
   	<dependency>
   		<groupId>com.fasterxml.jackson.core</groupId>
   		<artifactId>jackson-databind</artifactId>
-        <version>2.4.0</version>
+        <version>2.5.1</version>
   	</dependency>
     <dependency>
           <groupId>net.sourceforge.htmlcleaner</groupId>
