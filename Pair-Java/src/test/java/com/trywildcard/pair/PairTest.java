@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertEquals;
 public class PairTest {
     @Test
     public void testPairVersion() {
-        assertEquals(Pair.getInstance().getVersion(), "0.4.6");
+        assertEquals(Pair.getInstance().getVersion(), "0.4.7");
     }
 
     @Test

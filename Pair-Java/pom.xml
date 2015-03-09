@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.trywildcard.pair</groupId>
   <artifactId>wildcard-pair</artifactId>
-  <version>0.4.6</version>
+  <version>0.4.7</version>
   <name>Wildcard Pair Java SDK</name>
   <description>SDK for brands, merchants, and publishers to create cards for their content</description>
   <url>http://trywildcard.com/dev</url>
@@ -131,27 +131,27 @@
     </plugins>
   </build>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-        <version>2.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-        <version>2.4.0</version>
-    </dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>4.11</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.fasterxml.jackson.core</groupId>
+  		<artifactId>jackson-annotations</artifactId>
+  		<version>2.5.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.fasterxml.jackson.core</groupId>
+  		<artifactId>jackson-core</artifactId>
+        <version>2.5.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.fasterxml.jackson.core</groupId>
+  		<artifactId>jackson-databind</artifactId>
+        <version>2.5.1</version>
+  	</dependency>
     <dependency>
           <groupId>net.sourceforge.htmlcleaner</groupId>
           <artifactId>htmlcleaner</artifactId>
