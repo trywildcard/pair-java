@@ -12,6 +12,7 @@ import java.util.List;
 public class DummySummary {
 
     public final String title = "U.N. hosts Global Warming Summit";
+    public final String subtitle = "The Huffington Post";
     public final String description = "U.N. hosts Global Warming Summit in New York hosted by thousands.  Dignataries speak.";
     public final String webUrl = "http://www.huffingtonpost.com/2014/09/23/leonardo-dicaprio-un_n_5868718.html";
     public Image image;

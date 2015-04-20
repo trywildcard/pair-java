@@ -15,6 +15,7 @@ public class Summary {
     protected ValidationTool v = new ValidationTool();
 
     private String title;
+    private String subtitle;
     private String description;
     private Media media;
 
@@ -53,6 +54,17 @@ public class Summary {
         boolean isValid = v.required(v.notNullOrEmpty(description), "Description cannot be blank.");
         if (isValid) {
             this.description = description;
+        }
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) throws CardBuilderException {
+        boolean isValid = v.optional(v.notNullOrEmpty(subtitle), "Title cannot be blank.");
+        if (isValid) {
+            this.subtitle = subtitle;
         }
     }
 

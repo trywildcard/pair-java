@@ -41,6 +41,15 @@
       <name>Pair Sites</name>
       <url>dav:http://repo.trywildcard.com/nexus/content/sites/site/</url>
     </site>
+    <!-- the above needs to be commented out and the below neesd to be uncommented to deploy to maven central -->
+<!--    <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+  <repository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  </repository> -->
   </distributionManagement>
   <build> 
     <plugins>
@@ -52,6 +61,73 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      <plugin>
+      <groupId>org.sonatype.plugins</groupId>
+      <artifactId>nexus-staging-maven-plugin</artifactId>
+      <version>1.6.5</version>
+      <executions>
+        <execution>
+          <id>default-deploy</id>
+          <phase>deploy</phase>
+          <goals>
+            <goal>deploy</goal>
+          </goals>
+        </execution>
+      </executions>
+      <extensions>true</extensions>
+      <configuration>
+        <serverId>ossrh</serverId>
+        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+        <autoReleaseAfterClose>false</autoReleaseAfterClose>
+      </configuration>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+      <version>2.2.1</version>
+      <executions>
+        <execution>
+          <id>attach-sources</id>
+          <goals>
+            <goal>jar-no-fork</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>2.9.1</version>
+      <executions>
+        <execution>
+          <id>attach-javadocs</id>
+          <goals>
+            <goal>jar</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.5</version>
+      <executions>
+        <execution>
+          <id>sign-artifacts</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>sign</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-deploy-plugin</artifactId>
+      <configuration>
+        <skip>true</skip>
+      </configuration>
+    </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -64,17 +140,17 @@
   	<dependency>
   		<groupId>com.fasterxml.jackson.core</groupId>
   		<artifactId>jackson-annotations</artifactId>
-  		<version>2.5.1</version>
+  		<version>2.4.0</version>
   	</dependency>
   	<dependency>
   		<groupId>com.fasterxml.jackson.core</groupId>
   		<artifactId>jackson-core</artifactId>
-        <version>2.5.1</version>
+        <version>2.4.0</version>
   	</dependency>
   	<dependency>
   		<groupId>com.fasterxml.jackson.core</groupId>
   		<artifactId>jackson-databind</artifactId>
-        <version>2.5.1</version>
+        <version>2.4.0</version>
   	</dependency>
     <dependency>
           <groupId>net.sourceforge.htmlcleaner</groupId>
