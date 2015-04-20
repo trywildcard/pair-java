@@ -101,7 +101,7 @@ public class SummaryCardTest {
 
     private Summary buildExtensiveSummary() throws CardBuilderException {
         Summary summary = new Summary(dummySummary.title, dummySummary.description);
-
+        summary.setSubtitle(dummySummary.subtitle);
         summary.setMedia(dummySummary.image);
         return summary;
     }
