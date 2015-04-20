@@ -73,7 +73,7 @@ public class VideoBuilderValidationTest {
     @Test
     public void hasErrorForNullContributorString(){
         assertEquals("Errors size should match", 0, builder.getErrors().size());
-        builder.creator(null);
+        builder.author(null);
         assertEquals("Errors size should match", 1, builder.getErrors().size());
     }
 

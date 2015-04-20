@@ -61,7 +61,7 @@ public class VideoBuilderTest {
         Assert.assertEquals("posterImage Url should match", dummyVideo.posterImageUrl, video.getPosterImageUrl().toString());
         Assert.assertEquals("Description should match", dummyVideo.description, video.getDescription());
         Assert.assertEquals("Publication Date should match", dummyVideo.publicationDate, video.getPublicationDate());
-        Assert.assertEquals("Contributor should match", dummyVideo.creator, video.getCreator());
+        Assert.assertEquals("Contributor should match", dummyVideo.creator, video.getAuthor());
         Assert.assertEquals("Source should match", dummyVideo.source, video.getSource());
     }
 
@@ -73,7 +73,7 @@ public class VideoBuilderTest {
         builder.streamContentType(dummyVideo.streamContentType);
         builder.posterImageUrl(dummyVideo.posterImageUrl);
         builder.description(dummyVideo.description);
-        builder.creator(dummyVideo.creator);
+        builder.author(dummyVideo.creator);
         builder.publicationDate(dummyVideo.publicationDate);
         builder.source(dummyVideo.source);
 

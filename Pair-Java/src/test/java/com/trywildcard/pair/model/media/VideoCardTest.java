@@ -116,7 +116,7 @@ public class VideoCardTest {
         builder.streamContentType(dummyVideo.streamContentType);
         builder.posterImageUrl(dummyVideo.posterImageUrl);
         builder.description(dummyVideo.description);
-        builder.creator(dummyVideo.creator);
+        builder.author(dummyVideo.creator);
         builder.publicationDate(dummyVideo.publicationDate);
         builder.source(dummyVideo.source);
 
