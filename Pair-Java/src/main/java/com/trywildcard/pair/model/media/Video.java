@@ -23,7 +23,7 @@ public class Video extends Media {
     private Date publicationDate;
     private String description;
     private URL posterImageUrl;
-    private String creator;
+    private String author;
     private String source;
 
     /** Needed for Jackson deserialization **/
@@ -42,7 +42,7 @@ public class Video extends Media {
         this.publicationDate = builder.publicationDate;
         this.description = builder.description;
         this.posterImageUrl = builder.posterImageUrl;
-        this.creator = builder.creator;
+        this.author = builder.author;
         this.source = builder.source;
     }
 
@@ -54,8 +54,8 @@ public class Video extends Media {
         return source;
     }
 
-    public String getCreator() {
-        return creator;
+    public String getAuthor() {
+        return author;
     }
 
     public URL getPosterImageUrl() {
@@ -101,7 +101,7 @@ public class Video extends Media {
 
         Video video = (Video) o;
 
-        if (creator != null ? !creator.equals(video.creator) : video.creator != null) return false;
+        if (author != null ? !author.equals(video.author) : video.author != null) return false;
         if (description != null ? !description.equals(video.description) : video.description != null) return false;
         if (embeddedUrl != null ? !embeddedUrl.equals(video.embeddedUrl) : video.embeddedUrl != null) return false;
         if (embeddedUrlHeight != null ? !embeddedUrlHeight.equals(video.embeddedUrlHeight) : video.embeddedUrlHeight != null)
@@ -132,7 +132,7 @@ public class Video extends Media {
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (posterImageUrl != null ? posterImageUrl.hashCode() : 0);
-        result = 31 * result + (creator != null ? creator.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (source != null ? source.hashCode() : 0);
         return result;
     }

@@ -33,7 +33,7 @@ public class VideoBuilder implements Builder<Video> {
     protected Date publicationDate;
     protected String description;
     protected URL posterImageUrl;
-    protected String creator;
+    protected String author;
     protected String source;
 
     /** Private Constructor **/
@@ -171,10 +171,10 @@ public class VideoBuilder implements Builder<Video> {
         return this;
     }
 
-    public VideoBuilder creator(String creator) {
-        boolean isValid = v.optional(v.notNullOrEmpty(creator), "Video creator cannot be blank.");
+    public VideoBuilder author(String author) {
+        boolean isValid = v.optional(v.notNullOrEmpty(author), "Video creator cannot be blank.");
         if (isValid) {
-            this.creator = creator;
+            this.author = author;
         }
         return this;
     }
